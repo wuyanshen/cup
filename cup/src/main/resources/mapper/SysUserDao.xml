@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longyi.dao.SysUserDao">
+
+    <resultMap type="com.longyi.entity.SysUser" id="SysUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orgId" column="org_id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="BOOLEAN"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysUserMap">
+        select
+        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag
+        from sys_user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysUserMap">
+        select
+        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag
+        from sys_user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysUserMap">
+        select
+        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag
+        from sys_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orgId != null">
+                and org_id = #{orgId}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null">
+                and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_user(org_id, username, password, email, phone, avatar, status, sort, create_time, update_time,
+        del_flag)
+        values (#{orgId}, #{username}, #{password}, #{email}, #{phone}, #{avatar}, #{status}, #{sort}, #{createTime},
+        #{updateTime}, #{delFlag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_user
+        <set>
+            <if test="orgId != null">
+                org_id = #{orgId},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <!--通过用户名查询用户-->
+    <select id="loadUserByUsername" resultMap="SysUserMap">
+        select
+        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag
+        from sys_user
+        where username = #{username}
+    </select>
+
+    <select id="selectPageVo" resultMap="SysUserMap">
+        select id,
+               org_id,
+               username,
+               password,
+               email,
+               phone,
+               avatar,
+               status,
+               sort,
+               create_time,
+               update_time,
+               del_flag
+        from sys_user
+    </select>
+
+</mapper>

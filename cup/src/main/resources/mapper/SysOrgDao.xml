@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longyi.dao.SysOrgDao">
+
+    <resultMap type="com.longyi.entity.SysOrg" id="SysOrgMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orgPid" column="org_pid" jdbcType="INTEGER"/>
+        <result property="orgPids" column="org_pids" jdbcType="VARCHAR"/>
+        <result property="isLeaf" column="is_leaf" jdbcType="INTEGER"/>
+        <result property="orgName" column="org_name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="level" column="level" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysOrgMap">
+        select
+          id, org_pid, org_pids, is_leaf, org_name, address, status, sort, level, create_time, update_time, del_flag
+        from sys_org
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysOrgMap">
+        select
+          id, org_pid, org_pids, is_leaf, org_name, address, status, sort, level, create_time, update_time, del_flag
+        from sys_org
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysOrgMap">
+        select
+          id, org_pid, org_pids, is_leaf, org_name, address, status, sort, level, create_time, update_time, del_flag
+        from sys_org
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orgPid != null">
+                and org_pid = #{orgPid}
+            </if>
+            <if test="orgPids != null and orgPids != ''">
+                and org_pids = #{orgPids}
+            </if>
+            <if test="isLeaf != null">
+                and is_leaf = #{isLeaf}
+            </if>
+            <if test="orgName != null and orgName != ''">
+                and org_name = #{orgName}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null">
+                and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_org(org_pid, org_pids, is_leaf, org_name, address, status, sort, level, create_time, update_time, del_flag)
+        values (#{orgPid}, #{orgPids}, #{isLeaf}, #{orgName}, #{address}, #{status}, #{sort}, #{level}, #{createTime}, #{updateTime}, #{delFlag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_org
+        <set>
+            <if test="orgPid != null">
+                org_pid = #{orgPid},
+            </if>
+            <if test="orgPids != null and orgPids != ''">
+                org_pids = #{orgPids},
+            </if>
+            <if test="isLeaf != null">
+                is_leaf = #{isLeaf},
+            </if>
+            <if test="orgName != null and orgName != ''">
+                org_name = #{orgName},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_org where id = #{id}
+    </delete>
+
+</mapper>

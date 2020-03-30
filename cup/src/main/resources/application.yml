@@ -1,0 +1,33 @@
+server:
+  port: 3001
+  servlet:
+    session:
+      timeout: 20s  # SpringBoot默认session超时是1分钟，小于1分钟还是1分钟
+      cookie:
+        http-only: true #这样设置就不能通过js脚本获取cookie
+#        secure: true #只有https请求才会携带cookie
+
+
+spring:
+  application:
+    name: VueBackApp
+  security:
+    loginType: JSON
+
+  session:
+    timeout: 30m
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vue-boot-back?serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#logging:
+#  level:
+#    org.springframework.security: DEBUG
