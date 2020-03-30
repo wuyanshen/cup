@@ -16,7 +16,7 @@
           </el-input>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" icon="el-icon-edit" @click="userAddDialog=true">新增</el-button>
+          <el-button type="primary" icon="el-icon-plus" @click="userAddDialog=true">新增</el-button>
         </el-col>
       </el-row>
 
