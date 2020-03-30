@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.longyi.dao.SysOrgDao">
+<mapper namespace="com.cup.dao.SysOrgDao">
 
-    <resultMap type="com.longyi.entity.SysOrg" id="SysOrgMap">
+    <resultMap type="com.cup.entity.SysOrg" id="SysOrgMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="orgPid" column="org_pid" jdbcType="INTEGER"/>
         <result property="orgPids" column="org_pids" jdbcType="VARCHAR"/>

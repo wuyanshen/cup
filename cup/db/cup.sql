@@ -14,6 +14,7 @@
  Date: 30/03/2020 20:14:37
 */
 
+USE cup;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
