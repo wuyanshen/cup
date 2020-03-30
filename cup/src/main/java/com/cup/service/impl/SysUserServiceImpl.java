@@ -84,10 +84,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
      * 分页查询用户信息
      *
      * @param page
+     * @param sysUser
      * @return IPage<SysUser>
      */
     @Override
-    public IPage<SysUser> selectUserPage(Page<SysUser> page) {
-        return this.sysUserDao.selectPageVo(page);
+    public IPage<SysUser> selectUserPage(Page<SysUser> page, SysUser sysUser) {
+        return this.sysUserDao.selectPageVo(page,sysUser);
     }
 }

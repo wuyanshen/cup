@@ -1,0 +1,10 @@
+${AnsiBackground.BRIGHT_WHITE}
+${AnsiStyle.FAINT}
+${AnsiColor.BRIGHT_RED}
+              _______  ______
+             / ___/ / / / __ \
+            / /__/ /_/ / /_/ /
+            \___/\__,_/ .___/
+                     /_/       V1.0
+
+              www.longyi.com

@@ -1,5 +1,6 @@
 package com.cup.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cup.entity.SysUser;
 import com.cup.service.SysUserService;
@@ -7,6 +8,7 @@ import com.cup.util.Res;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -42,8 +44,12 @@ public class SysUserController {
      * @return com.longyi.util.Res
      */
     @GetMapping("page")
-    public Res page(Page page) {
-        return Res.success(this.sysUserService.selectUserPage(page));
+    public Res page(Page page, SysUser sysUser) {
+        QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
+        if(!StringUtils.isEmpty(sysUser.getUsername())){
+            wrapper.lambda().like(SysUser::getUsername,sysUser.getUsername());
+        }
+        return Res.success(this.sysUserService.page(page,wrapper));
     }
 
     /**

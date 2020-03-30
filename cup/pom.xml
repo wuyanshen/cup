@@ -10,7 +10,7 @@
         <version>2.1.10.RELEASE</version>
     </parent>
 
-    <groupId>com.longyi</groupId>
+    <groupId>com.cup</groupId>
     <artifactId>cup</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
@@ -65,12 +65,7 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
-        <!--jwt-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.jsonwebtoken</groupId>-->
-        <!--            <artifactId>jjwt</artifactId>-->
-        <!--            <version>0.9.1</version>-->
-        <!--        </dependency>-->
+        <!--   jwt依赖     -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>

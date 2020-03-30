@@ -54,7 +54,8 @@ public interface SysUserDao extends BaseMapper<SysUser> {
      * 分页查询
      *
      * @param page
+     * @param sysUser
      * @return IPage<SysUser>
      */
-    IPage<SysUser> selectPageVo(Page<?> page);
+    IPage<SysUser> selectPageVo(Page<?> page, SysUser sysUser);
 }

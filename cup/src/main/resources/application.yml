@@ -19,7 +19,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/vue-boot-back?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/cup?serverTimezone=Asia/Shanghai
     username: root
     password: root
     type: com.zaxxer.hikari.HikariDataSource

@@ -61,8 +61,9 @@ public interface SysUserService extends IService<SysUser> {
      * 分页查询用户信息
      *
      * @param page
+     * @param sysUser
      * @return com.longyi.util.Res
      */
-    IPage<SysUser> selectUserPage(Page<SysUser> page);
+    IPage<SysUser> selectUserPage(Page<SysUser> page, SysUser sysUser);
 
 }

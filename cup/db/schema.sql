@@ -1,4 +1,4 @@
-/**建表语句*/
+/**建数据库语句*/
 
 DROP DATABASE  if exists `cup`;
 

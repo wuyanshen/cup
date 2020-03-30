@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50728
  Source Host           : localhost:3306
- Source Schema         : vue-boot-back
+ Source Schema         : cup
 
  Target Server Type    : MySQL
  Target Server Version : 50728
