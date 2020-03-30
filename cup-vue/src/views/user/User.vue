@@ -96,6 +96,16 @@
         <el-form-item label="密码">
           <el-input v-model="userEditForm.password"></el-input>
         </el-form-item>
+        <el-form-item label="是否启用">
+          <el-switch
+            style="display: block"
+            v-model="userEditForm.status"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            active-text="启用"
+            inactive-text="禁用"
+          ></el-switch>
+        </el-form-item>
         <el-form-item label="电话">
           <el-input v-model="userEditForm.phone"></el-input>
         </el-form-item>
@@ -129,7 +139,8 @@ export default {
         username: "",
         password: "",
         phone: "",
-        email: ""
+        email: "",
+        status: true
       },
       pageSize: 10,
       total: 0,
@@ -229,6 +240,10 @@ export default {
 }
 
 .el-pagination {
+  margin-top: -10px;
+}
+
+.el-switch {
   margin-top: 10px;
 }
 </style>

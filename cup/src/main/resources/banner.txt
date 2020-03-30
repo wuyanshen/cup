@@ -7,4 +7,6 @@ ${AnsiColor.BRIGHT_RED}
             \___/\__,_/ .___/
                      /_/       V1.0
 
+              来一杯咖啡可好~
+
               www.longyi.com

@@ -75,6 +75,14 @@ class HttpRequest {
                     case 404:
                         Message.error('没有找到您要访问的资源哦~')
                         break;
+
+                    case 420:
+                        Message.error('用户名或密码错误~')
+                        break;
+
+                    case 433:
+                        Message.error('您的账户已被禁用，请联系管理员哦~')
+                        break;
                 }
                 return response.data
             },
@@ -95,6 +103,14 @@ class HttpRequest {
 
                         case 404:
                             Message.error('没有找到您要访问的资源哦~')
+                            break;
+
+                        case 420:
+                            Message.error('用户名或密码错误~')
+                            break;
+
+                        case 433:
+                            Message.error('您的账户已被禁用，请联系管理员哦~')
                             break;
 
                         case 500:

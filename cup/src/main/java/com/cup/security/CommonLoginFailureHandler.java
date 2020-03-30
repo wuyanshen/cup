@@ -42,8 +42,10 @@ public class CommonLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
             res.setCode(1);
             res.setData("");
             if (exception instanceof DisabledException) {
+                res.setCode(433);
                 res.setMsg("账户已被禁用，请联系管理员");
             } else if (exception instanceof BadCredentialsException) {
+                res.setCode(420);
                 res.setMsg("用户名或密码错误");
             } else if (exception instanceof UsernameNotFoundException) {
                 res.setMsg("用户名不存在");
