@@ -6,14 +6,14 @@ import { Message } from 'element-ui'
 import qs from 'qs'
 
 
-//设置请求超时
-axios.defaults.timeout = 10000
-//设置请求头
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-//将post请求参数转成get参数形式 例如：/user?id=1&age=22&name=jack的形式
-axios.defaults.transformRequest = data => qs.stringify(data)
-//跨域请求是否允许携带cookie
-axios.defaults.withCredentials = true
+// //设置请求超时
+// axios.defaults.timeout = 10000
+// //设置请求头
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+// //将post请求参数转成get参数形式 例如：/user?id=1&age=22&name=jack的形式
+// axios.defaults.transformRequest = data => qs.stringify(data)
+// //跨域请求是否允许携带cookie
+// axios.defaults.withCredentials = true
 
 class HttpRequest {
 
@@ -27,9 +27,16 @@ class HttpRequest {
     //全局配置
     getInsideConfig() {
         const config = {
+            //跨域请求是否允许携带cookie
+            withCredentials: true,
             baseUrl: this.baseUrl,
+            //将post请求参数转成get参数形式 例如：/user?id=1&age=22&name=jack的形式
+            transformRequest: data => qs.stringify(data),
+            //设置请求超时
+            timeout: 10000,
             headers: {
-
+                //设置默认请求头
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             }
         }
         return config
@@ -113,7 +120,7 @@ class HttpRequest {
         )
     }
 
-    //定义方法
+    //自定义方法
     request(options) {
         const instance = axios.create()
         //es6 对配置进行合并,把两个对象进行合并,相同的key合并时默认取后面的对象覆盖前面的对象
@@ -121,6 +128,68 @@ class HttpRequest {
         this.interceptors(instance)
         return instance(options)
     }
+
+    //封装post方法
+    post(url, data) {
+        let options = {
+            url: url,
+            method: 'post',
+            data,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            transformRequest: data => JSON.stringify(data)
+        }
+        const instance = axios.create()
+        options = Object.assign(this.getInsideConfig(), options)
+        this.interceptors(instance)
+        return instance(options)
+    }
+
+    //封装put方法
+    put(url, data) {
+        let options = {
+            url: url,
+            method: 'put',
+            data,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            transformRequest: data => JSON.stringify(data)
+        }
+        const instance = axios.create()
+        options = Object.assign(this.getInsideConfig(), options)
+        this.interceptors(instance)
+        return instance(options)
+    }
+
+    //封装get方法
+    get(url, params) {
+        let options = {
+            url,
+            method: 'get',
+            params
+        }
+        const instance = axios.create()
+        options = Object.assign(this.getInsideConfig(), options)
+        this.interceptors(instance)
+        return instance(options)
+    }
+
+    //封装delete方法
+    delete(url, data) {
+        console.log(url)
+        let options = {
+            url,
+            method: 'delete',
+            data
+        }
+        const instance = axios.create()
+        options = Object.assign(this.getInsideConfig(), options)
+        this.interceptors(instance)
+        return instance(options)
+    }
+
 }
 
 export default HttpRequest

@@ -2,10 +2,7 @@ import axios from './index'
 
 //测试获取用户名方法
 const getUserInfo = () => {
-    return axios.request({
-        url: '/sysUser/info',
-        method: 'get'
-    })
+    return axios.get('/sysUser/info')
 }
 
 //登录方法
@@ -19,27 +16,36 @@ const login = params => {
 
 //刷新token方法
 const refreshToken = () => {
-    return axios.request({
-        url: '/token/refresh',
-        method: 'get',
-    })
+    return axios.get('/token/refresh')
 }
 
 //分页查询用户
-const userPage = (current, page) => {
-    return axios.request({
-        url: '/users/page',
-        method: 'get',
-        params: {
-            current,
-            page
-        }
-    })
+const userPage = params => {
+    return axios.get('/users/page', params)
 }
+
+//新增用户
+const addUser = user => {
+    return axios.post('/users', user)
+}
+
+//更新用户
+const updateUser = user => {
+    return axios.put('/users', user)
+}
+
+//删除用户
+const deleteUser = id => {
+    return axios.delete(`/users/${id}`)
+}
+
 
 export default {
     getUserInfo,
     login,
     refreshToken,
-    userPage
+    userPage,
+    addUser,
+    updateUser,
+    deleteUser,
 }

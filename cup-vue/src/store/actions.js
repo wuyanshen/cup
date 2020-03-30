@@ -3,7 +3,7 @@ import api from '@/api/api'
 
 const actions = {
 
-    //
+    //修改系统名称
     editAppName({ commit }) {
         commit('UPDATE_APPNAME', '全局actions修改')
     },
@@ -40,13 +40,44 @@ const actions = {
     //用户分页查询
     userPage({ commit }, params) {
         return new Promise((resolve, reject) => {
-            api.user.userPage().then(res => {
+            api.user.userPage(params).then(res => {
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+    //新增用户
+    addUser({ commit }, user) {
+        return new Promise((resolve, reject) => {
+            api.user.addUser(user).then(res => {
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+    //修改用户
+    updateUser({ commit }, user) {
+        return new Promise((resolve, reject) => {
+            api.user.updateUser(user).then(res => {
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+    //删除用户
+    deleteUser({ commit }, id) {
+        return new Promise((resolve, reject) => {
+            api.user.deleteUser(id).then(res => {
                 resolve(res)
             }).catch(error => {
                 reject(error)
             })
         })
     }
+
 }
 
 export default actions
