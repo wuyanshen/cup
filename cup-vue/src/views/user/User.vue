@@ -69,7 +69,7 @@
           <el-input v-model="userAddForm.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="userAddForm.password"></el-input>
+          <el-input type="password" v-model="userAddForm.password"></el-input>
         </el-form-item>
         <el-form-item label="电话">
           <el-input v-model="userAddForm.phone"></el-input>
@@ -92,9 +92,6 @@
         </el-form-item>
         <el-form-item label="用户名">
           <el-input v-model="userEditForm.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="userEditForm.password"></el-input>
         </el-form-item>
         <el-form-item label="是否启用">
           <el-switch

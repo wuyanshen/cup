@@ -3,6 +3,8 @@ package com.cup.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.cup.entity.dto.MenuTree;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,22 @@ import java.util.List;
  * @discription 描述
  */
 public class Test {
+
+
+    private static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+
     public static void main(String[] args) throws JsonProcessingException {
+        testPwd();
+    }
+
+    public static void testPwd(){
+        String pwdStr = "$2a$10$ssErbjkQIqjIR6cbD3JcNOKbJnBbmw/E04sUST7DE2UcLy/rIUJgK";
+
+        System.out.println(passwordEncoder.matches("123456",pwdStr));
+    }
+
+    public static void tree() throws JsonProcessingException {
 
 //        //根节点
 //        TreeNode root = new TreeNode();

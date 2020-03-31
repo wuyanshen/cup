@@ -7,6 +7,8 @@ import com.cup.entity.SysUser;
 import com.cup.dao.SysUserDao;
 import com.cup.service.SysUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,8 @@ import java.util.List;
 public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> implements SysUserService {
 
     private final SysUserDao sysUserDao;
+
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
      * 通过ID查询单条数据
@@ -90,5 +94,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
     @Override
     public IPage<SysUser> selectUserPage(Page<SysUser> page, SysUser sysUser) {
         return this.sysUserDao.selectPageVo(page,sysUser);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param sysUser
+     * @return
+     */
+    @Override
+    public boolean updatePwd(SysUser sysUser) {
+        String newPwd = this.passwordEncoder.encode(sysUser.getPassword());
+        sysUser.setPassword(newPwd);
+        return this.sysUserDao.updatePwd(sysUser);
     }
 }

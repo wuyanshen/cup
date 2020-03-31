@@ -7,7 +7,11 @@ import com.cup.service.SysUserService;
 import com.cup.util.Res;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +27,8 @@ import org.springframework.web.bind.annotation.*;
 public class SysUserController {
 
     private final SysUserService sysUserService;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
      * 查询用户信息
@@ -60,6 +66,7 @@ public class SysUserController {
      */
     @PostMapping
     public Res create(@RequestBody SysUser sysUser) {
+        sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
         return Res.success(this.sysUserService.save(sysUser));
     }
 
@@ -83,6 +90,33 @@ public class SysUserController {
     @PutMapping
     public Res update(@RequestBody SysUser sysUser) {
         return Res.success(this.sysUserService.updateById(sysUser));
+    }
+
+
+    /**
+     * 更新密码
+     *
+     * @param sysUser
+     * @return
+     */
+    @PutMapping("pwd")
+    public Res updatePwd(@RequestBody SysUser sysUser){
+        return Res.success(this.sysUserService.updatePwd(sysUser));
+    }
+
+    /**
+     * 校验原密码是否正确
+     * @param password
+     * @return
+     */
+    @GetMapping("pwd/check")
+    public Res checkPwd(@RequestParam("password")String password){
+        User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(passwordEncoder.matches(password,user.getPassword())){
+            return Res.success("密码匹配");
+        }else{
+            return Res.fail("密码不匹配");
+        }
     }
 
 }

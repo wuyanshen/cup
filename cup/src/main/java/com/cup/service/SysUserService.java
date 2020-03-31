@@ -66,4 +66,5 @@ public interface SysUserService extends IService<SysUser> {
      */
     IPage<SysUser> selectUserPage(Page<SysUser> page, SysUser sysUser);
 
+    boolean updatePwd(SysUser sysUser);
 }

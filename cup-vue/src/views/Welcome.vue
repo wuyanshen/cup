@@ -41,7 +41,7 @@ export default {
     ...mapMutations(["UPDATE_APPNAME", "SET_USERNAME"]),
     ...mapActions(["editAppName", "updateUsername"]),
     async uInfo() {
-      const { data: res } = await this.$api.user.getUserInfo();
+      const { data: res } = await this.$api.user.userInfo();
     },
     handleAppName() {
       this.editAppName();

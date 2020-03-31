@@ -14,13 +14,20 @@ import java.util.Collection;
 public class CommonUser extends User {
 
     /**
+     * id
+     */
+    @Getter
+    private Integer id;
+
+    /**
      * 机构id
      */
     @Getter
     private Integer orgId;
 
-    public CommonUser(String username, String password, Integer orgId, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public CommonUser(String username, String password, Integer id, Integer orgId, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.orgId = orgId;
+        this.id = id;
     }
 }

@@ -54,6 +54,6 @@ public class CommonUserDetailServiceImpl implements UserDetailsService {
         urls.addAll(roleCodes.stream().map(roleCode -> "ROLE_" + roleCode).collect(Collectors.toList()));
         String auths = urls.stream().collect(Collectors.joining(","));
 
-        return new CommonUser(sysUser.getUsername(), sysUser.getPassword(), sysUser.getOrgId(), sysUser.isStatus(), true, true, true, AuthorityUtils.commaSeparatedStringToAuthorityList(auths));
+        return new CommonUser(sysUser.getUsername(), sysUser.getPassword(), sysUser.getId(), sysUser.getOrgId(), sysUser.isStatus(), true, true, true, AuthorityUtils.commaSeparatedStringToAuthorityList(auths));
     }
 }

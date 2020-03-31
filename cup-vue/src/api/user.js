@@ -1,8 +1,8 @@
 import axios from './index'
 
-//测试获取用户名方法
-const getUserInfo = () => {
-    return axios.get('/sysUser/info')
+//获取当前登录用户信息方法
+const userInfo = () => {
+    return axios.get('/users/info')
 }
 
 //登录方法
@@ -39,13 +39,24 @@ const deleteUser = id => {
     return axios.delete(`/users/${id}`)
 }
 
+//修改用户密码
+const updatePwd = user => {
+    return axios.put(`/users/pwd`, user)
+}
+
+//校验原密码是否正确
+const pwdCheck = params => {
+    return axios.get('/users/pwd/check', params)
+}
 
 export default {
-    getUserInfo,
+    userInfo,
     login,
     refreshToken,
     userPage,
     addUser,
     updateUser,
     deleteUser,
+    updatePwd,
+    pwdCheck,
 }

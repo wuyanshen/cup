@@ -127,6 +127,11 @@
         where id = #{id}
     </update>
 
+    <!--修改密码-->
+    <update id="updatePwd">
+        update sys_user set password = #{password} where id = #{id}
+    </update>
+
 
     <!--通过用户名查询用户-->
     <select id="loadUserByUsername" resultMap="SysUserMap">

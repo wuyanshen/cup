@@ -58,4 +58,11 @@ public interface SysUserDao extends BaseMapper<SysUser> {
      * @return IPage<SysUser>
      */
     IPage<SysUser> selectPageVo(Page<?> page, SysUser sysUser);
+
+    /**
+     *  更新密码
+     * @param sysUser
+     * @return
+     */
+    boolean updatePwd(SysUser sysUser);
 }
