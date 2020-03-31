@@ -63,35 +63,44 @@
     </el-card>
 
     <!-- 新增用户对话框 -->
-    <el-dialog title="新增用户" :visible.sync="userAddDialog" width="50%">
-      <el-form label-width="80px" :model="userAddForm">
-        <el-form-item label="用户名">
+    <el-dialog
+      title="新增用户"
+      :visible.sync="userAddDialog"
+      width="50%"
+      :show-close="false"
+      @close="userAddClose"
+    >
+      <el-form label-width="80px" :rules="userAddRules" :model="userAddForm" ref="userAddForm">
+        <el-form-item label="用户名" prop="username">
           <el-input v-model="userAddForm.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="userAddForm.password"></el-input>
         </el-form-item>
-        <el-form-item label="电话">
+        <el-form-item label="电话" prop="phone">
           <el-input v-model="userAddForm.phone"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱">
+        <el-form-item label="邮箱" prop="email">
           <el-input v-model="userAddForm.email"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="userAddDialog = false">取 消</el-button>
-        <el-button type="primary" @click="handleUserAdd">确 定</el-button>
+        <el-button type="primary" @click="handleUserAdd('userAddForm')">确 定</el-button>
       </span>
     </el-dialog>
 
     <!-- 修改用户对话框 -->
-    <el-dialog title="修改用户" :visible.sync="userEditDialog" width="50%">
+    <el-dialog title="修改用户" :visible.sync="userEditDialog" width="50%" :show-close="false">
       <el-form label-width="80px" :model="userEditForm">
         <el-form-item label="id">
           <el-input v-model="userEditForm.id" disabled></el-input>
         </el-form-item>
         <el-form-item label="用户名">
           <el-input v-model="userEditForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="userEditForm.password"></el-input>
         </el-form-item>
         <el-form-item label="是否启用">
           <el-switch
@@ -121,6 +130,14 @@
 import { mapActions } from "vuex";
 export default {
   data() {
+    var usernameCheck = async (rule, value, callback) => {
+      let res = await this.usernameCheck({ username: value });
+      if (res.code !== 0) {
+        callback(new Error("用户名已存在"));
+      } else {
+        callback();
+      }
+    };
     return {
       tableData: [],
       userAddDialog: false,
@@ -146,18 +163,38 @@ export default {
         size: 10,
         current: 1,
         username: ""
+      },
+      userAddRules: {
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          { validator: usernameCheck, message: "用户名已存在", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { min: 6, message: "密码至少为6位", trigger: "blur" }
+        ],
+        phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
+        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }]
       }
     };
   },
   async mounted() {
     let res = await this.userPage();
-    this.tableData = res.data.records;
-    this.total = res.data.total;
-    this.pageSize = res.data.size;
-    this.currentPage = res.data.current;
+    if (res.code == 0) {
+      this.tableData = res.data.records;
+      this.total = res.data.total;
+      this.pageSize = res.data.size;
+      this.currentPage = res.data.current;
+    }
   },
   methods: {
-    ...mapActions(["userPage", "addUser", "updateUser", "deleteUser"]),
+    ...mapActions([
+      "userPage",
+      "addUser",
+      "updateUser",
+      "deleteUser",
+      "usernameCheck"
+    ]),
     //修改每页显示条数
     async handleSizeChange(size) {
       this.queryInfo.size = size;
@@ -177,16 +214,27 @@ export default {
       this.userEditForm.email = row.email;
       this.userEditDialog = true;
     },
+    //用户新增dialog关闭后清空值和校验
+    userAddClose() {
+      this.$refs["userAddForm"].resetFields();
+      this.userAddForm = {};
+    },
     //新增用户
-    async handleUserAdd() {
-      let res = await this.addUser(this.userAddForm);
-      if (res.code == 0) {
-        this.$message.success("添加用户成功");
-      }
-      //刷新
-      this.flushUserPage();
-      //关闭dialog
-      this.userAddDialog = false;
+    handleUserAdd(formName) {
+      this.$refs[formName].validate(async valid => {
+        if (!valid) {
+          return false;
+        } else {
+          let res = await this.addUser(this.userAddForm);
+          if (res.code == 0) {
+            this.$message.success("添加用户成功");
+          }
+          //刷新
+          this.flushUserPage();
+          //关闭dialog
+          this.userAddDialog = false;
+        }
+      });
     },
     //更新用户
     async handleUserUpdate() {

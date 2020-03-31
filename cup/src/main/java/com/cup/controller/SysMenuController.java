@@ -36,6 +36,10 @@ public class SysMenuController {
     }
 
 
+    /**
+     * 获取当前登录用户的菜单
+     * @return
+     */
     @GetMapping("tree")
     public Res menuTree(){
         List<MenuTree> list = sysMenuService.findMenuByRoleId(1);

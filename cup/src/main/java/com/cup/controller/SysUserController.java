@@ -6,6 +6,7 @@ import com.cup.entity.SysUser;
 import com.cup.service.SysUserService;
 import com.cup.util.Res;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,6 +37,7 @@ public class SysUserController {
      * @param authentication
      * @return String
      */
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("info")
     public Res info(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -49,6 +51,7 @@ public class SysUserController {
      * @param page
      * @return com.longyi.util.Res
      */
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("page")
     public Res page(Page page, SysUser sysUser) {
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
@@ -64,6 +67,7 @@ public class SysUserController {
      * @param sysUser
      * @return com.longyi.util.Res
      */
+    @PreAuthorize("hasAuthority('sys:user:add')")
     @PostMapping
     public Res create(@RequestBody SysUser sysUser) {
         sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
@@ -76,6 +80,7 @@ public class SysUserController {
      * @param id
      * @return com.longyi.util.Res
      */
+    @PreAuthorize("hasAuthority('sys:user:delete')")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id") Integer id) {
         return Res.success(this.sysUserService.deleteById(id));
@@ -87,8 +92,10 @@ public class SysUserController {
      * @param sysUser
      * @return com.longyi.util.Res
      */
+    @PreAuthorize("hasAuthority('sys:user:update')")
     @PutMapping
     public Res update(@RequestBody SysUser sysUser) {
+        sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
         return Res.success(this.sysUserService.updateById(sysUser));
     }
 
@@ -101,6 +108,7 @@ public class SysUserController {
      */
     @PutMapping("pwd")
     public Res updatePwd(@RequestBody SysUser sysUser){
+        sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
         return Res.success(this.sysUserService.updatePwd(sysUser));
     }
 
@@ -116,6 +124,21 @@ public class SysUserController {
             return Res.success("密码匹配");
         }else{
             return Res.fail("密码不匹配");
+        }
+    }
+
+    /**
+     * 校验用户名是否存在
+     * @param username
+     * @return
+     */
+    @GetMapping("name/check")
+    public Res checkUsername(@RequestParam("username")String username){
+        boolean flag = this.sysUserService.findAll(new SysUser()).stream().anyMatch(user->user.getUsername().equals(username));
+        if(flag){
+            return Res.fail("用户名已存在");
+        }else{
+            return Res.success("用户名可用");
         }
     }
 

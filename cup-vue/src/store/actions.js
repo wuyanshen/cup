@@ -121,9 +121,35 @@ const actions = {
     pwdCheck({
         commit
     }, params) {
-        console.log(params)
         return new Promise((resolve, reject) => {
             api.user.pwdCheck(params).then(res => {
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+    //校验用户名是否存在
+    usernameCheck({
+        commit
+    }, params) {
+        return new Promise((resolve, reject) => {
+            api.user.usernameCheck(params).then(res => {
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+
+    //==========================菜单接口===========================
+
+    //获取菜单树
+    menuTree({
+        commit
+    }) {
+        return new Promise((resolve, reject) => {
+            api.menu.menuTree().then(res => {
                 resolve(res)
             }).catch(error => {
                 reject(error)

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { setToken, getToken } from '@/lib/util'
+import {
+    setToken,
+    getToken
+} from '@/lib/util'
 import store from '@/store'
 
 Vue.use(VueRouter)
@@ -11,22 +14,38 @@ const routes = [{
         redirect: '/welcome',
         component: () => import('../views/Home.vue'),
         children: [{
-            path: '/about',
-            name: 'About',
-            component: () => import('../views/About.vue')
-        }, {
-            path: '/welcome',
-            name: 'Welcome',
-            component: () => import('../views/Welcome.vue')
-        }, {
-            path: '/user',
-            name: 'User',
-            component: () => import('../views/user/User.vue')
-        }, {
-            path: '/nextTickDemo',
-            name: 'nextTickDemo',
-            component: () => import('../views/nextTickDemo.vue')
-        }, ]
+                path: '/about',
+                name: 'About',
+                component: () => import('../views/About.vue')
+            }, {
+                path: '/welcome',
+                name: 'Welcome',
+                component: () => import('../views/Welcome.vue')
+            }, {
+                path: '/users**',
+                name: 'User',
+                component: () => import('../views/user/User.vue')
+            }, {
+                path: '/menus**',
+                name: 'Menu',
+                component: () => import('../views/menu/Menu.vue')
+            },
+            {
+                path: '/roles**',
+                name: 'Role',
+                component: () => import('../views/role/Role.vue')
+            },
+            {
+                path: '/logs**',
+                name: 'Log',
+                component: () => import('../views/log/Log.vue')
+            },
+            {
+                path: '/nextTickDemo',
+                name: 'nextTickDemo',
+                component: () => import('../views/nextTickDemo.vue')
+            },
+        ]
     },
     {
         path: '/login',

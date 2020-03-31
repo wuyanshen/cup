@@ -49,6 +49,11 @@ const pwdCheck = params => {
     return axios.get('/users/pwd/check', params)
 }
 
+//校验用户名是否已存在
+const usernameCheck = params => {
+    return axios.get('/users/name/check', params)
+}
+
 export default {
     userInfo,
     login,
@@ -59,4 +64,5 @@ export default {
     deleteUser,
     updatePwd,
     pwdCheck,
+    usernameCheck,
 }

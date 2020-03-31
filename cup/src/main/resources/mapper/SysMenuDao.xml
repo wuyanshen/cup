@@ -12,6 +12,7 @@
         <result property="isLeaf" column="is_leaf" jdbcType="INTEGER"/>
         <result property="level" column="level" jdbcType="INTEGER"/>
         <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
         <result property="sort" column="sort" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -19,10 +20,19 @@
         <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
     </resultMap>
 
+    <sql id="queryNoJoin">
+      id, menu_pid, menu_pids, menu_name, url, type, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag
+    </sql>
+
+    <sql id="queryJoin">
+        m.id, m.menu_pid, m.menu_pids, m.menu_name, m.url, m.permission,m.type, m.is_leaf, m.level, m.icon, m.status, m.sort, m.create_time, m.update_time, m.del_flag
+    </sql>
+
+
     <!--查询单个-->
     <select id="queryById" resultMap="SysMenuMap">
         select
-          id, menu_pid, menu_pids, menu_name, url, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag
+        <include refid="queryNoJoin"/>
         from sys_menu
         where id = #{id}
     </select>
@@ -30,7 +40,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SysMenuMap">
         select
-          id, menu_pid, menu_pids, menu_name, url, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag
+        <include refid="queryNoJoin"/>
         from sys_menu
         limit #{offset}, #{limit}
     </select>
@@ -38,7 +48,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="SysMenuMap">
         select
-          id, menu_pid, menu_pids, menu_name, url, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag
+        <include refid="queryNoJoin"/>
         from sys_menu
         <where>
             <if test="id != null">
@@ -145,9 +155,10 @@
     </delete>
 
 
-    <!--通过角色名称list查询按钮权限-->
+    <!--通过角色名称list查询菜单权限-->
     <select id="loadPermissionByRoleCode" resultMap="SysMenuMap">
-        select url
+        select
+        <include refid="queryJoin"/>
         from sys_menu m
         left join sys_role_menu rm on m.id = rm.menu_id
         left join sys_role r on r.id = rm.role_id
@@ -157,9 +168,10 @@
         </foreach>
     </select>
 
-
+    <!--通过角色id获取菜单列表-->
     <select id="findMenuByRoleId" resultMap="SysMenuMap">
-        select m.id, m.menu_pid, m.menu_pids, m.menu_name, m.url, m.permission, m.is_leaf, m.level, m.icon, m.status, m.sort, m.create_time, m.update_time, m.del_flag
+        select
+        <include refid="queryJoin"/>
         from sys_menu m
         left join sys_role_menu rm on rm.menu_id = m.id
         where rm.role_id = #{id}

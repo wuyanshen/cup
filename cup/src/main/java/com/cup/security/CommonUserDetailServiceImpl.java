@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +49,12 @@ public class CommonUserDetailServiceImpl implements UserDetailsService {
 
         //获取可以访问的菜单
         List<SysMenu> sysMenus = sysMenuDao.loadPermissionByRoleCode(roleCodes);
-        List<String> urls = sysMenus.stream().map(sysMenu -> sysMenu.getUrl()).collect(Collectors.toList());
+        List<String> urls = sysMenus.stream().map(sysMenu -> sysMenu.getUrl()).filter(url -> !StringUtils.isEmpty(url)).collect(Collectors.toList());
+        //获取可以访问的按钮
+        List<String> permissions = sysMenus.stream().map(sysMenu -> sysMenu.getPermission()).filter(permission-> !StringUtils.isEmpty(permission)).collect(Collectors.toList());
+
+        //将按钮权限合并
+        urls.addAll(permissions);
 
         //将可以访问的菜单和角色合并
         urls.addAll(roleCodes.stream().map(roleCode -> "ROLE_" + roleCode).collect(Collectors.toList()));
