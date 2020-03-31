@@ -33,21 +33,10 @@ export default {
     };
   },
   computed: {
-    // ...mapState("user", {
-    //   username: state => state.username
-    // })
-
     ...mapState({
       appName: state => state.appName,
       username: state => state.user.username
     })
-    // ...mapState(["appName"])
-    // appName() {
-    //   return this.$store.state.appName;
-    // },
-    // username() {
-    //   return this.$store.state.user.username;
-    // }
   },
   methods: {
     handleCommand(command) {

@@ -22,17 +22,17 @@
 
       <!-- 表格区 -->
       <el-table :data="tableData" border stripe class="user_table">
-        <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="username" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="phone" label="电话"></el-table-column>
-        <el-table-column prop="email" label="邮箱"></el-table-column>
-        <el-table-column prop="status" label="是否启用">
+        <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
+        <el-table-column align="center" prop="username" label="姓名" width="180"></el-table-column>
+        <el-table-column align="center" prop="phone" label="电话"></el-table-column>
+        <el-table-column align="center" prop="email" label="邮箱"></el-table-column>
+        <el-table-column align="center" prop="status" label="是否启用">
           <template v-slot="scope">
             <el-tag v-if="scope.row.status" type="success">启用</el-tag>
             <el-tag v-else type="danger">禁用</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column align="center" label="操作">
           <template v-slot="scope">
             <el-button
               type="primary"
@@ -148,7 +148,7 @@ export default {
       queryInfo: {
         size: 10,
         current: 1,
-        username: null
+        username: ""
       }
     };
   },
@@ -158,7 +158,6 @@ export default {
     this.total = res.data.total;
     this.pageSize = res.data.size;
     this.currentPage = res.data.current;
-    console.log(res);
   },
   methods: {
     ...mapActions(["userPage", "addUser", "updateUser", "deleteUser"]),
@@ -240,7 +239,7 @@ export default {
 }
 
 .el-pagination {
-  margin-top: -10px;
+  margin-top: 10px;
 }
 
 .el-switch {
