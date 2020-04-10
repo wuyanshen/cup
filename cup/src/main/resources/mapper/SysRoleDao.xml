@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cup.dao.SysRoleDao">
+<mapper namespace="com.lvcoding.dao.SysRoleDao">
 
-    <resultMap type="com.cup.entity.SysRole" id="SysRoleMap">
+    <resultMap type="com.lvcoding.entity.SysRole" id="SysRoleMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
         <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
@@ -104,7 +104,7 @@
 
     <!--通过用户名查询权限-->
     <select id="loadRolesByUsername" resultMap="SysRoleMap">
-        select role_code
+        select r.id, r.role_code ,r.role_name, r.status
         from sys_role r
                  left join sys_user_role ur on r.id = ur.role_id
                  left join sys_user u on u.id = ur.user_id

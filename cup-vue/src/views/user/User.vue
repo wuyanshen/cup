@@ -11,17 +11,17 @@
       <!-- 查询区 -->
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名">
+          <el-input size="small" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名">
             <el-button slot="append" icon="el-icon-search" @click="handleSearch(username)"></el-button>
           </el-input>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" icon="el-icon-plus" @click="userAddDialog=true">新增</el-button>
+          <el-button type="primary" icon="el-icon-plus" size="small" @click="userAddDialog=true">新增</el-button>
         </el-col>
       </el-row>
 
       <!-- 表格区 -->
-      <el-table :data="tableData" border stripe class="user_table">
+      <el-table size="small" :data="tableData" border stripe class="user_table">
         <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
         <el-table-column align="center" prop="username" label="姓名" width="180"></el-table-column>
         <el-table-column align="center" prop="phone" label="电话"></el-table-column>
@@ -63,6 +63,9 @@
     </el-card>
 
     <!-- 新增用户对话框 -->
+    <el-dialog :show-close="false" title="新增用户" :visible.sync="userAddDialog" width="50%">
+      <el-form size="small" label-width="80px" :model="userAddForm">
+        <el-form-item label="用户名">
     <el-dialog
       title="新增用户"
       :visible.sync="userAddDialog"
@@ -85,14 +88,14 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="userAddDialog = false">取 消</el-button>
-        <el-button type="primary" @click="handleUserAdd('userAddForm')">确 定</el-button>
+        <el-button size="small" @click="userAddDialog = false">取 消</el-button>
+        <el-button size="small" type="primary" @click="handleUserAdd">确 定</el-button>
       </span>
     </el-dialog>
 
     <!-- 修改用户对话框 -->
-    <el-dialog title="修改用户" :visible.sync="userEditDialog" width="50%" :show-close="false">
-      <el-form label-width="80px" :model="userEditForm">
+    <el-dialog :show-close="false" title="修改用户" :visible.sync="userEditDialog" width="50%">
+      <el-form size="small" label-width="80px" :model="userEditForm">
         <el-form-item label="id">
           <el-input v-model="userEditForm.id" disabled></el-input>
         </el-form-item>
@@ -120,8 +123,8 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="userEditDialog = false">取 消</el-button>
-        <el-button type="primary" @click="handleUserUpdate">确 定</el-button>
+        <el-button size="small" @click="userEditDialog = false">取 消</el-button>
+        <el-button size="small" type="primary" @click="handleUserUpdate">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -212,6 +215,7 @@ export default {
       this.userEditForm.password = row.password;
       this.userEditForm.phone = row.phone;
       this.userEditForm.email = row.email;
+      this.userEditForm.status = row.status;
       this.userEditDialog = true;
     },
     //用户新增dialog关闭后清空值和校验
