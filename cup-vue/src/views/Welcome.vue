@@ -3,7 +3,6 @@
     <h1>欢迎来到{{this.$store.state.appName}}</h1>
     <h1>{{appName}}</h1>
     <h1>{{appNameWithVersion}}</h1>
-    <h1>{{usernameWithVersion}}</h1>
     <br />
     <el-button type="warning" @click="uInfo">获取用户信息</el-button>
     <el-button type="warning" @click="handleAppName">修改系统名称</el-button>
@@ -27,7 +26,7 @@ export default {
     //
   },
   computed: {
-    ...mapGetters(["appNameWithVersion", "usernameWithVersion"]),
+    ...mapGetters(["appNameWithVersion"]),
     appName: {
       set(value) {
         this.UPDATE_APPNAME(value);

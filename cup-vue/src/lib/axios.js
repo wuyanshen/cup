@@ -69,7 +69,7 @@ class HttpRequest {
                         break;
 
                     case 403:
-                        Message.error('您没有权限访问该资源，请联系管理员哦~')
+                        Message.error('您没有权限执行此操作，请联系管理员哦~')
                         break;
 
                     case 404:

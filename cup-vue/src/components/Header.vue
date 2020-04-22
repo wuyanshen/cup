@@ -1,9 +1,8 @@
 <template>
   <div class="header-container">
-    <div class="logo">
-      <el-avatar shape="square" :size="50" :src="avatar"></el-avatar>
-      <div class="title">{{appName}}</div>
-    </div>
+    <!-- 缩放按钮 -->
+    <div class="collapse_btn_div" @click="handleCollapse"><i :class="handleClass()"></i></div>
+    <!-- 头像 -->
     <div class="avatar">
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
@@ -44,8 +43,8 @@
   </div>
 </template>
 <script>
-import avatar from "@/assets/logo.png";
-import { mapState, mapActions } from "vuex";
+import avatar from "@/assets/logoko.png";
+import {mapState, mapActions, mapMutations} from "vuex";
 
 export default {
   data() {
@@ -91,13 +90,15 @@ export default {
     };
   },
   computed: {
+    ...mapState(["siderCollapse"]),
     ...mapState({
-      appName: state => state.appName,
       username: state => state.user.username
     })
   },
   methods: {
     ...mapActions(["updatePwd", "userInfo", "pwdCheck"]),
+    ...mapMutations(["UPDATE_COLLAPSE"]),
+    ...mapMutations("tabs",["initMainTabs"]),
     handleCommand(command) {
       this[command]();
     },
@@ -141,13 +142,23 @@ export default {
         .then(() => {
           window.sessionStorage.clear();
           this.$router.push("/login");
+          this.initMainTabs()
           this.$message({
             type: "success",
             message: "退出成功!"
           });
         })
         .catch(() => {});
-    }
+    },
+    handleCollapse() {
+      this.UPDATE_COLLAPSE(!this.siderCollapse);
+    },
+    handleClass(){
+      return {
+        "el-icon-s-fold":!this.siderCollapse,
+        "el-icon-s-unfold":this.siderCollapse
+      }
+    },
   }
 };
 </script>
@@ -156,26 +167,14 @@ export default {
   display: flex;
   justify-content: space-between;
 
-  // 左边的logo和标题
-  .logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 60px;
-
-    .el-avatar {
-      background-color: #2b4b6b;
-    }
-
-    img {
-      margin-top: 10px;
-    }
-
-    .title {
-      font-size: 20px;
-      font-weight: bold;
+  //左边缩放按钮
+  .collapse_btn_div {
+    font-size: 25px;
+    i:hover{
+      cursor:pointer;
     }
   }
+
 
   // 右边的头像
   .avatar {

@@ -5,6 +5,9 @@ import {
     getToken
 } from '@/lib/util'
 import store from '@/store'
+import menuRouter from './menuRouter.js'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 Vue.use(VueRouter)
 
@@ -13,38 +16,8 @@ const routes = [{
         name: 'Home',
         redirect: '/welcome',
         component: () => import('../views/Home.vue'),
-        children: [{
-                path: '/about',
-                name: 'About',
-                component: () => import('../views/About.vue')
-            }, {
-                path: '/welcome',
-                name: 'Welcome',
-                component: () => import('../views/Welcome.vue')
-            }, {
-                path: '/users**',
-                name: 'User',
-                component: () => import('../views/user/User.vue')
-            }, {
-                path: '/menus**',
-                name: 'Menu',
-                component: () => import('../views/menu/Menu.vue')
-            },
-            {
-                path: '/roles**',
-                name: 'Role',
-                component: () => import('../views/role/Role.vue')
-            },
-            {
-                path: '/logs**',
-                name: 'Log',
-                component: () => import('../views/log/Log.vue')
-            },
-            {
-                path: '/nextTickDemo',
-                name: 'nextTickDemo',
-                component: () => import('../views/nextTickDemo.vue')
-            },
+        children: [
+            ...menuRouter
         ]
     },
     {
@@ -62,6 +35,7 @@ const router = new VueRouter({
 
 //全局路由守卫
 router.beforeEach(async (to, from, next) => {
+    NProgress.start();
     const token = getToken()
     if (token) { //如果有token
         // store.dispatch('checkAndRefreshToken').then(
@@ -89,6 +63,11 @@ router.beforeEach(async (to, from, next) => {
         if (to.path === '/login') next()
         else next('/login')
     }
+})
+
+router.afterEach((to,from)=>{
+    store.dispatch("tabs/addTab", to.path)
+    NProgress.done();
 })
 
 export default router

@@ -13,6 +13,7 @@ if (process.env.NODE_ENV === 'development') require('./mock')
 // import Mock from './mock'
 import api from '@/api/api'
 
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(vueAxios, axios)

@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- 面包屑区 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-    </el-breadcrumb>
+    </el-breadcrumb> -->
 
     <!-- 卡片区 -->
     <el-card>
@@ -12,7 +12,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <el-input size="small" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名">
-            <el-button slot="append" icon="el-icon-search" @click="handleSearch(username)"></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
           </el-input>
         </el-col>
         <el-col :span="2">
@@ -63,9 +63,6 @@
     </el-card>
 
     <!-- 新增用户对话框 -->
-    <el-dialog :show-close="false" title="新增用户" :visible.sync="userAddDialog" width="50%">
-      <el-form size="small" label-width="80px" :model="userAddForm">
-        <el-form-item label="用户名">
     <el-dialog
       title="新增用户"
       :visible.sync="userAddDialog"
@@ -101,9 +98,6 @@
         </el-form-item>
         <el-form-item label="用户名">
           <el-input v-model="userEditForm.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码">
-          <el-input type="password" v-model="userEditForm.password"></el-input>
         </el-form-item>
         <el-form-item label="是否启用">
           <el-switch
@@ -212,7 +206,6 @@ export default {
     handleEdit(row) {
       this.userEditForm.id = row.id;
       this.userEditForm.username = row.username;
-      this.userEditForm.password = row.password;
       this.userEditForm.phone = row.phone;
       this.userEditForm.email = row.email;
       this.userEditForm.status = row.status;
@@ -269,7 +262,7 @@ export default {
         })
         .catch(() => {});
     },
-    async handleSearch(username) {
+    async handleSearch() {
       let res = await this.userPage(this.queryInfo);
       this.tableData = res.data.records;
     },

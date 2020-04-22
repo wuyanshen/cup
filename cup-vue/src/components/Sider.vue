@@ -1,62 +1,57 @@
 <template>
   <div class="sider">
-    <!-- 缩放按钮 -->
-    <div class="collapse_btn_div" @click="handleCollapse">|||</div>
+    <!--logo-->
+    <div class="logo">
+        <el-avatar shape="square" :size="64" :src="avatar"></el-avatar>
+        <div class="title" v-if="!siderCollapse">{{appName}}</div>
+    </div>
     <!-- 左侧菜单栏 -->
     <el-menu
-      default-active="2"
-      background-color="#325272"
-      text-color="#fff"
+      :default-active="activeRoute"
       :collapse="siderCollapse"
       :collapse-transition="false"
       router
     >
-      <!-- <el-submenu index="1">
+      <!-- 一级菜单 -->
+      <el-submenu :index="it1.url" v-for="(it1,index1) of menuList" :key="index1">
         <template slot="title">
-          <i class="el-icon-setting"></i>
-          <span>权限管理</span>
-        </template>
-        <el-menu-item index="/about">关于我们</el-menu-item>
-        <el-menu-item index="/user">用户管理</el-menu-item>
-      </el-submenu>-->
-
-      <el-submenu index="1" v-for="(it1,index1) of menuTrees" :key="index1">
-        <template slot="title">
-          <i class="el-icon-setting"></i>
+          <i :class="it1.icon"></i>
           <span>{{it1.menuName}}</span>
         </template>
+        <!-- 二级菜单 -->
         <el-menu-item
           v-for="(it2,index2) of it1.children"
           :key="index2"
           :index="it2.url"
-        >{{ it2.menuName }}</el-menu-item>
+          @click="handleMenuClick(it2)"
+        >
+          <i :class="it2.icon"></i>
+          <span slot="title">{{ it2.menuName }}</span>
+        </el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
 </template>
 
 <script>
+import avatar from "@/assets/logoko.png";
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
-      menuTrees: []
+      avatar,
     };
   },
-  async mounted() {
-    let res = await this.menuTree();
-    if (res.code === 0) {
-      this.menuTrees = res.data;
-    }
+  mounted() {
+    console.log(this.menuList)
   },
   computed: {
-    ...mapState(["siderCollapse"])
+    ...mapState(["siderCollapse","appName"]),
+    ...mapState("tabs",["activeRoute","menuList"])
   },
   methods: {
-    ...mapActions(["menuTree"]),
-    ...mapMutations(["UPDATE_COLLAPSE"]),
-    handleCollapse() {
-      this.UPDATE_COLLAPSE(!this.siderCollapse);
+    handleMenuClick(item){
+      // this.addTab(item)
     }
   }
 };
@@ -69,9 +64,50 @@ export default {
 
 .collapse_btn_div {
   line-height: 20px;
-  color: #fff;
+  color: #666;
   text-align: center;
   cursor: pointer;
-  border-bottom: 1px solid #2b4b6b;
+  border-bottom: 1px solid #666;
+}
+
+// 左边的logo和标题
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  color: #fff;
+  background-color: #409EFF;
+  border-right: solid 1px #e6e6e6;
+  box-shadow: 2px 0 3px -1px #000;
+
+  .el-avatar {
+    padding-left: 8px;
+    background-color: #409EFF;
+  }
+
+  img {
+    margin-top: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+// 右边的头像
+.avatar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+  .el-dropdown {
+    height: 50px;
+  }
+
+  img {
+    margin-top: 10px;
+  }
 }
 </style>

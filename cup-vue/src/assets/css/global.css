@@ -11,5 +11,20 @@ body,
 }
 
 .el-card {
-    margin-top: 10px;
+    margin: 15px;
 }
+
+/*tab样式*/
+.el-tabs--border-card>.el-tabs__content{
+	padding: 0
+}
+/*tab样式*/
+.el-tabs--top>.el-tabs__header{
+	margin: 0;
+    padding: 0 20px;
+}
+
+.el-table tbody tr:hover>td {
+    background-color:#fff!important
+}
+
