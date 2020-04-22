@@ -17,6 +17,11 @@ const routes = [{
         redirect: '/welcome',
         component: () => import('../views/Home.vue'),
         children: [
+            {
+                path: 'info',
+                name: 'Info',
+                component: () => import('../views/Info.vue')
+            },
             ...menuRouter
         ]
     },

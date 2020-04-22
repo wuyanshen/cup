@@ -2,7 +2,7 @@
   <div class="sider">
     <!--logo-->
     <div class="logo">
-        <el-avatar shape="square" :size="64" :src="avatar"></el-avatar>
+        <el-avatar shape="square" :size="60" :src="avatar"></el-avatar>
         <div class="title" v-if="!siderCollapse">{{appName}}</div>
     </div>
     <!-- 左侧菜单栏 -->
@@ -13,7 +13,7 @@
       router
     >
       <!-- 一级菜单 -->
-      <el-submenu :index="it1.url" v-for="(it1,index1) of menuList" :key="index1">
+      <el-submenu :index="it1.url" v-for="(it1,index1) of menuList" :key="index1" v-if="it1.id">
         <template slot="title">
           <i :class="it1.icon"></i>
           <span>{{it1.menuName}}</span>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import avatar from "@/assets/logoko.png";
+import avatar from "@/assets/logo55.png";
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
@@ -82,7 +82,6 @@ export default {
   box-shadow: 2px 0 3px -1px #000;
 
   .el-avatar {
-    padding-left: 8px;
     background-color: #409EFF;
   }
 
@@ -107,7 +106,11 @@ export default {
   }
 
   img {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 </style>

@@ -43,7 +43,6 @@
   </div>
 </template>
 <script>
-import avatar from "@/assets/logoko.png";
 import {mapState, mapActions, mapMutations} from "vuex";
 
 export default {
@@ -66,7 +65,6 @@ export default {
     return {
       avatarUrl:
         "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-      avatar,
       pwdDialog: false,
       pwdForm: {
         old_password: "",
@@ -97,8 +95,9 @@ export default {
   },
   methods: {
     ...mapActions(["updatePwd", "userInfo", "pwdCheck"]),
+    ...mapActions("tabs",["addTab"]),
     ...mapMutations(["UPDATE_COLLAPSE"]),
-    ...mapMutations("tabs",["initMainTabs"]),
+    ...mapMutations("tabs",["initMainTabs","setActiveRoute"]),
     handleCommand(command) {
       this[command]();
     },
@@ -131,7 +130,9 @@ export default {
       this.pwdForm = {};
     },
     info() {
-      this.$message.success("个人信息");
+      this.addTab('/info')
+      this.setActiveRoute('/info')
+      this.$router.push({name:"Info"});
     },
     logout() {
       this.$confirm("此操作将退出系统, 是否继续?", "提示", {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main_div">
   	<el-tabs :value="activeRoute" @tab-click="tabClick" @tab-remove="tabRemove">
 	  <el-tab-pane
 	    v-for="(item, index) in maintabs"
@@ -43,5 +43,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-
+	.main_div{
+		height: 100%;
+	}
 </style>

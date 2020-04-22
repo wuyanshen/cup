@@ -3,7 +3,15 @@ import api from '@/api/api'
 const state = {
 	maintabs:[{url:'/welcome',title:'首页',closable:false}],
 	activeRoute:'/welcome',
-	menuList:[],
+	menuList:[
+		{
+			menuName: '非菜单路由',
+			url:'',
+			children:[
+				{	menuName:'个人信息',url:'/info'}
+			]
+		}
+	],
 }
 
 const mutations = {
@@ -12,8 +20,14 @@ const mutations = {
 		let isAreadyIn = state.maintabs.some(item => item.url === url);
 		if(!isAreadyIn){
 			if(state.menuList.length>=1){
-				let route = state.menuList[0].children.filter(item => item.url === url)
-				state.maintabs.push({url:url,title:route[0].menuName, closable:true})
+				let route = []
+				for(let i in state.menuList){
+					route = state.menuList[i].children.filter(item => item.url === url)
+					if(route.length>0){
+						break
+					}
+				}
+				state.maintabs.push({url:url, title:route[0].menuName, closable:true})
 			}
 		}
 		state.activeRoute = url
@@ -29,7 +43,7 @@ const mutations = {
 	},
 	//加载菜单树
 	loadMenuTree(state,menuTree){
-		state.menuList = menuTree
+		state.menuList = [state.menuList[0], ...menuTree]
 	},
 	//退出登录后初始化tab数组
 	initMainTabs(state){
