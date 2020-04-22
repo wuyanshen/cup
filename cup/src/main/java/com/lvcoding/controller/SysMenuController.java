@@ -52,4 +52,37 @@ public class SysMenuController {
         List<MenuTree> list = sysMenuService.findMenuByRoleIds(roleIds);
         return Res.success(list);
     }
+
+    /**
+     * 新增菜单
+     *
+     * @param
+     * @return MenuTree
+     */
+    @PostMapping
+    public Res add(@RequestBody MenuTree menuTree){
+        return Res.success(sysMenuService.addMenu(menuTree));
+    }
+
+    /**
+     * 修改菜单
+     *
+     * @param sysMenu
+     * @return Res
+     */
+    @PutMapping
+    public Res update(@RequestBody SysMenu sysMenu){
+        return Res.success(sysMenuService.update(sysMenu));
+    }
+
+    /**
+     * 删除菜单
+     *
+     * @param id
+     * @return com.lvcoding.util.Res
+     */
+    @DeleteMapping("{id}")
+    public Res delete(@PathVariable("id")Integer id){
+        return Res.success(sysMenuService.deleteById(id));
+    }
 }

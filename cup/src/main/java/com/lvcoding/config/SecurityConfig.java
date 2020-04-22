@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 设置拦截忽略url - 会直接过滤该url - 将不会经过Spring Security过滤器链
         // 设置拦截忽略文件夹，可以对静态资源放行
-        web.ignoring().antMatchers("/favicon.ico", "/img/**", "/css/**", "/js/**");
+        web.ignoring().antMatchers("/favicon.ico", "/assets/**", "/images/**", "/css/**", "/js/**");
     }
 
 
@@ -88,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/token/refresh","/token/check", "/login", "/login.html").permitAll()
-                    .anyRequest().access("@commonHasPermission.hasPermision(request,authentication)")
+//                    .anyRequest().access("@commonHasPermission.hasPermision(request,authentication)")
                 .and()
                     .exceptionHandling()
                     .accessDeniedHandler(commonAccessDeniedHandler)

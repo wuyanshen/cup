@@ -1,13 +1,14 @@
-package com.cup.util;
+package com.lvcoding.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.cup.entity.dto.MenuTree;
+import com.lvcoding.entity.dto.MenuTree;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * @author wuyanshen

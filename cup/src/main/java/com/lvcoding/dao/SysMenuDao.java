@@ -1,5 +1,6 @@
 package com.lvcoding.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lvcoding.entity.SysMenu;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-24 01:24:05
  */
-public interface SysMenuDao {
+public interface SysMenuDao extends BaseMapper<SysMenu> {
 
     /**
      * 通过角色名称list查询菜单权限

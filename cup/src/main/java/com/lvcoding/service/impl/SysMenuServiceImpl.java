@@ -1,5 +1,7 @@
 package com.lvcoding.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysMenu;
 import com.lvcoding.dao.SysMenuDao;
 import com.lvcoding.entity.dto.MenuTree;
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
  * @since 2020-03-24 01:24:05
  */
 @Service("sysMenuService")
-public class SysMenuServiceImpl implements SysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> implements SysMenuService {
     @Resource
     private SysMenuDao sysMenuDao;
 
@@ -99,5 +101,13 @@ public class SysMenuServiceImpl implements SysMenuService {
         }).collect(Collectors.toList());
         List<MenuTree> trees = TreeUtil.buildByRecursive(menuTrees, 0);
         return trees;
+    }
+
+    @Override
+    public boolean addMenu(MenuTree menuTree) {
+        SysMenu sysMenu = new SysMenu();
+        BeanUtils.copyProperties(menuTree,sysMenu);
+        sysMenu.setMenuPid(menuTree.getParentId());
+        return this.baseMapper.insert(sysMenu) == 1?true:false;
     }
 }

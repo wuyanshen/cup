@@ -1,5 +1,6 @@
 package com.lvcoding.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvcoding.entity.SysMenu;
 import com.lvcoding.entity.dto.MenuTree;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-24 01:24:05
  */
-public interface SysMenuService {
+public interface SysMenuService extends IService<SysMenu> {
 
     /**
      * 通过ID查询单条数据
@@ -62,4 +63,5 @@ public interface SysMenuService {
      */
     List<MenuTree> findMenuByRoleIds(List<Integer> roleIds);
 
+    boolean addMenu(MenuTree menuTree);
 }

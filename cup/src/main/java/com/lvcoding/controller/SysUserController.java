@@ -3,6 +3,7 @@ package com.lvcoding.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
+import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysUserService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
@@ -37,10 +38,10 @@ public class SysUserController {
      * @param authentication
      * @return String
      */
-    @PreAuthorize("hasAuthority('sys:user:view')")
+    @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("info")
     public Res info(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        CommonUser user = (CommonUser) authentication.getPrincipal();
         return Res.success(user);
     }
 
@@ -51,7 +52,7 @@ public class SysUserController {
      * @param page
      * @return com.longyi.util.Res
      */
-    @PreAuthorize("hasAuthority('sys:user:view')")
+    @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("page")
     public Res page(Page page, SysUser sysUser) {
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
@@ -67,7 +68,7 @@ public class SysUserController {
      * @param sysUser
      * @return com.longyi.util.Res
      */
-    @PreAuthorize("hasAuthority('sys:user:add')")
+    @PreAuthorize("@pm.hasPermission('sys:user:add')")
     @PostMapping
     public Res create(@RequestBody SysUser sysUser) {
         sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
@@ -80,7 +81,7 @@ public class SysUserController {
      * @param id
      * @return com.longyi.util.Res
      */
-    @PreAuthorize("hasAuthority('sys:user:delete')")
+    @PreAuthorize("@pm.hasPermission('sys:user:delete')")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id") Integer id) {
         return Res.success(this.sysUserService.deleteById(id));
@@ -92,7 +93,7 @@ public class SysUserController {
      * @param sysUser
      * @return com.longyi.util.Res
      */
-    @PreAuthorize("hasAuthority('sys:user:update')")
+    @PreAuthorize("@pm.hasPermission('sys:user:update')")
     @PutMapping
     public Res update(@RequestBody SysUser sysUser) {
         sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
@@ -108,7 +109,6 @@ public class SysUserController {
      */
     @PutMapping("pwd")
     public Res updatePwd(@RequestBody SysUser sysUser){
-        sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
         return Res.success(this.sysUserService.updatePwd(sysUser));
     }
 

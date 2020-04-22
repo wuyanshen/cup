@@ -16,6 +16,12 @@ import java.util.List;
 public class CommonUser extends User {
 
     /**
+     * 用户id
+     */
+    @Getter
+    private Integer id;
+
+    /**
      * 机构id
      */
     @Getter
@@ -27,8 +33,9 @@ public class CommonUser extends User {
     @Getter
     private List<SysRole> sysRoles;
 
-    public CommonUser(String username, String password, Integer orgId, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, List<SysRole> sysRoles, Collection<? extends GrantedAuthority> authorities) {
+    public CommonUser(String username, String password, Integer orgId, Integer id, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, List<SysRole> sysRoles, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        this.id = id;
         this.orgId = orgId;
         this.sysRoles = sysRoles;
     }
