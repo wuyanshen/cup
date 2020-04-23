@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import avatar from "@/assets/logo55.png";
+import avatar from "@/assets/logo.png";
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
