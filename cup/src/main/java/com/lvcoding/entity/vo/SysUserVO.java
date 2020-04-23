@@ -1,26 +1,25 @@
-package com.lvcoding.entity;
+package com.lvcoding.entity.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 用户表(SysUser)实体类
+ * 用户(SysUserVO)视图类
  *
  * @author makejava
  * @since 2020-03-24 01:44:06
  */
 @Data
-public class SysUser implements Serializable {
+public class SysUserVO implements Serializable {
     private static final long serialVersionUID = 448260653094233335L;
     /**
      * 主键id
      */
-    @TableId(type = IdType.AUTO)
     private Integer id;
     /**
      * 组织机构id
@@ -33,7 +32,6 @@ public class SysUser implements Serializable {
     /**
      * 密码
      */
-    @JsonIgnore
     private String password;
     /**
      * 邮箱

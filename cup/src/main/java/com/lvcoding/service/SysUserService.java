@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvcoding.entity.SysUser;
+import com.lvcoding.entity.vo.SysUserVO;
 
 import java.util.List;
 
@@ -66,5 +67,5 @@ public interface SysUserService extends IService<SysUser> {
      */
     IPage<SysUser> selectUserPage(Page<SysUser> page, SysUser sysUser);
 
-    boolean updatePwd(SysUser sysUser);
+    boolean updatePwd(SysUserVO sysUser);
 }

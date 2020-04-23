@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.dao.SysUserDao;
+import com.lvcoding.entity.vo.SysUserVO;
 import com.lvcoding.service.SysUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -99,13 +101,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
     /**
      * 修改密码
      *
-     * @param sysUser
+     * @param sysUserVO
      * @return
      */
     @Override
-    public boolean updatePwd(SysUser sysUser) {
-        String newPwd = this.passwordEncoder.encode(sysUser.getPassword());
-        sysUser.setPassword(newPwd);
+    public boolean updatePwd(SysUserVO sysUserVO) {
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(sysUserVO,sysUser);
+        sysUser.setPassword(this.passwordEncoder.encode(sysUserVO.getPassword()));
         return this.sysUserDao.updatePwd(sysUser);
     }
 }

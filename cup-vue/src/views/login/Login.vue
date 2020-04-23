@@ -71,15 +71,17 @@ export default {
     };
   },
   computed: {
-    ...mapState(["appName", "username", "password"])
+    ...mapState(["appName"]),
+    ...mapState("user",["username", "password"])
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions("user",["login"]),
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           let res = await this.login(this.loginForm);
           if (res.code === 0) {
+            this.$message.success('登录成功~')
             this.$router.push("/");
           }
         } else {

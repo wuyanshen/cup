@@ -185,7 +185,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
+    ...mapActions("user",[
       "userPage",
       "addUser",
       "updateUser",

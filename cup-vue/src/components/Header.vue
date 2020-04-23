@@ -94,14 +94,14 @@ export default {
     })
   },
   methods: {
-    ...mapActions(["updatePwd", "userInfo", "pwdCheck"]),
+    ...mapActions("user",["updatePwd", "userInfo", "pwdCheck"]),
     ...mapActions("tabs",["addTab"]),
     ...mapMutations(["UPDATE_COLLAPSE"]),
     ...mapMutations("tabs",["initMainTabs","setActiveRoute"]),
     handleCommand(command) {
       this[command]();
     },
-    //弹出修改按钮dialog
+    //点击修改密码按钮 弹出dialog
     preUpdatePwd() {
       this.pwdDialog = true;
     },
@@ -115,11 +115,13 @@ export default {
           let {
             data: { id }
           } = await this.userInfo();
-
           let password = this.pwdForm.new_password;
+          console.log(password)
           //更新密码
           let res = await this.updatePwd({ id, password });
-          this.$message.success("密码修改成功");
+          if(res.code === 0){
+            this.$message.success("密码修改成功");
+          }
           this.pwdDialog = false;
         }
       });
@@ -129,6 +131,7 @@ export default {
       this.$refs["pwdForm"].resetFields();
       this.pwdForm = {};
     },
+    //展示用户信息方法
     info() {
       this.addTab('/info')
       this.setActiveRoute('/info')

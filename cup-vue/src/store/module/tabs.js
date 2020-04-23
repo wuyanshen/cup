@@ -19,7 +19,7 @@ const mutations = {
 	addTabMutation(state, url){
 		let isAreadyIn = state.maintabs.some(item => item.url === url);
 		if(!isAreadyIn){
-			if(state.menuList.length>=1){
+			if(state.menuList.length<=1){
 				let route = []
 				for(let i in state.menuList){
 					route = state.menuList[i].children.filter(item => item.url === url)
@@ -61,9 +61,14 @@ const actions = {
 	},
 }
 
+const getters = {
+
+}
+
 export default {
 	namespaced: true,
 	state,
 	mutations,
 	actions,
+	getters
 }
