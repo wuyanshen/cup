@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.entity.vo.SysUserVO;
+import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysUserService;
 import com.lvcoding.util.Res;
@@ -32,17 +33,19 @@ public class SysUserController {
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+
     /**
      * 查询用户信息
      *
      * @param authentication
      * @return String
      */
+    @SysLog(value = "查询用户信息", type = "1")
     @GetMapping("info")
     public Res info(Authentication authentication) {
         CommonUser user = (CommonUser) authentication.getPrincipal();
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username",user.getUsername());
+        queryWrapper.eq("username", user.getUsername());
         SysUser sysUser = this.sysUserService.getOne(queryWrapper);
         return Res.success(sysUser);
     }
@@ -54,14 +57,15 @@ public class SysUserController {
      * @param page
      * @return com.longyi.util.Res
      */
+    @SysLog(value = "分页查询用户信息", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("page")
     public Res page(Page page, SysUser sysUser) {
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
-        if(!StringUtils.isEmpty(sysUser.getUsername())){
-            wrapper.lambda().like(SysUser::getUsername,sysUser.getUsername());
+        if (!StringUtils.isEmpty(sysUser.getUsername())) {
+            wrapper.lambda().like(SysUser::getUsername, sysUser.getUsername());
         }
-        return Res.success(this.sysUserService.page(page,wrapper));
+        return Res.success(this.sysUserService.page(page, wrapper));
     }
 
     /**
@@ -70,6 +74,7 @@ public class SysUserController {
      * @param sysUser
      * @return com.longyi.util.Res
      */
+    @SysLog(value = "新增用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:add')")
     @PostMapping
     public Res create(@RequestBody SysUser sysUser) {
@@ -83,6 +88,7 @@ public class SysUserController {
      * @param id
      * @return com.longyi.util.Res
      */
+    @SysLog(value = "删除用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:delete')")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id") Integer id) {
@@ -95,6 +101,7 @@ public class SysUserController {
      * @param sysUser
      * @return com.longyi.util.Res
      */
+    @SysLog(value = "更新用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:update')")
     @PutMapping
     public Res update(@RequestBody SysUser sysUser) {
@@ -109,37 +116,40 @@ public class SysUserController {
      * @param sysUserVO
      * @return
      */
+    @SysLog(value = "更新密码", type = "1")
     @PutMapping("pwd")
-    public Res updatePwd(@RequestBody SysUserVO sysUserVO){
+    public Res updatePwd(@RequestBody SysUserVO sysUserVO) {
         return Res.success(this.sysUserService.updatePwd(sysUserVO));
     }
 
     /**
      * 校验原密码是否正确
+     *
      * @param password
      * @return
      */
     @GetMapping("pwd/check")
-    public Res checkPwd(@RequestParam("password")String password){
-        User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(passwordEncoder.matches(password,user.getPassword())){
+    public Res checkPwd(@RequestParam("password") String password) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (passwordEncoder.matches(password, user.getPassword())) {
             return Res.success("密码匹配");
-        }else{
+        } else {
             return Res.fail("密码不匹配");
         }
     }
 
     /**
      * 校验用户名是否存在
+     *
      * @param username
      * @return
      */
     @GetMapping("name/check")
-    public Res checkUsername(@RequestParam("username")String username){
-        boolean flag = this.sysUserService.findAll(new SysUser()).stream().anyMatch(user->user.getUsername().equals(username));
-        if(flag){
+    public Res checkUsername(@RequestParam("username") String username) {
+        boolean flag = this.sysUserService.findAll(new SysUser()).stream().anyMatch(user -> user.getUsername().equals(username));
+        if (flag) {
             return Res.fail("用户名已存在");
-        }else{
+        } else {
             return Res.success("用户名可用");
         }
     }

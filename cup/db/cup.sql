@@ -199,4 +199,24 @@ INSERT INTO `sys_user_role` VALUES (1, 1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 2, 2);
 COMMIT;
 
+-- ----------------------------
+-- Table structure for sys_log
+-- ----------------------------
+CREATE TABLE `sys_log` (
+   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+   `type` varchar(1) DEFAULT NULL COMMENT '日志类型 1:用户日志 2菜单日志 3角色日志',
+   `title` varchar(30) DEFAULT NULL COMMENT '日志标题',
+   `ip` varchar(30) DEFAULT NULL COMMENT '操作ip地址',
+   `request_uri` varchar(30) DEFAULT NULL COMMENT '请求uri',
+   `method` varchar(10) DEFAULT NULL COMMENT '请求方式(POST,GET,PUT,DELETE)',
+   `params` varchar(100) DEFAULT NULL COMMENT '请求提交参数',
+   `time` bigint(20) DEFAULT NULL COMMENT '请求时间',
+   `response` varchar(2000) DEFAULT NULL COMMENT '响应数据',
+   `create_by` varchar(20) DEFAULT NULL COMMENT '操作人',
+   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   `del_flag` int(1) DEFAULT '0' COMMENT '是否删除,1已删0未删',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
+
 SET FOREIGN_KEY_CHECKS = 1;
