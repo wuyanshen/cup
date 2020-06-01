@@ -105,7 +105,9 @@ public class SysUserController {
     @PreAuthorize("@pm.hasPermission('sys:user:update')")
     @PutMapping
     public Res update(@RequestBody SysUser sysUser) {
-        sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
+        if(!StringUtils.isEmpty(sysUser.getPassword())){
+            sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
+        }
         return Res.success(this.sysUserService.updateById(sysUser));
     }
 

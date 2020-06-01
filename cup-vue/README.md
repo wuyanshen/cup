@@ -1,19 +1,25 @@
-# vue-demo
+# cup-vue
+cup前端UI项目
 
-## Project setup
+### 技术栈
+名称|版本
+:-:|:-:
+Vue|2.6.11
+Element-UI|2.13.0
+
+### Quick Start(快速开始)
 ```
-npm install
+# 安装项目依赖
+1.npm install
+
+# 启动项目
+2.npm run serve
+
+# 访问
+http://localhost:9999
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
+### 打包项目
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
