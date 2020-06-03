@@ -2,6 +2,8 @@ package com.lvcoding.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.imageio.ImageIO;
+
 class SysMenuServiceImplTest {
 
 

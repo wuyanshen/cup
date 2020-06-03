@@ -9,6 +9,8 @@ public interface CommonConstant {
 
     String CHECK_TOKEN_URI = "/token/check";
 
+    String WEB_SOCKET = "/websocket";
+
     String REFRESH_TOKEN_URI = "/token/refresh";
 
     String LOGIN_URI = "/login";

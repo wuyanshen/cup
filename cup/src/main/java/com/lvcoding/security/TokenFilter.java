@@ -41,7 +41,7 @@ public class TokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         //检查token或者刷新token直接放过
-        if (request.getRequestURI().equals(CommonConstant.CHECK_TOKEN_URI)||request.getRequestURI().equals(CommonConstant.REFRESH_TOKEN_URI)) {
+        if (request.getRequestURI().equals(CommonConstant.CHECK_TOKEN_URI)||request.getRequestURI().equals(CommonConstant.REFRESH_TOKEN_URI)||request.getRequestURI().contains(CommonConstant.WEB_SOCKET)) {
             filterChain.doFilter(request, response);
             return;
         }

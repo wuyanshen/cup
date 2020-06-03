@@ -87,7 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(commonLoginFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/token/check", "/login", "/login.html").permitAll()
+                .antMatchers("/token/check", "/login", "/login.html","/websocket/**").permitAll()
 //                    .anyRequest().access("@commonHasPermission.hasPermision(request,authentication)")
                 .and()
                 .exceptionHandling()
