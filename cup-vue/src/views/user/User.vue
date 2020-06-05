@@ -198,6 +198,7 @@ export default {
       let res = await this.userPage(this.queryInfo);
       this.tableData = res.data.records;
     },
+	//修改当前第几页
     async handleCurrentChange(current) {
       this.queryInfo.current = current;
       let res = await this.userPage(this.queryInfo);

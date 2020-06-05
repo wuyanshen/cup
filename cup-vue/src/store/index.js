@@ -7,6 +7,7 @@ import user from './module/user'
 import getters from './getters'
 import menu from './module/menu'
 import tabs from './module/tabs'
+import log from './module/log'
 import { saveInLocal } from './plugin/saveInLocal'
 
 Vue.use(Vuex)
@@ -21,6 +22,7 @@ export default new Vuex.Store({
         user,
         menu,
         tabs,
+		log,
     },
     // plugins: [saveInLocal]
 })
