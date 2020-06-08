@@ -9,14 +9,18 @@
     <!-- 卡片区 -->
     <el-card>
       <!-- 查询区 -->
-      <el-row :gutter="20">
+	  <el-row :gutter="20">
+		  <el-col :span="2">
+		    <el-button type="primary" icon="el-icon-plus" size="small" @click="userAddDialog=true">新增</el-button>
+		  </el-col>
+	  </el-row>
+      <el-row :gutter="20" style="margin-top:10px;">
         <el-col :span="6">
-          <el-input size="small" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名">
-            <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
+          <el-input size="small" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名" @change="handleSearch">
           </el-input>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" icon="el-icon-plus" size="small" @click="userAddDialog=true">新增</el-button>
+          <el-button type="primary" icon="el-icon-search" size="small" @click="handleSearch">查询</el-button>
         </el-col>
       </el-row>
 
@@ -193,14 +197,12 @@ export default {
     ]),
     //修改每页显示条数
     async handleSizeChange(size) {
-      this.queryInfo.size = size;
-      let res = await this.userPage(this.queryInfo);
+      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,size,this.page.currentPage));
 	  this.copyPageValue(res)
     },
 	//修改当前第几页
     async handleCurrentChange(current) {
-      this.queryInfo.current = current;
-      let res = await this.userPage(this.queryInfo);
+      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,current));
       this.copyPageValue(res)
     },
     handleEdit(row) {
@@ -262,8 +264,9 @@ export default {
         })
         .catch(() => {});
     },
+	//条件查询
     async handleSearch() {
-      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,this.page.currentPage));
+      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,''));
       this.copyPageValue(res)
     },
     //刷新用户列表

@@ -4,9 +4,20 @@
 	  <el-row :gutter="20">
 	    <el-col :span="6">
 	      <el-input size="small" clearable v-model="queryInfo.title" placeholder="请输入要查询的日志标题" @change="handleSearch">
-	        <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
 	      </el-input>
 	    </el-col>
+		<el-col :span="3">
+			<el-select size="small" v-model="queryInfo.type" placeholder="请求选择">
+				<el-option v-for="item in logTypes"
+				:key="item.value"
+				:label="item.label"
+				:value="item.value"
+				></el-option>
+			</el-select>
+		</el-col>
+		<el-col :span="2">
+		  <el-button type="primary" icon="el-icon-search" size="small" @click="handleSearch">查询</el-button>
+		</el-col>
 	  </el-row>
 	  <!-- 表格 -->
 	  <el-table :data="this.page.tableData" stripe border size="small" class="log_table">
@@ -48,6 +59,20 @@ import moment from 'moment'
 export default {
   data() {
     return {
+		value:'',
+		logTypes:[{
+			value: '',
+			label: '请选择'
+		},{
+			value: '1',
+			label: '用户日志'
+		},{
+			value: '2',
+			label: '菜单日志'
+		},{
+			value: '3',
+			label: '角色日志'
+		}],
 		page:{
 			tableData:[],
 			pageSize: 10,

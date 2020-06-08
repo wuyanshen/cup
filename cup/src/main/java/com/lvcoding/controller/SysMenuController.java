@@ -2,6 +2,7 @@ package com.lvcoding.controller;
 
 import com.lvcoding.entity.SysMenu;
 import com.lvcoding.entity.dto.MenuTree;
+import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.Res;
@@ -54,11 +55,27 @@ public class SysMenuController {
     }
 
     /**
+     * 查询菜单
+     *
+     * @param authentication
+     * @return Res
+     */
+    @SysLog(type = "2",value = "查询菜单")
+    @GetMapping("treePage")
+    public Res menuTreePage(Authentication authentication) {
+        CommonUser commonUser = (CommonUser) authentication.getPrincipal();
+        List<Integer> roleIds = commonUser.getSysRoles().stream().map(sysRole -> sysRole.getId()).collect(Collectors.toList());
+        List<MenuTree> list = sysMenuService.findMenuByRoleIds(roleIds);
+        return Res.success(list);
+    }
+
+    /**
      * 新增菜单
      *
      * @param
      * @return MenuTree
      */
+    @SysLog(type = "2",value = "新增菜单")
     @PostMapping
     public Res add(@RequestBody MenuTree menuTree){
         return Res.success(sysMenuService.addMenu(menuTree));
@@ -70,6 +87,7 @@ public class SysMenuController {
      * @param sysMenu
      * @return Res
      */
+    @SysLog(type = "2",value = "修改菜单")
     @PutMapping
     public Res update(@RequestBody SysMenu sysMenu){
         return Res.success(sysMenuService.update(sysMenu));
@@ -81,6 +99,7 @@ public class SysMenuController {
      * @param id
      * @return com.lvcoding.util.Res
      */
+    @SysLog(type = "2",value = "删除菜单")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id")Integer id){
         return Res.success(sysMenuService.deleteById(id));
