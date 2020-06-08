@@ -178,7 +178,7 @@ export default {
     };
   },
   async mounted() {
-    let res = await this.userPage();
+    let res = await this.userPage({size:5});
     if (res.code == 0) {
 	  this.copyPageValue(res)
     }

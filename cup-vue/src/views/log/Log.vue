@@ -26,7 +26,7 @@
 		  <el-table-column label="请求方式" prop="method"></el-table-column>
 		  <el-table-column label="请求时间" prop="time"></el-table-column>
 		  <el-table-column label="请求人" prop="createBy"></el-table-column>
-		  <el-table-column label="创建时间" prop="createTime"></el-table-column>
+		  <el-table-column label="创建时间" prop="createTime" :formatter="formatDate"></el-table-column>
 	  </el-table>
 	  <!-- 分页区 -->
 	  <el-pagination
@@ -43,6 +43,8 @@
 
 <script>
 import {mapActions} from 'vuex'
+import moment from 'moment'
+
 export default {
   data() {
     return {
@@ -61,7 +63,7 @@ export default {
 	};
   },
   async mounted() {
-	  const res  = await this.logPage()
+	  const res  = await this.logPage({size:5})
 	  if(res.code === 0){
 		  this.copyPageValue(res)
 	  }
@@ -83,6 +85,11 @@ export default {
 	  async handleSearch() {
 	    let res = await this.logPage(this.copyQueryValue(this.queryInfo.title,this.queryInfo.type,this.page.pageSize,''));
 	    this.copyPageValue(res)
+	  },
+	  //格式化table日期格式
+	  formatDate(row,column){
+		  let date = row[column.property]
+		  return moment(date).format("YYYY-MM-DD HH:mm:ss")
 	  },
 	  //封装查询条件
 	  copyQueryValue(title,type,size,current){
