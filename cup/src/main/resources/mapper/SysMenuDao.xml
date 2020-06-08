@@ -98,8 +98,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sys_menu(menu_pid, menu_pids, menu_name, url, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag)
-        values (#{menuPid}, #{menuPids}, #{menuName}, #{url}, #{permission}, #{isLeaf}, #{level}, #{icon}, #{status}, #{sort}, #{createTime}, #{updateTime}, #{delFlag})
+        insert into sys_menu(menu_pid, menu_pids, menu_name, url, type, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag)
+        values (#{menuPid}, #{menuPids}, #{menuName}, #{url}, #{type}, #{permission}, #{isLeaf}, #{level}, #{icon}, #{status}, #{sort}, #{createTime}, #{updateTime}, #{delFlag})
     </insert>
 
     <!--通过主键修改数据-->
