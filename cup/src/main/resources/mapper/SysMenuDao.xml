@@ -145,13 +145,21 @@
             <if test="delFlag != null">
                 del_flag = #{delFlag},
             </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
         </set>
         where id = #{id}
     </update>
 
-    <!--通过主键删除-->
+    <!--通过主键删除菜单-->
     <delete id="deleteById">
         delete from sys_menu where id = #{id}
+    </delete>
+
+    <!--通过菜单id删除菜单角色关联表-->
+    <delete id="deleteMenuRoleById">
+        delete from sys_role_menu where menu_id = #{menuId}
     </delete>
 
 

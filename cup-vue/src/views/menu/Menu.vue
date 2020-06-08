@@ -130,7 +130,7 @@ export default {
         id:null,
         parentId: null, // el-tree-select初始ID（可选）
         menuName:'',
-        type: 0,
+        type: '0',
         url:'',
         icon:'',
         permission:''
@@ -145,11 +145,11 @@ export default {
   },
   created() {},
   async mounted() {
-    const res = await this.menuTree();
+    const res = await this.menuTreePage();
     this.tableData = res.data;
   },
   methods: {
-    ...mapActions('menu',['menuTree','addMenu','updateMenu','deleteMenu']),
+    ...mapActions('menu',['menuTreePage','addMenu','updateMenu','deleteMenu']),
     menuAddClose(){
       this.menuForm = {
         id:null,
@@ -174,20 +174,51 @@ export default {
     },
     //新增菜单
     async handleMenuAdd(){
-      console.log(this.menuForm)
       const res = await this.addMenu(this.menuForm)
-      console.log(res)
+	  this.menuAddDialog = false
+	  this.refresh()
+      if(res.code===0){
+		  this.$message.success('添加成功')
+	  }else{
+		  this.$message.error('添加失败')
+	  }
     },
-    //更新菜单
-    handleEditMenu(row){
-      this.menuEditDialog = true
-      this.menuForm = row
+	//删除菜单
+    handleDeleteMenu(menuId){
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(async () => {
+				let res = await this.deleteMenu(menuId);
+				if(res.code===0){
+					this.refresh()
+					this.$message({
+					  type: 'success',
+					  message: '删除成功!'
+					});
+				}
+              }).catch(() => {
+                // this.$message({
+                //   type: 'info',
+                //   message: '已取消删除'
+                // });          
+              });
     },
-    handleDeleteMenu(){
-      //
-    },
-    handleMenuUpdate(){
-      //
+	//弹出更新菜单dialog
+	handleEditMenu(row){
+	  this.menuEditDialog = true
+	  this.menuForm = row
+	},
+	//更新菜单
+    async handleMenuUpdate(){
+	  console.log(this.menuForm)
+      const res = await this.updateMenu(this.menuForm)
+      this.menuEditDialog = false
+      this.refresh()
+      if(res.code===0){
+		this.$message.success('更新成功')
+      }
     },
     handleTreeSelected(value){
       this.menuForm.parentId = value
@@ -196,6 +227,11 @@ export default {
     validateSelectTree(){
       this.$refs.menuForm.validateField("parentId");
     },
+	//刷新table
+	async refresh() {
+	  const res = await this.menuTreePage();
+	  this.tableData = res.data;
+	},
   }
 };
 </script>

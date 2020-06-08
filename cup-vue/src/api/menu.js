@@ -1,9 +1,15 @@
 import axios from './index'
 
-//获取当前登录用户的菜单树
+//查询菜单树
 const menuTree = () => {
     return axios.get('/menus/tree')
 }
+
+//查询菜单
+const menuTreePage = () => {
+    return axios.get('/menus/treePage')
+}
+
 //新增菜单
 const addMenu = params => {
     return axios.post('/menus',params)
@@ -14,11 +20,12 @@ const updateMenu = params => {
 }
 //删除菜单
 const deleteMenu = id => {
-    return axios.delete('/menus',id)
+    return axios.delete(`/menus/${id}`)
 }
 
 export default {
     menuTree,
+	menuTreePage,
     addMenu,
     updateMenu,
     deleteMenu

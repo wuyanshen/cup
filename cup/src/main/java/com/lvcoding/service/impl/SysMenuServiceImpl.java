@@ -80,7 +80,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      */
     @Override
     public boolean deleteById(Integer id) {
-        return this.sysMenuDao.deleteById(id) > 0;
+        boolean flag1 = this.sysMenuDao.deleteMenuRoleById(id) > 0?true:false;
+        boolean flag2 = this.sysMenuDao.deleteById(id) > 0?true:false;
+        return flag1&&flag2;
     }
 
     /**
@@ -103,11 +105,32 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
         return trees;
     }
 
+
     @Override
     public boolean addMenu(MenuTree menuTree) {
         SysMenu sysMenu = new SysMenu();
         BeanUtils.copyProperties(menuTree,sysMenu);
         sysMenu.setMenuPid(menuTree.getParentId());
         return this.baseMapper.insert(sysMenu) == 1?true:false;
+    }
+
+    /**
+     * 查询所有的菜单树
+     *
+     * @param
+     * @return java.util.List<com.lvcoding.entity.dto.MenuTree>
+     */
+    @Override
+    public List<MenuTree> findAllMenuTree() {
+        List<SysMenu> sysMenus = this.baseMapper.queryAll(new SysMenu());
+        List<MenuTree> collect = sysMenus.stream().map(sysMenu -> {
+            MenuTree menuTree = new MenuTree();
+            BeanUtils.copyProperties(sysMenu, menuTree);
+            menuTree.setParentId(sysMenu.getMenuPid());
+            menuTree.setId(sysMenu.getId());
+            return menuTree;
+        }).collect(Collectors.toList());
+        List<MenuTree> menuTrees = TreeUtil.buildByRecursive(collect, 0);
+        return menuTrees;
     }
 }

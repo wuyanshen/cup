@@ -13,6 +13,16 @@ const actions = {
             })
         })
     },
+	//查询菜单
+	menuTreePage({commit}) {
+	    return new Promise((resolve, reject) => {
+	        api.menu.menuTreePage().then(res => {
+	            resolve(res)
+	        }).catch(error => {
+	            reject(error)
+	        })
+	    })
+	},
     //新增菜单
     addMenu({commit},params){
         return new Promise((resolve, reject) => {

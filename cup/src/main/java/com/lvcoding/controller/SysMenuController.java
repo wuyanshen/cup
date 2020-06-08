@@ -6,6 +6,7 @@ import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.Res;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,15 +58,13 @@ public class SysMenuController {
     /**
      * 查询菜单
      *
-     * @param authentication
      * @return Res
      */
+    @PreAuthorize("@pm.hasPermission('sys:menu:view')")
     @SysLog(type = "2",value = "查询菜单")
     @GetMapping("treePage")
-    public Res menuTreePage(Authentication authentication) {
-        CommonUser commonUser = (CommonUser) authentication.getPrincipal();
-        List<Integer> roleIds = commonUser.getSysRoles().stream().map(sysRole -> sysRole.getId()).collect(Collectors.toList());
-        List<MenuTree> list = sysMenuService.findMenuByRoleIds(roleIds);
+    public Res menuTreePage() {
+        List<MenuTree> list = sysMenuService.findAllMenuTree();
         return Res.success(list);
     }
 
@@ -75,6 +74,7 @@ public class SysMenuController {
      * @param
      * @return MenuTree
      */
+    @PreAuthorize("@pm.hasPermission('sys:menu:add')")
     @SysLog(type = "2",value = "新增菜单")
     @PostMapping
     public Res add(@RequestBody MenuTree menuTree){
@@ -87,6 +87,7 @@ public class SysMenuController {
      * @param sysMenu
      * @return Res
      */
+    @PreAuthorize("@pm.hasPermission('sys:menu:update')")
     @SysLog(type = "2",value = "修改菜单")
     @PutMapping
     public Res update(@RequestBody SysMenu sysMenu){
@@ -99,6 +100,7 @@ public class SysMenuController {
      * @param id
      * @return com.lvcoding.util.Res
      */
+    @PreAuthorize("@pm.hasPermission('sys:menu:delete')")
     @SysLog(type = "2",value = "删除菜单")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id")Integer id){

@@ -74,6 +74,14 @@ public interface SysMenuDao extends BaseMapper<SysMenu> {
     int deleteById(Integer id);
 
     /**
+     * 通过菜单id删除角色菜单关联表
+     *
+     * @param menuId
+     * @return int
+     */
+    int deleteMenuRoleById(Integer menuId);
+
+    /**
      * 根据角色id集合获取用户菜单
      *
      * @param roleIds
