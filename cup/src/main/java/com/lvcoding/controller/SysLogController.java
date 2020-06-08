@@ -38,6 +38,7 @@ public class SysLogController {
         if(!StringUtils.isEmpty(sysLog.getType())){
             queryWrapper.lambda().eq(SysLog::getType,sysLog.getType());
         }
+        queryWrapper.lambda().orderByDesc(SysLog::getCreateTime);
         return Res.success(sysLogService.page(page,queryWrapper));
     }
 }

@@ -3,13 +3,13 @@
 	  <!-- 查询区 -->
 	  <el-row :gutter="20">
 	    <el-col :span="6">
-	      <el-input size="small" clearable v-model="queryInfo.title" placeholder="请输入要查询的日志标题">
+	      <el-input size="small" clearable v-model="queryInfo.title" placeholder="请输入要查询的日志标题" @change="handleSearch">
 	        <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
 	      </el-input>
 	    </el-col>
 	  </el-row>
 	  <!-- 表格 -->
-	  <el-table :data="tableData" stripe border size="small">
+	  <el-table :data="this.page.tableData" stripe border size="small" class="log_table">
 		  <el-table-column type="index" label="序号" width="50"></el-table-column>
 		  <el-table-column label="标题" prop="title"></el-table-column>
 		  <el-table-column label="日志类型" prop="type">
@@ -32,11 +32,11 @@
 	  <el-pagination
 	    @size-change="handleSizeChange"
 	    @current-change="handleCurrentChange"
-	    :current-page="currentPage"
+	    :current-page="this.page.currentPage"
 	    :page-sizes="[5, 10, 15, 20]"
-	    :page-size="pageSize"
+	    :page-size="this.page.pageSize"
 	    layout="total, sizes, prev, pager, next, jumper"
-	    :total="total"
+	    :total="this.page.total"
 	  ></el-pagination>
   </el-card>
 </template>
@@ -46,24 +46,24 @@ import {mapActions} from 'vuex'
 export default {
   data() {
     return {
-		tableData:[],
-		pageSize: 10,
-		total: 0,
-		currentPage: 1,
+		page:{
+			tableData:[],
+			pageSize: 10,
+			total: 0,
+			currentPage: 1,
+		},
 		queryInfo: {
-		  title: "",
-		  type: ""
+		  title: '',
+		  type: '',
+		  size: 0,
+		  current: 0
 		},
 	};
   },
-  created() {},
   async mounted() {
 	  const res  = await this.logPage()
 	  if(res.code === 0){
-		  this.tableData = res.data.records
-		  this.total = res.data.total;
-		  this.pageSize = res.data.size;
-		  this.currentPage = res.data.current;
+		  this.copyPageValue(res)
 	  }
   },
   methods: {
@@ -71,25 +71,42 @@ export default {
 	  //修改每页显示条数
 	  async handleSizeChange(size) {
 	    this.queryInfo.size = size;
-	    let res = await this.logPage(this.queryInfo);
-	    this.tableData = res.data.records;
+	    let res = await this.logPage(this.copyQueryValue(this.queryInfo.title,this.queryInfo.type,size,this.page.currentPage));
+	    this.copyPageValue(res)
 	  },
 	  //修改当前第几页
 	  async handleCurrentChange(current) {
-	    this.queryInfo.current = current;
-	    let res = await this.logPage(this.queryInfo);
-	    this.tableData = res.data.records;
+	    let res = await this.logPage(this.copyQueryValue(this.queryInfo.title,this.queryInfo.type,this.page.pageSize,current));
+	    this.copyPageValue(res)
 	  },
+	  //条件查询
 	  async handleSearch() {
-	    let res = await this.logPage(this.queryInfo);
-	    this.tableData = res.data.records;
-		this.total = res.data.total;
-		this.pageSize = res.data.size;
-		this.currentPage = res.data.current;
+	    let res = await this.logPage(this.copyQueryValue(this.queryInfo.title,this.queryInfo.type,this.page.pageSize,''));
+	    this.copyPageValue(res)
 	  },
+	  //封装查询条件
+	  copyQueryValue(title,type,size,current){
+		  return {
+			  title: title?title:null,
+			  type: type?type:null,
+			  size: size?size:null,
+			  current: current?current:null,
+		  }
+	  },
+	  //封装分页属性值
+	  copyPageValue(res){
+		  this.page.tableData = res.data.records;
+		  this.page.total = res.data.total;
+		  this.page.pageSize = res.data.size;
+		  this.page.currentPage = res.data.current;
+	  }
   }
 };
 </script>
 
 <style scoped lang="less">
+	.log_table{
+		width: 100%;
+		margin-top: 10px;
+	}
 </style>

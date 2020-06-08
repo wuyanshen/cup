@@ -21,7 +21,7 @@
       </el-row>
 
       <!-- 表格区 -->
-      <el-table size="small" :data="tableData" border stripe class="user_table">
+      <el-table size="small" :data="this.page.tableData" border stripe class="user_table">
         <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
         <el-table-column align="center" prop="username" label="姓名" width="180"></el-table-column>
         <el-table-column align="center" prop="phone" label="电话"></el-table-column>
@@ -54,11 +54,11 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage"
+        :current-page="this.page.currentPage"
         :page-sizes="[5, 10, 15, 20]"
-        :page-size="pageSize"
+        :page-size="this.page.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :total="this.page.total"
       ></el-pagination>
     </el-card>
 
@@ -136,7 +136,6 @@ export default {
       }
     };
     return {
-      tableData: [],
       userAddDialog: false,
       userEditDialog: false,
       userAddForm: {
@@ -153,13 +152,16 @@ export default {
         email: "",
         status: true
       },
-      pageSize: 10,
-      total: 0,
-      currentPage: 1,
+	  page:{
+		tableData: [],
+		pageSize: 10,
+		total: 0,
+		currentPage: 1,
+	  },
       queryInfo: {
-        size: 10,
-        current: 1,
-        username: ""
+        size: 0,
+        current: 0,
+        username: ''
       },
       userAddRules: {
         username: [
@@ -178,10 +180,7 @@ export default {
   async mounted() {
     let res = await this.userPage();
     if (res.code == 0) {
-      this.tableData = res.data.records;
-      this.total = res.data.total;
-      this.pageSize = res.data.size;
-      this.currentPage = res.data.current;
+	  this.copyPageValue(res)
     }
   },
   methods: {
@@ -196,13 +195,13 @@ export default {
     async handleSizeChange(size) {
       this.queryInfo.size = size;
       let res = await this.userPage(this.queryInfo);
-      this.tableData = res.data.records;
+	  this.copyPageValue(res)
     },
 	//修改当前第几页
     async handleCurrentChange(current) {
       this.queryInfo.current = current;
       let res = await this.userPage(this.queryInfo);
-      this.tableData = res.data.records;
+      this.copyPageValue(res)
     },
     handleEdit(row) {
       this.userEditForm.id = row.id;
@@ -264,14 +263,29 @@ export default {
         .catch(() => {});
     },
     async handleSearch() {
-      let res = await this.userPage(this.queryInfo);
-      this.tableData = res.data.records;
+      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,this.page.currentPage));
+      this.copyPageValue(res)
     },
     //刷新用户列表
     async flushUserPage() {
       let res = await this.userPage();
-      this.tableData = res.data.records;
-    }
+	  this.copyPageValue(res)
+    },
+	//封装分页参数
+	copyPageValue(res){
+		this.page.tableData = res.data.records;
+		this.page.total = res.data.total;
+		this.page.pageSize = res.data.size;
+		this.page.currentPage = res.data.current;
+	},
+	//封装查询参数
+	copyQueryValue(username,size,current){
+		return {
+			username: username?username:null,
+			size: size?size:null,
+			current: current?current:null,
+		}
+	}
   }
 };
 </script>
