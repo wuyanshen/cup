@@ -54,6 +54,11 @@ const usernameCheck = params => {
     return axios.get('/users/name/check', params)
 }
 
+//获取用户角色id集合
+const userRoleIds = id => {
+    return axios.get(`/users/roleIds/${id}`)
+}
+
 export default {
     userInfo,
     login,
@@ -65,4 +70,5 @@ export default {
     updatePwd,
     pwdCheck,
     usernameCheck,
+    userRoleIds,
 }

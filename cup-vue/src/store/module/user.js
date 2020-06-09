@@ -122,7 +122,17 @@ const actions = {
                 reject(error)
             })
         })
-    }
+    },
+    //获取用户角色id集合
+    userRoleIds({commit}, id) {
+        return new Promise((resolve, reject) => {
+            api.user.userRoleIds(id).then(res => {
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
 }
 
 const getters = {

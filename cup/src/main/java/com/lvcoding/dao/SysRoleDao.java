@@ -1,6 +1,8 @@
 package com.lvcoding.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lvcoding.entity.SysRole;
+import com.lvcoding.entity.dto.SysRoleDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-24 01:24:31
  */
-public interface SysRoleDao {
+public interface SysRoleDao extends BaseMapper<SysRole> {
 
     /**
      * 根据用户名获取角色
@@ -71,4 +73,11 @@ public interface SysRoleDao {
      */
     int deleteById(Integer id);
 
+    int deleteSysRoleMenuById(Integer id);
+
+    List<Integer> findMenuIds(@Param("roleId") Integer id);
+
+    boolean saveRoleMenu(@Param("roleId")Integer roleId,@Param("menuIds") List<Integer> menuIds);
+
+    boolean deleteRoleMenu(@Param("roleId")Integer id);
 }

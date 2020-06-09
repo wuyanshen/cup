@@ -1,7 +1,9 @@
 package com.lvcoding.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysRole;
 import com.lvcoding.dao.SysRoleDao;
+import com.lvcoding.entity.dto.SysRoleDTO;
 import com.lvcoding.service.SysRoleService;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ import java.util.List;
  * @since 2020-03-24 01:24:31
  */
 @Service("sysRoleService")
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao,SysRole> implements SysRoleService {
     @Resource
     private SysRoleDao sysRoleDao;
 
@@ -75,5 +77,32 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public boolean deleteById(Integer id) {
         return this.sysRoleDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 删除角色
+     *
+     * @param id
+     * @return boolean
+     */
+    @Override
+    public boolean delete(Integer id) {
+        boolean flag1 = this.baseMapper.deleteById(id)>0?true:false;
+        boolean flag2 = this.sysRoleDao.deleteSysRoleMenuById(id)>0?true:false;
+        return flag1&&flag2;
+    }
+
+    @Override
+    public List<Integer> findMenuIds(Integer id) {
+        return  this.sysRoleDao.findMenuIds(id);
+    }
+
+    @Override
+    public boolean saveRoleMenu(SysRoleDTO sysRoleDTO) {
+        boolean flag1 = sysRoleDao.deleteRoleMenu(sysRoleDTO.getId());
+        if (sysRoleDTO.getMenuIds().size()>0){
+            this.sysRoleDao.saveRoleMenu(sysRoleDTO.getId(),sysRoleDTO.getMenuIds());
+        }
+        return flag1;
     }
 }

@@ -16,7 +16,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="SysRoleMap">
         select
-          id, role_name, role_code, sort, status, update_time, create_time, del_flag
+        id, role_name, role_code, sort, status, update_time, create_time, del_flag
         from sys_role
         where id = #{id}
     </select>
@@ -24,7 +24,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SysRoleMap">
         select
-          id, role_name, role_code, sort, status, update_time, create_time, del_flag
+        id, role_name, role_code, sort, status, update_time, create_time, del_flag
         from sys_role
         limit #{offset}, #{limit}
     </select>
@@ -32,7 +32,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="SysRoleMap">
         select
-          id, role_name, role_code, sort, status, update_time, create_time, del_flag
+        id, role_name, role_code, sort, status, update_time, create_time, del_flag
         from sys_role
         <where>
             <if test="id != null">
@@ -106,9 +106,30 @@
     <select id="loadRolesByUsername" resultMap="SysRoleMap">
         select r.id, r.role_code ,r.role_name, r.status
         from sys_role r
-                 left join sys_user_role ur on r.id = ur.role_id
-                 left join sys_user u on u.id = ur.user_id
+        left join sys_user_role ur on r.id = ur.role_id
+        left join sys_user u on u.id = ur.user_id
         where u.username = #{username};
     </select>
+
+    <!--通过角色id删除关联表-->
+    <delete id="deleteSysRoleMenuById">
+        delete from sys_role_menu where role_id = #{roleId}
+    </delete>
+
+    <!-- 通过角色id查询菜单id集合-->
+    <select id="findMenuIds" resultType="java.lang.Integer">
+        select menu_id from sys_role_menu where role_id = #{roleId}
+    </select>
+
+    <!--保存权限-->
+    <insert id="saveRoleMenu">
+        insert into sys_role_menu (role_id, menu_id) values
+        <foreach collection="menuIds" item="menuId" separator=",">
+            (#{roleId},#{menuId})
+        </foreach>
+    </insert>
+    <delete id="deleteRoleMenu">
+        delete from sys_role_menu where role_id = #{roleId}
+    </delete>
 
 </mapper>

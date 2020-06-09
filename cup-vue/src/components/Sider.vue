@@ -13,7 +13,7 @@
       router
     >
       <!-- 一级菜单 -->
-      <el-submenu :index="it1.url" v-for="(it1,index1) of menuList" :key="index1" v-if="it1.id">
+      <el-submenu :index="it1.url" v-for="(it1,index1) of menuList" :key="index1" v-if="it1.id && it1.type!=1">
         <template slot="title">
           <i :class="it1.icon"></i>
           <span>{{it1.menuName}}</span>
@@ -23,6 +23,7 @@
           v-for="(it2,index2) of it1.children"
           :key="index2"
           :index="it2.url"
+		  v-if="it2.type!=1"
           @click="handleMenuClick(it2)"
         >
           <i :class="it2.icon"></i>

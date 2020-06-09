@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.dao.SysUserDao;
+import com.lvcoding.entity.dto.SysUserDTO;
 import com.lvcoding.entity.vo.SysUserVO;
 import com.lvcoding.service.SysUserService;
 import lombok.AllArgsConstructor;
@@ -12,8 +13,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 用户表(SysUser)表服务实现类
@@ -110,5 +113,47 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
         BeanUtils.copyProperties(sysUserVO,sysUser);
         sysUser.setPassword(this.passwordEncoder.encode(sysUserVO.getPassword()));
         return this.sysUserDao.updatePwd(sysUser);
+    }
+
+    @Override
+    public List<Integer> getRoleIdsByUserId(Integer id) {
+        return this.sysUserDao.getRolesByUserId(id);
+    }
+
+    @Override
+    public boolean updateUser(SysUserDTO sysUserDTO) {
+        //更新用户
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(sysUserDTO,sysUser);
+        if(!StringUtils.isEmpty(sysUser.getPassword())){
+            sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
+        }
+        boolean flag1 = this.sysUserDao.updateById(sysUser)>0?true:false;
+
+        //删除用户角色关联表
+        boolean flag2 = this.sysUserDao.deleteUserRole(sysUser.getId());
+
+        //新增用户角色关联表
+        List<Boolean> collect = sysUserDTO.getRoleIds().stream().map(roleId -> {
+            return this.sysUserDao.saveUserRole(sysUser.getId(), roleId);
+        }).collect(Collectors.toList());
+
+        return flag1&&flag2;
+    }
+
+    @Override
+    public boolean saveUser(SysUserDTO sysUserDTO) {
+        //新增用户
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(sysUserDTO,sysUser);
+        sysUser.setPassword(this.passwordEncoder.encode(sysUserDTO.getPassword()));
+        boolean flag1 = this.baseMapper.insert(sysUser)>0?true:false;
+
+        //新增角色关联
+        sysUserDTO.getRoleIds().stream().map(roleId -> {
+            return this.sysUserDao.saveUserRole(sysUser.getId(), roleId);
+        }).collect(Collectors.toList());
+
+        return flag1;
     }
 }

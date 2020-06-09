@@ -1,26 +1,27 @@
-package com.lvcoding.entity;
+package com.lvcoding.entity.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
- * 角色表(SysRole)实体类
+ * 角色数据传输类
  *
  * @author makejava
  * @since 2020-03-24 01:24:31
  */
 @Data
-public class SysRole implements Serializable {
+public class SysRoleDTO implements Serializable {
     private static final long serialVersionUID = -91881003056749924L;
     /**
      * 主键id
      */
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 角色名称
      */
@@ -49,5 +50,7 @@ public class SysRole implements Serializable {
      * 是否删除,1已删0未删
      */
     private Integer delFlag;
+
+    private List<Integer> menuIds;
 
 }

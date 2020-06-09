@@ -3,7 +3,9 @@ package com.lvcoding.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lvcoding.entity.SysRole;
 import com.lvcoding.entity.SysUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -65,4 +67,10 @@ public interface SysUserDao extends BaseMapper<SysUser> {
      * @return
      */
     boolean updatePwd(SysUser sysUser);
+
+    List<Integer> getRolesByUserId(Integer id);
+
+    boolean deleteUserRole(Integer id);
+
+    boolean saveUserRole(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
 }

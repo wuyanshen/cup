@@ -11,7 +11,7 @@
       <!-- 查询区 -->
 	  <el-row :gutter="20">
 		  <el-col :span="2">
-		    <el-button type="primary" icon="el-icon-plus" size="small" @click="userAddDialog=true">新增</el-button>
+		    <el-button type="primary" icon="el-icon-plus" size="small" @click="handleAdd">新增</el-button>
 		  </el-col>
 	  </el-row>
       <el-row :gutter="20" style="margin-top:10px;">
@@ -87,6 +87,16 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="userAddForm.email"></el-input>
         </el-form-item>
+        <el-form-item label="角色" prop="roleIds">
+            <el-select size="small" v-model="userAddForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
+                <el-option
+                v-for="item in userAddForm.roleList"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+                ></el-option>
+            </el-select>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="small" @click="userAddDialog = false">取 消</el-button>
@@ -119,6 +129,16 @@
         <el-form-item label="邮箱">
           <el-input v-model="userEditForm.email"></el-input>
         </el-form-item>
+        <el-form-item label="角色">
+            <el-select size="small" v-model="userEditForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
+                <el-option
+                v-for="item in userEditForm.roleList"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+                ></el-option>
+            </el-select>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="small" @click="userEditDialog = false">取 消</el-button>
@@ -146,7 +166,9 @@ export default {
         username: "",
         password: "",
         phone: "",
-        email: ""
+        email: "",
+        status: true,
+        roleIds: []
       },
       userEditForm: {
         id: 0,
@@ -154,7 +176,9 @@ export default {
         password: "",
         phone: "",
         email: "",
-        status: true
+        status: true,
+        roleIds: [],
+        roleList: []
       },
 	  page:{
 		tableData: [],
@@ -177,7 +201,8 @@ export default {
           { min: 6, message: "密码至少为6位", trigger: "blur" }
         ],
         phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
-        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }]
+        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
+        roleIds: [{ required: true, message: "角色不能为空", trigger: "blur" }],
       }
     };
   },
@@ -193,8 +218,22 @@ export default {
       "addUser",
       "updateUser",
       "deleteUser",
-      "usernameCheck"
+      "usernameCheck",
+      "userRoleIds",
     ]),
+    ...mapActions("role",[
+        "roleList"
+    ]),
+    //弹出用户新增dialog
+    async handleAdd(){
+        this.userAddDialog = true
+        //查询用户角色列表
+        const res1 = await this.roleList()
+        if(res1.code === 0){
+            console.log(res1.data)
+            this.userAddForm.roleList = res1.data
+        }
+    },
     //修改每页显示条数
     async handleSizeChange(size) {
       let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,size,this.page.currentPage));
@@ -205,13 +244,25 @@ export default {
       let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,current));
       this.copyPageValue(res)
     },
-    handleEdit(row) {
+    async handleEdit(row) {
       this.userEditForm.id = row.id;
       this.userEditForm.username = row.username;
       this.userEditForm.phone = row.phone;
       this.userEditForm.email = row.email;
       this.userEditForm.status = row.status;
       this.userEditDialog = true;
+      //查询用户角色id集合
+      const res = await this.userRoleIds(row.id)
+      if(res.code === 0){
+          console.log(res.data)
+          this.userEditForm.roleIds = res.data
+      }
+      //查询用户角色列表
+      const res1 = await this.roleList()
+      if(res1.code === 0){
+          console.log(res1.data)
+          this.userEditForm.roleList = res1.data
+      }
     },
     //用户新增dialog关闭后清空值和校验
     userAddClose() {
@@ -219,8 +270,8 @@ export default {
       this.userAddForm = {};
     },
     //新增用户
-    handleUserAdd(formName) {
-      this.$refs[formName].validate(async valid => {
+    handleUserAdd() {
+      this.$refs.userAddForm.validate(async valid => {
         if (!valid) {
           return false;
         } else {

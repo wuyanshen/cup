@@ -52,10 +52,10 @@
           <el-radio v-model="menuForm.type" label="0" border>菜单</el-radio>
           <el-radio v-model="menuForm.type" label="1" border>按钮</el-radio>
         </el-form-item>
-        <el-form-item label="路由路径">
+        <el-form-item label="路由路径" v-if="menuForm.type==='0'">
           <el-input v-model="menuForm.url"></el-input>
         </el-form-item>
-        <el-form-item label="图标">
+        <el-form-item label="图标" v-if="menuForm.type==='0'">
           <el-input v-model="menuForm.icon"></el-input>
         </el-form-item>
         <el-form-item label="权限标识">

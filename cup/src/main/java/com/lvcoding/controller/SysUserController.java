@@ -3,6 +3,7 @@ package com.lvcoding.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
+import com.lvcoding.entity.dto.SysUserDTO;
 import com.lvcoding.entity.vo.SysUserVO;
 import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
@@ -40,7 +41,6 @@ public class SysUserController {
      * @param authentication
      * @return String
      */
-    @SysLog(value = "查询用户信息", type = "1")
     @GetMapping("info")
     public Res info(Authentication authentication) {
         CommonUser user = (CommonUser) authentication.getPrincipal();
@@ -57,7 +57,7 @@ public class SysUserController {
      * @param page
      * @return com.longyi.util.Res
      */
-    @SysLog(value = "分页查询用户信息", type = "1")
+    @SysLog(value = "查询用户列表", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("page")
     public Res page(Page page, SysUser sysUser) {
@@ -71,15 +71,14 @@ public class SysUserController {
     /**
      * 新增用户
      *
-     * @param sysUser
+     * @param sysUserDTO
      * @return com.longyi.util.Res
      */
     @SysLog(value = "新增用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:add')")
     @PostMapping
-    public Res create(@RequestBody SysUser sysUser) {
-        sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
-        return Res.success(this.sysUserService.save(sysUser));
+    public Res create(@RequestBody SysUserDTO sysUserDTO) {
+        return Res.success(this.sysUserService.saveUser(sysUserDTO));
     }
 
     /**
@@ -98,17 +97,14 @@ public class SysUserController {
     /**
      * 更新用户
      *
-     * @param sysUser
+     * @param sysUserDTO
      * @return com.longyi.util.Res
      */
     @SysLog(value = "更新用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:update')")
     @PutMapping
-    public Res update(@RequestBody SysUser sysUser) {
-        if(!StringUtils.isEmpty(sysUser.getPassword())){
-            sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
-        }
-        return Res.success(this.sysUserService.updateById(sysUser));
+    public Res update(@RequestBody SysUserDTO sysUserDTO) {
+        return Res.success(this.sysUserService.updateUser(sysUserDTO));
     }
 
 
@@ -154,6 +150,17 @@ public class SysUserController {
         } else {
             return Res.success("用户名可用");
         }
+    }
+
+    /**
+     * 查询用户的角色的id集合
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("roleIds/{id}")
+    public Res roleIds(@PathVariable("id")Integer id) {
+        return Res.success(this.sysUserService.getRoleIdsByUserId(id));
     }
 
 }
