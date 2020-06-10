@@ -6,11 +6,11 @@
             <div class="title" v-if="!siderCollapse">{{appName}}</div>
         </div>
         <!-- 左侧菜单栏 -->
-        <el-menu :default-active="activeRoute" :collapse="siderCollapse" :collapse-transition="false" router>
+        <el-menu :default-active="activeRoute" :collapse="siderCollapse" :collapse-transition="false">
 
             <template v-for="menu in menuList">
                 <!-- 只有一级菜单的时候 -->
-                    <el-menu-item v-if="menu.id && menu.type!=1 && menu.children.length === 0" :key="menu.id"
+                    <el-menu-item v-if="menu.id && menu.type!=1 && menu.children.length === 0" :key="menu.id" :index="menu.url"
                         @click="handleMenuClick(menu)">
                         <i :class="menu.icon"></i>
                         <span slot="title">{{ menu.menuName }}</span>
