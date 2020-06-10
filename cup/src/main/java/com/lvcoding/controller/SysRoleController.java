@@ -130,6 +130,7 @@ public class SysRoleController {
      * @param sysRoleDTO
      * @return com.lvcoding.util.Res
      */
+    @PreAuthorize("@pm.hasPermission('sys:permission:update')")
     @PutMapping("permission")
     public Res updatePermission(@RequestBody SysRoleDTO sysRoleDTO){
         return Res.success(this.sysRoleService.saveRoleMenu(sysRoleDTO));

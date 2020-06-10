@@ -19,7 +19,7 @@
                 </el-col>
             </el-row>
             <!-- 表格区 -->
-            <el-table size="small" border stripe :data="this.page.tableData">
+            <el-table size="small" border stripe :data="this.page.tableData" :header-cell-style="{background:'#F2F6FC'}">
                 <el-table-column align="center" label="序号" type="index" width="50px"></el-table-column>
                 <el-table-column align="center" label="角色名称" prop="roleName"></el-table-column>
                 <el-table-column align="center" label="角色英文名称" prop="roleCode"></el-table-column>
@@ -29,8 +29,8 @@
                         <el-tag size="small" v-if="scope.row.status===0" type="danger">禁用</el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column align="center" label="创建时间" prop="createTime" :formatter="formatDate"></el-table-column>
-                <el-table-column align="center" label="更新时间" prop="updateTime" :formatter="formatDate1"></el-table-column>
+                <el-table-column align="center" label="创建时间" prop="createTime" :formatter="formatCreateDate"></el-table-column>
+                <el-table-column align="center" label="更新时间" prop="updateTime" :formatter="formatUpdateDate"></el-table-column>
                 <el-table-column align="center" label="操作" width="300px">
                     <template v-slot="scope">
                         <el-button size="mini" icon="el-icon-edit" type="primary" @click="handleEidt(scope.row)">修改</el-button>
@@ -39,7 +39,7 @@
                     </template>
                 </el-table-column>
             </el-table>
-            
+
             <!-- 分页区 -->
             <el-pagination
               @size-change="handleSizeChange"
@@ -51,7 +51,7 @@
               :total="this.page.total"
             ></el-pagination>
         </el-card>
-        
+
         <!-- 修改角色dialog -->
         <el-dialog :show-close="false" title="修改角色" :visible.sync="roleEditDialog" width="50%">
           <el-form size="small" label-width="80px" :model="roleEditForm">
@@ -79,14 +79,14 @@
             <el-form-item label="排序">
               <el-input v-model="roleEditForm.sort"></el-input>
             </el-form-item>
-            
+
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button size="small" @click="roleEditDialog = false">取 消</el-button>
             <el-button size="small" type="primary" @click="handleRoleUpdate">确 定</el-button>
           </span>
         </el-dialog>
-        
+
         <!-- 新增角色dialog -->
         <el-dialog :show-close="false" title="新增角色" :visible.sync="roleAddDialog" width="50%" @close="roleAddClose">
           <el-form size="small" label-width="80px" :model="roleAddForm">
@@ -105,7 +105,7 @@
             <el-button size="small" type="primary" @click="handleRoleAdd">确 定</el-button>
           </span>
         </el-dialog>
-        
+
         <!-- 权限dialog -->
         <el-dialog :show-close="false" title="分配权限" :visible.sync="permissionDialog" width="50%">
             <el-tree
@@ -127,6 +127,8 @@
 <script>
     import {mapActions} from 'vuex'
     import moment from 'moment'
+    import {formatDate} from '@/lib/util'
+    
     export default {
         data() {
             return {
@@ -157,7 +159,7 @@
                 },
                 page:{
                     tableData:[],
-                    pageSize:0,
+                    pageSize:5,
                     currentPage:0,
                     total:0
                 },
@@ -170,18 +172,15 @@
             };
         },
         created() {},
-        async mounted() {
-            const res  = await this.rolePage({size:5})
-            if(res.code === 0){
-            	this.copyPageValue(res)
-            }
+        mounted() {
+            this.flush()
         },
         methods: {
             ...mapActions("role",["rolePage","roleAdd","roleUpdate","roleDelete","roleMenuIds","permission"]),
             ...mapActions("menu",["menuTreePage"]),
             //更新权限
             async handlePermissionUpdate(){
-                this.permissionForm.menuIds = this.$refs.tree.getCheckedKeys()
+                this.permissionForm.menuIds = this.$refs.tree.getCheckedKeys().concat(this.$refs.tree.getHalfCheckedKeys())
                 console.log(this.permissionForm)
                 let res = await this.permission(this.permissionForm)
                 if(res.code === 0){
@@ -199,7 +198,14 @@
                     //设置默认选中
                     let res1 = await this.roleMenuIds(id)
                     if(res1.code === 0){
-                        this.$refs.tree.setCheckedKeys(res1.data);
+                        //方案二：
+                        res1.data.forEach((i,n) => {
+                          var node = this.$refs.tree.getNode(i);
+                          console.log(node.isLeaf)
+                          if(node.isLeaf){
+                            this.$refs.tree.setChecked(node, true);
+                          }
+                        });
                     }
                 }
             },
@@ -232,11 +238,6 @@
                    this.$message.success('新增成功')
                }
             },
-            //刷新界面
-            async flush(){
-                let res = await this.rolePage({size:5})
-                this.copyPageValue(res)
-            },
             //弹出修改角色dialog
             handleEidt(row){
                 this.roleEditDialog = true
@@ -256,33 +257,27 @@
                 }
             },
             //条件查询角色
-            async queryRole(){
-                const res  = await this.rolePage(this.copyQueryValue(this.queryInfo.roleName,this.queryInfo.roleCode,this.page.pageSize,''))
-                if(res.code === 0){
-                	this.copyPageValue(res)
-                }
+            queryRole(){
+                this.queryPage(this.queryInfo.roleName,this.queryInfo.roleCode,this.page.pageSize,'')
             },
             //格式化创建时间
-            formatDate(row,column){
-                let date = row[column.property]
-                return moment(date).format("YYYY-MM-DD HH:mm:ss")
+            formatCreateDate(row,column){
+                return formatDate(row,column)
             },
             //格式化更新时间
-            formatDate1(row,column){
-                let date = row[column.property]
-                return moment(date).format("YYYY-MM-DD HH:mm:ss")
+            formatUpdateDate(row,column){
+                return formatDate(row,column)
             },
             //修改每页显示条数
-            async handleSizeChange(size) {
-              this.queryInfo.size = size;
-              let res = await this.rolePage(this.copyQueryValue(this.queryInfo.roleName,this.queryInfo.roleCode,size,this.page.currentPage));
-              this.copyPageValue(res)
+            handleSizeChange(size) {
+              this.queryPage(this.queryInfo.roleName,this.queryInfo.roleCode,size,this.page.currentPage)
             },
             //修改当前第几页
-            async handleCurrentChange(current) {
-              let res = await this.rolePage(this.copyQueryValue(this.queryInfo.roleName,this.queryInfo.roleCode,this.page.pageSize,current));
-              this.copyPageValue(res)
+            handleCurrentChange(current) {
+              this.queryPage(this.queryInfo.roleName, this.queryInfo.roleCode, this.page.pageSize, current)
             },
+            
+            //------- 工具方法 -------
             //封装查询条件
             copyQueryValue(roleName,roleCode,size,current){
               return {
@@ -298,6 +293,15 @@
               this.page.total = res.data.total;
               this.page.pageSize = res.data.size;
               this.page.currentPage = res.data.current;
+            },
+            //封装通用分页方法
+            async queryPage(roleName,roleCode,size,current){
+                let res = await this.rolePage(this.copyQueryValue(roleName, roleCode, size, current));
+                this.copyPageValue(res)
+            },
+            //刷新界面
+            flush(){
+                this.queryPage('', '', this.page.pageSize, '')
             }
         }
     };

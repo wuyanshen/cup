@@ -11,21 +11,21 @@
       <!-- 查询区 -->
 	  <el-row :gutter="20">
 		  <el-col :span="2">
-		    <el-button type="primary" icon="el-icon-plus" size="small" @click="handleAdd">新增</el-button>
+		    <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd">新增</el-button>
 		  </el-col>
 	  </el-row>
       <el-row :gutter="20" style="margin-top:10px;">
         <el-col :span="6">
-          <el-input size="small" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名" @change="handleSearch">
+          <el-input size="mini" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名" @change="handleSearch">
           </el-input>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" icon="el-icon-search" size="small" @click="handleSearch">查询</el-button>
+          <el-button type="primary" icon="el-icon-search" size="mini" @click="handleSearch">查询</el-button>
         </el-col>
       </el-row>
 
       <!-- 表格区 -->
-      <el-table size="small" :data="this.page.tableData" border stripe class="user_table">
+      <el-table size="mini" :data="this.page.tableData" border stripe class="user_table" :header-cell-style="{background:'#F2F6FC'}">
         <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
         <el-table-column align="center" prop="username" label="姓名" width="180"></el-table-column>
         <el-table-column align="center" prop="phone" label="电话"></el-table-column>
@@ -88,7 +88,7 @@
           <el-input v-model="userAddForm.email"></el-input>
         </el-form-item>
         <el-form-item label="角色" prop="roleIds">
-            <el-select size="small" v-model="userAddForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
+            <el-select size="mini" v-model="userAddForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
                 <el-option
                 v-for="item in userAddForm.roleList"
                 :key="item.id"
@@ -99,14 +99,14 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="userAddDialog = false">取 消</el-button>
-        <el-button size="small" type="primary" @click="handleUserAdd">确 定</el-button>
+        <el-button size="mini" @click="userAddDialog = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="handleUserAdd">确 定</el-button>
       </span>
     </el-dialog>
 
     <!-- 修改用户对话框 -->
     <el-dialog :show-close="false" title="修改用户" :visible.sync="userEditDialog" width="50%">
-      <el-form size="small" label-width="80px" :model="userEditForm">
+      <el-form size="mini" label-width="80px" :model="userEditForm">
         <el-form-item label="id">
           <el-input v-model="userEditForm.id" disabled></el-input>
         </el-form-item>
@@ -130,7 +130,7 @@
           <el-input v-model="userEditForm.email"></el-input>
         </el-form-item>
         <el-form-item label="角色">
-            <el-select size="small" v-model="userEditForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
+            <el-select size="mini" v-model="userEditForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
                 <el-option
                 v-for="item in userEditForm.roleList"
                 :key="item.id"
@@ -141,8 +141,8 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="userEditDialog = false">取 消</el-button>
-        <el-button size="small" type="primary" @click="handleUserUpdate">确 定</el-button>
+        <el-button size="mini" @click="userEditDialog = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="handleUserUpdate">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -206,11 +206,8 @@ export default {
       }
     };
   },
-  async mounted() {
-    let res = await this.userPage({size:5});
-    if (res.code == 0) {
-	  this.copyPageValue(res)
-    }
+  mounted() {
+    this.flush()
   },
   methods: {
     ...mapActions("user",[
@@ -235,14 +232,12 @@ export default {
         }
     },
     //修改每页显示条数
-    async handleSizeChange(size) {
-      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,size,this.page.currentPage));
-	  this.copyPageValue(res)
+    handleSizeChange(size) {
+      this.queryPage(this.queryInfo.username, size, this.page.currentPage)
     },
 	//修改当前第几页
-    async handleCurrentChange(current) {
-      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,current));
-      this.copyPageValue(res)
+    handleCurrentChange(current) {
+      this.queryPage(this.queryInfo.username, this.page.pageSize, current)
     },
     async handleEdit(row) {
       this.userEditForm.id = row.id;
@@ -280,7 +275,7 @@ export default {
             this.$message.success("添加用户成功");
           }
           //刷新
-          this.flushUserPage();
+          this.flush();
           //关闭dialog
           this.userAddDialog = false;
         }
@@ -293,7 +288,7 @@ export default {
         this.$message.success("修改用户成功");
       }
       //刷新
-      this.flushUserPage();
+      this.flush();
       //关闭dialog
       this.userEditDialog = false;
     },
@@ -311,20 +306,16 @@ export default {
             this.$message.success("删除用户成功");
           }
           //刷新
-          this.flushUserPage();
+          this.flush();
         })
         .catch(() => {});
     },
 	//条件查询
-    async handleSearch() {
-      let res = await this.userPage(this.copyQueryValue(this.queryInfo.username,this.page.pageSize,''));
-      this.copyPageValue(res)
+    handleSearch() {
+      this.queryPage(this.queryInfo.username,this.page.pageSize,'')
     },
-    //刷新用户列表
-    async flushUserPage() {
-      let res = await this.userPage();
-	  this.copyPageValue(res)
-    },
+    
+    //---------- 工具方法 -----------
 	//封装分页参数
 	copyPageValue(res){
 		this.page.tableData = res.data.records;
@@ -339,7 +330,16 @@ export default {
 			size: size?size:null,
 			current: current?current:null,
 		}
-	}
+	},
+    //封装分页请求通用方法
+    async queryPage(username,size,current){
+        let res = await this.userPage(this.copyQueryValue(username,size,current));
+        this.copyPageValue(res)
+    },
+    //刷新界面
+    flush() {
+      this.queryPage('',this.page.pageSize,'')
+    },
   }
 };
 </script>

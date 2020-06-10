@@ -3,11 +3,11 @@
 	  <!-- 查询区 -->
 	  <el-row :gutter="20">
 	    <el-col :span="6">
-	      <el-input size="small" clearable v-model="queryInfo.title" placeholder="请输入要查询的日志标题" @change="handleSearch">
+	      <el-input size="mini" clearable v-model="queryInfo.title" placeholder="请输入要查询的日志标题" @change="handleSearch">
 	      </el-input>
 	    </el-col>
 		<el-col :span="3">
-			<el-select size="small" v-model="queryInfo.type" placeholder="请求选择">
+			<el-select size="mini" v-model="queryInfo.type" placeholder="请求选择">
 				<el-option v-for="item in logTypes"
 				:key="item.value"
 				:label="item.label"
@@ -16,14 +16,14 @@
 			</el-select>
 		</el-col>
 		<el-col :span="2">
-		  <el-button type="primary" icon="el-icon-search" size="small" @click="handleSearch">查询</el-button>
+		  <el-button type="primary" icon="el-icon-search" size="mini" @click="handleSearch">查询</el-button>
 		</el-col>
 	  </el-row>
 	  <!-- 表格 -->
-	  <el-table :data="this.page.tableData" stripe border size="small" class="log_table">
-		  <el-table-column type="index" label="序号" width="50"></el-table-column>
+	  <el-table :data="this.page.tableData" stripe border size="mini" class="log_table" :header-cell-style="{background:'#F2F6FC'}">
+		  <el-table-column type="index" label="序号" width="50" align="center"></el-table-column>
 		  <el-table-column label="标题" prop="title"></el-table-column>
-		  <el-table-column label="日志类型" prop="type">
+		  <el-table-column label="日志类型" prop="type" width="110px" align="center">
 			  <template v-slot="scope">
 			    <el-tag v-if="scope.row.type==='1'" type="success">用户日志</el-tag>
 				<el-tag v-if="scope.row.type==='2'" type="success">菜单日志</el-tag>
@@ -34,10 +34,10 @@
 		  <el-table-column label="请求uri" prop="requestUri"></el-table-column>
 		  <el-table-column label="请求参数" prop="params"></el-table-column>
 		  <el-table-column label="请求响应" prop="response" :show-overflow-tooltip="true"></el-table-column>
-		  <el-table-column label="请求方式" prop="method"></el-table-column>
-		  <el-table-column label="请求时间(毫秒)" prop="time"></el-table-column>
-		  <el-table-column label="请求人" prop="createBy"></el-table-column>
-		  <el-table-column label="创建时间" prop="createTime" :formatter="formatDate"></el-table-column>
+		  <el-table-column label="请求方式" prop="method" width="80px" align="center"></el-table-column>
+		  <el-table-column label="请求时间(毫秒)" prop="time" width="80px" align="center"></el-table-column>
+		  <el-table-column label="请求人" prop="createBy" width="80px" align="center"></el-table-column>
+		  <el-table-column label="创建时间" prop="createTime" :formatter="formatDate" width="180px" align="center"></el-table-column>
 	  </el-table>
 	  <!-- 分页区 -->
 	  <el-pagination
@@ -54,7 +54,7 @@
 
 <script>
 import {mapActions} from 'vuex'
-import moment from 'moment'
+import {formatDate} from '@/lib/util'
 
 export default {
   data() {
@@ -75,7 +75,7 @@ export default {
 		}],
 		page:{
 			tableData:[],
-			pageSize: 10,
+			pageSize: 5,
 			total: 0,
 			currentPage: 1,
 		},
@@ -87,23 +87,27 @@ export default {
 		},
 	};
   },
-  async mounted() {
-	  const res  = await this.logPage({size:5})
-	  if(res.code === 0){
-		  this.copyPageValue(res)
-	  }
+  mounted() {
+	this.flush()
   },
   methods: {
 	  ...mapActions('log',['logPage']),
+      //刷新页面
+      async flush(){
+          const res  = await this.logPage({size:this.page.pageSize})
+          if(res.code === 0){
+            this.copyPageValue(res)
+          }
+      },
 	  //修改每页显示条数
 	  async handleSizeChange(size) {
-	    this.queryInfo.size = size;
 	    let res = await this.logPage(this.copyQueryValue(this.queryInfo.title,this.queryInfo.type,size,this.page.currentPage));
 	    this.copyPageValue(res)
 	  },
 	  //修改当前第几页
 	  async handleCurrentChange(current) {
 	    let res = await this.logPage(this.copyQueryValue(this.queryInfo.title,this.queryInfo.type,this.page.pageSize,current));
+        console.log(res)
 	    this.copyPageValue(res)
 	  },
 	  //条件查询
@@ -113,8 +117,7 @@ export default {
 	  },
 	  //格式化table日期格式
 	  formatDate(row,column){
-		  let date = row[column.property]
-		  return moment(date).format("YYYY-MM-DD HH:mm:ss")
+		  return formatDate(row, column)
 	  },
 	  //封装查询条件
 	  copyQueryValue(title,type,size,current){
@@ -140,5 +143,6 @@ export default {
 	.log_table{
 		width: 100%;
 		margin-top: 10px;
+        margin-bottom: 10px;
 	}
 </style>
