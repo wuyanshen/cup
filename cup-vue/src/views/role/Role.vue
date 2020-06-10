@@ -198,10 +198,10 @@
                     //设置默认选中
                     let res1 = await this.roleMenuIds(id)
                     if(res1.code === 0){
-                        //方案二：
-                        res1.data.forEach((i,n) => {
-                          var node = this.$refs.tree.getNode(i);
-                          console.log(node.isLeaf)
+                        //树形菜单回显核心代码 --> 这里很重要！！！
+                        res1.data.forEach(menuId => {
+                          var node = this.$refs.tree.getNode(menuId);
+                          console.log(`节点名:${node.label} --- 节点id:${node.key} --- 是否叶子节点:${node.isLeaf}`)
                           if(node.isLeaf){
                             this.$refs.tree.setChecked(node, true);
                           }
