@@ -10,21 +10,27 @@
 	  >
 	  </el-tab-pane>
 	</el-tabs>
-	<router-view></router-view>
+	<router-view v-if="routerViewShowHide"></router-view>
+    <myiframe></myiframe>
   </div>
 </template>
 
 <script>
 import {mapState,mapMutations} from 'vuex'
+import myiframe from '@/components/myiframe.vue'
 export default {
   data() {
     return {
     };
   },
+  components:{
+      myiframe
+  },
   created() {},
   mounted() {},
   computed:{
   	...mapState('tabs',['maintabs','activeRoute']),
+    ...mapState(["routerViewShowHide"]),
   },
   methods: {
   	...mapMutations('tabs',['removeTab','setActiveRoute']),

@@ -10,7 +10,7 @@
 
             <template v-for="menu in menuList">
                 <!-- 只有一级菜单的时候 -->
-                    <el-menu-item v-if="menu.id && menu.type!=1 && menu.children.length === 0" :key="menu.id" :index="menu.url"
+                    <el-menu-item v-if="menu.id && menu.type!=1 && menu.children.length === 0" :key="menu.id"
                         @click="handleMenuClick(menu)">
                         <i :class="menu.icon"></i>
                         <span slot="title">{{ menu.menuName }}</span>
@@ -18,13 +18,13 @@
 
                 <!-- 大于一级菜单的时候 -->
                 <!-- 一级菜单 -->
-                <el-submenu :index="menu.url" :key="menu.id" v-if="menu.id && menu.type!=1 && menu.children.length >0">
+                <el-submenu :index="menu.url" :key="menu.id"  v-if="menu.id && menu.type!=1 && menu.children.length >0">
                     <template slot="title">
                         <i :class="menu.icon"></i>
                         <span>{{menu.menuName}}</span>
                     </template>
                     <!-- 二级菜单 -->
-                    <el-menu-item v-for="subMenu of menu.children" :key="subMenu.id" :index="subMenu.url" v-if="subMenu.type!=1"
+                    <el-menu-item v-for="subMenu of menu.children" :index="subMenu.url" :key="subMenu.id" v-if="subMenu.type!=1"
                         @click="handleMenuClick(subMenu)">
                         <i :class="subMenu.icon"></i>
                         <span slot="title">{{ subMenu.menuName }}</span>
@@ -58,12 +58,23 @@
         },
         mounted() {},
         computed: {
-            ...mapState(["siderCollapse", "appName"]),
+            ...mapState(["siderCollapse", "appName", "iframeUrl"]),
             ...mapState("tabs", ["activeRoute", "menuList"])
         },
         methods: {
+            ...mapMutations(["UPDATE_IFRAME_URL","UPDATE_IFRAME_STYLE","UPDATE_ROUTER_VIEW"]),
             handleMenuClick(item) {
-                // this.addTab(item)
+                let url = item.url || '/'
+                if (url.includes('http') || url.includes('https')) {
+                    this.UPDATE_IFRAME_STYLE({visibility: 'visible'})
+                    this.UPDATE_IFRAME_URL(item.url)
+                    this.UPDATE_ROUTER_VIEW(false)
+                }else{
+                    this.UPDATE_IFRAME_URL("")
+                    this.UPDATE_IFRAME_STYLE({visibility: 'hidden'})
+                    this.UPDATE_ROUTER_VIEW(true)
+                    this.$router.push(url)
+                }
             }
         }
     };
