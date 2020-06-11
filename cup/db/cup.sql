@@ -220,17 +220,14 @@ CREATE TABLE `sys_user` (
     `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `del_flag` int(2) DEFAULT '0' COMMENT '是否删除,1已删0未删',
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user` VALUES (1, 3, 'admin', '$2a$10$BqmyJhzbUTwAlW6JPQINZufIgEBVvUs/Go6CjDPXPiI3bvSOJrWaW', '23xxx@qq.com', '18911483365', NULL, 1, 1, NULL, '2020-06-01 17:36:04', 0);
-INSERT INTO `sys_user` VALUES (2, NULL, 'yafa1', '$2a$10$BqmyJhzbUTwAlW6JPQINZufIgEBVvUs/Go6CjDPXPiI3bvSOJrWaW', '22@qq.com', '189222222', NULL, 1, NULL, NULL, '2020-06-10 12:27:30', NULL);
-INSERT INTO `sys_user` VALUES (10, NULL, 'aaa', '24234', '234234', '324234', NULL, 1, NULL, NULL, '2020-03-31 04:02:29', NULL);
-INSERT INTO `sys_user` VALUES (11, NULL, 'bbb222', 'sdfadfa', '2323@qq.com', '189232323', NULL, 0, NULL, NULL, '2020-03-31 04:02:43', NULL);
-INSERT INTO `sys_user` VALUES (13, NULL, 'xxx', '', '22@qq.com', '18911111111', NULL, 1, NULL, NULL, '2020-06-09 18:39:05', NULL);
+INSERT INTO `sys_user` VALUES (2, NULL, 'yonghu1', '$2a$10$BqmyJhzbUTwAlW6JPQINZufIgEBVvUs/Go6CjDPXPiI3bvSOJrWaW', '22@qq.com', '189222222', NULL, 1, NULL, NULL, '2020-06-10 12:27:30', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -248,10 +245,8 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user_role` VALUES (5, 1, 1);
-INSERT INTO `sys_user_role` VALUES (10, 13, 1);
-INSERT INTO `sys_user_role` VALUES (11, 13, 2);
-INSERT INTO `sys_user_role` VALUES (12, 2, 2);
+INSERT INTO `sys_user_role` VALUES (1, 1, 1);
+INSERT INTO `sys_user_role` VALUES (2, 2, 2);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
