@@ -1,16 +1,16 @@
 server:
   port: 3001
-  servlet:
-    session:
-      timeout: 20s  # SpringBoot默认session超时是1分钟，小于1分钟还是1分钟
-      cookie:
-        http-only: true #这样设置就不能通过js脚本获取cookie
+#  servlet:
+#    session:
+#      timeout: 20s  # SpringBoot默认session超时是1分钟，小于1分钟还是1分钟
+#      cookie:
+#        http-only: true #这样设置就不能通过js脚本获取cookie
 #        secure: true #只有https请求才会携带cookie
 
 
 spring:
   application:
-    name: VueBackApp
+    name: cup
   security:
     loginType: JSON
 

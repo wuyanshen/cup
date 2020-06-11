@@ -82,7 +82,7 @@ export default {
           let res = await this.login(this.loginForm);
           if (res.code === 0) {
             this.$message.success('登录成功~')
-            this.$router.push("/");
+            this.$router.push("/").catch(err => {err})
           }
         } else {
           return false;
