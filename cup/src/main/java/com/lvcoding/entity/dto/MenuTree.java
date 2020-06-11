@@ -46,14 +46,6 @@ public class MenuTree extends TreeNode implements Serializable {
     private String keepAlive;
 
     /**
-     * 是否叶子节点，1:是，0:不是
-     */
-    private Integer isLeaf;
-    /**
-     * 菜单第几级
-     */
-    private Integer level;
-    /**
      * 菜单图标
      */
     private String icon;

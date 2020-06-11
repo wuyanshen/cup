@@ -63,8 +63,6 @@ CREATE TABLE `sys_menu` (
     `menu_name` varchar(20) DEFAULT NULL COMMENT '菜单名称',
     `url` varchar(64) DEFAULT NULL COMMENT '菜单路径',
     `permission` varchar(64) DEFAULT NULL COMMENT '权限标识',
-    `is_leaf` int(2) DEFAULT NULL COMMENT '是否叶子节点，1:是，0:不是',
-    `level` int(2) DEFAULT NULL COMMENT '菜单第几级',
     `icon` varchar(20) DEFAULT NULL COMMENT '菜单图标',
     `component` varchar(20) DEFAULT NULL COMMENT 'VUE页面',
     `type` varchar(5) DEFAULT NULL COMMENT '菜单类型(0菜单1按钮)',

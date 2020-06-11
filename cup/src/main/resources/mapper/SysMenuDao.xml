@@ -9,8 +9,6 @@
         <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
         <result property="url" column="url" jdbcType="VARCHAR"/>
         <result property="permission" column="permission" jdbcType="VARCHAR"/>
-        <result property="isLeaf" column="is_leaf" jdbcType="INTEGER"/>
-        <result property="level" column="level" jdbcType="INTEGER"/>
         <result property="icon" column="icon" jdbcType="VARCHAR"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
@@ -20,12 +18,9 @@
         <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="queryNoJoin">
-      id, menu_pid, menu_pids, menu_name, url, type, permission, is_leaf, level, icon, status, sort, create_time, update_time, del_flag
-    </sql>
 
     <sql id="queryJoin">
-        m.id, m.menu_pid, m.menu_pids, m.menu_name, m.url, m.permission,m.type, m.is_leaf, m.level, m.icon, m.status, m.sort, m.create_time, m.update_time, m.del_flag
+        m.id, m.menu_pid, m.menu_pids, m.menu_name, m.url, m.permission,m.type, m.icon, m.status, m.sort, m.create_time, m.update_time, m.del_flag
     </sql>
 
 

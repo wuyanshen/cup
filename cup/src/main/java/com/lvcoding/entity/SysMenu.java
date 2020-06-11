@@ -49,20 +49,11 @@ public class SysMenu implements Serializable {
      */
     private String component;
 
-
     /**
      * 路由缓冲(1开启0关闭)
      */
     private String keepAlive;
 
-    /**
-     * 是否叶子节点，1:是，0:不是
-     */
-    private Integer isLeaf;
-    /**
-     * 菜单第几级
-     */
-    private Integer level;
     /**
      * 菜单图标
      */
