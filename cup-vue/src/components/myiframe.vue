@@ -1,29 +1,28 @@
 <template>
-    <div>
-        <iframe ref="iframe" :style="iframeStyle" :src="iframeUrl" frameborder="0" width="100%" scrolling="auto">
-        </iframe>
-    </div>
+    <iframe ref="iframe" :style="iframeStyle" :src="iframeUrl" frameborder="0" width="100%" scrolling="auto">
+    </iframe>
 </template>
 
 <script>
-    import {mapState} from 'vuex'
-    export default{
-        data(){
-            return{
-            }
+    import {
+        mapState
+    } from 'vuex'
+    export default {
+        data() {
+            return {}
         },
-        mounted(){
-            this.iframeInit()
+        mounted() {
+            // this.iframeInit()
         },
-        computed:{
-            ...mapState(["iframeUrl","iframeStyle"]),
+        computed: {
+            ...mapState(["iframeUrl", "iframeStyle"]),
         },
-        methods:{
-            iframeInit(){
-                const iframe = this.$refs.iframe
-                const clientHeight = document.documentElement.clientHeight - (screen > 1 ? 200 : 105)
-                iframe.style.height = `${clientHeight}px`
-            }
+        methods: {
+            // iframeInit() {
+            //     const iframe = this.$refs.iframe
+            //     const clientHeight = document.documentElement.clientHeight - (screen > 1 ? 200 : 105)
+            //     iframe.style.height = `${clientHeight}px`
+            // }
         }
     }
 </script>

@@ -22,10 +22,19 @@ const mutations = {
 			if(state.menuList.length>=1){
 				let route = []
 				for(let i in state.menuList){
-					route = state.menuList[i].children.filter(item => item.url === url)
-					if(route.length>0){
-						break
-					}
+                    if(state.menuList[i].children.length === 0){
+                        if(state.menuList[i].url === url){
+                            route.push(state.menuList[i])
+                        }
+                        if(route.length>0){
+                        	break
+                        }
+                    }else{
+                        route = state.menuList[i].children.filter(item => item.url === url)
+                        if(route.length>0){
+                        	break
+                        }
+                    }
 				}
 				state.maintabs.push({url:url, title:route[0].menuName, closable:true})
 			}

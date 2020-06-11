@@ -49,31 +49,30 @@
                 avatar,
             };
         },
-        created() {
-            for (let menu of this.menuList) {
-                if (menu.children) {
-                    console.log(menu.menuName)
-                }
-            }
-        },
+        created() {},
         mounted() {},
         computed: {
             ...mapState(["siderCollapse", "appName", "iframeUrl"]),
             ...mapState("tabs", ["activeRoute", "menuList"])
         },
         methods: {
+            ...mapActions("tabs",["addTab"]),
             ...mapMutations(["UPDATE_IFRAME_URL","UPDATE_IFRAME_STYLE","UPDATE_ROUTER_VIEW"]),
             handleMenuClick(item) {
                 let url = item.url || '/'
+                //跳转iframe
                 if (url.includes('http') || url.includes('https')) {
-                    this.UPDATE_IFRAME_STYLE({visibility: 'visible'})
+                    this.UPDATE_IFRAME_STYLE({visibility: 'visible', height: '100%'})
                     this.UPDATE_IFRAME_URL(item.url)
                     this.UPDATE_ROUTER_VIEW(false)
+                    this.addTab(item.url)
+                    
+                //跳转vue页面
                 }else{
                     this.UPDATE_IFRAME_URL("")
-                    this.UPDATE_IFRAME_STYLE({visibility: 'hidden'})
+                    this.UPDATE_IFRAME_STYLE({visibility: 'hidden', height: '0'})
                     this.UPDATE_ROUTER_VIEW(true)
-                    this.$router.push(url)
+                    this.$router.push(url).catch(err => {err})
                 }
             }
         }

@@ -135,7 +135,7 @@ export default {
     info() {
       this.addTab('/info')
       this.setActiveRoute('/info')
-      this.$router.push({name:"Info"});
+      this.$router.push({name:"Info"}).catch(err => {err});
     },
     logout() {
       this.$confirm("此操作将退出系统, 是否继续?", "提示", {
@@ -145,7 +145,7 @@ export default {
       })
         .then(() => {
           window.sessionStorage.clear();
-          this.$router.push("/login");
+          this.$router.push("/login").catch(err => {err});
           this.initMainTabs()
           this.$message({
             type: "success",
