@@ -3,8 +3,8 @@ package com.lvcoding.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
-import com.lvcoding.entity.dto.SysUserDTO;
-import com.lvcoding.entity.vo.SysUserVO;
+import com.lvcoding.entity.dto.UserDTO;
+import com.lvcoding.entity.vo.UserVO;
 import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysUserService;
@@ -71,14 +71,14 @@ public class SysUserController {
     /**
      * 新增用户
      *
-     * @param sysUserDTO
+     * @param userDTO
      * @return com.longyi.util.Res
      */
     @SysLog(value = "新增用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:add')")
     @PostMapping
-    public Res create(@RequestBody SysUserDTO sysUserDTO) {
-        return Res.success(this.sysUserService.saveUser(sysUserDTO));
+    public Res create(@RequestBody UserDTO userDTO) {
+        return Res.success(this.sysUserService.saveUser(userDTO));
     }
 
     /**
@@ -91,33 +91,33 @@ public class SysUserController {
     @PreAuthorize("@pm.hasPermission('sys:user:delete')")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id") Integer id) {
-        return Res.success(this.sysUserService.deleteById(id));
+        return Res.success(this.sysUserService.removeById(id));
     }
 
     /**
      * 更新用户
      *
-     * @param sysUserDTO
+     * @param userDTO
      * @return com.longyi.util.Res
      */
     @SysLog(value = "更新用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:update')")
     @PutMapping
-    public Res update(@RequestBody SysUserDTO sysUserDTO) {
-        return Res.success(this.sysUserService.updateUser(sysUserDTO));
+    public Res update(@RequestBody UserDTO userDTO) {
+        return Res.success(this.sysUserService.updateUser(userDTO));
     }
 
 
     /**
      * 更新密码
      *
-     * @param sysUserVO
+     * @param userVO
      * @return
      */
     @SysLog(value = "更新密码", type = "1")
     @PutMapping("pwd")
-    public Res updatePwd(@RequestBody SysUserVO sysUserVO) {
-        return Res.success(this.sysUserService.updatePwd(sysUserVO));
+    public Res updatePwd(@RequestBody UserVO userVO) {
+        return Res.success(this.sysUserService.updatePwd(userVO));
     }
 
     /**
@@ -144,7 +144,7 @@ public class SysUserController {
      */
     @GetMapping("name/check")
     public Res checkUsername(@RequestParam("username") String username) {
-        boolean flag = this.sysUserService.findAll(new SysUser()).stream().anyMatch(user -> user.getUsername().equals(username));
+        boolean flag = this.sysUserService.list().stream().anyMatch(user -> user.getUsername().equals(username));
         if (flag) {
             return Res.fail("用户名已存在");
         } else {

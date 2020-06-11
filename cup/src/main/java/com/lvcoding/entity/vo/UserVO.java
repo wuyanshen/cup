@@ -1,8 +1,5 @@
 package com.lvcoding.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +12,7 @@ import java.util.Date;
  * @since 2020-03-24 01:44:06
  */
 @Data
-public class SysUserVO implements Serializable {
+public class UserVO implements Serializable {
     private static final long serialVersionUID = 448260653094233335L;
     /**
      * 主键id

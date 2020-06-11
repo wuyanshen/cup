@@ -5,6 +5,7 @@ import com.lvcoding.util.Res;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020-03-25 5:18 下午
  * @discription token相关控制器
  */
+@RequestMapping("token")
 @RestController
 public class TokenController {
 
-    @GetMapping("token/check")
+    @GetMapping("check")
     public Res checkToken(@RequestHeader("token") String token) {
         if (StringUtils.isEmpty(token)) {
             return Res.fail("token不能为空");
@@ -26,7 +28,7 @@ public class TokenController {
         return Res.fail("token无效", false);
     }
 
-    @GetMapping("token/refresh")
+    @GetMapping("refresh")
     public Res refreshToken(@RequestHeader("token") String token) {
         if (StringUtils.isEmpty(token)) {
             return Res.fail("token不能为空");

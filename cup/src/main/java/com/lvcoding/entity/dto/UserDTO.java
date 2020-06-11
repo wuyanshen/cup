@@ -1,6 +1,5 @@
 package com.lvcoding.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,7 +10,7 @@ import java.util.List;
  * 用户数据传输
  */
 @Data
-public class SysUserDTO implements Serializable {
+public class UserDTO implements Serializable {
     private static final long serialVersionUID = 448260653094233335L;
     /**
      * 主键id

@@ -6,11 +6,11 @@ import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.Res;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,23 +22,10 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("menus")
+@AllArgsConstructor
 public class SysMenuController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private SysMenuService sysMenuService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public SysMenu selectOne(Integer id) {
-        return this.sysMenuService.queryById(id);
-    }
+    private final SysMenuService sysMenuService;
 
 
     /**
@@ -91,7 +78,7 @@ public class SysMenuController {
     @SysLog(type = "2",value = "修改菜单")
     @PutMapping
     public Res update(@RequestBody SysMenu sysMenu){
-        return Res.success(sysMenuService.update(sysMenu));
+        return Res.success(sysMenuService.updateById(sysMenu));
     }
 
     /**

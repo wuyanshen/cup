@@ -2,18 +2,15 @@ package com.lvcoding.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lvcoding.dao.SysRoleDao;
 import com.lvcoding.entity.SysRole;
-import com.lvcoding.entity.dto.SysRoleDTO;
+import com.lvcoding.entity.dto.RoleDTO;
 import com.lvcoding.log.SysLog;
 import com.lvcoding.service.SysRoleService;
 import com.lvcoding.util.Res;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * 角色表(SysRole)表控制层
@@ -23,23 +20,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("roles")
+@AllArgsConstructor
 public class SysRoleController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private SysRoleService sysRoleService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public SysRole selectOne(Integer id) {
-        return this.sysRoleService.queryById(id);
-    }
+
+    private final SysRoleService sysRoleService;
+
 
     /**
      * 获取所有的角色列表
@@ -127,13 +113,13 @@ public class SysRoleController {
     /**
      * 保存权限
      *
-     * @param sysRoleDTO
+     * @param roleDTO
      * @return com.lvcoding.util.Res
      */
     @PreAuthorize("@pm.hasPermission('sys:permission:update')")
     @PutMapping("permission")
-    public Res updatePermission(@RequestBody SysRoleDTO sysRoleDTO){
-        return Res.success(this.sysRoleService.saveRoleMenu(sysRoleDTO));
+    public Res updatePermission(@RequestBody RoleDTO roleDTO){
+        return Res.success(this.sysRoleService.saveRoleMenu(roleDTO));
     }
 
 }

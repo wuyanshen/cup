@@ -1,6 +1,6 @@
 package com.lvcoding.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysMenu;
 import com.lvcoding.dao.SysMenuDao;
@@ -10,7 +10,6 @@ import com.lvcoding.util.TreeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,57 +19,8 @@ import java.util.stream.Collectors;
  * @author makejava
  * @since 2020-03-24 01:24:05
  */
-@Service("sysMenuService")
+@Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> implements SysMenuService {
-    @Resource
-    private SysMenuDao sysMenuDao;
-
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    @Override
-    public SysMenu queryById(Integer id) {
-        return this.sysMenuDao.queryById(id);
-    }
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<SysMenu> queryAllByLimit(int offset, int limit) {
-        return this.sysMenuDao.queryAllByLimit(offset, limit);
-    }
-
-    /**
-     * 新增数据
-     *
-     * @param sysMenu 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public SysMenu insert(SysMenu sysMenu) {
-        this.sysMenuDao.insert(sysMenu);
-        return sysMenu;
-    }
-
-    /**
-     * 修改数据
-     *
-     * @param sysMenu 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public SysMenu update(SysMenu sysMenu) {
-        this.sysMenuDao.update(sysMenu);
-        return this.queryById(sysMenu.getId());
-    }
 
     /**
      * 通过主键删除数据
@@ -80,8 +30,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      */
     @Override
     public boolean deleteById(Integer id) {
-        boolean flag1 = this.sysMenuDao.deleteMenuRoleById(id) > 0?true:false;
-        boolean flag2 = this.sysMenuDao.deleteById(id) > 0?true:false;
+        boolean flag1 = this.baseMapper.deleteMenuRoleById(id) > 0?true:false;
+        boolean flag2 = this.baseMapper.deleteById(id) > 0?true:false;
         return flag1&&flag2;
     }
 
@@ -93,7 +43,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      */
     @Override
     public List<MenuTree> findMenuByRoleIds(List<Integer> roleIds) {
-        List<SysMenu> menuList = sysMenuDao.findMenuByRoleIds(roleIds);
+        List<SysMenu> menuList = baseMapper.findMenuByRoleIds(roleIds);
         List<MenuTree> menuTrees = menuList.stream().map(menu -> {
             MenuTree menuTree = new MenuTree();
             BeanUtils.copyProperties(menu, menuTree);
@@ -122,7 +72,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
      */
     @Override
     public List<MenuTree> findAllMenuTree() {
-        List<SysMenu> sysMenus = this.baseMapper.queryAll(new SysMenu());
+        List<SysMenu> sysMenus = this.baseMapper.selectList(new QueryWrapper<>());
         List<MenuTree> collect = sysMenus.stream().map(sysMenu -> {
             MenuTree menuTree = new MenuTree();
             BeanUtils.copyProperties(sysMenu, menuTree);

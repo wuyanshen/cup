@@ -1,11 +1,9 @@
 package com.lvcoding.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvcoding.entity.SysUser;
-import com.lvcoding.entity.dto.SysUserDTO;
-import com.lvcoding.entity.vo.SysUserVO;
+import com.lvcoding.entity.dto.UserDTO;
+import com.lvcoding.entity.vo.UserVO;
 
 import java.util.List;
 
@@ -17,58 +15,14 @@ import java.util.List;
  */
 public interface SysUserService extends IService<SysUser> {
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    SysUser queryById(Integer id);
-
 
     /**
-     * 新增数据
-     *
-     * @param sysUser 实例对象
-     * @return 实例对象
-     */
-    SysUser insert(SysUser sysUser);
-
-    /**
-     * 修改数据
-     *
-     * @param sysUser 实例对象
-     * @return 实例对象
-     */
-    SysUser update(SysUser sysUser);
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
-
-
-    /**
-     * 查询所有用户
+     * 更新密码
      *
      * @param sysUser
-     * @return Res
+     * @return boolean
      */
-    List<SysUser> findAll(SysUser sysUser);
-
-    /**
-     * 分页查询用户信息
-     *
-     * @param page
-     * @param sysUser
-     * @return com.longyi.util.Res
-     */
-    IPage<SysUser> selectUserPage(Page<SysUser> page, SysUser sysUser);
-
-    boolean updatePwd(SysUserVO sysUser);
+    boolean updatePwd(UserVO sysUser);
 
     /**
      * 通过用户id查询角色id集
@@ -78,7 +32,19 @@ public interface SysUserService extends IService<SysUser> {
      */
     List<Integer> getRoleIdsByUserId(Integer id);
 
-    boolean updateUser(SysUserDTO sysUserDTO);
+    /**
+     * 更新用户
+     *
+     * @param userDTO
+     * @return boolean
+     */
+    boolean updateUser(UserDTO userDTO);
 
-    boolean saveUser(SysUserDTO sysUserDTO);
+    /**
+     * 保存用户
+     *
+     * @param userDTO
+     * @return boolean
+     */
+    boolean saveUser(UserDTO userDTO);
 }

@@ -128,6 +128,8 @@
             (#{roleId},#{menuId})
         </foreach>
     </insert>
+
+
     <delete id="deleteRoleMenu">
         delete from sys_role_menu where role_id = #{roleId}
     </delete>

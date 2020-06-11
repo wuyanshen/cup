@@ -1,7 +1,5 @@
 package com.lvcoding.entity.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +13,7 @@ import java.util.List;
  * @since 2020-03-24 01:24:31
  */
 @Data
-public class SysRoleDTO implements Serializable {
+public class RoleDTO implements Serializable {
     private static final long serialVersionUID = -91881003056749924L;
     /**
      * 主键id
