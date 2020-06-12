@@ -60,9 +60,20 @@ export default {
             this.UPDATE_ROUTER_VIEW(true)
             
             let nextUrl = this.maintabs[this.maintabs.length-1].url
-            this.$router.push(nextUrl).catch(err => {err})
             console.log('url',url)
             console.log('newxUrl',nextUrl)
+            //如果删除后显示的标签时外部链接标签
+            if(nextUrl.indexOf('http')!=-1 || nextUrl.indexOf('https')!=-1){
+                this.UPDATE_IFRAME_STYLE({visibility: 'visible', height: '100%'})
+                this.UPDATE_IFRAME_URL(nextUrl)
+                this.UPDATE_ROUTER_VIEW(false)
+                this.removeTab(url)
+                
+            //如果删除后显示的标签时系统内标签
+            }else{
+                this.removeTab(url)
+                this.$router.push(nextUrl).catch(err => {err})
+            }
                 
         //如果删除的是系统内标签
         }else{
