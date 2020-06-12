@@ -79,26 +79,28 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_menu` VALUES (1, 0, '0', '系统管理', '/', NULL, 0, 1, 'el-icon-setting', NULL, '0', NULL, 1, 1, '2020-03-24 00:25:57', '2020-04-13 17:40:14', 0);
-INSERT INTO `sys_menu` VALUES (2, 1, '1', '用户管理', '/users', '', 1, 2, 'el-icon-user', NULL, '0', NULL, 1, 1, '2020-03-24 00:41:33', '2020-06-10 19:02:04', 0);
-INSERT INTO `sys_menu` VALUES (3, 1, '1', '日志管理', '/logs', '', 1, 2, 'el-icon-tickets', NULL, '0', NULL, 1, 2, '2020-03-24 00:42:09', '2020-04-13 17:45:20', 0);
-INSERT INTO `sys_menu` VALUES (7, 2, '1,2', '用户查询', '', 'sys:user:view', 1, NULL, NULL, NULL, '1', NULL, 1, NULL, '2020-03-24 16:24:46', '2020-04-12 19:34:02', 0);
-INSERT INTO `sys_menu` VALUES (8, 2, '1,2', '用户新增', '', 'sys:user:add', 1, 2, NULL, NULL, '1', NULL, 1, NULL, '2020-03-28 01:58:00', '2020-04-12 19:34:03', 0);
-INSERT INTO `sys_menu` VALUES (9, 1, '1', '菜单管理', '/menus/tree', NULL, 1, 2, 'el-icon-menu', NULL, '0', NULL, 1, 5, '2020-03-30 17:27:06', '2020-04-13 17:44:24', 0);
-INSERT INTO `sys_menu` VALUES (14, 2, NULL, '更新用户', '', 'sys:user:update', 1, 2, '', NULL, '1', NULL, 1, NULL, NULL, '2020-06-08 17:47:36', NULL);
-INSERT INTO `sys_menu` VALUES (16, 9, NULL, '菜单查询', NULL, 'sys:menu:view', 1, 2, NULL, NULL, '1', NULL, 1, NULL, '2020-06-08 16:50:32', '2020-06-08 16:50:32', 0);
-INSERT INTO `sys_menu` VALUES (18, 9, NULL, '菜单新增', NULL, 'sys:menu:add', 1, 2, NULL, NULL, '1', NULL, 1, NULL, '2020-06-08 16:56:22', '2020-06-08 16:56:22', 0);
-INSERT INTO `sys_menu` VALUES (21, 9, NULL, '菜单修改', '', 'sys:menu:update', 1, 2, '', NULL, '1', NULL, 1, NULL, NULL, '2020-06-08 17:37:05', NULL);
-INSERT INTO `sys_menu` VALUES (22, 9, NULL, '菜单删除', '', 'sys:menu:delete', 1, 2, '', NULL, '1', NULL, 1, NULL, NULL, '2020-06-08 18:03:20', NULL);
-INSERT INTO `sys_menu` VALUES (29, 1, NULL, '角色管理', '/roles', '', 1, NULL, 'el-icon-s-custom', NULL, '0', NULL, NULL, NULL, NULL, '2020-06-10 09:44:32', NULL);
-INSERT INTO `sys_menu` VALUES (30, 29, NULL, '角色查询', '', 'sys:role:view', 1, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:33', NULL);
-INSERT INTO `sys_menu` VALUES (31, 29, NULL, '角色修改', '', 'sys:role:update', 1, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:34', NULL);
-INSERT INTO `sys_menu` VALUES (32, 29, NULL, '角色删除', '', 'sys:role:delete', 1, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:35', NULL);
-INSERT INTO `sys_menu` VALUES (33, 29, NULL, '角色新增', '', 'sys:role:add', 1, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:36', NULL);
-INSERT INTO `sys_menu` VALUES (34, 2, NULL, '用户删除', '', 'sys:user:delete', NULL, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_menu` VALUES (35, 29, NULL, '分配权限', '', 'sys:permission:update', NULL, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_menu` VALUES (36, 3, NULL, '日志查询', '', 'sys:log:view', NULL, NULL, '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_menu` VALUES (37, 0, NULL, '测试菜单', 'http://www.baidu.com', '', NULL, NULL, 'el-icon-eleme', NULL, '0', NULL, NULL, NULL, NULL, '2020-06-11 15:11:55', NULL);
+BEGIN;
+INSERT INTO `sys_menu` VALUES (1, 0, '0', '系统管理', '/', NULL, 'el-icon-setting', NULL, '0', NULL, 1, 1, '2020-03-24 00:25:57', '2020-04-13 17:40:14', 0);
+INSERT INTO `sys_menu` VALUES (2, 1, '1', '用户管理', '/users', '', 'el-icon-user', NULL, '0', NULL, 1, 1, '2020-03-24 00:41:33', '2020-06-10 19:02:04', 0);
+INSERT INTO `sys_menu` VALUES (3, 1, '1', '日志管理', '/logs', '', 'el-icon-tickets', NULL, '0', NULL, 1, 2, '2020-03-24 00:42:09', '2020-04-13 17:45:20', 0);
+INSERT INTO `sys_menu` VALUES (7, 2, '1,2', '用户查询', '', 'sys:user:view', NULL, NULL, '1', NULL, 1, NULL, '2020-03-24 16:24:46', '2020-06-12 11:18:57', 0);
+INSERT INTO `sys_menu` VALUES (8, 2, '1,2', '用户新增', '', 'sys:user:add', NULL, NULL, '1', NULL, 1, NULL, '2020-03-28 01:58:00', '2020-04-12 19:34:03', 0);
+INSERT INTO `sys_menu` VALUES (9, 1, '1', '菜单管理', '/menus/tree', NULL, 'el-icon-menu', NULL, '0', NULL, 1, 5, '2020-03-30 17:27:06', '2020-04-13 17:44:24', 0);
+INSERT INTO `sys_menu` VALUES (14, 2, NULL, '更新用户', '', 'sys:user:update', '', NULL, '1', NULL, 1, NULL, NULL, '2020-06-08 17:47:36', NULL);
+INSERT INTO `sys_menu` VALUES (16, 9, NULL, '菜单查询', NULL, 'sys:menu:view', NULL, NULL, '1', NULL, 1, NULL, '2020-06-08 16:50:32', '2020-06-08 16:50:32', 0);
+INSERT INTO `sys_menu` VALUES (18, 9, NULL, '菜单新增', NULL, 'sys:menu:add', NULL, NULL, '1', NULL, 1, NULL, '2020-06-08 16:56:22', '2020-06-08 16:56:22', 0);
+INSERT INTO `sys_menu` VALUES (21, 9, NULL, '菜单修改', '', 'sys:menu:update', '', NULL, '1', NULL, 1, NULL, NULL, '2020-06-08 17:37:05', NULL);
+INSERT INTO `sys_menu` VALUES (22, 9, NULL, '菜单删除', '', 'sys:menu:delete', '', NULL, '1', NULL, 1, NULL, NULL, '2020-06-08 18:03:20', NULL);
+INSERT INTO `sys_menu` VALUES (29, 1, NULL, '角色管理', '/roles', '', 'el-icon-s-custom', NULL, '0', NULL, NULL, NULL, NULL, '2020-06-10 09:44:32', NULL);
+INSERT INTO `sys_menu` VALUES (30, 29, NULL, '角色查询', '', 'sys:role:view', '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:33', NULL);
+INSERT INTO `sys_menu` VALUES (31, 29, NULL, '角色修改', '', 'sys:role:update', '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:34', NULL);
+INSERT INTO `sys_menu` VALUES (32, 29, NULL, '角色删除', '', 'sys:role:delete', '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:35', NULL);
+INSERT INTO `sys_menu` VALUES (33, 29, NULL, '角色新增', '', 'sys:role:add', '', NULL, '1', NULL, NULL, NULL, NULL, '2020-06-10 09:44:36', NULL);
+INSERT INTO `sys_menu` VALUES (34, 2, NULL, '用户删除', '', 'sys:user:delete', '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (35, 29, NULL, '分配权限', '', 'sys:permission:update', '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (36, 3, NULL, '日志查询', '', 'sys:log:view', '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (37, 0, NULL, '测试菜单', 'http://www.baidu.com', '', 'el-icon-eleme', NULL, '0', NULL, NULL, NULL, NULL, '2020-06-11 17:36:36', NULL);
+INSERT INTO `sys_menu` VALUES (38, 0, NULL, '企鹅网', 'http://qq.com', '', '', NULL, '0', NULL, 1, NULL, '2020-06-12 11:19:50', '2020-06-12 11:19:50', 0);
 COMMIT;
 
 -- ----------------------------
