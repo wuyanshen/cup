@@ -1,28 +1,28 @@
 const menuRouter = [{
                 path: 'about',
-                name: 'About',
+                name: 'about',
                 component: () => import('../views/About.vue')
             }, {
                 path: 'welcome',
-                name: 'Welcome',
+                name: 'welcome',
                 component: () => import('../views/Welcome.vue')
             }, {
-                path: 'users**',
-                name: 'User',
+                path: 'user',
+                name: 'user',
                 component: () => import('../views/user/User.vue')
             }, {
-                path: 'menus**',
-                name: 'Menu',
+                path: 'menu',
+                name: 'menu',
                 component: () => import('../views/menu/Menu.vue')
             },
             {
-                path: 'roles**',
-                name: 'Role',
+                path: 'role',
+                name: 'role',
                 component: () => import('../views/role/Role.vue')
             },
             {
-                path: 'logs**',
-                name: 'Log',
+                path: 'log',
+                name: 'log',
                 component: () => import('../views/log/Log.vue')
             },
             {

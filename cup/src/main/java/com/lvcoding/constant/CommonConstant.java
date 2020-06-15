@@ -13,7 +13,7 @@ public interface CommonConstant {
 
     String REFRESH_TOKEN_URI = "/token/refresh";
 
-    String LOGIN_URI = "/login";
+    String LOGIN_URI = "/certification";
 
     String POST = "post";
 

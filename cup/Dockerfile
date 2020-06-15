@@ -12,4 +12,4 @@ ADD ./target/cup-1.0.jar ./
 
 EXPOSE 3001
 
-java -jar -Xms128m -Xmx256m cup-1.0.jar
+CMD java -jar -Xms128m -Xmx256m cup-1.0.jar

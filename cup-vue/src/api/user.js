@@ -8,7 +8,7 @@ const userInfo = () => {
 //登录方法
 const login = params => {
     return axios.request({
-        url: '/login',
+        url: '/certification',
         method: 'post',
         data: params
     })

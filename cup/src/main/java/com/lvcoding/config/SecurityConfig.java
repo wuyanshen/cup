@@ -52,9 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private TokenFilter tokenFilter;
 
-    @Autowired
-    private DataSource dataSource;
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 设置拦截忽略url - 会直接过滤该url - 将不会经过Spring Security过滤器链
@@ -73,21 +70,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(commonLogoutSuccessHandler)
                 .deleteCookies("JSESSIONID")
                 .and()
-                .rememberMe()
-                .rememberMeCookieName("remember-me-cookie")
-                .rememberMeParameter("remember-me-new")
-                .tokenValiditySeconds(2 * 24 * 60 * 60)
-                .tokenRepository(persistentTokenRepository())
-                .and()
                 .formLogin()
-                .loginProcessingUrl("/login")
-                .loginPage("/login.html")
-                .successForwardUrl("/index.html")
+                .loginProcessingUrl("/certification")
                 .successHandler(commonLoginSuccessHandler)
                 .failureHandler(commonLoginFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/token/check", "/login", "/login.html","/websocket/**").permitAll()
+                .antMatchers("/token/check", "/certification","/websocket/**").permitAll()
 //                    .anyRequest().access("@commonHasPermission.hasPermision(request,authentication)")
                 .and()
                 .exceptionHandling()
@@ -96,17 +85,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-//        http.sessionManagement()
-//                //默认的session生成策略
-//                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//                .sessionFixation().migrateSession()
-//                //指定最大登录数
-//                .maximumSessions(1)
-//                // 当达到最大值时，旧用户被踢出后的操作
-//                .expiredSessionStrategy(commonExpiredSessionStrategy)
-//                // 当达到最大值时，是否保留已经登录的用户，为true，新用户无法登录；为 false，旧用户被踢出
-//                .maxSessionsPreventsLogin(false);
     }
 
     @Override
@@ -124,19 +102,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * remember持久化
-     *
-     * @param
-     * @return PersistentTokenRepository
-     */
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        return tokenRepository;
     }
 
 }
