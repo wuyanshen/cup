@@ -24,7 +24,8 @@ http://localhost:9999
 npm run build
 ```
 
-
+## cup线上演示环境
+[cup线上环境](http://49.233.209.183/)
 
 
 
