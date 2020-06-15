@@ -5,7 +5,7 @@
         <!-- 中间区域 -->
         <div class="middle_div">
             <el-tooltip content="打赏" placement="top">
-                <a @click="open"><i class="el-icon-star-off"></i></a>
+                <a @click="open" href="#"><i class="el-icon-star-off"></i></a>
             </el-tooltip>
             <el-tooltip content="博客" placement="top">
                 <a href="http://www.lvcoding.com" target="_blank"><i class="el-icon-reading"></i></a>
