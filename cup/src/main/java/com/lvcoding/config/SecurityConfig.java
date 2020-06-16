@@ -2,6 +2,7 @@ package com.lvcoding.config;
 
 import com.lvcoding.security.*;
 import com.lvcoding.session.CommonExpiredSessionStrategy;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,31 +27,23 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CommonExpiredSessionStrategy commonExpiredSessionStrategy;
+    private final CommonLoginSuccessHandler commonLoginSuccessHandler;
 
-    @Autowired
-    private CommonLoginSuccessHandler commonLoginSuccessHandler;
+    private final CommonLoginFailureHandler commonLoginFailureHandler;
 
-    @Autowired
-    private CommonLoginFailureHandler commonLoginFailureHandler;
+    private final CommonUserDetailServiceImpl commonUserDetailServiceImpl;
 
-    @Autowired
-    private CommonUserDetailServiceImpl commonUserDetailServiceImpl;
+    private final CommonAccessDeniedHandler commonAccessDeniedHandler;
 
-    @Autowired
-    private CommonAccessDeniedHandler commonAccessDeniedHandler;
+    private final CommonLogoutSuccessHandler commonLogoutSuccessHandler;
 
-    @Autowired
-    private CommonLogoutSuccessHandler commonLogoutSuccessHandler;
+    private final CommonAuthenticationEntryPoint commonAuthenticationEntryPoint;
 
-    @Autowired
-    private CommonAuthenticationEntryPoint commonAuthenticationEntryPoint;
+    private final TokenFilter tokenFilter;
 
-    @Autowired
-    private TokenFilter tokenFilter;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -77,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/token/check", "/certification","/websocket/**").permitAll()
-//                    .anyRequest().access("@commonHasPermission.hasPermision(request,authentication)")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(commonAccessDeniedHandler)

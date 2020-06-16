@@ -2,12 +2,13 @@
 
 ## 技术栈
 
-基于RBAC权限模型设计，前后端分离
+基于RBAC权限模型设计，JWT前后端分离
 
 - Spring Boot2.0
 - Spring Security
 - Mybatis-Plus 2.3.0
 - Vue
+- jjwt
 
 |技术|版本|
 |:---:|:---:|
@@ -16,6 +17,11 @@
 |Mybatis-Plus|2.3.0|
 |Vue|2.6.11|
 |Vue-cli|4.2.0|
+|jjwt|0.10.5|
+
+
+
+
 
 ## 目录结构说明
 
@@ -25,6 +31,10 @@ cup				cup后端
  |--db   	数据库文件
  |--src  	项目源文件
 ```
+
+
+
+
 
 ## 快速开始
 
@@ -52,8 +62,22 @@ http://localhost:9999
 
 
 
+## 运行效果
+
+![用户管理](./images/cup_user.png)
+
+![角色管理](./images/cup_role.png)
+
+![菜单管理](./images/cup_menu.png)
+
+![日志管理](./images/cup_log.png)
+
+
+
 ## cup线上演示环境
 [cup线上环境](http://49.233.209.183/)
+
+
 
 
 
