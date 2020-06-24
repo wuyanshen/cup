@@ -9,6 +9,7 @@ import menu from './module/menu'
 import tabs from './module/tabs'
 import log from './module/log'
 import role from './module/role'
+import org from './module/org'
 import { saveInLocal } from './plugin/saveInLocal'
 
 Vue.use(Vuex)
@@ -25,6 +26,7 @@ export default new Vuex.Store({
         tabs,
 		log,
         role,
+        org,
     },
     // plugins: [saveInLocal]
 })

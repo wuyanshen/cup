@@ -61,7 +61,20 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
         SysMenu sysMenu = new SysMenu();
         BeanUtils.copyProperties(menuTree,sysMenu);
         sysMenu.setMenuPid(menuTree.getParentId());
-        return this.baseMapper.insert(sysMenu) == 1?true:false;
+        //新增菜单默认有效
+        sysMenu.setStatus(1);
+        //设置父id集合
+        this.setMenuPids(sysMenu);
+        return this.baseMapper.insert(sysMenu)>0;
+    }
+
+    private void setMenuPids(SysMenu child){
+        List<SysMenu> sysMenus = this.baseMapper.selectList(new QueryWrapper<>());
+        for (SysMenu sysMenu:sysMenus){
+            if (sysMenu.getId().equals(child.getMenuPid())){
+                child.setMenuPids(sysMenu.getMenuPids()+","+child.getMenuPid());
+            }
+        }
     }
 
     /**

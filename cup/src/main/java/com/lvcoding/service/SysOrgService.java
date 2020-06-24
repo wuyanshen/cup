@@ -3,6 +3,9 @@ package com.lvcoding.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvcoding.entity.SysOrg;
+import com.lvcoding.entity.dto.OrgTree;
+
+import java.util.List;
 
 /**
  * 组织机构表(SysOrg)表服务接口
@@ -12,4 +15,7 @@ import com.lvcoding.entity.SysOrg;
  */
 public interface SysOrgService extends IService<SysOrg> {
 
+    List<OrgTree> orgTree();
+
+    Boolean saveOrg(SysOrg sysOrg);
 }
