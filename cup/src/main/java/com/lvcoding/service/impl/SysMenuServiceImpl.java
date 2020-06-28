@@ -9,6 +9,7 @@ import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.TreeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,7 +73,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> impleme
         List<SysMenu> sysMenus = this.baseMapper.selectList(new QueryWrapper<>());
         for (SysMenu sysMenu:sysMenus){
             if (sysMenu.getId().equals(child.getMenuPid())){
-                child.setMenuPids(sysMenu.getMenuPids()+","+child.getMenuPid());
+                if(ObjectUtils.isEmpty(sysMenu.getMenuPids()) || sysMenu.getMenuPids().equals("0")){
+                    child.setMenuPids(sysMenu.getId()+"");
+                }else{
+                    child.setMenuPids(sysMenu.getMenuPids()+","+child.getMenuPid());
+                }
             }
         }
     }

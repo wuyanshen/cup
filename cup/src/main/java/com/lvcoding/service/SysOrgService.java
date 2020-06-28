@@ -17,5 +17,7 @@ public interface SysOrgService extends IService<SysOrg> {
 
     List<OrgTree> orgTree();
 
-    Boolean saveOrg(SysOrg sysOrg);
+    Boolean saveOrg(OrgTree orgTree);
+
+    Boolean updateOrgById(OrgTree orgTree);
 }

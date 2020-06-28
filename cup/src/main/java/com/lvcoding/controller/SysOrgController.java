@@ -3,6 +3,7 @@ package com.lvcoding.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysOrg;
+import com.lvcoding.entity.dto.OrgTree;
 import com.lvcoding.service.SysOrgService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
@@ -43,24 +44,24 @@ public class SysOrgController {
     /**
      * 新增机构
      *
-     * @param sysOrg
+     * @param orgTree
      * @return com.lvcoding.util.Res
      */
     @PostMapping
-    public Res add(@RequestBody SysOrg sysOrg){
-        return Res.success(sysOrgService.saveOrg(sysOrg));
+    public Res add(@RequestBody OrgTree orgTree){
+        return Res.success(sysOrgService.saveOrg(orgTree));
     }
 
 
     /**
      * 更新机构
      *
-     * @param sysOrg
+     * @param orgTree
      * @return com.lvcoding.util.Res
      */
     @PutMapping
-    public Res update(@RequestBody SysOrg sysOrg){
-        return Res.success(sysOrgService.updateById(sysOrg));
+    public Res update(@RequestBody OrgTree orgTree){
+        return Res.success(sysOrgService.updateOrgById(orgTree));
     }
 
     /**
