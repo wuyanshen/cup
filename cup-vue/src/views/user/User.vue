@@ -397,7 +397,7 @@ export default {
     },
 	//条件查询
     handleSearch() {
-      this.queryPage(this.queryInfo.orgId,this.queryInfo.username,this.page.pageSize,'')
+      this.queryPage('',this.queryInfo.username,this.page.pageSize,'')
     },
     
     //---------- 工具方法 -----------
