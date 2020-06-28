@@ -72,6 +72,8 @@ http://localhost:9999
 
 ![日志管理](./images/cup_log.png)
 
+![组织机构管理](./images/cup_org.png)
+
 
 
 ## cup线上演示环境

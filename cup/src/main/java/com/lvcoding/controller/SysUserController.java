@@ -65,6 +65,9 @@ public class SysUserController {
         if (!StringUtils.isEmpty(sysUser.getUsername())) {
             wrapper.lambda().like(SysUser::getUsername, sysUser.getUsername());
         }
+        if (!StringUtils.isEmpty(sysUser.getOrgId())) {
+            wrapper.lambda().eq(SysUser::getOrgId, sysUser.getOrgId());
+        }
         return Res.success(this.sysUserService.page(page, wrapper));
     }
 
