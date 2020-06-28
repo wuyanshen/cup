@@ -12,6 +12,7 @@ const menuTreePage = () => {
 
 //新增菜单
 const addMenu = params => {
+    console.log(params)
     return axios.post('/menus',params)
 }
 //修改菜单
