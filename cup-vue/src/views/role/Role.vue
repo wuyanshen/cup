@@ -61,7 +61,7 @@
             <el-form-item label="角色名称">
               <el-input v-model="roleEditForm.roleName"></el-input>
             </el-form-item>
-            <el-form-item label="角色英文名称">
+            <el-form-item label="英文名称">
               <el-input v-model="roleEditForm.roleCode"></el-input>
             </el-form-item>
             <el-form-item label="是否启用">
@@ -314,5 +314,8 @@
     }
     .el-row{
         margin-bottom: 10px;
+    }
+    .el-switch{
+        margin-top: 6px;
     }
 </style>

@@ -196,4 +196,7 @@
     .org_table{
         margin: 10px 0;
     }
+    .el-switch{
+        margin-top: 3.3px;
+    }
 </style>

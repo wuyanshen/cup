@@ -3,6 +3,7 @@ import axios from 'axios'
 import { baseURL } from '@/config'
 import { getToken } from '@/lib/util'
 import { Message } from 'element-ui'
+import { showLoading,hideLoading } from '@/lib/loading'
 import qs from 'qs'
 
 
@@ -17,9 +18,9 @@ import qs from 'qs'
 
 class HttpRequest {
 
-    constructor(baseUrl = baseURL) {
+    constructor(baseUrl=baseURL) {
         // this.baseUrl = baseUrl || baseURL //这个相当于参数中的baseUrl=baseURL
-        this.baseUrl = baseURL
+        this.baseUrl = baseUrl
         //队列
         this.queue = {}
     }
@@ -29,7 +30,7 @@ class HttpRequest {
         const config = {
             //跨域请求是否允许携带cookie
             withCredentials: true,
-            baseUrl: this.baseUrl,
+            baseURL: this.baseUrl,
             //将post请求参数转成get参数形式 例如：/user?id=1&age=22&name=jack的形式
             transformRequest: data => qs.stringify(data),
             //设置请求超时
@@ -43,17 +44,23 @@ class HttpRequest {
     }
 
     //拦截器
-    interceptors(instance) {
+    interceptors(instance, url) {
+        
         //请求拦截器
         instance.interceptors.request.use(
+        
             config => {
                 //添加全局loading...
                 //Spin->iView组件
+                if(!Object.keys(this.queue).length)showLoading()
+                
+                //在所有请求头设置token
                 let token = getToken()
                 token && (config.headers['token'] = token)
                 return config
             },
             error => {
+                // hideLoading()
                 return Promise.reject(error)
             }
         )
@@ -61,6 +68,8 @@ class HttpRequest {
         //响应拦截器
         instance.interceptors.response.use(
             response => {
+                delete this.queue[url]
+                hideLoading()
                 let { data: { code } } = response
 
                 switch (code) {
@@ -84,10 +93,14 @@ class HttpRequest {
                         Message.error('您的账户已被禁用，请联系管理员哦~')
                         break;
                 }
+                setTimeout(() => {
+                    
+                }, 5000);
                 return response.data
             },
             error => {
-
+                delete this.queue[url]
+                hideLoading()
                 let { response } = error
                 //服务器有返回结果
                 if (response) {
@@ -141,7 +154,7 @@ class HttpRequest {
         const instance = axios.create()
         //es6 对配置进行合并,把两个对象进行合并,相同的key合并时默认取后面的对象覆盖前面的对象
         options = Object.assign(this.getInsideConfig(), options)
-        this.interceptors(instance)
+        this.interceptors(instance, options.url)
         return instance(options)
     }
 
@@ -159,7 +172,7 @@ class HttpRequest {
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)
         this.interceptors(instance)
-        return instance(options)
+        return instance(options, options.url)
     }
 
     //封装put方法
@@ -175,7 +188,7 @@ class HttpRequest {
         }
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)
-        this.interceptors(instance)
+        this.interceptors(instance, options.url)
         return instance(options)
     }
 
@@ -188,13 +201,13 @@ class HttpRequest {
         }
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)
-        this.interceptors(instance)
+        this.interceptors(instance, options.url)
+        console.log(this.queue)
         return instance(options)
     }
 
     //封装delete方法
     delete(url, data) {
-        console.log(url)
         let options = {
             url,
             method: 'delete',
@@ -202,7 +215,7 @@ class HttpRequest {
         }
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)
-        this.interceptors(instance)
+        this.interceptors(instance, options.url)
         return instance(options)
     }
 
