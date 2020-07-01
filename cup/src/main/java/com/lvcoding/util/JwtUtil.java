@@ -3,7 +3,6 @@ package com.lvcoding.util;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.experimental.UtilityClass;
-import org.springframework.security.core.Authentication;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
@@ -20,29 +19,15 @@ import java.util.UUID;
 @UtilityClass
 public class JwtUtil {
 
-    /**
-     * key（按照签名算法的字节长度设置key）
-     */
-    private final static String SECRET_KEY = "0123456789_0123456789_0123456789";
-
-    /**
-     * 过期时间（毫秒单位）
-     * 默认设置1小时
-     */
-    private final static long TOKEN_EXPIRE_MILLIS = 1000 * 60 * 60;
-
 
     /**
      * 生成token
      *
-     * @param authentication
+     * @param secret
      * @return java.lang.String
      */
-    public String createToken(Authentication authentication) {
-        Map<String, Object> tokenMap = new HashMap(2);
-        tokenMap.put("username", authentication.getName());
-        tokenMap.put("created", new Date());
-        return generateToken(tokenMap);
+    public String createToken(Map<String, Object> claimMap,String secret) {
+        return generateToken(claimMap, secret);
     }
 
     /**
@@ -51,17 +36,17 @@ public class JwtUtil {
      * @param claimMap
      * @return java.lang.String
      */
-    public String generateToken(Map<String, Object> claimMap) {
+    public String generateToken(Map<String, Object> claimMap, String secret) {
         return Jwts.builder()
-                .setId(UUID.randomUUID().toString())
+//                .setId(UUID.randomUUID().toString())
                 // 设置签发时间
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+//                .setIssuedAt(new Date(System.currentTimeMillis()))
                 // 设置过期时间
-                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRE_MILLIS))
+//                .setExpiration(new Date(System.currentTimeMillis() + expireTime))
                 //设置主体内容
                 .addClaims(claimMap)
                 //设置签名算法
-                .signWith(generateKey())
+                .signWith(generateKey(secret))
                 .compact();
     }
 
@@ -71,9 +56,9 @@ public class JwtUtil {
      * @param token
      * @return java.lang.Boolean
      */
-    public Boolean validateToken(String token) {
+    public Boolean validateToken(String token, String secret) {
         try {
-            Jwts.parser().setSigningKey(generateKey()).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(generateKey(secret)).parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;
@@ -86,11 +71,11 @@ public class JwtUtil {
      * @param token
      * @return Map<Object>
      */
-    public Map<String, Object> parseToken(String token) {
+    public Map<String, Object> parseToken(String token, String secret) {
         // 得到DefaultJwtParser
         return Jwts.parser()
                 // 设置签名密钥
-                .setSigningKey(generateKey())
+                .setSigningKey(generateKey(secret))
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -101,22 +86,22 @@ public class JwtUtil {
      * @param
      * @return String
      */
-    public String refreshToken(String token){
-        Map<String,Object> claims = parseToken(token);
+    public String refreshToken(String token, String secret){
+        Map<String,Object> claims = parseToken(token, secret);
         Map<String,Object> newClaims = new HashMap<>();
         newClaims.put("username",claims.get("username"));
         newClaims.put("created", new Date());
 
         return Jwts.builder()
-                .setId(UUID.randomUUID().toString())
+//                .setId(UUID.randomUUID().toString())
                 // 设置签发时间
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+//                .setIssuedAt(new Date(System.currentTimeMillis()))
                 // 设置过期时间
-                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRE_MILLIS))
+//                .setExpiration(new Date(System.currentTimeMillis() + expireTime))
                 //设置主体内容
                 .addClaims(newClaims)
                 //设置签名算法
-                .signWith(generateKey())
+                .signWith(generateKey(secret))
                 .compact();
     }
 
@@ -125,8 +110,8 @@ public class JwtUtil {
      *
      * @return
      */
-    public Key generateKey() {
-        return new SecretKeySpec(SECRET_KEY.getBytes(), SignatureAlgorithm.HS256.getJcaName());
+    public Key generateKey(String secret) {
+        return new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS256.getJcaName());
     }
 
 }

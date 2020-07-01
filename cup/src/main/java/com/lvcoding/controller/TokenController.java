@@ -17,22 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TokenController {
 
-    @GetMapping("check")
-    public Res checkToken(@RequestHeader("token") String token) {
-        if (StringUtils.isEmpty(token)) {
-            return Res.fail("token不能为空");
-        }
-        if (JwtUtil.validateToken(token)) {
-            return Res.success("token有效", true);
-        }
-        return Res.fail("token无效", false);
-    }
-
-    @GetMapping("refresh")
-    public Res refreshToken(@RequestHeader("token") String token) {
-        if (StringUtils.isEmpty(token)) {
-            return Res.fail("token不能为空");
-        }
-        return Res.success("刷新token成功", JwtUtil.refreshToken(token));
-    }
+//    @GetMapping("refresh")
+//    public Res refreshToken(@RequestHeader("token") String token) {
+//        if (StringUtils.isEmpty(token)) {
+//            return Res.fail("token不能为空");
+//        }
+//        return Res.success("刷新token成功", JwtUtil.refreshToken(token));
+//    }
 }

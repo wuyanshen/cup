@@ -33,6 +33,15 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Value("${spring.security.loginType}")
     private String loginType;
 
+    /**
+     * token秘钥
+     */
+    @Value("${token.secret}")
+    private String secret;
+
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String username = authentication.getName();
@@ -40,7 +49,8 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         if (loginType.equalsIgnoreCase(CommonConstant.LOGIN_TYPE_JSON)) {
             //生成token
-            String token = JwtUtil.createToken(authentication);
+            CommonUser commonUser = (CommonUser) authentication.getPrincipal();
+            String token = tokenService.createToken(commonUser);
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(Res.success(0, "登录成功", token)));
         } else {

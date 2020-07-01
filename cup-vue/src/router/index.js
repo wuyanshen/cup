@@ -60,7 +60,7 @@ router.beforeEach(async (to, from, next) => {
         //     next('/login')
         // })
         try {
-            await store.dispatch('user/checkAndRefreshToken');
+            // await store.dispatch('user/checkAndRefreshToken');
             if (to.path === '/login') next('/')
             else next()
         } catch (e) {

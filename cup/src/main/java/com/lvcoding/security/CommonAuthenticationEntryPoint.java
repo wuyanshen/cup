@@ -3,6 +3,7 @@ package com.lvcoding.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.util.Res;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ public class CommonAuthenticationEntryPoint implements AuthenticationEntryPoint 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(objectMapper.writeValueAsString(Res.fail(401, "您无权访问")));
+        int code = HttpStatus.UNAUTHORIZED.value();
+        response.getWriter().write(objectMapper.writeValueAsString(Res.fail(code, "您无权访问 "+ request.getRequestURI())));
     }
 }

@@ -55,12 +55,12 @@ class HttpRequest {
                 if(!Object.keys(this.queue).length)showLoading()
                 
                 //在所有请求头设置token
-                let token = getToken()
-                token && (config.headers['token'] = token)
+                let token = 'Bearer ' + getToken()
+                token && (config.headers['Authorization'] = token)
                 return config
             },
             error => {
-                // hideLoading()
+                hideLoading()
                 return Promise.reject(error)
             }
         )
@@ -93,9 +93,6 @@ class HttpRequest {
                         Message.error('您的账户已被禁用，请联系管理员哦~')
                         break;
                 }
-                setTimeout(() => {
-                    
-                }, 5000);
                 return response.data
             },
             error => {

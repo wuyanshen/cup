@@ -4,6 +4,7 @@ import com.lvcoding.entity.SysMenu;
 import com.lvcoding.entity.dto.MenuTree;
 import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
+import com.lvcoding.security.TokenService;
 import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,17 +29,19 @@ public class SysMenuController {
 
     private final SysMenuService sysMenuService;
 
+    private final TokenService tokenService;
+
 
     /**
      * 获取当前用户的菜单树
      *
-     * @param authentication
+     * @param request
      * @return Res
      */
     @GetMapping("tree")
-    public Res menuTree(Authentication authentication) {
-        CommonUser commonUser = (CommonUser) authentication.getPrincipal();
-        List<Integer> roleIds = commonUser.getSysRoles().stream().map(sysRole -> sysRole.getId()).collect(Collectors.toList());
+    public Res menuTree(HttpServletRequest request) {
+        CommonUser commonUser = tokenService.getCommonUser(request);
+        List<Integer> roleIds = commonUser.getRoles().stream().map(sysRole -> sysRole.getId()).collect(Collectors.toList());
         List<MenuTree> list = sysMenuService.findMenuByRoleIds(roleIds);
         return Res.success(list);
     }

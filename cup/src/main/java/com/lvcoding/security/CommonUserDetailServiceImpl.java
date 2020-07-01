@@ -15,7 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -59,7 +61,9 @@ public class CommonUserDetailServiceImpl implements UserDetailsService {
         //将可以访问的菜单和角色合并
         urls.addAll(roleCodes.stream().map(roleCode -> "ROLE_" + roleCode).collect(Collectors.toList()));
         String auths = urls.stream().collect(Collectors.joining(","));
+        Set<String> authorities = Arrays.stream(auths.split(",")).collect(Collectors.toSet());
 
-        return new CommonUser(sysUser.getUsername(), sysUser.getPassword(), sysUser.getOrgId(), sysUser.getId(), sysUser.isStatus(), true, true, true,roles, AuthorityUtils.commaSeparatedStringToAuthorityList(auths));
+//        return new CommonUser(sysUser.getUsername(), sysUser.getPassword(), sysUser.getOrgId(), sysUser.getId(), sysUser.isStatus(), true, true, true,roles, AuthorityUtils.commaSeparatedStringToAuthorityList(auths));
+        return new CommonUser(sysUser, authorities, roles);
     }
 }

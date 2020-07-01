@@ -16,7 +16,7 @@
                   placeholder="输入关键字进行过滤"
                   v-model="filterText">
                 </el-input>
-                
+
                 <el-tree
                   class="filter-tree"
                   :data="orgTreeData"
@@ -43,7 +43,7 @@
                     <el-button type="primary" icon="el-icon-search" size="mini" @click="handleSearch">查询</el-button>
                   </el-col>
                 </el-row>
-                
+
                 <!-- 表格区 -->
                 <el-table size="mini" :data="this.page.tableData" border stripe class="user_table" :header-cell-style="{background:'#F2F6FC'}">
                   <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
@@ -73,7 +73,7 @@
                     </template>
                   </el-table-column>
                 </el-table>
-                
+
                 <!-- 分页区 -->
                 <el-pagination
                   @size-change="handleSizeChange"
@@ -110,7 +110,7 @@
           <el-input v-model="userAddForm.email"></el-input>
         </el-form-item>
         <el-form-item label="所属组织机构">
-            <el-tree-select 
+            <el-tree-select
               :elTreeProps="elTreeProps"
               :elTreeData="orgTreeData"
               :defaultSelectedId="userAddForm.orgId"
@@ -161,7 +161,7 @@
           <el-input v-model="userEditForm.email"></el-input>
         </el-form-item>
         <el-form-item label="所属组织机构">
-            <el-tree-select 
+            <el-tree-select
               :elTreeProps="elTreeProps"
               :elTreeData="orgTreeData"
               :defaultSelectedId="userEditForm.orgId"
@@ -383,23 +383,23 @@ export default {
     },
     handleAddTreeSelected(value){
       this.userEditForm.orgId = value
-      this.$refs.userAddForm.validateField("orgId");
+      // this.$refs.userAddForm.validateField("orgId");
     },
     validateAddSelectTree(){
-      this.$refs.userAddForm.validateField("orgId");
+      // this.$refs.userAddForm.validateField("orgId");
     },
     handleEditTreeSelected(value){
       this.userEditForm.orgId = value
-      this.$refs.userEditForm.validateField("orgId");
+      // this.$refs.userEditForm.validateField("orgId");
     },
     validateEditSelectTree(){
-      this.$refs.userEditForm.validateField("orgId");
+      // this.$refs.userEditForm.validateField("orgId");
     },
 	//条件查询
     handleSearch() {
       this.queryPage('',this.queryInfo.username,this.page.pageSize,'')
     },
-    
+
     //---------- 工具方法 -----------
 	//封装分页参数
 	copyPageValue(res){
@@ -440,6 +440,6 @@ export default {
 }
 
 .el-switch {
-  margin-top: 10px;
+  margin-top: 4px;
 }
 </style>

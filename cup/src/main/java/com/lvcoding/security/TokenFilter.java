@@ -1,17 +1,22 @@
 package com.lvcoding.security;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
+import com.lvcoding.entity.SysUser;
 import com.lvcoding.util.DateUtil;
 import com.lvcoding.util.JwtUtil;
 import com.lvcoding.util.Res;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -31,11 +36,17 @@ import java.util.Map;
 @Slf4j
 public class TokenFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+//    @Autowired
+//    private ObjectMapper objectMapper;
+//
+//    @Autowired
+//    private CommonUserDetailServiceImpl commonUserDetailServiceImpl;
+//
+//    @Autowired
+//    private RedisTemplate redisTemplate;
 
     @Autowired
-    private CommonUserDetailServiceImpl commonUserDetailServiceImpl;
+    private TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -52,38 +63,44 @@ public class TokenFilter extends OncePerRequestFilter {
             //这里必须使用return，否则登录请求(/login)还继续会往下走
             return;
         }
+//
+//        response.setContentType("application/json;charset=utf-8");
 
-        response.setContentType("application/json;charset=utf-8");
 
-        //判断token是否为空
-        String token = request.getHeader("token");
-        if (ObjectUtils.isEmpty(token)) {
-            response.getWriter().write(objectMapper.writeValueAsString(Res.fail("请求中必须携带token")));
-            return;
+
+//        //判断token是否为空
+//        String token = request.getHeader(header);
+//        if (StringUtils.isEmpty(token) && token.startsWith(CommonConstant.TOKEN_PREFIX)) {
+//            response.getWriter().write(objectMapper.writeValueAsString(Res.fail("请求中必须携带token")));
+//            return;
+//        }
+//
+//        //验证token正确性
+//        if (!JwtUtil.validateToken(token, secret)) {
+//            log.info("token校验失败 {}", DateUtil.nowString());
+//            response.getWriter().write(objectMapper.writeValueAsString(Res.fail(401, "无效的token,请重新登录")));
+//            return;
+//        }
+//
+//        //解析token
+//        Map<String, Object> stringObjectMap = JwtUtil.parseToken(token, secret);
+//        String username = stringObjectMap.get("username").toString();
+//        UserDetails userDetails = commonUserDetailServiceImpl.loadUserByUsername(username);
+//        if (ObjectUtils.isEmpty(userDetails)) {
+//            response.getWriter().write(objectMapper.writeValueAsString(Res.fail("token中的用户不存在")));
+//            return;
+//        }
+
+        CommonUser commonUser = tokenService.getCommonUser(request);
+        if(ObjectUtil.isNotEmpty(commonUser)){
+
+            tokenService.validateToken(commonUser);
+            //将认证信息放到SpringSecurity上下文中
+            UsernamePasswordAuthenticationToken authenticationToken
+                    = new UsernamePasswordAuthenticationToken(commonUser, null,
+                    commonUser.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
-
-        //验证token正确性
-        if (!JwtUtil.validateToken(token)) {
-            log.info("token校验失败 {}", DateUtil.nowString());
-            response.getWriter().write(objectMapper.writeValueAsString(Res.fail(401, "无效的token,请重新登录")));
-            return;
-        }
-
-        //解析token
-        Map<String, Object> stringObjectMap = JwtUtil.parseToken(token);
-        String username = stringObjectMap.get("username").toString();
-        UserDetails userDetails = commonUserDetailServiceImpl.loadUserByUsername(username);
-        if (ObjectUtils.isEmpty(userDetails)) {
-            response.getWriter().write(objectMapper.writeValueAsString(Res.fail("token中的用户不存在")));
-            return;
-        }
-
-        //将认证信息放到SpringSecurity上下文中
-        UsernamePasswordAuthenticationToken authenticationToken
-                = new UsernamePasswordAuthenticationToken(userDetails, null,
-                userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        log.info("token校验通过 {}", DateUtil.nowString());
 
         //继续走其它过滤器
         filterChain.doFilter(request, response);

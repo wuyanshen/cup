@@ -20,4 +20,10 @@ public interface CommonConstant {
     String LOGIN_TYPE_JSON = "JSON";
 
     String LOGIN_TYPE_HTML = "HTML";
+
+    String TOKEN_PREFIX = "Bearer ";
+
+    String TOKEN_REDIS_KEY = "login_token_key:";
+
+    String TOKEN_KEY = "token_key";
 }
