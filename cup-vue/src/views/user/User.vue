@@ -110,18 +110,27 @@
           <el-input v-model="userAddForm.email"></el-input>
         </el-form-item>
         <el-form-item label="所属组织机构">
-            <el-tree-select
+            <!-- <el-tree-select
               :elTreeProps="elTreeProps"
               :elTreeData="orgTreeData"
               :defaultSelectedId="userAddForm.orgId"
               :disabled="false"
               @handleTreeSelected="handleAddTreeSelected($event)"
-              @validateSelectTree="validateAddSelectTree"/>
+              @validateSelectTree="validateAddSelectTree"/> -->
+              <el-input placeholder="请选择组织机构" v-model="userAddForm.orgName"  @focus="orgTreeKey=true"></el-input>
+              <div v-if="orgTreeKey">
+                  <el-tree
+                  :data="orgTreeData"
+                  :props="defaultProps"
+                  default-expand-all
+                  @node-click="handleAddTreeSelected"
+                  ></el-tree>
+              </div>
         </el-form-item>
         <el-form-item label="角色" prop="roleIds">
             <el-select size="mini" v-model="userAddForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
                 <el-option
-                v-for="item in userAddForm.roleList"
+                v-for="item in roles"
                 :key="item.id"
                 :label="item.roleName"
                 :value="item.id"
@@ -136,7 +145,7 @@
     </el-dialog>
 
     <!-- 修改用户对话框 -->
-    <el-dialog :show-close="false" title="修改用户" :visible.sync="userEditDialog" width="50%">
+    <el-dialog :show-close="false" title="修改用户" :visible.sync="userEditDialog" width="50%" @close="userEditClose">
       <el-form size="mini" label-width="100px" :model="userEditForm">
         <el-form-item label="id">
           <el-input v-model="userEditForm.id" disabled></el-input>
@@ -161,19 +170,28 @@
           <el-input v-model="userEditForm.email"></el-input>
         </el-form-item>
         <el-form-item label="所属组织机构">
-            <el-tree-select
+            <!-- <el-tree-select
               :elTreeProps="elTreeProps"
               :elTreeData="orgTreeData"
               :defaultSelectedId="userEditForm.orgId"
               :disabled="false"
               @handleTreeSelected="handleEditTreeSelected($event)"
-              @validateSelectTree="validateEditSelectTree"/>
+              @validateSelectTree="validateEditSelectTree"/> -->
+              <el-input placeholder="请选择组织机构" v-model="userEditForm.orgName"  @focus="orgTreeKey=true"></el-input>
+              <div v-if="orgTreeKey">
+                  <el-tree
+                  :data="orgTreeData"
+                  :props="defaultProps"
+                  default-expand-all
+                  @node-click="handleEditTreeSelected"
+                  ></el-tree>
+              </div>
         </el-form-item>
         <el-form-item label="角色">
             <el-select size="mini" v-model="userEditForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
                 <el-option
-                v-for="item in userEditForm.roleList"
-                :key="item.id"
+                v-for="(item,index) in roles"
+                :key="index"
                 :label="item.roleName"
                 :value="item.id"
                 ></el-option>
@@ -188,12 +206,8 @@
   </div>
 </template>
 <script>
-import ElTreeSelect from '@/components/TreeSelect'
 import { mapActions } from "vuex";
 export default {
-  components: {
-    ElTreeSelect
-  },
   data() {
     var usernameCheck = async (rule, value, callback) => {
       let res = await this.usernameCheck({ username: value });
@@ -204,6 +218,8 @@ export default {
       }
     };
     return {
+      orgs:[],
+      roles: [],
       orgTreeData: [],
       userAddDialog: false,
       userEditDialog: false,
@@ -214,7 +230,8 @@ export default {
         email: "",
         status: true,
         orgId: "",
-        roleIds: []
+        orgName: "",
+        roleIds: ""
       },
       userEditForm: {
         id: 0,
@@ -224,8 +241,8 @@ export default {
         email: "",
         status: true,
         orgId: "",
-        roleIds: [],
-        roleList: []
+        orgName: "",
+        roleIds: ""
       },
 	  page:{
 		tableData: [],
@@ -239,6 +256,7 @@ export default {
         username: '',
         orgId: '',
       },
+      orgTreeKey: false,
       defaultProps: {
         children: 'children',
         label: 'orgName'
@@ -294,17 +312,15 @@ export default {
     },
     //点击组织机构树的节点
     orgTreeClick(data, node, obj){
-        console.log(data.id)
         this.queryPage(data.id, this.queryInfo.username, this.page.pageSize, this.page.currentPage)
     },
     //弹出用户新增dialog
     async handleAdd(){
         this.userAddDialog = true
         //查询用户角色列表
-        const res1 = await this.roleList()
-        if(res1.code === 0){
-            console.log(res1.data)
-            this.userAddForm.roleList = res1.data
+        const res = await this.roleList()
+        if(res.code === 0){
+            this.roles = res.data
         }
     },
     //修改每页显示条数
@@ -315,25 +331,73 @@ export default {
     handleCurrentChange(current) {
       this.queryPage(this.queryInfo.orgId, this.queryInfo.username, this.page.pageSize, current)
     },
-    async handleEdit(row) {
-      this.userEditForm = row
-      this.userEditDialog = true;
-      //查询用户角色id集合
-      const res = await this.userRoleIds(row.id)
-      if(res.code === 0){
-          console.log(res.data)
-          this.userEditForm.roleIds = res.data
-      }
+    //用户修改关闭dialog后处理
+    userEditClose(){
+        this.orgTreeKey = false
+        this.userEditForm = {
+            id: 0,
+            username: "",
+            password: "",
+            phone: "",
+            email: "",
+            status: true,
+            orgId: "",
+            orgName: "",
+            roleIds: ""
+        }
+    },
+    //弹出用户修改dialog
+    handleEdit(row) {
+      this.userEditForm.id = row.id
+      this.userEditForm.orgId = row.orgId
+      this.userEditForm.status = row.status
+      this.userEditForm.username = row.username
+      this.userEditForm.phone = row.phone
+      this.userEditForm.email = row.email
+      
+      
+      console.log('form', this.userEditForm)
+      
       //查询用户角色列表
-      const res1 = await this.roleList()
-      if(res1.code === 0){
-          this.userEditForm.roleList = res1.data
+      this.roleList().then(res => {
+          this.roles = res.data
+      })
+      // 查询用户角色id集合
+      this.userRoleIds(row.id).then(res => {
+          this.userEditForm.roleIds = res.data
+      })
+      
+      this.getOrg(this.orgTreeData)
+      //回显组织机构
+      for(let org of this.orgs){
+          if(org.orgId === row.orgId){
+              this.userEditForm.orgName = org.orgName
+          }
+      }
+      this.userEditDialog = true;
+    },
+    getOrg(datas){ //递归遍历机构树，获取组织机构list
+      for(var i in datas){
+        this.orgs.push({orgId: datas[i].id, orgName: datas[i].orgName})
+        if(datas[i].children){
+          this.getOrg(datas[i].children);
+        }
       }
     },
     //用户新增dialog关闭后清空值和校验
     userAddClose() {
       this.$refs["userAddForm"].resetFields();
-      this.userAddForm = {};
+      this.userAddForm = {
+        username: "",
+        password: "",
+        phone: "",
+        email: "",
+        status: true,
+        orgId: "",
+        orgName: "",
+        roleIds: ""
+      }
+      this.orgTreeKey = false
     },
     //新增用户
     handleUserAdd() {
@@ -381,19 +445,15 @@ export default {
         })
         .catch(() => {});
     },
-    handleAddTreeSelected(value){
-      this.userEditForm.orgId = value
-      // this.$refs.userAddForm.validateField("orgId");
+    handleAddTreeSelected(data){
+      this.userAddForm.orgId = data.id
+      this.userAddForm.orgName = data.orgName
+      this.orgTreeKey = false
     },
-    validateAddSelectTree(){
-      // this.$refs.userAddForm.validateField("orgId");
-    },
-    handleEditTreeSelected(value){
-      this.userEditForm.orgId = value
-      // this.$refs.userEditForm.validateField("orgId");
-    },
-    validateEditSelectTree(){
-      // this.$refs.userEditForm.validateField("orgId");
+    handleEditTreeSelected(data){
+        this.userEditForm.orgId = data.id
+        this.userEditForm.orgName = data.orgName
+        this.orgTreeKey = false
     },
 	//条件查询
     handleSearch() {

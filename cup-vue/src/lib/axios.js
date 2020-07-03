@@ -55,8 +55,8 @@ class HttpRequest {
                 if(!Object.keys(this.queue).length)showLoading()
                 
                 //在所有请求头设置token
-                let token = 'Bearer ' + getToken()
-                token && (config.headers['Authorization'] = token)
+                let token = getToken()
+                token && (config.headers['Authorization'] = 'Bearer ' + token)
                 return config
             },
             error => {

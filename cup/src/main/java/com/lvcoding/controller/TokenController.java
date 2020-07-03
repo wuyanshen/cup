@@ -1,12 +1,15 @@
 package com.lvcoding.controller;
 
-import com.lvcoding.util.JwtUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.lvcoding.security.CommonUser;
+import com.lvcoding.security.TokenService;
 import com.lvcoding.util.Res;
-import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author wuyanshen
@@ -17,11 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TokenController {
 
-//    @GetMapping("refresh")
-//    public Res refreshToken(@RequestHeader("token") String token) {
-//        if (StringUtils.isEmpty(token)) {
-//            return Res.fail("token不能为空");
-//        }
-//        return Res.success("刷新token成功", JwtUtil.refreshToken(token));
-//    }
+    @Autowired
+    private TokenService tokenService;
+
+    /**
+     * 校验token是否有效
+     *
+     */
+    @GetMapping("/check")
+    public Res refreshToken(HttpServletRequest request) {
+        CommonUser commonUser = tokenService.getCommonUser(request);
+        if (ObjectUtil.isEmpty(commonUser)) {
+            return Res.fail(401,"token无效或不存在");
+        }
+        return Res.success("token有效");
+    }
 }

@@ -1,5 +1,5 @@
 import {
-    setToken
+    setToken, removeToken
 } from '@/lib/util'
 import api from '@/api/api'
 
@@ -28,21 +28,33 @@ const actions = {
             })
         })
     },
-    //校验并刷新token
-    // checkAndRefreshToken({commit}) {
-    //     return new Promise((resolve, reject) => {
-    //         api.user.refreshToken().then(res => {
-    //             if (res.code !== 0) reject(new Error('token已过期'))
-    //             else {
-    //                 //刷新token，继续延长token的有效期
-    //                 setToken(res.data)
-    //                 resolve(res)
-    //             }
-    //         }).catch(error => {
-    //             reject(error)
-    //         })
-    //     })
-    // },
+    //登出方法
+    logout({commit}){
+      return new Promise((resolve, reject) => {
+          api.user.logout().then(res => {
+              if(res.code !==0) reject(new Error('登出出错了'))
+              else {
+                  removeToken()
+                  resolve(res)
+              }
+          }).catch(error => {
+              reject(error)
+          })
+      })  
+    },
+    //校验token
+    checkToken({commit}) {
+        return new Promise((resolve, reject) => {
+            api.user.checkToken().then(res => {
+                if (res.code !== 0) reject(new Error('token已过期'))
+                else {
+                    resolve(res)
+                }
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
     //用户分页查询
     userPage({commit}, params) {
         return new Promise((resolve, reject) => {

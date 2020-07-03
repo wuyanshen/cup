@@ -116,6 +116,17 @@ public class TokenService {
     }
 
     /**
+     * 从redis删除token
+     *
+     */
+    public Boolean deleteToken(String token){
+        if(StrUtil.isNotEmpty(token)){
+            return redisService.del(CommonConstant.TOKEN_REDIS_KEY+token);
+        }
+        return false;
+    }
+
+    /**
      * 刷新token
      *
      * @param commonUser
@@ -128,4 +139,6 @@ public class TokenService {
         //用redis缓存token
         redisService.set(key, commonUser, expireTime, TimeUnit.MINUTES);
     }
+
+
 }

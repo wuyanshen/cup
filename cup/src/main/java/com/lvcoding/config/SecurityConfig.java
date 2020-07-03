@@ -1,9 +1,7 @@
 package com.lvcoding.config;
 
 import com.lvcoding.security.*;
-import com.lvcoding.session.CommonExpiredSessionStrategy;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,10 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-
-import javax.sql.DataSource;
 
 
 /**
@@ -46,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         // 设置拦截忽略url - 会直接过滤该url - 将不会经过Spring Security过滤器链
         // 设置拦截忽略文件夹，可以对静态资源放行
         web.ignoring().antMatchers("/favicon.ico", "/assets/**", "/images/**", "/css/**", "/js/**");
@@ -61,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/signout")
                 .logoutSuccessHandler(commonLogoutSuccessHandler)
-                .deleteCookies("JSESSIONID")
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/certification")
@@ -69,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(commonLoginFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/token/check", "/certification","/websocket/**").permitAll()
+                .antMatchers("/token/check", "/certification", "/websocket/**").permitAll()
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(commonAccessDeniedHandler)

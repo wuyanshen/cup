@@ -8,6 +8,10 @@ export const getToken = (key = 'token') => {
     return window.sessionStorage.getItem(key)
 }
 
+export const removeToken = (key = 'token') => {
+    window.sessionStorage.removeItem('token')
+}
+
 //格式化时间
 export const formatDate = (row,column) => {
     let date = row[column.property]

@@ -68,11 +68,7 @@ public class SysUserController {
         if (!StringUtils.isEmpty(sysUser.getOrgId())) {
             wrapper.lambda().eq(SysUser::getOrgId, sysUser.getOrgId());
         }
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         return Res.success(this.sysUserService.page(page, wrapper));
     }
 

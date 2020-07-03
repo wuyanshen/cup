@@ -14,10 +14,15 @@ const login = params => {
     })
 }
 
-//刷新token方法
-// const refreshToken = () => {
-//     return axios.get('/token/refresh')
-// }
+//登出
+const logout = () => {
+    return axios.get('/signout')
+}
+
+//检查token方法
+const checkToken = () => {
+    return axios.get('/token/check')
+}
 
 //分页查询用户
 const userPage = params => {
@@ -62,7 +67,8 @@ const userRoleIds = id => {
 export default {
     userInfo,
     login,
-    // refreshToken,
+    logout,
+    checkToken,
     userPage,
     addUser,
     updateUser,

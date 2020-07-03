@@ -33,12 +33,6 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Value("${spring.security.loginType}")
     private String loginType;
 
-    /**
-     * token秘钥
-     */
-    @Value("${token.secret}")
-    private String secret;
-
     @Autowired
     private TokenService tokenService;
 

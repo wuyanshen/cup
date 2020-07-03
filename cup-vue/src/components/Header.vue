@@ -24,7 +24,7 @@
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="info">个人信息</el-dropdown-item>
                     <el-dropdown-item command="preUpdatePwd">修改密码</el-dropdown-item>
-                    <el-dropdown-item command="logout">退出</el-dropdown-item>
+                    <el-dropdown-item command="signout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -130,7 +130,7 @@
             })
         },
         methods: {
-            ...mapActions("user", ["updatePwd", "userInfo", "pwdCheck"]),
+            ...mapActions("user", ["updatePwd", "userInfo", "pwdCheck", "logout"]),
             ...mapActions("tabs", ["addTab"]),
             ...mapMutations(["UPDATE_COLLAPSE"]),
             ...mapMutations("tabs", ["initMainTabs", "setActiveRoute"]),
@@ -182,22 +182,26 @@
                     err
                 });
             },
-            logout() {
+            signout() {
                 this.$confirm("此操作将退出系统, 是否继续?", "提示", {
                         confirmButtonText: "确定",
                         cancelButtonText: "取消",
                         type: "warning"
                     })
-                    .then(() => {
-                        window.sessionStorage.clear();
-                        this.$router.push("/login").catch(err => {
-                            err
-                        });
-                        this.initMainTabs()
-                        this.$message({
-                            type: "success",
-                            message: "退出成功!"
-                        });
+                    .then(async () => {
+                        const res = await this.logout()
+                        if(res.code === 0){
+                            window.sessionStorage.clear();
+                            this.$router.push("/login").catch(err => {
+                                err
+                            });
+                            this.initMainTabs()
+                            this.$message({
+                                type: "success",
+                                message: "退出成功!"
+                            });
+                        }
+                        
                     })
                     .catch(() => {});
             },
