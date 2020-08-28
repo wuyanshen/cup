@@ -1,4 +1,4 @@
-package com.lvcoding.service.impl;
+package com.lvcoding;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysRole;

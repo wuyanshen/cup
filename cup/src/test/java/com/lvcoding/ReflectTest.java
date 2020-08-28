@@ -1,4 +1,4 @@
-package com.lvcoding.service.impl;
+package com.lvcoding;
 
 import com.lvcoding.entity.SysUser;
 import lombok.SneakyThrows;

@@ -1,4 +1,4 @@
-package com.lvcoding.service.impl;
+package com.lvcoding;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

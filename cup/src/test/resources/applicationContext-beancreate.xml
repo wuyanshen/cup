@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="jdbc.properties"/>
+
+    <!--实现FactoryBean接口-->
+    <bean id="conn" class="com.lvcoding.beanCreate.ConnectionBeanFactory">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--bean工厂-->
+    <bean id="connectionFactory" class="com.lvcoding.beanCreate.ConnectionFactory" />
+    <bean id="conn2" factory-bean="connectionFactory" factory-method="getConnection"/>
+
+    <!--静态工厂-->
+    <bean id="conn1" class="com.lvcoding.beanCreate.ConnectionStaticFactory" factory-method="getConnection" ></bean>
+
+</beans>

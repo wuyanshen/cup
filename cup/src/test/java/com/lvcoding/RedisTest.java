@@ -1,4 +1,4 @@
-package com.lvcoding.service.impl;
+package com.lvcoding;
 
 import cn.hutool.core.lang.UUID;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommonAspect {
 
-    @Pointcut("execution(* com.lvcoding.service.*.*(..))")
+    @Pointcut("execution(* com.lvcoding.service..*.*(..))")
     public void pointcut() {
     }
 

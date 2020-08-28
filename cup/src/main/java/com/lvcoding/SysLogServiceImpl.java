@@ -1,4 +1,4 @@
-package com.lvcoding.service.impl;
+package com.lvcoding;
 
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
