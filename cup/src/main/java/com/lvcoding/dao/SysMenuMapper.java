@@ -12,7 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-24 01:24:05
  */
-public interface SysMenuDao extends BaseMapper<SysMenu> {
+public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     /**
      * 通过角色名称list查询菜单权限

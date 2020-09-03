@@ -1,8 +1,8 @@
-package com.lvcoding;
+package com.lvcoding.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysRole;
-import com.lvcoding.dao.SysRoleDao;
+import com.lvcoding.dao.SysRoleMapper;
 import com.lvcoding.entity.dto.RoleDTO;
 import com.lvcoding.service.SysRoleService;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2020-03-24 01:24:31
  */
 @Service
-public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao,SysRole> implements SysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper,SysRole> implements SysRoleService {
 
     /**
      * 删除角色

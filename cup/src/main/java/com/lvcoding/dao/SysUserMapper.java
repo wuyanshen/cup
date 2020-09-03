@@ -14,7 +14,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-24 01:44:06
  */
-public interface SysUserDao extends BaseMapper<SysUser> {
+public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
      * 通过用户名查询用户

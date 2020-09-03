@@ -40,10 +40,20 @@ token:
   expireTime: 30
 
 
-
+# mybatis-plus配置
 mybatis-plus:
+  global-config:
+    banner: false
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #logging:
 #  level:
 #    org.springframework.security: DEBUG
+
+
+# 多租户配置
+cup:
+  tenant:
+    enable: true
+    ignore-tables:
+#      - sys_menu

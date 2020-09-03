@@ -1,9 +1,9 @@
-package com.lvcoding;
+package com.lvcoding.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysOrg;
-import com.lvcoding.dao.SysOrgDao;
+import com.lvcoding.dao.SysOrgMapper;
 import com.lvcoding.entity.dto.OrgTree;
 import com.lvcoding.service.SysOrgService;
 import com.lvcoding.util.TreeUtil;
@@ -11,7 +11,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
  * @since 2020-03-24 01:24:17
  */
 @Service
-public class SysOrgServiceImpl extends ServiceImpl<SysOrgDao, SysOrg> implements SysOrgService {
+public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper, SysOrg> implements SysOrgService {
 
     @Override
     public List<OrgTree> orgTree() {

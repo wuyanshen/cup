@@ -1,8 +1,8 @@
-package com.lvcoding;
+package com.lvcoding.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysUser;
-import com.lvcoding.dao.SysUserDao;
+import com.lvcoding.dao.SysUserMapper;
 import com.lvcoding.entity.dto.UserDTO;
 import com.lvcoding.entity.vo.UserVO;
 import com.lvcoding.service.SysUserService;
@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -21,8 +22,9 @@ import java.util.stream.Collectors;
  * @author makejava
  * @since 2020-03-24 01:44:06
  */
+@Transactional(readOnly = true)
 @Service
-public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -62,6 +64,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
         return flag1&&flag2;
     }
 
+    @Transactional(readOnly = false)
     @Override
     public boolean saveUser(UserDTO userDTO) {
         //新增用户

@@ -26,4 +26,20 @@ public interface CommonConstant {
     String TOKEN_REDIS_KEY = "login_token_key:";
 
     String TOKEN_KEY = "token_key";
+
+    /**
+     * 租户表名称
+     */
+    String TENANT_TABLE = "sys_tenant";
+
+    /**
+     * 租户id字段名称
+     */
+    String TENANT_ID = "tenant_id";
+
+    /**
+     * 请求头中租户id名称
+     */
+    String TENANT_HEADER = "tenantId";
+
 }

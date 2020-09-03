@@ -1,11 +1,17 @@
 package com.lvcoding.config;
 
+import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
+import com.baomidou.mybatisplus.extension.plugins.tenant.TenantSqlParser;
+import com.lvcoding.tenant.CupTenantHandler;
+import lombok.AllArgsConstructor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wuyanshen
@@ -13,16 +19,23 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @discription Mybatis配置
  */
 
+@AllArgsConstructor
 @Configuration
 @MapperScan(basePackages = "com.lvcoding.dao")
 @EnableTransactionManagement
 public class MybatisConfig {
 
+    public final CupTenantHandler cupTenantHandler;
+
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
-        // 开启 count 的 join 优化,只针对部分 left join
-        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+        // 多租户配置
+        List<ISqlParser> sqlParserList = new ArrayList<>();
+        TenantSqlParser tenantSqlParser = new TenantSqlParser();
+        tenantSqlParser.setTenantHandler(cupTenantHandler);
+        sqlParserList.add(tenantSqlParser);
+        paginationInterceptor.setSqlParserList(sqlParserList);
         return paginationInterceptor;
     }
 }

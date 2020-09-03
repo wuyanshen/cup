@@ -4,6 +4,16 @@
       <div class="login-title">
         <h3>{{appName}}</h3>
       </div>
+      <div class="tenant">
+          <el-select class="tenant-list" v-model="tenantId" placeholder="请选择租户" @change="getTenantId">
+              <el-option
+              v-for="tenant in tenants"
+              :key="tenant.value"
+              :label="tenant.label"
+              :value="tenant.value"
+              ></el-option>
+          </el-select>
+      </div>
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" class="loginForm">
         <el-form-item label prop="username">
           <el-input
@@ -31,9 +41,11 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import {removeTenantId} from '@/lib/util.js'
 
 export default {
   data() {
+      
     var validateUsername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输用户名"));
@@ -54,9 +66,21 @@ export default {
       }
     };
     return {
+      tenantId:'',
+      tenants: [
+          {
+              label: '北京卡普公司',
+              value: '1'
+          },
+          {
+              label: '太原卡普公司',
+              value: '2'
+          }
+      ],
       loginForm: {
         username: "",
-        password: ""
+        password: "",
+       
       },
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
@@ -69,6 +93,9 @@ export default {
       username: this.username,
       password: this.password
     };
+    
+    // 获取租户列表
+    this.getTenantList();
   },
   computed: {
     ...mapState(["appName"]),
@@ -76,9 +103,22 @@ export default {
   },
   methods: {
     ...mapActions("user",["login"]),
+    ...mapActions("tenant",["tenantList"]),
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
+            if(this.tenantId){
+                let tenantInfo = {
+                    dataType: 'number',
+                    content: parseInt(this.tenantId),
+                    datetime: new Date().getTime(),
+                };
+                localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
+            }else{
+                
+            }
+            
+            
           let res = await this.login(this.loginForm);
           if (res.code === 0) {
             this.$message.success('登录成功~')
@@ -88,6 +128,32 @@ export default {
           return false;
         }
       });
+    },
+    // 获取租户id，并存储到localStorage
+    getTenantId(){
+        if(this.tenantId){
+            let tenantInfo = {
+                dataType: 'number',
+                content: parseInt(this.tenantId),
+                datetime: new Date().getTime(),
+            };
+            localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
+        }
+    },
+    // 获取租户列表
+    async getTenantList(){
+        let res = await this.tenantList();
+        let arr = []
+        if(res.code === 0){
+            for(let tenant of res.data){
+                let item = {
+                    label: tenant.tenantName,
+                    value: tenant.tenantId
+                }
+                arr.push(item)
+            }
+        }
+        this.tenants = arr;
     }
   }
 };
@@ -109,7 +175,6 @@ el-button {
 }
 
 .login-title {
-  margin-bottom: 20px;
   font-size: 30px;
   color: #2b4b6b;
 }
@@ -127,5 +192,14 @@ el-button {
 }
 .loginForm {
   width: 90%;
+}
+
+.tenant {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    .tenant-list {
+        width: 150px;
+    }
 }
 </style>

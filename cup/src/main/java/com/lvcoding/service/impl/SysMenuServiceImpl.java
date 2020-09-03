@@ -1,9 +1,9 @@
-package com.lvcoding;
+package com.lvcoding.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysMenu;
-import com.lvcoding.dao.SysMenuDao;
+import com.lvcoding.dao.SysMenuMapper;
 import com.lvcoding.entity.dto.MenuTree;
 import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.TreeUtil;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * @since 2020-03-24 01:24:05
  */
 @Service
-public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> implements SysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
     /**
      * 通过主键删除数据

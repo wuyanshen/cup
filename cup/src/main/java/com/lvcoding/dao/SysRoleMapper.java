@@ -12,7 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-24 01:24:31
  */
-public interface SysRoleDao extends BaseMapper<SysRole> {
+public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     /**
      * 根据用户名获取角色

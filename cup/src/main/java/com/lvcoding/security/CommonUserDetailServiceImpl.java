@@ -1,14 +1,14 @@
 package com.lvcoding.security;
 
-import com.lvcoding.dao.SysMenuDao;
-import com.lvcoding.dao.SysRoleDao;
-import com.lvcoding.dao.SysUserDao;
+import com.lvcoding.dao.SysMenuMapper;
+import com.lvcoding.dao.SysRoleMapper;
+import com.lvcoding.dao.SysUserMapper;
 import com.lvcoding.entity.SysMenu;
 import com.lvcoding.entity.SysRole;
 import com.lvcoding.entity.SysUser;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,31 +26,29 @@ import java.util.stream.Collectors;
  * @discription 自定义认证查询方法
  */
 @Component
+@AllArgsConstructor
 public class CommonUserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private SysUserDao sysUserDao;
-    @Autowired
-    private SysRoleDao sysRoleDao;
-    @Autowired
-    private SysMenuDao sysMenuDao;
+    private final SysUserMapper sysUserMapper;
+    private final SysRoleMapper sysRoleMapper;
+    private final SysMenuMapper sysMenuMapper;
 
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) {
         //获取用户
-        SysUser sysUser = sysUserDao.loadUserByUsername(username);
+        SysUser sysUser = sysUserMapper.loadUserByUsername(username);
 
         if (sysUser == null) {
             throw new UsernameNotFoundException("您输入的用户不存在");
         }
 
         //获取角色
-        List<SysRole> roles = sysRoleDao.loadRolesByUsername(username);
+        List<SysRole> roles = sysRoleMapper.loadRolesByUsername(username);
         List<String> roleCodes = roles.stream().map(sysRole -> sysRole.getRoleCode()).collect(Collectors.toList());
 
         //获取可以访问的菜单
-        List<SysMenu> sysMenus = sysMenuDao.loadPermissionByRoleCode(roleCodes);
+        List<SysMenu> sysMenus = sysMenuMapper.loadPermissionByRoleCode(roleCodes);
         List<String> urls = sysMenus.stream().map(sysMenu -> sysMenu.getUrl()).filter(url -> !StringUtils.isEmpty(url)).collect(Collectors.toList());
         //获取可以访问的按钮
         List<String> permissions = sysMenus.stream().map(sysMenu -> sysMenu.getPermission()).filter(permission-> !StringUtils.isEmpty(permission)).collect(Collectors.toList());

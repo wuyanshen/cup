@@ -2,9 +2,12 @@ package com.lvcoding.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
+import com.lvcoding.entity.SysLog;
+import com.lvcoding.service.SysLogService;
 import com.lvcoding.util.DateUtil;
-import com.lvcoding.util.JwtUtil;
 import com.lvcoding.util.Res;
+import com.lvcoding.util.SysLogUtils;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,14 +30,16 @@ import java.io.IOException;
 @Component
 public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Value("${spring.security.loginType}")
     private String loginType;
-
+    @Autowired
+    private ObjectMapper objectMapper;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private SysLogService sysLogService;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -42,7 +47,9 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         log.info("=== 用户【{}】在 {} 登录了系统 ===", username, DateUtil.nowString());
 
         if (loginType.equalsIgnoreCase(CommonConstant.LOGIN_TYPE_JSON)) {
-            //生成token
+            // 记录日志
+            addLog();
+            // 生成token
             CommonUser commonUser = (CommonUser) authentication.getPrincipal();
             String token = tokenService.createToken(commonUser);
             response.setContentType("application/json;charset=UTF-8");
@@ -50,5 +57,15 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         } else {
             super.onAuthenticationSuccess(request, response, authentication);
         }
+    }
+
+    /**
+     * 记录日志
+     */
+    private void addLog() {
+        SysLog sysLog = SysLogUtils.getSysLog();
+        sysLog.setTitle(SysLogUtils.getUserName() + "用户登录");
+        sysLog.setType("1");
+        sysLogService.save(sysLog);
     }
 }

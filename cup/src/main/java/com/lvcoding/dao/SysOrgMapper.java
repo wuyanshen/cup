@@ -10,6 +10,6 @@ import com.lvcoding.entity.SysOrg;
  * @author makejava
  * @since 2020-03-24 01:24:17
  */
-public interface SysOrgDao extends BaseMapper<SysOrg> {
+public interface SysOrgMapper extends BaseMapper<SysOrg> {
 
 }

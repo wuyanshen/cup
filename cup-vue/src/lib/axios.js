@@ -1,7 +1,7 @@
 //封装axios
 import axios from 'axios'
 import { baseURL } from '@/config'
-import { getToken } from '@/lib/util'
+import { getToken, getTenantId, removeTenantId } from '@/lib/util'
 import { Message } from 'element-ui'
 import { showLoading,hideLoading } from '@/lib/loading'
 import qs from 'qs'
@@ -57,6 +57,14 @@ class HttpRequest {
                 //在所有请求头设置token
                 let token = getToken()
                 token && (config.headers['Authorization'] = 'Bearer ' + token)
+                
+                // 在所有请求头设置tenantId
+                let tenantId = getTenantId() && JSON.parse(getTenantId()).content;
+                if(tenantId){
+                    config.headers['tenantId'] = tenantId
+                }else{
+                    removeTenantId()
+                }
                 return config
             },
             error => {
@@ -199,7 +207,6 @@ class HttpRequest {
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)
         this.interceptors(instance, options.url)
-        console.log(this.queue)
         return instance(options)
     }
 

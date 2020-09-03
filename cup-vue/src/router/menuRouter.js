@@ -31,6 +31,11 @@ const menuRouter = [{
                 component: () => import('../views/org/Org.vue')
             },
             {
+                path: 'tenant',
+                name: 'tenant',
+                component: () => import('../views/tenant/Tenant.vue')
+            },
+            {
                 path: 'nextTickDemo',
                 name: 'nextTickDemo',
                 component: () => import('../views/nextTickDemo.vue')
