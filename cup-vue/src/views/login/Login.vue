@@ -67,16 +67,7 @@ export default {
     };
     return {
       tenantId:'',
-      tenants: [
-          {
-              label: '北京卡普公司',
-              value: '1'
-          },
-          {
-              label: '太原卡普公司',
-              value: '2'
-          }
-      ],
+      tenants: [],
       loginForm: {
         username: "",
         password: "",
@@ -138,6 +129,8 @@ export default {
                 datetime: new Date().getTime(),
             };
             localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
+        }else{
+            removeTenantId();
         }
     },
     // 获取租户列表
