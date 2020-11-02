@@ -236,7 +236,6 @@ export default {
       userEditForm: {
         id: 0,
         username: "",
-        password: "",
         phone: "",
         email: "",
         status: true,
@@ -337,7 +336,6 @@ export default {
         this.userEditForm = {
             id: 0,
             username: "",
-            password: "",
             phone: "",
             email: "",
             status: true,
@@ -354,10 +352,10 @@ export default {
       this.userEditForm.username = row.username
       this.userEditForm.phone = row.phone
       this.userEditForm.email = row.email
-      
-      
+
+
       console.log('form', this.userEditForm)
-      
+
       //查询用户角色列表
       this.roleList().then(res => {
           this.roles = res.data
@@ -366,7 +364,7 @@ export default {
       this.userRoleIds(row.id).then(res => {
           this.userEditForm.roleIds = res.data
       })
-      
+
       this.getOrg(this.orgTreeData)
       //回显组织机构
       for(let org of this.orgs){

@@ -43,6 +43,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return this.baseMapper.getRolesByUserId(id);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public boolean updateUser(UserDTO userDTO) {
         //更新用户
