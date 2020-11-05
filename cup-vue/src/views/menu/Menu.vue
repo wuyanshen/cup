@@ -21,7 +21,11 @@
           </template>
         </el-table-column>
         <el-table-column align="center" prop="url" label="路由路径"></el-table-column>
-        <el-table-column align="center" prop="icon" label="图标"></el-table-column>
+        <el-table-column align="center" prop="icon" label="图标">
+          <template v-slot="scope">
+            <i :class="scope.row.icon"></i>
+          </template>
+        </el-table-column>
         <el-table-column align="center" prop="permission" label="权限标识"></el-table-column>
         <el-table-column align="center" label="操作">
           <template v-slot="scope">
@@ -197,7 +201,7 @@ export default {
 					  message: '删除成功!'
 					});
 				}
-              }).catch(() => {       
+              }).catch(() => {
               });
     },
 	//弹出更新菜单dialog
