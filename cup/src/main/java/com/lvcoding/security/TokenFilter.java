@@ -95,7 +95,7 @@ public class TokenFilter extends OncePerRequestFilter {
         if(ObjectUtil.isNotEmpty(commonUser)){
 
             tokenService.validateToken(commonUser);
-            //将认证信息放到SpringSecurity上下文中
+            //将认证信息放到SpringSecurity上下文中，给后续的SpringSecurity鉴权使用，如果不放，SpringSecurity就不能鉴权
             UsernamePasswordAuthenticationToken authenticationToken
                     = new UsernamePasswordAuthenticationToken(commonUser, null,
                     commonUser.getAuthorities());

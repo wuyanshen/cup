@@ -45,7 +45,7 @@ import {removeTenantId} from '@/lib/util.js'
 
 export default {
   data() {
-      
+
     var validateUsername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输用户名"));
@@ -71,7 +71,7 @@ export default {
       loginForm: {
         username: "",
         password: "",
-       
+
       },
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
@@ -84,7 +84,7 @@ export default {
       username: this.username,
       password: this.password
     };
-    
+
     // 获取租户列表
     this.getTenantList();
   },
@@ -106,10 +106,10 @@ export default {
                 };
                 localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
             }else{
-                
+
             }
-            
-            
+
+
           let res = await this.login(this.loginForm);
           if (res.code === 0) {
             this.$message.success('登录成功~')
@@ -168,7 +168,7 @@ el-button {
 }
 
 .login-title {
-  font-size: 30px;
+  font-size: 18px;
   color: #2b4b6b;
 }
 
