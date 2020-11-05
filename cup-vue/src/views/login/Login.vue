@@ -169,7 +169,7 @@ el-button {
 
 .login-title {
   font-size: 18px;
-  color: #2b4b6b;
+  color: #777777;
 }
 
 .login-div {
