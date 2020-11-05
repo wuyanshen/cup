@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/token/check", "/certification", "/websocket/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(commonAccessDeniedHandler)
