@@ -77,7 +77,7 @@ http://localhost:9999
 
 
 ## cup线上演示环境
-[cup线上环境](http://49.233.209.183/)
+[cup线上环境](http://cup.lvcoding.com/)
 
 
 

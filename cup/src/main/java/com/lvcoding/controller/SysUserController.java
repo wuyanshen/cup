@@ -132,7 +132,7 @@ public class SysUserController {
      */
     @GetMapping("pwd/check")
     public Res checkPwd(@RequestParam("password") String password) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CommonUser user = (CommonUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (passwordEncoder.matches(password, user.getPassword())) {
             return Res.success("密码匹配");
         } else {

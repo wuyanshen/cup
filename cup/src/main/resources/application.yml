@@ -20,7 +20,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://mysql:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: root
     type: com.zaxxer.hikari.HikariDataSource
@@ -29,7 +29,7 @@ spring:
 
   # redis配置
   redis:
-    host: localhost
+    host: redis
     password:
     port: 6379
 
@@ -51,9 +51,21 @@ mybatis-plus:
 #    org.springframework.security: DEBUG
 
 
-# 多租户配置
+
 cup:
+  # 是否开启演示模式
+  enableDemo: false
+  # 不校验token的请求
+  token-ignore-url:
+    - /tenant/list
+    - /token/check
+    - /token/refresh
+    - /certification
+
+  # 多租户配置
   tenant:
     enable: true
     ignore-tables:
 #      - sys_menu
+
+

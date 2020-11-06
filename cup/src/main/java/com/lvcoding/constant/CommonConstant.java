@@ -11,11 +11,17 @@ public interface CommonConstant {
 
     String WEB_SOCKET = "/websocket";
 
+    String FAVICON = "/favicon.ico";
+
     String REFRESH_TOKEN_URI = "/token/refresh";
 
     String LOGIN_URI = "/certification";
 
     String POST = "post";
+
+    String PUT = "put";
+
+    String DELETE = "delete";
 
     String LOGIN_TYPE_JSON = "JSON";
 

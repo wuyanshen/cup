@@ -45,19 +45,19 @@ class HttpRequest {
 
     //拦截器
     interceptors(instance, url) {
-        
+
         //请求拦截器
         instance.interceptors.request.use(
-        
+
             config => {
                 //添加全局loading...
                 //Spin->iView组件
                 if(!Object.keys(this.queue).length)showLoading()
-                
+
                 //在所有请求头设置token
                 let token = getToken()
                 token && (config.headers['Authorization'] = 'Bearer ' + token)
-                
+
                 // 在所有请求头设置tenantId
                 let tenantId = getTenantId() && JSON.parse(getTenantId()).content;
                 if(tenantId){
@@ -81,6 +81,10 @@ class HttpRequest {
                 let { data: { code } } = response
 
                 switch (code) {
+                    case -1:
+                        Message.error(response.data.msg)
+                        break;
+
                     case 401:
                         Message.error('登录超时，请重新登录')
                         break;
@@ -110,6 +114,9 @@ class HttpRequest {
                 //服务器有返回结果
                 if (response) {
                     switch (response.status) {
+                        case -1:
+                            Message.error(response.msg)
+                            break;
 
                         case 401:
                             Message.error('未登录，请重新登录')

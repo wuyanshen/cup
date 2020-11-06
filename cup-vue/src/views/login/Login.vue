@@ -4,16 +4,16 @@
       <div class="login-title">
         <h3>{{appName}}</h3>
       </div>
-      <div class="tenant">
-          <el-select class="tenant-list" v-model="tenantId" placeholder="请选择租户" @change="getTenantId">
-              <el-option
-              v-for="tenant in tenants"
-              :key="tenant.value"
-              :label="tenant.label"
-              :value="tenant.value"
-              ></el-option>
-          </el-select>
-      </div>
+<!--      <div class="tenant">-->
+<!--          <el-select class="tenant-list" v-model="tenantId" placeholder="请选择租户" @change="getTenantId">-->
+<!--              <el-option-->
+<!--              v-for="tenant in tenants"-->
+<!--              :key="tenant.value"-->
+<!--              :label="tenant.label"-->
+<!--              :value="tenant.value"-->
+<!--              ></el-option>-->
+<!--          </el-select>-->
+<!--      </div>-->
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" class="loginForm">
         <el-form-item label prop="username">
           <el-input
@@ -170,6 +170,7 @@ el-button {
 .login-title {
   font-size: 18px;
   color: #777777;
+  padding: 20px;
 }
 
 .login-div {

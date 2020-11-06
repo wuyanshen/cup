@@ -30,6 +30,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
+    @Transactional(readOnly = false)
     @Override
     public boolean updatePwd(UserVO userVO) {
         SysUser sysUser = new SysUser();
