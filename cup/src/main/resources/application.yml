@@ -1,11 +1,5 @@
 server:
   port: 3001
-#  servlet:
-#    session:
-#      timeout: 20s  # SpringBoot默认session超时是1分钟，小于1分钟还是1分钟
-#      cookie:
-#        http-only: true #这样设置就不能通过js脚本获取cookie
-#        secure: true #只有https请求才会携带cookie
 
 
 spring:
@@ -15,14 +9,11 @@ spring:
     loginType: JSON
 
 
-  session:
-    timeout: 30m
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
+    username: ENC(qPk24c9OuwPT2qYHnLIymA==)
+    password: ENC(xz3XtbFndmSVOsS+CBxqrQ==)
     type: com.zaxxer.hikari.HikariDataSource
   main:
     allow-bean-definition-overriding: true
@@ -68,4 +59,8 @@ cup:
     ignore-tables:
 #      - sys_menu
 
+# jasypt安全框架—>盐值
+jasypt:
+  encryptor:
+    password: mQjEGflOtK9YuwOS
 

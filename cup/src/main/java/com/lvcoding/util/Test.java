@@ -3,6 +3,7 @@ package com.lvcoding.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.entity.dto.MenuTree;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,7 +23,18 @@ public class Test {
 
 
     public static void main(String[] args) throws JsonProcessingException {
-        testPwd();
+        testJasypt();
+    }
+
+    public static void testJasypt(){
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        //加密所需的salt(盐)
+        textEncryptor.setPassword("mQjEGflOtK9YuwOS");
+        //要加密的数据（数据库的用户名或密码）
+        String username = textEncryptor.encrypt("root");
+        String password = textEncryptor.encrypt("root");
+        System.out.println("username:"+username);
+        System.out.println("password:"+password);
     }
 
     public static void testPwd(){
