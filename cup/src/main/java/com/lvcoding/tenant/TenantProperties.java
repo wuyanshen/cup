@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @Component
 @ConfigurationProperties(prefix = "cup.tenant")
-public class TenantProperites {
+public class TenantProperties {
 
     /**
      *  是否开启租户功能，默认不开启（false）

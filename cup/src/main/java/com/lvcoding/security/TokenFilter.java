@@ -3,24 +3,12 @@ package com.lvcoding.security;
 import cn.hutool.core.util.ObjectUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.common.CupProperties;
-import com.lvcoding.constant.CommonConstant;
-import com.lvcoding.entity.SysUser;
-import com.lvcoding.tenant.TenantProperites;
-import com.lvcoding.util.DateUtil;
-import com.lvcoding.util.JwtUtil;
 import com.lvcoding.util.Res;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -30,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author wuyanshen
@@ -44,12 +31,6 @@ public class TokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private ObjectMapper objectMapper;
-//
-//    @Autowired
-//    private CommonUserDetailServiceImpl commonUserDetailServiceImpl;
-//
-//    @Autowired
-//    private RedisTemplate redisTemplate;
 
     @Autowired
     private TokenService tokenService;

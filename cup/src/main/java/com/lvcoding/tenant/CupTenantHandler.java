@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class CupTenantHandler implements TenantHandler {
 
-    private final TenantProperites tenantProperites;
+    private final TenantProperties tenantProperties;
 
     @Override
     public Expression getTenantId(boolean where) {
@@ -41,7 +41,7 @@ public class CupTenantHandler implements TenantHandler {
     public boolean doTableFilter(String tableName) {
 
         // 判断是否开启多租户功能
-        if(!tenantProperites.isEnable()){
+        if(!tenantProperties.isEnable()){
             return true;
         }
 
@@ -57,7 +57,7 @@ public class CupTenantHandler implements TenantHandler {
         }
 
         // 判断不需要过滤的表
-        if(tenantProperites.getIgnoreTables().contains(tableName)){
+        if(tenantProperties.getIgnoreTables().contains(tableName)){
             return true;
         }
 

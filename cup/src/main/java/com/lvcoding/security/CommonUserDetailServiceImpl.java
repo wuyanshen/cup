@@ -8,7 +8,6 @@ import com.lvcoding.entity.SysRole;
 import com.lvcoding.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -61,7 +60,6 @@ public class CommonUserDetailServiceImpl implements UserDetailsService {
         String auths = urls.stream().collect(Collectors.joining(","));
         Set<String> authorities = Arrays.stream(auths.split(",")).collect(Collectors.toSet());
 
-//        return new CommonUser(sysUser.getUsername(), sysUser.getPassword(), sysUser.getOrgId(), sysUser.getId(), sysUser.isStatus(), true, true, true,roles, AuthorityUtils.commaSeparatedStringToAuthorityList(auths));
         return new CommonUser(sysUser, authorities, roles);
     }
 }
