@@ -30,7 +30,8 @@
 				<el-tag v-if="scope.row.type==='3'" type="success">角色日志</el-tag>
 			  </template>
 		  </el-table-column>
-		  <el-table-column label="ip地址" prop="ip"></el-table-column>
+		  <el-table-column label="主机" prop="ip"></el-table-column>
+		  <el-table-column label="操作地址" prop="addr"></el-table-column>
 		  <el-table-column label="请求uri" prop="requestUri"></el-table-column>
 		  <el-table-column label="请求参数" prop="params"></el-table-column>
 		  <el-table-column label="请求响应" prop="response" :show-overflow-tooltip="true"></el-table-column>

@@ -35,7 +35,9 @@ public class SysLogUtils {
         sysLog.setCreateBy(getUserName());
         sysLog.setRequestUri(request.getRequestURI());
         //通过hutool获取ip
-        sysLog.setIp(ServletUtil.getClientIP(request));
+        String ip = ServletUtil.getClientIP(request);
+        sysLog.setIp(ip);
+        sysLog.setAddr(AddressUtil.getAddressByIp(ip));
         //通过hutool将参数转换成用`&`拼接的url参数
         sysLog.setParams(HttpUtil.toParams(request.getParameterMap()));
         sysLog.setUpdateTime(LocalDateTime.now());

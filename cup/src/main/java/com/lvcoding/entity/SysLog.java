@@ -36,6 +36,12 @@ public class SysLog {
     private String ip;
 
     /**
+     * 操作地址
+     */
+    @TableField(value = "addr")
+    private String addr;
+
+    /**
      * 请求uri
      */
     @TableField(value = "request_uri")

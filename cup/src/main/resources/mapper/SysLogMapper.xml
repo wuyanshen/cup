@@ -8,6 +8,7 @@
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="request_uri" jdbcType="VARCHAR" property="requestUri" />
     <result column="method" jdbcType="VARCHAR" property="method" />
     <result column="params" jdbcType="VARCHAR" property="params" />
@@ -20,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `type`, title, ip, request_uri, `method`, params, response, `time`, create_by, create_time,
+    id, `type`, title, ip, addr, request_uri, `method`, params, response, `time`, create_by, create_time,
     update_time, del_flag
   </sql>
 </mapper>

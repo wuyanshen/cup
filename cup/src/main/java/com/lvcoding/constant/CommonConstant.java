@@ -33,6 +33,8 @@ public interface CommonConstant {
 
     String TOKEN_KEY = "token_key";
 
+    String UNKNOWN_IP = "XX XX";
+
     /**
      * 租户表名称
      */
