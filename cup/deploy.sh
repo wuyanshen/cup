@@ -43,18 +43,18 @@ ssh "${deploy_user}"@"${deploy_host}" "
 
 printf '删除旧的docker镜像\n';
 docker rm -f cup
-docker rmi cup:1.0;
+docker rmi cup;
 printf '\n';
 
 printf '构建docker镜像\n';
 cd ${deploy_path};
 docker ps;
-docker build -t cup:1.0 .;
+docker build -t cup .;
 docker images ;
 printf '\n';
 
 printf '启动docker镜像\n';
-docker run -d -p 3001:3001 --name cup cup:1.0
+docker run -d -p 3001:3001 --name cup cup
 docker ps;
 printf '\n';
 
