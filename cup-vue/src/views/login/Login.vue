@@ -37,6 +37,12 @@
         </el-form-item>
       </el-form>
     </div>
+    <!--  底部  -->
+    <div class="login-footer">
+      <div class="txt">
+        <span>Copyright © 2018-2020 cup.lvcoding.com All Rights Reserved.</span>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -159,12 +165,20 @@ el-button {
 
 .login-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  /*background-color: #2b4b6b;*/
   background: url("../../assets/images/bg.jpg") no-repeat;
   background-size:100% 100%;
+
+  .login-footer{
+    color: white;
+    font-size: 12px;
+    align-self: center;
+    margin-top: 20px;
+    letter-spacing: 1px;
+  }
 }
 
 .login-title {
@@ -176,6 +190,7 @@ el-button {
 .login-div {
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: center;
   flex-direction: column;
   width: 400px;
