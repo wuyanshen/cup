@@ -66,7 +66,7 @@
                     this.UPDATE_IFRAME_URL(item.url)
                     this.UPDATE_ROUTER_VIEW(false)
                     this.addTab(item.url)
-                    
+
                 //跳转vue页面
                 }else{
                     this.UPDATE_IFRAME_URL("")
@@ -112,7 +112,7 @@
         }
 
         .title {
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
         }
     }

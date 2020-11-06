@@ -8,7 +8,7 @@
                 <a @click="open" href="#"><i class="el-icon-star-off"></i></a>
             </el-tooltip>
             <el-tooltip content="博客" placement="top">
-                <a href="http://www.lvcoding.com" target="_blank"><i class="el-icon-reading"></i></a>
+                <a href="https://www.lvcoding.com" target="_blank"><i class="el-icon-reading"></i></a>
             </el-tooltip>
             <el-tooltip content="Gitee码云" placement="bottom">
                 <a href="https://gitee.com/wuyanshen/cup" target="_blank"><i class="el-icon-medal-1"></i></a>
@@ -201,7 +201,7 @@
                                 message: "退出成功!"
                             });
                         }
-                        
+
                     })
                     .catch(() => {});
             },
@@ -251,7 +251,7 @@
                 font-size: 30px;
             }
         }
-        
+
         //二维码图片dialog
         .qrcode_dialog{
             img{
