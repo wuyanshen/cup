@@ -1,11 +1,5 @@
 server:
   port: 3001
-#  servlet:
-#    session:
-#      timeout: 20s  # SpringBoot默认session超时是1分钟，小于1分钟还是1分钟
-#      cookie:
-#        http-only: true #这样设置就不能通过js脚本获取cookie
-#        secure: true #只有https请求才会携带cookie
 
 
 spring:
@@ -18,7 +12,7 @@ spring:
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: ENC(qPk24c9OuwPT2qYHnLIymA==)
     password: ENC(xz3XtbFndmSVOsS+CBxqrQ==)
     type: com.zaxxer.hikari.HikariDataSource
