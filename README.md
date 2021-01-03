@@ -145,5 +145,5 @@ nginx配置反向代理，结果请求接口没有反应
 
 ## 请我喝咖啡
 
-![](./images/dashang.jpg){width="200px" height="200px"}
+![](./images/dashang.jpg)
 
