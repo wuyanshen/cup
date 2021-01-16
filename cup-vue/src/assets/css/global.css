@@ -28,3 +28,12 @@ body,
     background-color:#fff!important
 }
 
+/* 面包屑样式 */
+.el-breadcrumb {
+    margin: 20px 0 0 20px;
+}
+
+/* table样式 */
+.el-table{
+    margin-top: 10px;
+}

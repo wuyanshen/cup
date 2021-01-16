@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- 面包屑区 -->
-    <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-    </el-breadcrumb> -->
 
     <!-- 卡片区 -->
     <el-card>
@@ -47,7 +42,7 @@
                 <!-- 表格区 -->
                 <el-table size="mini" :data="this.page.tableData" border stripe class="user_table" :header-cell-style="{background:'#F2F6FC'}">
                   <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
-                  <el-table-column align="center" prop="username" label="姓名" width="180"></el-table-column>
+                  <el-table-column align="center" prop="username" label="用户名" width="180"></el-table-column>
                   <el-table-column align="center" prop="phone" label="电话"></el-table-column>
                   <el-table-column align="center" prop="email" label="邮箱"></el-table-column>
                   <el-table-column align="center" prop="status" label="是否启用">
@@ -88,36 +83,29 @@
         </el-row>
     </el-card>
 
-    <!-- 新增用户对话框 -->
+    <!-- 新增/修改用户对话框 -->
     <el-dialog
-      title="新增用户"
-      :visible.sync="userAddDialog"
-      width="50%"
+      :title="title"
+      :visible.sync="userDialog"
+      width="30%"
       :show-close="false"
-      @close="userAddClose"
+      @close="userDialogClose"
     >
-      <el-form size="mini" label-width="100px" :rules="userAddRules" :model="userAddForm" ref="userAddForm">
+      <el-form size="mini" label-width="100px" :rules="userRules" :model="userForm" ref="userForm">
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="userAddForm.username"></el-input>
+          <el-input v-model="userForm.username" :disabled="userForm.id !== undefined"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="userAddForm.password"></el-input>
+        <el-form-item label="密码" prop="password" v-if="userForm.id === undefined">
+          <el-input type="password" v-model="userForm.password"></el-input>
         </el-form-item>
         <el-form-item label="电话" prop="phone">
-          <el-input v-model="userAddForm.phone"></el-input>
+          <el-input v-model="userForm.phone"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="userAddForm.email"></el-input>
+          <el-input v-model="userForm.email"></el-input>
         </el-form-item>
         <el-form-item label="所属组织机构">
-            <!-- <el-tree-select
-              :elTreeProps="elTreeProps"
-              :elTreeData="orgTreeData"
-              :defaultSelectedId="userAddForm.orgId"
-              :disabled="false"
-              @handleTreeSelected="handleAddTreeSelected($event)"
-              @validateSelectTree="validateAddSelectTree"/> -->
-              <el-input placeholder="请选择组织机构" v-model="userAddForm.orgName"  @focus="orgTreeKey=true"></el-input>
+              <el-input placeholder="请选择组织机构" v-model="userForm.orgName"  @focus="orgTreeKey=true"></el-input>
               <div v-if="orgTreeKey">
                   <el-tree
                   :data="orgTreeData"
@@ -128,7 +116,7 @@
               </div>
         </el-form-item>
         <el-form-item label="角色" prop="roleIds">
-            <el-select size="mini" v-model="userAddForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
+            <el-select size="mini" v-model="userForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
                 <el-option
                 v-for="item in roles"
                 :key="item.id"
@@ -139,151 +127,83 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="userAddDialog = false">取 消</el-button>
-        <el-button size="mini" type="primary" @click="handleUserAdd">确 定</el-button>
+        <el-button size="mini" @click="userDialog = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="handleUserEditSubmit">确 定</el-button>
       </span>
     </el-dialog>
 
-    <!-- 修改用户对话框 -->
-    <el-dialog :show-close="false" title="修改用户" :visible.sync="userEditDialog" width="50%" @close="userEditClose">
-      <el-form size="mini" label-width="100px" :model="userEditForm">
-        <el-form-item label="id">
-          <el-input v-model="userEditForm.id" disabled></el-input>
-        </el-form-item>
-        <el-form-item label="用户名">
-          <el-input v-model="userEditForm.username"></el-input>
-        </el-form-item>
-        <el-form-item label="是否启用">
-          <el-switch
-            style="display: block"
-            v-model="userEditForm.status"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-            active-text="启用"
-            inactive-text="禁用"
-          ></el-switch>
-        </el-form-item>
-        <el-form-item label="电话">
-          <el-input v-model="userEditForm.phone"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱">
-          <el-input v-model="userEditForm.email"></el-input>
-        </el-form-item>
-        <el-form-item label="所属组织机构">
-            <!-- <el-tree-select
-              :elTreeProps="elTreeProps"
-              :elTreeData="orgTreeData"
-              :defaultSelectedId="userEditForm.orgId"
-              :disabled="false"
-              @handleTreeSelected="handleEditTreeSelected($event)"
-              @validateSelectTree="validateEditSelectTree"/> -->
-              <el-input placeholder="请选择组织机构" v-model="userEditForm.orgName"  @focus="orgTreeKey=true"></el-input>
-              <div v-if="orgTreeKey">
-                  <el-tree
-                  :data="orgTreeData"
-                  :props="defaultProps"
-                  default-expand-all
-                  @node-click="handleEditTreeSelected"
-                  ></el-tree>
-              </div>
-        </el-form-item>
-        <el-form-item label="角色">
-            <el-select size="mini" v-model="userEditForm.roleIds" value-key="id" style="width: 100%;" multiple placeholder="请选择角色">
-                <el-option
-                v-for="(item,index) in roles"
-                :key="index"
-                :label="item.roleName"
-                :value="item.id"
-                ></el-option>
-            </el-select>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="userEditDialog = false">取 消</el-button>
-        <el-button size="mini" type="primary" @click="handleUserUpdate">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 <script>
 import { mapActions } from "vuex";
 export default {
   data() {
-    var usernameCheck = async (rule, value, callback) => {
-      let res = await this.usernameCheck({ username: value });
-      if (res.code !== 0) {
-        callback(new Error("用户名已存在"));
-      } else {
-        callback();
-      }
+    const usernameCheck = async (rule, value, callback) => {
+        console.log(this.userForm.id)
+        if (this.userForm.id === undefined) {
+            let res = await this.usernameCheck({ username: value });
+            if (res.code !== 0) {
+                callback(new Error("用户名已存在"));
+            } else {
+                callback();
+            }
+        } else {
+            callback();
+        }
     };
     return {
-      orgs:[],
-      roles: [],
-      orgTreeData: [],
-      userAddDialog: false,
-      userEditDialog: false,
-      userAddForm: {
-        username: "",
-        password: "",
-        phone: "",
-        email: "",
-        status: true,
-        orgId: "",
-        orgName: "",
-        roleIds: ""
-      },
-      userEditForm: {
-        id: 0,
-        username: "",
-        phone: "",
-        email: "",
-        status: true,
-        orgId: "",
-        orgName: "",
-        roleIds: ""
-      },
-	  page:{
-		tableData: [],
-		pageSize: 10,
-		total: 0,
-		currentPage: 1,
-	  },
-      queryInfo: {
-        size: 0,
-        current: 0,
-        username: '',
-        orgId: '',
-      },
-      orgTreeKey: false,
-      defaultProps: {
-        children: 'children',
-        label: 'orgName'
-      },
-      elTreeProps:{// el-tree-select配置项（必选）
-        value: 'id',
-        label: 'orgName',
-        children: 'children',
-      },
-      filterText: '',
-      userAddRules: {
-        username: [
-          { required: true, message: "用户名不能为空", trigger: "blur" },
-          { validator: usernameCheck, message: "用户名已存在", trigger: "blur" }
-        ],
-        password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码至少为6位", trigger: "blur" }
-        ],
-        phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
-        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
-        roleIds: [{ required: true, message: "角色不能为空", trigger: "blur" }],
-      }
+        title: '',
+        orgs:[],
+        roles: [],
+        orgTreeData: [],
+        userDialog: false,
+        userForm: {
+            status: true,
+        },
+        page:{
+            tableData: [],
+            pageSize: 10,
+            total: 0,
+            currentPage: 1,
+        },
+        queryInfo: {
+            size: 0,
+            current: 0,
+            username: '',
+            orgId: '',
+        },
+        orgTreeKey: false,
+        defaultProps: {
+            children: 'children',
+            label: 'orgName'
+        },
+        elTreeProps:{// el-tree-select配置项（必选）
+            value: 'id',
+            label: 'orgName',
+            children: 'children',
+        },
+        filterText: '',
+        userRules: {
+            username: [
+              { required: true, message: "用户名不能为空", trigger: "blur" },
+              { validator: usernameCheck, message: "用户名已存在", trigger: "blur" }
+            ],
+            password: [
+              { required: true, message: "密码不能为空", trigger: "blur" },
+              { min: 6, message: "密码至少为6位", trigger: "blur" }
+            ],
+            phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
+            email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
+            roleIds: [{ required: true, message: "角色不能为空", trigger: "blur" }],
+        }
     };
   },
   async mounted() {
-    const res = await this.orgTree()
-    this.orgTreeData = res.data
+    // 查询机构树
+    const orgs = await this.orgTree()
+    this.orgTreeData = orgs.data
+
+    // 查询用户列表
     this.flush()
   },
   watch: {
@@ -304,75 +224,51 @@ export default {
         "roleList"
     ]),
     ...mapActions('org',['orgTree']),
-    //组织机构树过滤
+    // 组织机构树过滤
     filterNode(value, data) {
         if (!value) return true;
         return data.orgName.indexOf(value) !== -1;
     },
-    //点击组织机构树的节点
+    // 点击组织机构树的节点
     orgTreeClick(data, node, obj){
         this.queryPage(data.id, this.queryInfo.username, this.page.pageSize, this.page.currentPage)
     },
-    //弹出用户新增dialog
+    // 新增按钮
     async handleAdd(){
-        this.userAddDialog = true
-        //查询用户角色列表
-        const res = await this.roleList()
-        if(res.code === 0){
-            this.roles = res.data
-        }
+        this.title = '新增用户'
+        this.userDialog = true
     },
-    //修改每页显示条数
+    // 修改每页显示条数
     handleSizeChange(size) {
-      this.queryPage(this.queryInfo.orgId, this.queryInfo.username, size, this.page.currentPage)
+        this.queryPage(this.queryInfo.orgId, this.queryInfo.username, size, this.page.currentPage)
     },
-	//修改当前第几页
+	// 修改当前第几页
     handleCurrentChange(current) {
-      this.queryPage(this.queryInfo.orgId, this.queryInfo.username, this.page.pageSize, current)
+        this.queryPage(this.queryInfo.orgId, this.queryInfo.username, this.page.pageSize, current)
     },
-    //用户修改关闭dialog后处理
-    userEditClose(){
-        this.orgTreeKey = false
-        this.userEditForm = {
-            id: 0,
-            username: "",
-            phone: "",
-            email: "",
-            status: true,
-            orgId: "",
-            orgName: "",
-            roleIds: ""
+
+    // 修改按钮
+    async handleEdit(row) {
+        this.title = '修改用户'
+
+        // 查询用户角色列表
+        const roles = await this.roleList()
+        this.roles = roles.data
+
+        // 查询用户角色id集合
+        const roleIds = await this.userRoleIds(row.id);
+        this.userForm.roleIds = roleIds.data
+
+        this.getOrg(this.orgTreeData)
+        // 回显组织机构
+        for(let org of this.orgs) {
+            if (org.orgId === row.orgId) {
+                this.userForm.orgName = org.orgName
+            }
         }
-    },
-    //弹出用户修改dialog
-    handleEdit(row) {
-      this.userEditForm.id = row.id
-      this.userEditForm.orgId = row.orgId
-      this.userEditForm.status = row.status
-      this.userEditForm.username = row.username
-      this.userEditForm.phone = row.phone
-      this.userEditForm.email = row.email
+        this.userForm = Object.assign({}, this.userForm, row)
 
-
-      console.log('form', this.userEditForm)
-
-      //查询用户角色列表
-      this.roleList().then(res => {
-          this.roles = res.data
-      })
-      // 查询用户角色id集合
-      this.userRoleIds(row.id).then(res => {
-          this.userEditForm.roleIds = res.data
-      })
-
-      this.getOrg(this.orgTreeData)
-      //回显组织机构
-      for(let org of this.orgs){
-          if(org.orgId === row.orgId){
-              this.userEditForm.orgName = org.orgName
-          }
-      }
-      this.userEditDialog = true;
+        this.userDialog = true;
     },
     getOrg(datas){ //递归遍历机构树，获取组织机构list
       for(var i in datas){
@@ -382,50 +278,46 @@ export default {
         }
       }
     },
-    //用户新增dialog关闭后清空值和校验
-    userAddClose() {
-      this.$refs["userAddForm"].resetFields();
-      this.userAddForm = {
-        username: "",
-        password: "",
-        phone: "",
-        email: "",
+
+    // 用户新增dialog关闭后清空值和校验
+    userDialogClose() {
+      this.$refs["userForm"].resetFields();
+      this.userForm = {
         status: true,
-        orgId: "",
-        orgName: "",
-        roleIds: ""
       }
       this.orgTreeKey = false
     },
-    //新增用户
-    handleUserAdd() {
-      this.$refs.userAddForm.validate(async valid => {
-        if (!valid) {
-          return false;
-        } else {
-          let res = await this.addUser(this.userAddForm);
-          if (res.code == 0) {
-            this.$message.success("添加用户成功");
-          }
-          //刷新
-          this.flush();
-          //关闭dialog
-          this.userAddDialog = false;
-        }
-      });
+
+    // 提交表单
+    async handleUserEditSubmit() {
+        this.$refs.userForm.validate(async valid => {
+            if (!valid) {
+                return false;
+            } else {
+                if (this.userForm.id === undefined) {
+                    let res = await this.addUser(this.userForm);
+                    if (res.code === 0) {
+                        this.$message.success("添加用户成功");
+                    }
+                    //刷新
+                    this.flush();
+                    //关闭dialog
+                    this.userDialog = false;
+                } else {
+                    let res = await this.updateUser(this.userForm);
+                    if (res.code == 0) {
+                        this.$message.success("修改用户成功");
+                    }
+                    // 刷新
+                    this.flush();
+                    // 关闭dialog
+                    this.userDialog = false;
+                }
+            }
+        })
     },
-    //更新用户
-    async handleUserUpdate() {
-      let res = await this.updateUser(this.userEditForm);
-      if (res.code == 0) {
-        this.$message.success("修改用户成功");
-      }
-      //刷新
-      this.flush();
-      //关闭dialog
-      this.userEditDialog = false;
-    },
-    //删除用户
+
+    // 删除用户
     handleDeleteUser(id) {
       this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
         confirmButtonText: "确定",
@@ -444,15 +336,11 @@ export default {
         .catch(() => {});
     },
     handleAddTreeSelected(data){
-      this.userAddForm.orgId = data.id
-      this.userAddForm.orgName = data.orgName
+      this.userForm.orgId = data.id
+      this.userForm.orgName = data.orgName
       this.orgTreeKey = false
     },
-    handleEditTreeSelected(data){
-        this.userEditForm.orgId = data.id
-        this.userEditForm.orgName = data.orgName
-        this.orgTreeKey = false
-    },
+
 	//条件查询
     handleSearch() {
       this.queryPage('',this.queryInfo.username,this.page.pageSize,'')

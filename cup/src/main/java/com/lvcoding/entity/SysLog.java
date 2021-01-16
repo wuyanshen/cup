@@ -6,11 +6,15 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @TableName(value = "sys_log")
-public class SysLog {
+public class SysLog implements Serializable {
+
+    private static final long serialVersionUID = 9121075790485507207L;
+
     /**
      * 主键id
      */

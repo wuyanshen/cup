@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(commonLoginFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/token/check", "/certification", "/websocket/**", "/tenant/list").permitAll()
+                .antMatchers("/druid/**", "/token/check", "/certification", "/websocket/**", "/tenant/list").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
