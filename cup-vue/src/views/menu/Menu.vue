@@ -41,7 +41,7 @@
     </el-card>
 
     <!-- 新增/修改菜单对话框 -->
-    <el-dialog :show-close="false" :title="title" :visible.sync="menuDialog" width="50%" @close="menuDialogClose">
+    <el-dialog :show-close="false" :title="title" :visible.sync="menuDialog" width="30%" @close="menuDialogClose">
       <el-form size="mini" label-width="80px" :model="menuForm" ref="menuForm">
         <el-form-item label="名称">
           <el-input v-model="menuForm.menuName"></el-input>
