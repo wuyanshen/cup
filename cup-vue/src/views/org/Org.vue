@@ -20,9 +20,9 @@
                  </el-table-column>
             </el-table>
         </el-card>
-        
+
         <!-- 修改dialog -->
-        <el-dialog :visible.sync="orgEditDialog" title="修改" :show-close="false" width="50%" @close="orgEditClose">
+        <el-dialog :visible.sync="orgEditDialog" title="修改" :show-close="false" width="30%" @close="orgEditClose">
             <el-form size="mini" label-width="100px" :model="orgForm" ref="orgForm">
                 <el-form-item label="组织机构名称">
                     <el-input v-model="orgForm.orgName" size="mini"></el-input>
@@ -46,7 +46,7 @@
                     <el-input v-model="orgForm.address" size="mini"></el-input>
                 </el-form-item>
                 <el-form-item label="上级组织机构">
-                    <el-tree-select 
+                    <el-tree-select
                       :elTreeProps="elTreeProps"
                       :elTreeData="tableData"
                       :defaultSelectedId="orgForm.parentId"
@@ -60,9 +60,9 @@
                 <el-button type="primary" size="mini" @click="handleOrgUpdate">确定</el-button>
             </span>
         </el-dialog>
-        
+
         <!-- 新增dialog -->
-        <el-dialog :visible.sync="orgAddDialog" title="新增" :show-close="false" width="50%" @close="orgAddClose">
+        <el-dialog :visible.sync="orgAddDialog" title="新增" :show-close="false" width="30%" @close="orgAddClose">
             <el-form size="mini" label-width="100px" :model="orgForm" ref="orgForm">
                 <el-form-item label="组织机构名称">
                     <el-input v-model="orgForm.orgName" size="mini"></el-input>
@@ -74,7 +74,7 @@
                     <el-input v-model="orgForm.address" size="mini"></el-input>
                 </el-form-item>
                 <el-form-item label="上级组织机构">
-                    <el-tree-select 
+                    <el-tree-select
                       :elTreeProps="elTreeProps"
                       :elTreeData="tableData"
                       :defaultSelectedId="orgForm.parentId"

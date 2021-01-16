@@ -4,29 +4,29 @@
             <!-- 条件查询 -->
             <el-row :gutter="20">
                 <el-col :span="2">
-                    <el-button icon="el-icon-plus" size="small" type="primary" @click="roleAddDialog=true">新增</el-button>
+                    <el-button icon="el-icon-plus" size="mini" type="primary" @click="roleAddDialog=true">新增</el-button>
                 </el-col>
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="6">
-                    <el-input size="small" clearable v-model="queryInfo.roleName" placeholder="请输入要查询的角色名称" @change="queryRole"></el-input>
+                    <el-input size="mini" clearable v-model="queryInfo.roleName" placeholder="请输入要查询的角色名称" @change="queryRole"></el-input>
                 </el-col>
                 <el-col :span="6">
-                    <el-input size="small" clearable v-model="queryInfo.roleCode" placeholder="请输入要查询的角色英文名称" @change="queryRole"></el-input>
+                    <el-input size="mini" clearable v-model="queryInfo.roleCode" placeholder="请输入要查询的角色英文名称" @change="queryRole"></el-input>
                 </el-col>
                 <el-col :span="2">
-                    <el-button icon="el-icon-search" size="small" type="primary" @click="queryRole">查询</el-button>
+                    <el-button icon="el-icon-search" size="mini" type="primary" @click="queryRole">查询</el-button>
                 </el-col>
             </el-row>
             <!-- 表格区 -->
-            <el-table size="small" border stripe :data="this.page.tableData" :header-cell-style="{background:'#F2F6FC'}">
+            <el-table size="mini" border stripe :data="this.page.tableData" :header-cell-style="{background:'#F2F6FC'}">
                 <el-table-column align="center" label="序号" type="index" width="50px"></el-table-column>
                 <el-table-column align="center" label="角色名称" prop="roleName"></el-table-column>
                 <el-table-column align="center" label="角色英文名称" prop="roleCode"></el-table-column>
                 <el-table-column align="center" label="状态" prop="status">
                     <template v-slot="scope">
-                        <el-tag size="small" v-if="scope.row.status===1">启用</el-tag>
-                        <el-tag size="small" v-if="scope.row.status===0" type="danger">禁用</el-tag>
+                        <el-tag size="mini" v-if="scope.row.status===1">启用</el-tag>
+                        <el-tag size="mini" v-if="scope.row.status===0" type="danger">禁用</el-tag>
                     </template>
                 </el-table-column>
                 <el-table-column align="center" label="创建时间" prop="createTime" :formatter="formatCreateDate"></el-table-column>
@@ -53,8 +53,8 @@
         </el-card>
 
         <!-- 修改角色dialog -->
-        <el-dialog :show-close="false" title="修改角色" :visible.sync="roleEditDialog" width="50%">
-          <el-form size="small" label-width="80px" :model="roleEditForm">
+        <el-dialog :show-close="false" title="修改角色" :visible.sync="roleEditDialog" width="30%">
+          <el-form size="mini" label-width="80px" :model="roleEditForm">
             <el-form-item label="id">
               <el-input v-model="roleEditForm.id" disabled></el-input>
             </el-form-item>
@@ -82,14 +82,14 @@
 
           </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button size="small" @click="roleEditDialog = false">取 消</el-button>
-            <el-button size="small" type="primary" @click="handleRoleUpdate">确 定</el-button>
+            <el-button size="mini" @click="roleEditDialog = false">取 消</el-button>
+            <el-button size="mini" type="primary" @click="handleRoleUpdate">确 定</el-button>
           </span>
         </el-dialog>
 
         <!-- 新增角色dialog -->
-        <el-dialog :show-close="false" title="新增角色" :visible.sync="roleAddDialog" width="50%" @close="roleAddClose">
-          <el-form size="small" label-width="80px" :model="roleAddForm">
+        <el-dialog :show-close="false" title="新增角色" :visible.sync="roleAddDialog" width="30%" @close="roleAddClose">
+          <el-form size="mini" label-width="80px" :model="roleAddForm">
             <el-form-item label="角色名称">
               <el-input v-model="roleAddForm.roleName"></el-input>
             </el-form-item>
@@ -101,24 +101,23 @@
             </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button size="small" @click="roleAddDialog = false">取 消</el-button>
-            <el-button size="small" type="primary" @click="handleRoleAdd">确 定</el-button>
+            <el-button size="mini" @click="roleAddDialog = false">取 消</el-button>
+            <el-button size="mini" type="primary" @click="handleRoleAdd">确 定</el-button>
           </span>
         </el-dialog>
 
         <!-- 权限dialog -->
-        <el-dialog :show-close="false" title="分配权限" :visible.sync="permissionDialog" width="50%">
+        <el-dialog :show-close="false" title="分配权限" :visible.sync="permissionDialog" width="30%">
             <el-tree
               ref="tree"
               :data="treeData"
               show-checkbox
               node-key="id"
-              default-expand-all
               :props="defaultProps">
             </el-tree>
             <span slot="footer" class="dialog-footer">
-              <el-button size="small" @click="permissionDialog = false">取 消</el-button>
-              <el-button size="small" type="primary" @click="handlePermissionUpdate">确 定</el-button>
+              <el-button size="mini" @click="permissionDialog = false">取 消</el-button>
+              <el-button size="mini" type="primary" @click="handlePermissionUpdate">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -128,7 +127,7 @@
     import {mapActions} from 'vuex'
     import moment from 'moment'
     import {formatDate} from '@/lib/util'
-    
+
     export default {
         data() {
             return {
@@ -276,7 +275,7 @@
             handleCurrentChange(current) {
               this.queryPage(this.queryInfo.roleName, this.queryInfo.roleCode, this.page.pageSize, current)
             },
-            
+
             //------- 工具方法 -------
             //封装查询条件
             copyQueryValue(roleName,roleCode,size,current){

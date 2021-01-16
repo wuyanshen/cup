@@ -4,20 +4,20 @@
             <!-- 条件查询 -->
             <el-row :gutter="20">
                 <el-col :span="2">
-                    <el-button icon="el-icon-plus" size="small" type="primary" @click="tenantAddDialog=true">新增</el-button>
+                    <el-button icon="el-icon-plus" size="mini" type="primary" @click="tenantAddDialog=true">新增</el-button>
                 </el-col>
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="6">
-                    <el-input size="small" clearable v-model="queryInfo.tenantName" placeholder="请输入要查询的租户名称" @change="queryTenant"></el-input>
+                    <el-input size="mini" clearable v-model="queryInfo.tenantName" placeholder="请输入要查询的租户名称" @change="queryTenant"></el-input>
                 </el-col>
                 <el-col :span="2">
-                    <el-button icon="el-icon-search" size="small" type="primary" @click="queryTenant">查询</el-button>
+                    <el-button icon="el-icon-search" size="mini" type="primary" @click="queryTenant">查询</el-button>
                 </el-col>
             </el-row>
-            
+
             <!-- 表格区 -->
-            <el-table size="small" border stripe :data="this.page.tableData">
+            <el-table size="mini" border stripe :data="this.page.tableData">
                 <el-table-column align="center" label="序号" type="index" width="50px"></el-table-column>
                 <el-table-column align="center" label="租户名称" prop="tenantName" ></el-table-column>
                 <el-table-column align="center" label="租户编号" prop="tenantId"  ></el-table-column>
@@ -41,10 +41,10 @@
               :total="this.page.total"
             ></el-pagination>
         </el-card>
-        
+
         <!-- 修改租户dialog -->
-        <el-dialog :show-close="false" title="修改租户" :visible.sync="tenantEditDialog" width="50%">
-            <el-form size="small" label-width="80px" :model="tenantEditForm">
+        <el-dialog :show-close="false" title="修改租户" :visible.sync="tenantEditDialog" width="30%">
+            <el-form size="mini" label-width="80px" :model="tenantEditForm">
               <el-form-item label="租户名称">
                 <el-input v-model="tenantEditForm.tenantName"></el-input>
               </el-form-item>
@@ -56,14 +56,14 @@
               </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-              <el-button size="small" @click="tenantEditDialog = false">取 消</el-button>
-              <el-button size="small" type="primary" @click="handleTenantUpdate">确 定</el-button>
+              <el-button size="mini" @click="tenantEditDialog = false">取 消</el-button>
+              <el-button size="mini" type="primary" @click="handleTenantUpdate">确 定</el-button>
             </span>
         </el-dialog>
-        
+
         <!-- 新增租户dialog -->
-        <el-dialog :show-close="false" title="新增租户" :visible.sync="tenantAddDialog" width="50%">
-            <el-form size="small" label-width="80px" :model="tenantAddForm">
+        <el-dialog :show-close="false" title="新增租户" :visible.sync="tenantAddDialog" width="30%">
+            <el-form size="mini" label-width="80px" :model="tenantAddForm">
               <el-form-item label="租户名称">
                 <el-input v-model="tenantAddForm.tenantName"></el-input>
               </el-form-item>
@@ -75,8 +75,8 @@
               </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-              <el-button size="small" @click="tenantAddDialog = false">取 消</el-button>
-              <el-button size="small" type="primary" @click="TenantAdd">确 定</el-button>
+              <el-button size="mini" @click="tenantAddDialog = false">取 消</el-button>
+              <el-button size="mini" type="primary" @click="TenantAdd">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -85,7 +85,7 @@
 <script>
     import {mapActions} from 'vuex'
     import {formatDate} from '@/lib/util'
-        
+
     export default{
         data(){
             return {
@@ -168,7 +168,7 @@
                     this.flush()
                 }
             },
-            
+
             //------- 工具方法 -------
             //修改每页显示条数
             handleSizeChange(size) {
@@ -219,7 +219,7 @@
     .el-row{
         margin: 10px auto;
     }
-    
+
     .el-pagination{
         margin: 10px auto;
     }

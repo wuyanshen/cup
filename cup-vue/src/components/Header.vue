@@ -29,21 +29,21 @@
             </el-dropdown>
         </div>
         <!-- 修改密码对话框 -->
-        <el-dialog title="修改密码" :visible.sync="pwdDialog" width="50%" :show-close="false" @close="pwdClose">
-            <el-form label-width="180px" ref="pwdForm" :rules="pwdRules" :model="pwdForm">
+        <el-dialog title="修改密码" :visible.sync="pwdDialog" width="30%" :show-close="false" @close="pwdClose">
+            <el-form label-width="100px" ref="pwdForm" :rules="pwdRules" size="mini" :model="pwdForm">
                 <el-form-item label="原密码" prop="old_password">
                     <el-input type="password" v-model="pwdForm.old_password"></el-input>
                 </el-form-item>
                 <el-form-item label="新密码" prop="new_password">
                     <el-input type="password" v-model="pwdForm.new_password"></el-input>
                 </el-form-item>
-                <el-form-item label="再输入一次新密码" prop="re_password">
+                <el-form-item label="确认密码" prop="re_password">
                     <el-input type="password" v-model="pwdForm.re_password"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="pwdDialog = false">取 消</el-button>
-                <el-button type="primary" @click="handleUpdatePwd('pwdForm')">确 定</el-button>
+                <el-button size="mini" @click="pwdDialog = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="handleUpdatePwd('pwdForm')">确 定</el-button>
             </span>
         </el-dialog>
         <!-- 二维码显示 -->
