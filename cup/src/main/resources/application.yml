@@ -7,7 +7,12 @@ spring:
     name: cup
   security:
     loginType: JSON
-
+  rabbitmq:
+    addresses: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
 
   # 数据库配置
   datasource:
@@ -67,6 +72,7 @@ spring:
     password:
     port: 6379
 
+
 # token配置
 token:
   header: 'Authorization'
@@ -106,4 +112,6 @@ cup:
 jasypt:
   encryptor:
     password: mQjEGflOtK9YuwOS
+
+
 
