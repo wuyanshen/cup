@@ -16,6 +16,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Res<T> implements Serializable {
 
+    private static final long serialVersionUID = -3146576490912309065L;
+
     private Integer code;
     private String msg;
     private T data;

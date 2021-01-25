@@ -222,7 +222,11 @@ class HttpRequest {
         let options = {
             url,
             method: 'delete',
-            data
+            data,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            transformRequest: data => JSON.stringify(data)
         }
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)

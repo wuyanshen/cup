@@ -10,6 +10,7 @@ import tabs from './module/tabs'
 import log from './module/log'
 import role from './module/role'
 import org from './module/org'
+import job from './module/job'
 import tenant from './module/tenant'
 import { saveInLocal } from './plugin/saveInLocal'
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
 		log,
         role,
         org,
+        job,
         tenant
     },
     // plugins: [saveInLocal]

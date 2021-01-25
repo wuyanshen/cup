@@ -1,21 +1,4 @@
-server:
-  port: 3001
-
-
 spring:
-  application:
-    name: cup
-  profiles:
-    active: druid,quartz
-  security:
-    loginType: JSON
-  rabbitmq:
-    addresses: localhost
-    port: 5672
-    username: guest
-    password: guest
-    virtual-host: /
-
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,9 +8,12 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     # 连接池配置
     druid:
+      # 去掉警告: discard long time none received connection.
+      mysql:
+        use-ping-method: false,
       # 初始化大小，最小，最大
       initial-size: 5
-      min-idle: 5
+      min-idle: 10
       max-active: 20
       # 配置获取连接等待超时的时间
       max-wait: 60000
@@ -35,7 +21,10 @@ spring:
       time-between-eviction-runs-millis: 60000
       # 配置一个连接在池中最小生存时间
       min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1 FROM sys_user
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      max-evictable-idle-time-millis: 900000
+      # 配置检测连接是否有效
+      validation-query: SELECT 1 FROM DUAL
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
@@ -43,9 +32,17 @@ spring:
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 20
       # 配置监控统计拦截的 Filter，去掉后监控界面 SQL 无法统计，wall 用于防火墙
-      filters: stat,wall
-      # 通过 connection-properties 属性打开 mergeSql 功能；慢 SQL 记录
-      connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      # 打开 mergeSql 功能；慢 SQL 记录
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
       # 配置 DruidStatFilter
       web-stat-filter:
         enabled: true
@@ -56,64 +53,13 @@ spring:
         enabled: true
         url-pattern: /druid/*
         # IP 白名单，没有配置或者为空，则允许所有访问
-        allow: 127.0.0.1
+        allow:
         # IP 黑名单，若白名单也存在，则优先使用
-        deny: 192.168.31.253
+        deny:
         # 禁用 HTML 中 Reset All 按钮
         reset-enable: false
         # 登录用户名/密码
         login-username:
         login-password:
-
-  main:
-    allow-bean-definition-overriding: true
-
-  # redis配置
-  redis:
-    host: localhost
-    password:
-    port: 6379
-
-
-# token配置
-token:
-  header: 'Authorization'
-  secret: '0123456789_0123456789_0123456789'
-  expireTime: 30
-
-
-# mybatis-plus配置
-mybatis-plus:
-  global-config:
-    banner: false
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#logging:
-#  level:
-#    org.springframework.security: DEBUG
-
-
-
-cup:
-  # 是否开启演示模式
-  enableDemo: false
-  # 不校验token的请求
-  token-ignore-url:
-    - /tenant/list
-    - /token/check
-    - /token/refresh
-    - /certification
-
-  # 多租户配置
-  tenant:
-    enable: true
-    ignore-tables:
-#      - sys_menu
-
-# jasypt安全框架—>盐值
-jasypt:
-  encryptor:
-    password: mQjEGflOtK9YuwOS
-
 
 

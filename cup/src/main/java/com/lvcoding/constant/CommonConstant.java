@@ -50,4 +50,9 @@ public interface CommonConstant {
      */
     String TENANT_HEADER = "tenantId";
 
+    /**
+     * 定时任务数据key
+     */
+    String JOB_DATA_KEY = "JOB_DATA_KEY";
+
 }

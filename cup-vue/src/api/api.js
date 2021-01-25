@@ -4,6 +4,7 @@ import log from './log'
 import role from './role'
 import org from './org'
 import tenant from './tenant'
+import job from './job'
 
 export default {
     user,
@@ -11,5 +12,6 @@ export default {
 	log,
     role,
     org,
-    tenant
+    tenant,
+    job
 }
