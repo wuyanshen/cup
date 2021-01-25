@@ -25,7 +25,7 @@ public class Producer {
             List<String> strings = Arrays.asList("info", "warning", "error");
             for (String severity : strings) {
                 String msg = "this is a log 【" + severity + "】 ... ";
-                // 此时severity是绑定键
+                // 此时severity是路由键
                 channel.basicPublish(EXCHANGE_NAME, severity, null, msg.getBytes("UTF-8"));
                 System.out.println("生产了消息 " + msg);
             }

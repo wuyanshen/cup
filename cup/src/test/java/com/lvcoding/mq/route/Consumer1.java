@@ -25,7 +25,7 @@ public class Consumer1 {
         // 绑定交换机和队列
         List<String> strings = Arrays.asList("error");
         for (String severity : strings) {
-            // 此时severity是队列键
+            // 此时severity是路由键
             channel.queueBind(queue, EXCHANGE_NAME, severity);
         }
 
