@@ -1,10 +1,12 @@
 package com.lvcoding.mq.deadletter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 使用RabbitMQ的 ”死信队列“ 来实现 “延时队列”
@@ -20,6 +22,8 @@ public class Consumer1 {
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
 
+        System.out.println("等待消息中。。。");
+
 
         // 死信配置
         boolean durable = true; // 是否持久化
@@ -32,6 +36,11 @@ public class Consumer1 {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 System.out.println("消费了消息 " + new String(body, "UTF-8") + " " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                ObjectMapper mapper = new ObjectMapper();
+                Map<String,Object> map = mapper.readValue(new String(body), Map.class);
+                System.out.println(map.get("name"));
+                System.out.println(map.get("age"));
+                System.out.println(map.get("address"));
             }
         });
     }

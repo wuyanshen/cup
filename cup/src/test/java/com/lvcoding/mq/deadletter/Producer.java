@@ -1,5 +1,6 @@
 package com.lvcoding.mq.deadletter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 
 import java.text.SimpleDateFormat;
@@ -37,9 +38,16 @@ public class Producer {
                 .deliveryMode(2) // 2 代表持久化消息
                 .expiration("20000")
                 .build();
-        String msg = "我是一条消息哦，哈哈哈哈";
-        channel.basicPublish(BUSINESS_EXCHANGE_NAME, "", true, properties, msg.getBytes());
-        System.out.println("发布了一条消息 " + msg + " "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        // json字符串消息
+        Map<String, Object> msgs = new HashMap<>();
+        msgs.put("name", "xiaohong ");
+        msgs.put("age", 22);
+        msgs.put("address", "北京海淀");
+        ObjectMapper mapper = new ObjectMapper();
+        String result = mapper.writeValueAsString(msgs);
+
+        channel.basicPublish(BUSINESS_EXCHANGE_NAME, "", true, properties, result.getBytes());
+        System.out.println("发布了一条消息 " + result + " "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
         // 关闭资源
         channel.close();
