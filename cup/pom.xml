@@ -110,6 +110,7 @@
             <version>5.3.1</version>
         </dependency>
 
+        <!--quartz定时任务框架-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
@@ -156,6 +157,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!--activity工作流引擎-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>6.0.0</version>
+            <!--activiti包中的 org.mybatis 包 和 mybatisPlus中的org.mybatis 包冲突。需要排除掉-->
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--jasypt安全框架,加密数据源-->

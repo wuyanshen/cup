@@ -237,6 +237,9 @@ export default {
     async handleAdd(){
         this.title = '新增用户'
         this.userDialog = true
+        // 查询用户角色列表
+        const roles = await this.roleList()
+        this.roles = roles.data
     },
     // 修改每页显示条数
     handleSizeChange(size) {
