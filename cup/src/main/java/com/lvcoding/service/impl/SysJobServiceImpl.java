@@ -25,7 +25,7 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
     private Scheduler scheduler;
 
     @Override
-    public void doJob(JobDataMap jobDataMap) {
+    public void doJob(JobDataMap jobDataMap) throws Exception{
         // 将任务对象从dataMap里取出
         SysJob sysJob = (SysJob) jobDataMap.get(CommonConstant.JOB_DATA_KEY);
 
@@ -33,16 +33,12 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
         String methodName = sysJob.getMethodName();
         Object object = applicationContext.getBean(beanName);
 
-        try {
-            Method method = object.getClass().getDeclaredMethod(methodName);
-            method.invoke(object);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Method method = object.getClass().getDeclaredMethod(methodName);
+        method.invoke(object);
     }
 
     @Override
-    public void add(SysJob sysJob) {
+    public void add(SysJob sysJob) throws Exception {
 
         // 构建任务调度器
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(sysJob.getCron())
@@ -63,8 +59,6 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
                 .withIdentity(sysJob.getJobName())
                 .withSchedule(cronScheduleBuilder)
                 .build();
-
-        try {
             String name = sysJob.getJobName();
             JobKey jobKey = JobKey.jobKey(name);
             boolean exists = scheduler.checkExists(jobKey);
@@ -85,29 +79,24 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
                 this.baseMapper.insert(sysJob);
             }
 
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
-    public void delete(SysJob sysJob) {
-        TriggerKey triggerKey = TriggerKey.triggerKey(sysJob.getJobName());
-
-        try {
-            // 停止触发器
-            scheduler.pauseTrigger(triggerKey);
-            // 移除触发器
-            scheduler.unscheduleJob(triggerKey);
-            // 删除任务
-            scheduler.deleteJob(JobKey.jobKey(sysJob.getJobName()));
-
-            // 删除sys_job
-            this.baseMapper.deleteById(sysJob.getId());
-        } catch (SchedulerException e) {
-            e.printStackTrace();
+    public void delete(SysJob sysJob) throws Exception {
+        if (true) {
+            throw new RuntimeException("我自己抛出的异常");
         }
 
+        TriggerKey triggerKey = TriggerKey.triggerKey(sysJob.getJobName());
+
+        // 停止触发器
+        scheduler.pauseTrigger(triggerKey);
+        // 移除触发器
+        scheduler.unscheduleJob(triggerKey);
+        // 删除任务
+        scheduler.deleteJob(JobKey.jobKey(sysJob.getJobName()));
+
+        // 删除sys_job
+        this.baseMapper.deleteById(sysJob.getId());
     }
 }

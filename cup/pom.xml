@@ -39,6 +39,7 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!--安全框架-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -49,12 +50,14 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--mybatis-plus依赖，简化增删改查-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.3.2</version>
         </dependency>
 
+        <!--lombok 简化实体类-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -90,7 +93,7 @@
             <version>1.2.72</version>
         </dependency>
 
-        <!--druid数据源-->
+        <!--druid数据源，数据源监控-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -110,11 +113,6 @@
             <version>5.3.1</version>
         </dependency>
 
-        <!--quartz定时任务框架-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>
 
         <!--为yml自定义属性自动生成提示-->
         <dependency>
@@ -128,6 +126,7 @@
         <!--    <artifactId>spring-boot-devtools</artifactId>-->
         <!--</dependency>-->
 
+        <!--rabbitmq依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
@@ -153,11 +152,6 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
-        <!--rabbitmq-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
 
         <!--activity工作流引擎-->
         <dependency>

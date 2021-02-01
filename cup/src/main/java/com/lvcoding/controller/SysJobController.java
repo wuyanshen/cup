@@ -40,7 +40,7 @@ public class SysJobController {
      */
      @PreAuthorize("@pm.hasPermission('sys:job:view')")
     @RequestMapping("page")
-    public Res page(Page page, SysJob sysJob){
+    public Res page(Page page, SysJob sysJob) throws Exception{
         QueryWrapper<SysJob> queryWrapper = new QueryWrapper<>();
         if(!StringUtils.isEmpty(sysJob.getJobName())){
             queryWrapper.lambda().like(SysJob::getJobName,sysJob.getJobName());
@@ -57,7 +57,7 @@ public class SysJobController {
      */
     @PreAuthorize("@pm.hasPermission('sys:job:add')")
     @PostMapping
-    public Res saveOrUpdate(@RequestBody SysJob sysJob){
+    public Res saveOrUpdate(@RequestBody SysJob sysJob) throws Exception{
         String msg = "";
         if (ObjectUtils.isEmpty(sysJob.getId())) {
             log.info(String.format("新增任务 【 %s 】", sysJob.getJobName()));
@@ -80,7 +80,7 @@ public class SysJobController {
      */
     @PreAuthorize("@pm.hasPermission('sys:job:delete')")
     @DeleteMapping
-    public Res delete(@RequestBody SysJob sysJob){
+    public Res delete(@RequestBody SysJob sysJob) throws Exception {
         log.info(String.format("删除任务 【 %s 】", sysJob.getJobName()));
         sysJobService.delete(sysJob);
         return Res.success("删除任务成功");

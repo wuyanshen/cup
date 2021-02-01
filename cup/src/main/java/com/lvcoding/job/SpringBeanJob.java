@@ -1,6 +1,7 @@
 package com.lvcoding.job;
 
 import com.lvcoding.service.SysJobService;
+import lombok.SneakyThrows;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class SpringBeanJob implements Job {
     @Autowired
     private SysJobService sysJobService;
 
+    @SneakyThrows
     @Override
     public void execute(JobExecutionContext context) {
         sysJobService.doJob(context.getJobDetail().getJobDataMap());
