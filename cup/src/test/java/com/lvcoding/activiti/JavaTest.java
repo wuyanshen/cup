@@ -15,6 +15,17 @@ import java.util.zip.ZipInputStream;
  */
 public class JavaTest {
 
+
+
+    /**
+     * 初始化数据库
+     */
+    @Test
+    public void initDatabase(){
+        // 1.创建ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+    }
+
     /**
      * 流程部署
      * 启动后会自动创建28张表

@@ -1,5 +1,6 @@
 package com.lvcoding.activiti;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -13,13 +14,13 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class ActivityService {
 
-    @Autowired
-    private RuntimeService runtimeService;
+    private final RuntimeService runtimeService;
 
-    @Autowired
-    private TaskService taskService;
+    private final TaskService taskService;
+
 
     public boolean startActivity() {
         log.info("工作流启动....");
