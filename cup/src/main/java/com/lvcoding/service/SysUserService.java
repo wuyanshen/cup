@@ -47,4 +47,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return boolean
      */
     boolean saveUser(UserDTO userDTO);
+
+    /**
+     * 获取当前用户的上级
+     *
+     * @param username
+     * @return List<SysUser>
+     */
+    List<SysUser> findSuperior(String username);
 }

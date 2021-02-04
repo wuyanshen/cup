@@ -15,8 +15,16 @@
    <process id="myLeaveProcess" isClosed="false" isExecutable="true" name="请假流程"
             processType="None">
       <startEvent id="_2" name="开始"/>
-      <userTask activiti:exclusive="true" id="_3" name="提交请假"/>
-      <userTask activiti:exclusive="true" id="_4" name="经理审批"/>
+      <userTask activiti:exclusive="true" id="_3" name="提交请假">
+         <extensionElements>
+            <activiti:taskListener class="com.lvcoding.activiti.LeaveListener" event="create"/>
+         </extensionElements>
+      </userTask>
+      <userTask activiti:exclusive="true" id="_4" name="经理审批">
+         <extensionElements>
+            <activiti:taskListener class="com.lvcoding.activiti.LeaveListener" event="create"/>
+         </extensionElements>
+      </userTask>
       <endEvent id="_5" name="结束"/>
       <sequenceFlow id="_6" sourceRef="_2" targetRef="_3"/>
       <sequenceFlow id="_7" sourceRef="_3" targetRef="_4"/>
@@ -52,22 +60,22 @@
             </bpmndi:BPMNLabel>
          </bpmndi:BPMNShape>
          <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="_2" targetElement="_3">
-            <omgdi:waypoint x="226.0" y="62.0"/>
-            <omgdi:waypoint x="226.0" y="135.0"/>
+            <omgdi:waypoint x="226.0" y="61.364070341570525"/>
+            <omgdi:waypoint x="226.0" y="135.1484415440384"/>
             <bpmndi:BPMNLabel>
                <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
             </bpmndi:BPMNLabel>
          </bpmndi:BPMNEdge>
          <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="_3" targetElement="_4">
-            <omgdi:waypoint x="230.0" y="190.0"/>
-            <omgdi:waypoint x="230.0" y="240.0"/>
+            <omgdi:waypoint x="230.0" y="189.44008981635042"/>
+            <omgdi:waypoint x="230.0" y="239.55545745233076"/>
             <bpmndi:BPMNLabel>
                <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
             </bpmndi:BPMNLabel>
          </bpmndi:BPMNEdge>
          <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="_4" targetElement="_5">
-            <omgdi:waypoint x="231.0" y="295.0"/>
-            <omgdi:waypoint x="231.0" y="340.0"/>
+            <omgdi:waypoint x="231.0" y="295.23919927008666"/>
+            <omgdi:waypoint x="231.0" y="339.79379014064506"/>
             <bpmndi:BPMNLabel>
                <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
             </bpmndi:BPMNLabel>

@@ -1,7 +1,5 @@
 package com.lvcoding.activiti;
 
-import com.lvcoding.util.SecurityUtil;
-import lombok.AllArgsConstructor;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -9,14 +7,12 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
-import org.activiti.engine.task.TaskQuery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,15 +61,15 @@ public class BootTest {
      */
     @Test
     public void startProcessInstance() {
-        securityUtil.loginAs("admin");
+        // securityUtil.loginAs("admin");
         System.out.println("Number of process definitions : "+ repositoryService.createProcessDefinitionQuery().count());
         System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
-        Map<String, Object> map = new HashMap<>();
+        // Map<String, Object> map = new HashMap<>();
         //设置办理人、候选人、候选组
         // map.put("assigneeUserId", "admin");
-        map.put("candidateUsers", "李四,王五");
+        // map.put("candidateUsers", "李四,王五");
         // map.put("candidateGroups", "group1,group2");
-        runtimeService.startProcessInstanceByKey("myLeaveProcess", map);
+        runtimeService.startProcessInstanceByKey("myLeaveProcess");
     }
 
 
@@ -91,10 +87,11 @@ public class BootTest {
      */
     @Test
     public void taskQuery() {
-        securityUtil.loginAs("zhangsan");
+        // securityUtil.loginAs("user2");
         //根据流程定义的key,负责人assignee来实现当前用户的任务列表查询
         List<Task> list = taskService.createTaskQuery()
                 .processDefinitionKey("myLeaveProcess")
+                .taskCandidateUser("zhangsan")
                 .list();
 
         if(list!=null && list.size()>0){
@@ -131,11 +128,17 @@ public class BootTest {
 
         final Task task = taskService.createTaskQuery()
                 .processDefinitionKey("myLeaveProcess") // 流程key
+                .taskCandidateUser("zhangsan")
                 // .taskAssignee("zhangsan") // 任务负责人
                 .singleResult();
-        taskService.complete(task.getId());
-        //任务ID
-        System.out.println("完成任务：任务ID：" + task.getId());
+        if (task != null) {
+            taskService.complete(task.getId());
+            //任务ID
+            System.out.println("完成任务：任务ID：" + task.getId());
+        } else {
+            System.out.println("没有需要完成的任务！");
+        }
+
     }
 
     /**

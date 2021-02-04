@@ -1,6 +1,7 @@
 package com.lvcoding.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.entity.dto.UserDTO;
@@ -9,15 +10,17 @@ import com.lvcoding.log.SysLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysUserService;
 import com.lvcoding.util.Res;
+import com.lvcoding.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 /**
  * 用户表(SysUser)表控制层
@@ -34,7 +37,6 @@ public class SysUserController {
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
     /**
      * 查询用户信息
      *
@@ -43,10 +45,7 @@ public class SysUserController {
      */
     @GetMapping("info")
     public Res info(Authentication authentication) {
-        CommonUser user = (CommonUser) authentication.getPrincipal();
-        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", user.getUsername());
-        SysUser sysUser = this.sysUserService.getOne(queryWrapper);
+        SysUser sysUser = this.sysUserService.getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getUsername, Objects.requireNonNull(SecurityUtil.getUser()).getUsername()));
         return Res.success(sysUser);
     }
 
