@@ -1,6 +1,6 @@
 ${AnsiBackground.BRIGHT_WHITE}
 ${AnsiStyle.FAINT}
-${AnsiColor.BRIGHT_RED}
+${AnsiColor.BLACK}
 
 
 
