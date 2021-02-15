@@ -30,10 +30,8 @@ public class ExceptionAdvice {
         else if (ex instanceof MissingServletRequestParameterException) {
             return Res.fail("请求参数错误(参数类型或参数个数不正确)");
         } else {
-            // 将报错信息打印到日志文件中
+            // 将报错信息打印出来
             log.error(ExceptionUtil.getMessage(ex));
-            // 将报错信息打印到控制台，方便在本地调试
-            ex.printStackTrace();
             // 将报错信息返回给客户端
             return Res.fail(500, "系统异常，请联系管理员");
         }
