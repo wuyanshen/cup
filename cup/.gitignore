@@ -1,5 +1,6 @@
 rebel.xml
 *.imp
+/log
 target
 **/src/main/resources/rebel.xml
 package-lock.json

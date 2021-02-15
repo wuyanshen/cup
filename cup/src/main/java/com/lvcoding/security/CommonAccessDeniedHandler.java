@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @author wuyanshen
  * @date 2020-03-24 4:59 下午
- * @discription 自定义登录后访问拒绝处理
+ * @discription 当登录后访问的接口没有权限时，自定义返回结果
  */
 @Component
 public class CommonAccessDeniedHandler implements AccessDeniedHandler {

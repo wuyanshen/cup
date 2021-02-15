@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * @author wuyanshen
  * @date 2020-03-25 1:34 下午
- * @discription 自定义匿名访问(也就是没登录就访问)资源的提示
+ * @discription 自定义匿名访问(也就是未登录或者token失效时)资源的提示
  */
 @Component
 public class CommonAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -28,6 +28,6 @@ public class CommonAuthenticationEntryPoint implements AuthenticationEntryPoint 
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setContentType("application/json;charset=utf-8");
         int code = HttpStatus.UNAUTHORIZED.value();
-        response.getWriter().write(objectMapper.writeValueAsString(Res.fail(code, "您无权访问 "+ request.getRequestURI())));
+        response.getWriter().write(objectMapper.writeValueAsString(Res.fail(code, "未登录，请重新登录 "+ request.getRequestURI())));
     }
 }

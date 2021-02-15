@@ -158,7 +158,7 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter-basic</artifactId>
-            <version>6.0.0</version>
+            <version>5.22.0</version>
             <!--activiti包中的 org.mybatis 包 和 mybatisPlus中的org.mybatis 包冲突。需要排除掉-->
             <exclusions>
                 <exclusion>
