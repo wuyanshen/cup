@@ -3,6 +3,7 @@ package com.lvcoding.activiti;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
@@ -28,7 +29,7 @@ import java.io.InputStream;
 @Slf4j
 @RequestMapping("service")
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EditorController {
 
     String MODEL_ID = "modelId";
