@@ -41,11 +41,6 @@ const menuRouter = [{
                 component: () => import('../views/tenant/Tenant.vue')
             },
             {
-                path: 'nextTickDemo',
-                name: 'nextTickDemo',
-                component: () => import('../views/nextTickDemo.vue')
-            },
-            {
                 path: 'websocket',
                 name: 'websocket',
                 component: () => import('../views/websocket/websocket.vue')
