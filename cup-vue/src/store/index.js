@@ -32,5 +32,5 @@ export default new Vuex.Store({
         job,
         tenant
     },
-    // plugins: [saveInLocal]
+    plugins: [saveInLocal]
 })
