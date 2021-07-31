@@ -6,8 +6,10 @@ import com.lvcoding.entity.SysLog;
 import com.lvcoding.service.SysLogService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,5 +44,15 @@ public class SysLogController {
         }
         queryWrapper.lambda().orderByDesc(SysLog::getCreateTime);
         return Res.success(sysLogService.page(page,queryWrapper));
+    }
+
+    /**
+     * 清空日志
+     * @return
+     */
+    @PreAuthorize("@pm.hasPermission('sys:log:delete')")
+    @DeleteMapping("delete")
+    public Res delete() {
+        return Res.success(sysLogService.remove(null));
     }
 }
