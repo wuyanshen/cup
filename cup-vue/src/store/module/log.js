@@ -15,6 +15,16 @@ const actions = {
 			})
 		})
 	},
+	// 删除日志
+	deleteLogs({ commit }, params) {
+		return new Promise((resolve, reject) => {
+			api.log.deleteLogs(params).then(res => {
+				resolve(res)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	}
 }
 
 const getters = {
