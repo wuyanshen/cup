@@ -8,3 +8,5 @@ spring:
     db-identity-used: true
     # 历史任务存储等级
     history-level: full
+    # 开启历史记录表
+    db-history-used: true

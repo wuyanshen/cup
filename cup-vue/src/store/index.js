@@ -12,6 +12,7 @@ import role from './module/role'
 import org from './module/org'
 import job from './module/job'
 import tenant from './module/tenant'
+import leave from './module/leave'
 import { saveInLocal } from './plugin/saveInLocal'
 
 Vue.use(Vuex)
@@ -30,6 +31,7 @@ export default new Vuex.Store({
         role,
         org,
         job,
+        leave,
         tenant
     },
     plugins: [saveInLocal]

@@ -6,6 +6,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.DeploymentQuery;
 import org.activiti.engine.task.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +42,10 @@ public class BootTest {
 
     /**
      * 发布一个流程
+     * 影响的表：
+     * act_ge_bytearray
+     * act_re_deployment
+     * act_re_procdef
      *
      */
     @Test
@@ -48,6 +54,7 @@ public class BootTest {
         Deployment deployment = repositoryService.createDeployment()
                 .name("请假流程")
                 .addClasspathResource("processes/leave.bpmn")
+                .addClasspathResource("processes/leave.png")
                 .deploy();
 
         // 4.输出部署信息
@@ -58,18 +65,33 @@ public class BootTest {
 
     /**
      * 启动一个实例
+     * 影响的表：
+     * act_hi_actinst
+     * act_hi_detail
+     * act_hi_identitylink
+     * act_hi_procinst
+     * act_hi_taskinst
+     * act_hi_varinst
+     *
+     * act_ru_execution
+     * act_ru_identitylink
+     * act_ru_task
+     * act_ru_variable
+     *
      */
     @Test
     public void startProcessInstance() {
         // securityUtil.loginAs("admin");
         System.out.println("Number of process definitions : "+ repositoryService.createProcessDefinitionQuery().count());
         System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
-        // Map<String, Object> map = new HashMap<>();
+         Map<String, Object> map = new HashMap<>();
         //设置办理人、候选人、候选组
         // map.put("assigneeUserId", "admin");
         // map.put("candidateUsers", "李四,王五");
         // map.put("candidateGroups", "group1,group2");
-        runtimeService.startProcessInstanceByKey("myLeaveProcess");
+         map.put("assignee1", "zhangsan");
+         map.put("assignee2", "jl");
+        runtimeService.startProcessInstanceByKey("myProcess_1", map);
     }
 
 
@@ -79,7 +101,7 @@ public class BootTest {
      */
     @Test
     public void getProcess() {
-        taskService.claim("myLeaveProcess", "");
+        taskService.claim("myProcess_1", "");
     }
 
     /**
@@ -87,11 +109,12 @@ public class BootTest {
      */
     @Test
     public void taskQuery() {
-        // securityUtil.loginAs("user2");
+         securityUtil.loginAs("jl");
         //根据流程定义的key,负责人assignee来实现当前用户的任务列表查询
         List<Task> list = taskService.createTaskQuery()
-                .processDefinitionKey("myLeaveProcess")
-                .taskCandidateUser("zhangsan")
+                .processDefinitionKey("myProcess_1")
+//                .taskCandidateUser("zhangsan")
+                .taskAssignee("zhangsan")
                 .list();
 
         if(list!=null && list.size()>0){
@@ -127,9 +150,9 @@ public class BootTest {
     public void completeTask(){
 
         final Task task = taskService.createTaskQuery()
-                .processDefinitionKey("myLeaveProcess") // 流程key
-                .taskCandidateUser("zhangsan")
-                // .taskAssignee("zhangsan") // 任务负责人
+                .processDefinitionKey("myProcess_1") // 流程key
+//                .taskCandidateUser("zhangsan")
+                 .taskAssignee("jl") // 任务负责人
                 .singleResult();
         if (task != null) {
             taskService.complete(task.getId());
@@ -159,5 +182,21 @@ public class BootTest {
             System.out.println("开始时间：" + hai.getStartTime());
             System.out.println("结束时间：" + hai.getEndTime());
         }
+    }
+
+    /**
+     * 流程删除
+     */
+    @Test
+    public void deleteDeployment(){
+        Deployment deployment = repositoryService.createDeploymentQuery().deploymentName("")
+                .singleResult();
+        //1、创建 ProcessEngine
+        // 通过流程引擎获取repositoryService
+        //删除流程定义，如果该流程定义已经有流程实例启动，则删除出错
+        repositoryService.deleteDeployment("7b86176b-f276-11eb-b033-00ff65f53676",true);
+        //设置true 级联删除流程定义，即使该流程有流程实例启动也可以删除，设置为false非级别删除方式
+        // repositoryService.deleteDeployment("1", true);
+
     }
 }

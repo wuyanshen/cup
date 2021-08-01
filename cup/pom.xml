@@ -155,11 +155,27 @@
 
 
         <!--activity工作流引擎-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.activiti</groupId>-->
+        <!--            <artifactId>activiti-spring-boot-starter-basic</artifactId>-->
+        <!--            <version>5.22.0</version>-->
+        <!--            &lt;!&ndash;activiti包中的 org.mybatis 包 和 mybatisPlus中的org.mybatis 包冲突。需要排除掉&ndash;&gt;-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <artifactId>mybatis</artifactId>-->
+        <!--                    <groupId>org.mybatis</groupId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.activiti</groupId>
-            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <artifactId>activiti-modeler</artifactId>
             <version>5.22.0</version>
-            <!--activiti包中的 org.mybatis 包 和 mybatisPlus中的org.mybatis 包冲突。需要排除掉-->
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter</artifactId>
+            <version>7.0.0.SR1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>mybatis</artifactId>
@@ -167,11 +183,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-modeler</artifactId>
-            <version>5.22.0</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
         </dependency>
+
 
         <!--jasypt安全框架,加密数据源-->
         <dependency>

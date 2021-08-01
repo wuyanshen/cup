@@ -6,6 +6,7 @@ import api from '@/api/api'
 const state = {
     username: 'admin',
     password: '123456',
+    userInfo: {}
 }
 
 const actions = {
@@ -106,7 +107,7 @@ const actions = {
         })
     },
     //获取当前登录用户信息
-    userInfo({commit}, user) {
+    userInfoAction({commit}, user) {
         return new Promise((resolve, reject) => {
             api.user.userInfo(user).then(res => {
                 resolve(res)
@@ -152,7 +153,10 @@ const getters = {
 }
 
 const mutations = {
-
+    // 将用户信息存到vuex中
+    ADD_USERINFO(state, value) {
+        state.userInfo = value;
+    }
 }
 
 export default {

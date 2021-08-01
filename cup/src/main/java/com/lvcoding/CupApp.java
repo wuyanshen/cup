@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 而引入的activiti-spring-boot-starter-basic 依赖中也存在了一个自动安全配置类,  两个安全配置。
  * 排除activiti-spring-boot-starter-basic安全配置类
  */
-@SpringBootApplication(exclude = {org.activiti.spring.boot.SecurityAutoConfiguration.class})
+@SpringBootApplication
 public class CupApp {
     public static void main(String[] args) {
         SpringApplication.run(CupApp.class, args);

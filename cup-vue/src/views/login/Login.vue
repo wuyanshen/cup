@@ -2,19 +2,25 @@
   <div class="login-container">
     <div class="login-div">
       <div class="login-title">
-        <h3>{{appName}}</h3>
+        <h3>{{ appName }}</h3>
       </div>
-<!--      <div class="tenant">-->
-<!--          <el-select class="tenant-list" v-model="tenantId" placeholder="请选择租户" @change="getTenantId">-->
-<!--              <el-option-->
-<!--              v-for="tenant in tenants"-->
-<!--              :key="tenant.value"-->
-<!--              :label="tenant.label"-->
-<!--              :value="tenant.value"-->
-<!--              ></el-option>-->
-<!--          </el-select>-->
-<!--      </div>-->
-      <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" class="loginForm">
+      <!--      <div class="tenant">-->
+      <!--          <el-select class="tenant-list" v-model="tenantId" placeholder="请选择租户" @change="getTenantId">-->
+      <!--              <el-option-->
+      <!--              v-for="tenant in tenants"-->
+      <!--              :key="tenant.value"-->
+      <!--              :label="tenant.label"-->
+      <!--              :value="tenant.value"-->
+      <!--              ></el-option>-->
+      <!--          </el-select>-->
+      <!--      </div>-->
+      <el-form
+        :model="loginForm"
+        status-icon
+        :rules="rules"
+        ref="loginForm"
+        class="loginForm"
+      >
         <el-form-item label prop="username">
           <el-input
             prefix-icon="el-icon-user"
@@ -33,7 +39,12 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('loginForm')" style="width:100%">登录</el-button>
+          <el-button
+            type="primary"
+            @click="submitForm('loginForm')"
+            style="width: 100%"
+            >登录</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -46,12 +57,11 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import {removeTenantId} from '@/lib/util.js'
+import { mapState, mapActions, mapMutations } from "vuex";
+import { removeTenantId } from "@/lib/util.js";
 
 export default {
   data() {
-
     var validateUsername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输用户名"));
@@ -72,23 +82,22 @@ export default {
       }
     };
     return {
-      tenantId:'',
+      tenantId: "",
       tenants: [],
       loginForm: {
         username: "",
         password: "",
-
       },
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
-        password: [{ validator: validatePassword, trigger: "blur" }]
-      }
+        password: [{ validator: validatePassword, trigger: "blur" }],
+      },
     };
   },
   mounted() {
     this.loginForm = {
       username: this.username,
-      password: this.password
+      password: this.password,
     };
 
     // 获取租户列表
@@ -96,30 +105,35 @@ export default {
   },
   computed: {
     ...mapState(["appName"]),
-    ...mapState("user",["username", "password"])
+    ...mapState("user", ["username", "password"]),
   },
   methods: {
-    ...mapActions("user",["login"]),
-    ...mapActions("tenant",["tenantList"]),
+    ...mapActions("user", ["login", "userInfoAction"]),
+    ...mapActions("tenant", ["tenantList"]),
+    ...mapMutations("user", ["ADD_USERINFO"]),
     submitForm(formName) {
-      this.$refs[formName].validate(async valid => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-            if(this.tenantId){
-                let tenantInfo = {
-                    dataType: 'number',
-                    content: parseInt(this.tenantId),
-                    datetime: new Date().getTime(),
-                };
-                localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
-            }else{
-
-            }
-
+          if (this.tenantId) {
+            let tenantInfo = {
+              dataType: "number",
+              content: parseInt(this.tenantId),
+              datetime: new Date().getTime(),
+            };
+            localStorage.setItem("tenantId", JSON.stringify(tenantInfo));
+          } else {
+          }
 
           let res = await this.login(this.loginForm);
           if (res.code === 0) {
-            this.$message.success('登录成功~')
-            this.$router.push("/").catch(err => {err})
+            // 查询用户信息
+            let res = await this.userInfoAction();
+            // 将用户信息放到vuex中
+            this.ADD_USERINFO(res.data);
+            this.$message.success("登录成功~");
+            this.$router.push("/").catch((err) => {
+              err;
+            });
           }
         } else {
           return false;
@@ -127,34 +141,34 @@ export default {
       });
     },
     // 获取租户id，并存储到localStorage
-    getTenantId(){
-        if(this.tenantId){
-            let tenantInfo = {
-                dataType: 'number',
-                content: parseInt(this.tenantId),
-                datetime: new Date().getTime(),
-            };
-            localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
-        }else{
-            removeTenantId();
-        }
+    getTenantId() {
+      if (this.tenantId) {
+        let tenantInfo = {
+          dataType: "number",
+          content: parseInt(this.tenantId),
+          datetime: new Date().getTime(),
+        };
+        localStorage.setItem("tenantId", JSON.stringify(tenantInfo));
+      } else {
+        removeTenantId();
+      }
     },
     // 获取租户列表
-    async getTenantList(){
-        let res = await this.tenantList();
-        let arr = []
-        if(res.code === 0){
-            for(let tenant of res.data){
-                let item = {
-                    label: tenant.tenantName,
-                    value: tenant.tenantId
-                }
-                arr.push(item)
-            }
+    async getTenantList() {
+      let res = await this.tenantList();
+      let arr = [];
+      if (res.code === 0) {
+        for (let tenant of res.data) {
+          let item = {
+            label: tenant.tenantName,
+            value: tenant.tenantId,
+          };
+          arr.push(item);
         }
-        this.tenants = arr;
-    }
-  }
+      }
+      this.tenants = arr;
+    },
+  },
 };
 </script>
 
@@ -170,9 +184,9 @@ el-button {
   justify-content: center;
   height: 100%;
   background: url("../../assets/images/bg.jpg") no-repeat;
-  background-size:100% 100%;
+  background-size: 100% 100%;
 
-  .login-footer{
+  .login-footer {
     color: white;
     font-size: 12px;
     align-self: center;
@@ -204,11 +218,11 @@ el-button {
 }
 
 .tenant {
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-    .tenant-list {
-        width: 150px;
-    }
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  .tenant-list {
+    width: 150px;
+  }
 }
 </style>

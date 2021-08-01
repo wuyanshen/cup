@@ -55,4 +55,29 @@ public interface CommonConstant {
      */
     String JOB_DATA_KEY = "JOB_DATA_KEY";
 
+
+    /**
+     * 待审核
+     */
+    String LEAVE_BILL_STATUS_CREATE = "0";
+
+    /**
+     * 驳回
+     */
+    String LEAVE_BILL_STATUS_REJECT = "-1";
+
+    /**
+     * 不通过
+     */
+    String LEAVE_BILL_STATUS_REFUSE = "-2";
+
+    /**
+     * 通过
+     */
+    String LEAVE_BILL_STATUS_OK = "1";
+
+    /**
+     * 工作流id
+     */
+    String LEAVE_BILL_ID = "myProcess_1";
 }
