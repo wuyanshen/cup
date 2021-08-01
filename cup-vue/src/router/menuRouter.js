@@ -46,6 +46,11 @@ const menuRouter = [{
                 component: () => import('../views/activiti/LeaveBill.vue')
             },
             {
+                path: 'myTask',
+                name: 'myTask',
+                component: () => import('../views/activiti/MyTask.vue')
+            },
+            {
                 path: 'websocket',
                 name: 'websocket',
                 component: () => import('../views/websocket/websocket.vue')
