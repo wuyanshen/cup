@@ -3,6 +3,7 @@ package com.lvcoding.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ import java.io.Serializable;
  * @since 2020-03-24 01:44:06
  */
 @Data
+@TableName(value = "sys_user")
 public class SysUser implements Serializable {
     private static final long serialVersionUID = 448260653094233335L;
     /**

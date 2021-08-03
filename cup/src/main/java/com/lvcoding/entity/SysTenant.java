@@ -12,7 +12,7 @@ import lombok.Data;
  * 租户信息表
  */
 @Data
-@TableName(value = "cup.sys_tenant")
+@TableName(value = "sys_tenant")
 public class SysTenant implements Serializable {
     /**
      * 主键id

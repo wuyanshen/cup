@@ -3,6 +3,8 @@ package com.lvcoding.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
 
 import java.util.Date;
@@ -15,6 +17,7 @@ import java.io.Serializable;
  * @since 2020-03-24 01:24:17
  */
 @Data
+@TableName(value = "sys_org")
 public class SysOrg implements Serializable {
     private static final long serialVersionUID = 772244235379764292L;
     /**
