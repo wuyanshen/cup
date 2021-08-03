@@ -95,7 +95,20 @@
           <el-input v-model="menuForm.url"></el-input>
         </el-form-item>
         <el-form-item label="图标" prop="icon" v-if="menuForm.type === '0'">
-          <el-input v-model="menuForm.icon"></el-input>
+          <el-input
+            v-model="menuForm.icon"
+            v-popover:iconPop
+            :prefix-icon="menuForm.icon"
+          ></el-input>
+          <el-popover
+            ref="iconPop"
+            placement="bottom"
+            title=""
+            width="400"
+            trigger="click"
+          >
+            <icon-select @selected="handleIconSelected"></icon-select>
+          </el-popover>
         </el-form-item>
         <el-form-item
           label="权限标识"
@@ -126,98 +139,111 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
+import IconSelect from "../../components/IconSelect.vue";
 import ElTreeSelect from "@/components/TreeSelect";
 
 export default {
-  components: { ElTreeSelect },
+  components: { IconSelect, ElTreeSelect },
   data() {
     return {
-      title: '',
+      title: "",
       tableData: [],
       menuDialog: false,
       menuForm: {
-        type: '0',
-        menuName: '',
+        type: "0",
+        menuName: "",
         menuPid: 0,
-        permission: '',
+        permission: "",
       },
       elTreeDisabled: false,
-      elTreeProps: {         // el-tree-select配置项（必选）
-        value: 'id',
-        label: 'menuName',
-        children: 'children',
-      }
+      elTreeProps: {
+        // el-tree-select配置项（必选）
+        value: "id",
+        label: "menuName",
+        children: "children",
+      },
     };
   },
   mounted() {
-    this.flush()
+    this.flush();
   },
   methods: {
-    ...mapActions('menu', ['menuTreePage', 'addMenu', 'updateMenu', 'deleteMenu']),
+    ...mapActions("menu", [
+      "menuTreePage",
+      "addMenu",
+      "updateMenu",
+      "deleteMenu",
+    ]),
+    // 图标选择
+    handleIconSelected(name) {
+      this.$set(this.menuForm, "icon", name);
+    },
 
     // dialog关闭
     menuDialogClose() {
-      console.log('dialog关闭');
-      this.$set(this.menuForm, 'menuPid', undefined);
+      console.log("dialog关闭");
+      this.$set(this.menuForm, "menuPid", undefined);
       this.$refs.menuForm.resetFields();
     },
 
     // 新增按钮
     handleMenuAdd() {
-      this.title = '新增菜单'
-      this.menuDialog = true
+      this.title = "新增菜单";
+      this.menuDialog = true;
     },
 
     // 修改按钮
     handleEditMenu(row) {
-      this.title = '修改菜单'
-      this.menuDialog = true
-      const rowInfo = JSON.parse(JSON.stringify(row))
-      this.menuForm = rowInfo
-      this.menuForm.menuPid = rowInfo.parentId
+      this.title = "修改菜单";
+      this.menuDialog = true;
+      const rowInfo = JSON.parse(JSON.stringify(row));
+      this.menuForm = rowInfo;
+      this.menuForm.menuPid = rowInfo.parentId;
     },
 
     // 提交表单
     async handleMenuEditSubmit() {
       if (this.menuForm.id === undefined) {
-        const res = await this.addMenu(this.menuForm)
-        this.menuDialog = false
+        const res = await this.addMenu(this.menuForm);
+        this.menuDialog = false;
         if (res.code === 0) {
-          this.$message.success('添加成功')
+          this.$message.success("添加成功");
         } else {
-          this.$message.error('添加失败')
+          this.$message.error("添加失败");
         }
       } else {
-        const res = await this.updateMenu(this.menuForm)
-        this.menuDialog = false
+        const res = await this.updateMenu(this.menuForm);
+        this.menuDialog = false;
         if (res.code === 0) {
-          this.$message.success('更新成功')
+          this.$message.success("更新成功");
         }
       }
-      await this.flush()
+      await this.flush();
     },
 
     // 删除按钮
     handleDeleteMenu(menuId) {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async () => {
-        let res = await this.deleteMenu(menuId);
-        if (res.code === 0) {
-          this.flush()
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-        }
-      }).catch(() => { });
+      this.$confirm("此操作将永久删除, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(async () => {
+          let res = await this.deleteMenu(menuId);
+          if (res.code === 0) {
+            this.flush();
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+          }
+        })
+        .catch(() => {});
     },
 
     handleTreeSelected(value) {
-      this.menuForm.menuPid = value
+      this.menuForm.menuPid = value;
       this.$refs.menuForm.validateField("menuPid");
     },
     validateSelectTree() {
@@ -229,7 +255,7 @@ export default {
       const res = await this.menuTreePage();
       this.tableData = res.data;
     },
-  }
+  },
 };
 </script>
 
