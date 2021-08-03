@@ -6,7 +6,6 @@ import com.lvcoding.entity.SysLog;
 import com.lvcoding.service.SysLogService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
