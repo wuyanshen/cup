@@ -9,7 +9,6 @@ import com.lvcoding.service.SysMenuService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,8 +67,8 @@ public class SysMenuController {
     @PreAuthorize("@pm.hasPermission('sys:menu:add')")
     @SysLog(type = "2",value = "新增菜单")
     @PostMapping
-    public Res add(@RequestBody MenuTree menuTree){
-        return Res.success(sysMenuService.addMenu(menuTree));
+    public Res add(@RequestBody SysMenu sysMenu){
+        return Res.success(sysMenuService.addMenu(sysMenu));
     }
 
     /**

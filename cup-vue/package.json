@@ -8,6 +8,9 @@
     },
     "dependencies": {
         "axios": "^0.19.2",
+        "bpmn-js": "^8.7.1",
+        "bpmn-js-properties-panel": "^0.44.0",
+        "camunda-bpmn-moddle": "^5.1.2",
         "core-js": "^3.6.4",
         "countup": "^1.8.2",
         "element-ui": "^2.13.2",

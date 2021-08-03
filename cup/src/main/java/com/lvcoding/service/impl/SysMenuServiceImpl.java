@@ -58,10 +58,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
 
     @Override
-    public boolean addMenu(MenuTree menuTree) {
-        SysMenu sysMenu = new SysMenu();
-        BeanUtils.copyProperties(menuTree,sysMenu);
-        sysMenu.setMenuPid(menuTree.getParentId());
+    public boolean addMenu(SysMenu sysMenu) {
         //新增菜单默认有效
         sysMenu.setStatus(1);
         //设置父id集合

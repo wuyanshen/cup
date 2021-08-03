@@ -30,7 +30,7 @@ public interface SysMenuService extends IService<SysMenu> {
      */
     List<MenuTree> findMenuByRoleIds(List<Integer> roleIds);
 
-    boolean addMenu(MenuTree menuTree);
+    boolean addMenu(SysMenu sysMenu);
 
     List<MenuTree> findAllMenuTree();
 }
