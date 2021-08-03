@@ -53,7 +53,7 @@ public class SysRole implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "createTime")
+    @TableField(value = "create_time")
     private Date createTime;
     /**
      * 是否删除,1已删0未删

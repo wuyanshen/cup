@@ -2,7 +2,6 @@ package com.lvcoding;
 
 import com.lvcoding.entity.SysUser;
 import lombok.SneakyThrows;
-import org.assertj.core.util.Lists;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 
