@@ -3,7 +3,9 @@
     <!-- 按钮组 -->
     <div class="btn-group">
       <el-button-group>
-        <el-button icon="el-icon-upload">导入</el-button>
+        <el-button icon="el-icon-upload" @click="handleOpenFile"
+          >导入</el-button
+        >
         <el-button
           :disabled="canDownload"
           icon="el-icon-download"
@@ -16,6 +18,18 @@
           @click="handleDownloadXml"
           >导出为bpmn</el-button
         >
+        <el-button icon="el-icon-sort" @click="hideRightPanel"
+          >{{ showRight ? "隐藏" : "显示" }}属性栏</el-button
+        >
+        <el-button icon="el-icon-back" @click="handleUndo">后退</el-button>
+        <el-button icon="el-icon-right" @click="handleRedo">前进</el-button>
+        <el-button icon="el-icon-plus" @click="handleZoom(0.1)">放大</el-button>
+        <el-button icon="el-icon-minus" @click="handleZoom(-0.1)"
+          >缩小</el-button
+        >
+        <el-button icon="el-icon-refresh-left" @click="handleZoomBack"
+          >还原</el-button
+        >
       </el-button-group>
     </div>
 
@@ -24,7 +38,7 @@
       <!-- bpmn主内容 -->
       <div class="main-panel"></div>
       <!-- 右侧工具条 -->
-      <div class="right-panel"></div>
+      <div v-show="showRight" class="right-panel"></div>
     </div>
   </div>
 </template>
@@ -50,6 +64,11 @@ export default {
   data() {
     return {
       canDownload: true,
+      showRight: true,
+      scale: 1,
+      bpmnInfo: {
+        xmlStr: '',
+      }
     }
   },
   mounted() {
@@ -152,6 +171,67 @@ export default {
         }
       })
     },
+    // 前进
+    handleRedo() {
+      this.bpmnModeler.get('commandStack').redo()
+    },
+    // 后退
+    handleUndo() {
+      this.bpmnModeler.get('commandStack').undo()
+    },
+    // 放大缩小
+    handleZoom(radio) {
+      const newScale = !radio ? 1.0 : this.scale + radio;
+      this.bpmnModeler.get("canvas").zoom(newScale);
+      this.scale = newScale;
+    },
+    // 还原
+    handleZoomBack() {
+      this.bpmnModeler.get("canvas").zoom(1);
+    },
+    // 上传文件
+    handleOpenFile() {
+      const vm = this
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      input.type = 'file'
+      input.click()// 打开文件选择框
+      input.onchange = function () {
+        const file = input.files[0]
+        if (window.FileReader) {
+          try {
+            var fr = new FileReader()
+            fr.readAsText(file) // 将文件读取为文本
+            fr.onload = function (e) {
+              vm.bpmnInfo.xmlStr = fr.result
+              vm.createNewDiagram()
+            }
+          } catch (e) {
+            errorInfo(e.toString())
+          }
+
+        } else {
+          errorInfo('您的浏览器可能不支持此操作')
+        }
+        document.body.removeChild(input)
+      }
+
+    },
+    createNewDiagram() {
+      // 将字符串转换成图显示出来
+      let xmlStr = this.bpmnInfo.xmlStr;
+      this.bpmnModeler.importXML(xmlStr, (err) => {
+        if (err) {
+          // console.error(err)
+        } else {
+          // 这里是成功之后的回调, 可以在这里做一系列事情
+        }
+      })
+    },
+    // 隐藏右侧属性栏
+    hideRightPanel() {
+      this.showRight = !this.showRight;
+    }
   }
 
 }
@@ -160,7 +240,8 @@ export default {
 <style scoped lang="less">
 .container {
   background-color: white;
-  padding: 20px;
+  height: 100%;
+  overflow-y: scroll;
 }
 .btn-group {
   margin-left: 20px;
@@ -170,11 +251,14 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
+
   .main-panel {
     width: 100%;
   }
   .right-panel {
-    width: 500px;
+    height: 100%;
+    width: 300px;
   }
   ::v-deep .bpp-textfield input {
     padding-right: 0;

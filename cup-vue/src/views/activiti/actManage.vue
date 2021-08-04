@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-card>
+  <div class="act-container">
+    <el-card class="act-card">
       <bpmn-editor></bpmn-editor>
     </el-card>
   </div>
@@ -28,4 +28,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+::v-deep .el-card__body {
+  height: 100%;
+}
+.act-container {
+  height: 100%;
+
+  .act-card {
+    height: 100%;
+  }
+}
 </style>
