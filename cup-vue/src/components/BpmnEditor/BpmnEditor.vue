@@ -78,6 +78,10 @@ export default {
     initModeler() {
       this.bpmnModeler = new BpmnModeler({
         container: '.main-panel',
+        // 支持键盘快捷键 
+        // ctrl + z : 撤销 ctrl + y : 恢复 ctrl + c : 复制 ctrl + v : 粘贴 
+        // ctrl + + : 放大 ctrl + - : 缩小 ctrl + 0 : 恢复 ctrl + del : 删除 ctrl + 箭头 : 上下左右移动
+        keyboard: { bindTo: window },
         propertiesPanel: {
           parent: '.right-panel'
         },
