@@ -1,8 +1,27 @@
 <template>
   <div class="act-container">
     <el-card class="act-card">
-      <bpmn-editor></bpmn-editor>
+      <!-- 按钮 -->
+      <el-button type="danger" size="mini" @click="showActEditor"
+        >工作流编辑器</el-button
+      >
+      <!-- 表格 -->
+      <el-table border stripe>
+        <el-table-column label="流程ID"></el-table-column>
+        <el-table-column label="流程KEY"></el-table-column>
+        <el-table-column label="名称"></el-table-column>
+        <el-table-column label="版本"></el-table-column>
+        <el-table-column label="部署时间"></el-table-column>
+        <el-table-column label="部署ID"></el-table-column>
+        <el-table-column label="状态"></el-table-column>
+        <el-table-column label="操作"></el-table-column>
+      </el-table>
     </el-card>
+
+    <!-- 编辑器弹框dialog -->
+    <el-dialog title="工作流编辑器" width="80%" :visible.sync="showAct">
+      <bpmn-editor></bpmn-editor>
+    </el-dialog>
   </div>
 </template>
 
@@ -12,7 +31,7 @@ export default {
   components: { BpmnEditor },
   data() {
     return {
-
+      showAct: false,
     };
   },
   created() {
@@ -22,7 +41,9 @@ export default {
 
   },
   methods: {
-
+    showActEditor() {
+      this.showAct = true
+    }
   }
 };
 </script>

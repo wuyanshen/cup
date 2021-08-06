@@ -40,9 +40,9 @@ public class JavaTest {
 
         // 3.使用RepositoryService进行流程部署，把bpmn和png存到数据库
         Deployment deployment = repositoryService.createDeployment()
-                .name("出差申请流程")
-                .addClasspathResource("processes/business.bpmn")
-                .addClasspathResource("processes/business.png")
+                .name("请假流程")
+                .addClasspathResource("processes/leave.bpmn")
+                .addClasspathResource("processes/leave.png")
                 .deploy();
 
         // 4.输出部署信息

@@ -2,6 +2,7 @@ package com.lvcoding.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.lvcoding.activiti.ActivityService;
+import com.lvcoding.entity.vo.DeploymentVO;
 import com.lvcoding.util.Res;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
@@ -122,9 +123,22 @@ public class ActivityController {
         return Res.success("没有待办任务");
     }
 
+    /**
+     * 审批任务
+     */
     @PutMapping("complete")
     public Res complete(@RequestParam("taskId") String taskId) {
         this.taskService.complete(taskId);
         return Res.success("审批成功");
+    }
+
+    /**
+     * 查询部署中的工作流
+     * @return
+     */
+    @GetMapping("deps")
+    public Res deps() {
+        List<DeploymentVO> list = this.activityService.getDeployList();
+        return Res.success();
     }
 }

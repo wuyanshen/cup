@@ -10,6 +10,7 @@ import org.activiti.engine.repository.DeploymentQuery;
 import org.activiti.engine.task.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.lvcoding.entity.vo.DeploymentVO;
 
 /**
  * SpringBoot方式使用activiti
@@ -197,6 +201,21 @@ public class BootTest {
         repositoryService.deleteDeployment("7b86176b-f276-11eb-b033-00ff65f53676",true);
         //设置true 级联删除流程定义，即使该流程有流程实例启动也可以删除，设置为false非级别删除方式
         // repositoryService.deleteDeployment("1", true);
+    }
 
+    /**
+     * 查询发布的流程列表
+     */
+    @Test
+    public void findDeploymentList() {
+        List<Deployment> list = repositoryService.createDeploymentQuery().list();
+        List<DeploymentVO> collect = list.stream().map(dep -> {
+            DeploymentVO deploymentVO = new DeploymentVO();
+            BeanUtils.copyProperties(dep, deploymentVO);
+            return deploymentVO;
+        }).collect(Collectors.toList());
+
+        System.out.println("列表的大小：" + collect.size());
+        collect.forEach(System.out::print);
     }
 }
