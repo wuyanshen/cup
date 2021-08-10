@@ -77,7 +77,7 @@ public interface CommonConstant {
     String LEAVE_BILL_STATUS_OK = "1";
 
     /**
-     * 工作流id
+     * 流程定义key
      */
-    String LEAVE_BILL_ID = "myProcess_1";
+    String LEAVE_BILL_KEY = "leave";
 }

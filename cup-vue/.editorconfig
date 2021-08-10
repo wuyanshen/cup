@@ -1,0 +1,36 @@
+# EditorConfig配置文件，统一代码风格，如缩进
+# http://editorconfig.org
+# 设置.editorconfig文件是否生效，true生效
+root = true
+
+# 匹配所有的文件
+[*]
+# 缩进风格：空格
+indent_style = space
+# 缩进大小4个空格
+indent_size = 4
+# 文件换行符是 linux 的 `\n`
+end_of_line = lf
+# 文件编码是 utf-8
+charset = utf-8
+# 是否删除行尾的空格
+trim_trailing_whitespace = true
+# 是否在文件的最后插入一个空行
+insert_final_newline = true
+
+[*.{yml,yaml}]
+# 使用4个空格缩进
+indent_size = 4
+
+# 对所有的 js 文件生效
+[*.js]
+# 字符串使用单引号
+quote_type = single
+
+[*.md]
+# 是否删除行尾的空格
+trim_trailing_whitespace = false
+
+[Makefile]
+# 使用4个空格缩进
+indent_style = tab

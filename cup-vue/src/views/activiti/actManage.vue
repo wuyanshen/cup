@@ -2,19 +2,17 @@
   <div class="act-container">
     <el-card class="act-card">
       <!-- 按钮 -->
-      <el-button type="danger" size="mini" @click="showActEditor"
-        >工作流编辑器</el-button
-      >
+      <el-button type="danger" size="mini" @click="showActEditor">工作流编辑器</el-button>
       <!-- 表格 -->
-      <el-table border stripe>
-        <el-table-column label="流程ID"></el-table-column>
-        <el-table-column label="流程KEY"></el-table-column>
-        <el-table-column label="名称"></el-table-column>
-        <el-table-column label="版本"></el-table-column>
-        <el-table-column label="部署时间"></el-table-column>
-        <el-table-column label="部署ID"></el-table-column>
-        <el-table-column label="状态"></el-table-column>
-        <el-table-column label="操作"></el-table-column>
+      <el-table size="mini" border stripe>
+        <el-table-column align="center" label="流程ID"></el-table-column>
+        <el-table-column align="center" label="流程KEY"></el-table-column>
+        <el-table-column align="center" label="名称"></el-table-column>
+        <el-table-column align="center" label="版本"></el-table-column>
+        <el-table-column align="center" label="部署时间"></el-table-column>
+        <el-table-column align="center" label="部署ID"></el-table-column>
+        <el-table-column align="center" label="状态"></el-table-column>
+        <el-table-column align="center" label="操作"></el-table-column>
       </el-table>
     </el-card>
 

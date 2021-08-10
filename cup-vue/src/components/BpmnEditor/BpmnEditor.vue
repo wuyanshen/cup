@@ -3,33 +3,15 @@
     <!-- 按钮组 -->
     <div class="btn-group">
       <el-button-group>
-        <el-button icon="el-icon-upload" @click="handleOpenFile"
-          >导入</el-button
-        >
-        <el-button
-          :disabled="canDownload"
-          icon="el-icon-download"
-          @click="handleDownloadSvg"
-          >导出为svg</el-button
-        >
-        <el-button
-          :disabled="canDownload"
-          icon="el-icon-download"
-          @click="handleDownloadXml"
-          >导出为bpmn</el-button
-        >
-        <el-button icon="el-icon-sort" @click="hideRightPanel"
-          >{{ showRight ? "隐藏" : "显示" }}属性栏</el-button
-        >
+        <el-button icon="el-icon-upload" @click="handleOpenFile">导入</el-button>
+        <el-button :disabled="canDownload" icon="el-icon-download" @click="handleDownloadSvg">导出为svg</el-button>
+        <el-button :disabled="canDownload" icon="el-icon-download" @click="handleDownloadXml">导出为bpmn</el-button>
+        <el-button icon="el-icon-sort" @click="hideRightPanel">{{ showRight ? '隐藏' : '显示' }}属性栏</el-button>
         <el-button icon="el-icon-back" @click="handleUndo">后退</el-button>
         <el-button icon="el-icon-right" @click="handleRedo">前进</el-button>
         <el-button icon="el-icon-plus" @click="handleZoom(0.1)">放大</el-button>
-        <el-button icon="el-icon-minus" @click="handleZoom(-0.1)"
-          >缩小</el-button
-        >
-        <el-button icon="el-icon-refresh-left" @click="handleZoomBack"
-          >还原</el-button
-        >
+        <el-button icon="el-icon-minus" @click="handleZoom(-0.1)">缩小</el-button>
+        <el-button icon="el-icon-refresh-left" @click="handleZoomBack">还原</el-button>
       </el-button-group>
     </div>
 
@@ -54,8 +36,10 @@ import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css"; // �
 // 依赖的js
 import BpmnModeler from "bpmn-js/lib/Modeler"
 import propertiesPanelModule from "bpmn-js-properties-panel";
-import propertiesProviderModule from "bpmn-js-properties-panel/lib/provider/camunda";
-import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
+import propertiesProviderModule from './properties-panel/provider/activiti';
+import activitiModdleDescriptor from './activiti.json';
+import customControlsModule from './customControls'
+
 // 3. 在实例化建模器时以自定义模块的方式传入参数
 import customTranslate from "./customTranslate";
 
@@ -78,8 +62,8 @@ export default {
     initModeler() {
       this.bpmnModeler = new BpmnModeler({
         container: '.main-panel',
-        // 支持键盘快捷键 
-        // ctrl + z : 撤销 ctrl + y : 恢复 ctrl + c : 复制 ctrl + v : 粘贴 
+        // 支持键盘快捷键
+        // ctrl + z : 撤销 ctrl + y : 恢复 ctrl + c : 复制 ctrl + v : 粘贴
         // ctrl + + : 放大 ctrl + - : 缩小 ctrl + 0 : 恢复 ctrl + del : 删除 ctrl + 箭头 : 上下左右移动
         keyboard: { bindTo: window },
         propertiesPanel: {
@@ -89,11 +73,11 @@ export default {
           // 右侧工具条
           propertiesPanelModule,
           propertiesProviderModule,
+          customControlsModule,
           // 汉化
           { translate: ["value", customTranslate] }],
         moddleExtensions: {
-          //如果要在属性面板中维护camunda：XXX属性，则需要此 
-          camunda: camundaModdleDescriptor
+          activiti: activitiModdleDescriptor
         }
       })
       // 内部调用了importXML方法，读取内部的默认xml字符串
@@ -267,5 +251,10 @@ export default {
   ::v-deep .bpp-textfield input {
     padding-right: 0;
   }
+}
+
+// 隐藏bpmnjs右下角图标
+::v-deep .bjs-powered-by {
+  display: none !important;
 }
 </style>

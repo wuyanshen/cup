@@ -1,11 +1,12 @@
 package com.lvcoding.service;
 
 import com.lvcoding.entity.vo.DeploymentVO;
+import com.lvcoding.entity.vo.ProcessDefinitionVO;
 import com.lvcoding.entity.vo.TaskVO;
 
 import java.util.List;
 
-public interface ActivitiService {
+public interface ActivityService {
 
     /**
      * 查询待办任务
@@ -19,7 +20,7 @@ public interface ActivitiService {
      *
      * @param
      */
-    List<DeploymentVO> getDeployList();
+    List<ProcessDefinitionVO> getDeployList();
 
     /**
      * 发布流程

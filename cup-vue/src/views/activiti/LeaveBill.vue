@@ -4,83 +4,36 @@
       <!-- 条件查询 -->
       <el-row :gutter="20">
         <el-col :span="2">
-          <el-button
-            icon="el-icon-plus"
-            size="mini"
-            type="primary"
-            style="margin-bottom: 10px"
-            @click="handlePreAdd"
-            >新增</el-button
-          >
+          <el-button icon="el-icon-plus" size="mini" type="primary" style="margin-bottom: 10px" @click="handlePreAdd">新增</el-button>
         </el-col>
       </el-row>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input
-            size="mini"
-            clearable
-            placeholder="请假原因"
-            v-model="queryForm.reason"
-            @change="handleQuery"
-          ></el-input>
+          <el-input size="mini" clearable placeholder="请假原因" v-model="queryForm.reason" @change="handleQuery"></el-input>
         </el-col>
         <el-col :span="2">
-          <el-button
-            icon="el-icon-search"
-            size="mini"
-            type="primary"
-            @click="handleQuery"
-            >查询</el-button
-          >
+          <el-button icon="el-icon-search" size="mini" type="primary" @click="handleQuery">查询</el-button>
         </el-col>
       </el-row>
       <!-- 表格区 -->
-      <el-table :data="leaveBillList">
+      <el-table size="mini" :data="leaveBillList">
         <el-table-column align="center" label="id" prop="id"></el-table-column>
         <el-table-column label="原因" prop="reason"></el-table-column>
         <el-table-column label="状态" prop="status">
           <template v-slot="scope">
             <!-- (0待审核 -1驳回 -2不通过 1通过) -->
-            <el-tag v-if="scope.row.status === '0'" type="info" size="mini"
-              >待审核</el-tag
-            >
-            <el-tag v-if="scope.row.status === '-1'" type="warning" size="mini"
-              >驳回</el-tag
-            >
-            <el-tag v-if="scope.row.status === '-2'" type="danger" size="mini"
-              >不通过</el-tag
-            >
-            <el-tag v-if="scope.row.status === '1'" type="success" size="mini"
-              >通过</el-tag
-            >
+            <el-tag v-if="scope.row.status === '0'" type="info" size="mini">待审核</el-tag>
+            <el-tag v-if="scope.row.status === '-1'" type="warning" size="mini">驳回</el-tag>
+            <el-tag v-if="scope.row.status === '-2'" type="danger" size="mini">不通过</el-tag>
+            <el-tag v-if="scope.row.status === '1'" type="success" size="mini">通过</el-tag>
           </template>
         </el-table-column>
-        <el-table-column
-          label="开始时间"
-          prop="startDate"
-          :formatter="dateFormat"
-        ></el-table-column>
-        <el-table-column
-          label="结束时间"
-          prop="endDate"
-          :formatter="dateFormat"
-        ></el-table-column>
+        <el-table-column label="开始时间" prop="startDate" :formatter="dateFormat"></el-table-column>
+        <el-table-column label="结束时间" prop="endDate" :formatter="dateFormat"></el-table-column>
         <el-table-column label="操作">
           <template v-slot="scope">
-            <el-button
-              size="mini"
-              icon="el-icon-edit"
-              type="primary"
-              @click="handleUpdate(scope.row)"
-              >修改</el-button
-            >
-            <el-button
-              size="mini"
-              icon="el-icon-delete"
-              type="danger"
-              @click="handleDelete(scope.row.id)"
-              >删除</el-button
-            >
+            <el-button size="mini" icon="el-icon-edit" type="primary" @click="handleUpdate(scope.row)">修改</el-button>
+            <el-button size="mini" icon="el-icon-delete" type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -97,48 +50,26 @@
       ></el-pagination>
     </el-card>
     <!-- 新增/修改请假 -->
-    <el-dialog
-      :show-close="false"
-      :title="title"
-      :visible.sync="leaveShow"
-      width="30%"
-      @close="resetForm"
-    >
-      <el-form
-        size="mini"
-        label-width="80px"
-        ref="leaveBillForm"
-        :model="leaveBillForm"
-      >
+    <el-dialog :show-close="false" :title="title" :visible.sync="leaveShow" width="30%" @close="resetForm">
+      <el-form size="mini" label-width="80px" ref="leaveBillForm" :model="leaveBillForm">
         <el-form-item label="请假原因" prop="reason">
-          <el-input
-            type="textarea"
-            rows="6"
-            v-model="leaveBillForm.reason"
-          ></el-input>
+          <el-input type="textarea" rows="6" v-model="leaveBillForm.reason"></el-input>
         </el-form-item>
         <el-form-item label="开始时间" prop="startDate">
-          <el-date-picker
-            v-model="leaveBillForm.startDate"
-            placeholder=""
-          ></el-date-picker>
+          <el-date-picker v-model="leaveBillForm.startDate" placeholder=""></el-date-picker>
         </el-form-item>
         <el-form-item label="结束时间" prop="endDate">
-          <el-date-picker
-            v-model="leaveBillForm.endDate"
-            placeholder=""
-          ></el-date-picker>
+          <el-date-picker v-model="leaveBillForm.endDate" placeholder=""></el-date-picker>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="leaveShow = false">取 消</el-button>
-        <el-button size="mini" type="primary" @click="handleLeaveBillSubmit"
-          >确 定</el-button
-        >
+        <el-button size="mini" type="primary" @click="handleLeaveBillSubmit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
+
 
 <script>
 import { mapActions, mapState } from "vuex";
@@ -164,7 +95,7 @@ export default {
       },
     };
   },
-  created() {},
+  created() { },
   mounted() {
     this.getLeavePage();
   },
@@ -234,7 +165,7 @@ export default {
             this.getLeavePage();
           }
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     // 修改按钮
     handleUpdate(row) {

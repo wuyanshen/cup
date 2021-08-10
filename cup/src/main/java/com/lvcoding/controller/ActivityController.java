@@ -1,22 +1,20 @@
 package com.lvcoding.controller;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.lvcoding.activiti.ActivityService;
 import com.lvcoding.entity.vo.DeploymentVO;
+import com.lvcoding.entity.vo.ProcessDefinitionVO;
+import com.lvcoding.entity.vo.TaskVO;
+import com.lvcoding.service.ActivityService;
 import com.lvcoding.util.Res;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author wuyanshen
@@ -34,8 +32,6 @@ public class ActivityController {
     @Autowired
     private RepositoryService repositoryService;
     @Autowired
-    private RuntimeService runtimeService;
-    @Autowired
     private TaskService taskService;
 
     /**
@@ -43,17 +39,7 @@ public class ActivityController {
      */
     @PostMapping("publish")
     public Res publish() {
-        // 3.使用RepositoryService进行流程部署，把bpmn和png存到数据库
-        Deployment deployment = repositoryService.createDeployment()
-                .name("请假流程")
-                .addClasspathResource("processes/leave.bpmn")
-                .addClasspathResource("processes/leave.png")
-                .deploy();
-
-        // 4.输出部署信息
-        log.info("流程部署id："+deployment.getId());
-        log.info("流程部署名称：" + deployment.getName());
-
+        this.activityService.publish();
         return Res.success("发布成功");
     }
 
@@ -80,47 +66,12 @@ public class ActivityController {
      */
     @GetMapping
     public Res find(@RequestParam("username") String username) {
-        List<Task> list = taskService.createTaskQuery()
-                .processDefinitionKey("myProcess_1")
-                .taskAssignee(username)
-                .list();
-
-        if(list!=null && list.size()>0){
-            List<Map<String,Object>> newList = new ArrayList<>();
-
-            for(Task task:list){
-                System.out.println("任务ID:"+task.getId());
-                System.out.println("任务名称:"+task.getName());
-                System.out.println("任务的创建时间:"+task.getCreateTime());
-                System.out.println("任务的办理人:"+task.getAssignee());
-                System.out.println("任务的属性:"+task.getProcessVariables());
-                System.out.println("流程实例ID："+task.getProcessInstanceId());
-                System.out.println("执行对象ID:"+task.getExecutionId());
-                System.out.println("流程定义ID:"+task.getProcessDefinitionId());
-                System.out.println("getOwner:"+task.getOwner());
-                System.out.println("getCategory:"+task.getCategory());
-                System.out.println("getDescription:"+task.getDescription());
-                System.out.println("getFormKey:"+task.getFormKey());
-                Map<String, Object> map = task.getProcessVariables();
-                for (Map.Entry<String, Object> m : map.entrySet()) {
-                    System.out.println("key:" + m.getKey() + " value:" + m.getValue());
-                }
-                for (Map.Entry<String, Object> m : task.getTaskLocalVariables().entrySet()) {
-                    System.out.println("key:" + m.getKey() + " value:" + m.getValue());
-                }
-
-                Map<String,Object> newMap =  new HashMap<>();
-                newMap.put("taskId",task.getId());
-                newMap.put("taskName",task.getName());
-                newMap.put("createTime",task.getCreateTime());
-                newList.add(newMap);
-
-            }
-
-            return Res.success(newList);
+        List<TaskVO> list = activityService.findTasks(username);
+        if (list != null) {
+            return Res.success(list);
+        } else {
+            return Res.success("没有待办任务");
         }
-
-        return Res.success("没有待办任务");
     }
 
     /**
@@ -134,11 +85,9 @@ public class ActivityController {
 
     /**
      * 查询部署中的工作流
-     * @return
      */
     @GetMapping("deps")
     public Res deps() {
-        List<DeploymentVO> list = this.activityService.getDeployList();
-        return Res.success();
+        return Res.success(this.activityService.getDeployList());
     }
 }

@@ -2,10 +2,9 @@ package com.lvcoding.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.lvcoding.constant.CommonConstant;
-import com.lvcoding.entity.vo.DeploymentVO;
+import com.lvcoding.entity.vo.ProcessDefinitionVO;
 import com.lvcoding.entity.vo.TaskVO;
-import com.lvcoding.service.ActivitiService;
-import com.lvcoding.util.Res;
+import com.lvcoding.service.ActivityService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
@@ -13,8 +12,10 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,12 +27,14 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class ActivitiServiceImpl implements ActivitiService {
+public class ActivityServiceImpl implements ActivityService {
 
-
-    private final RuntimeService runtimeService;
-    private final TaskService taskService;
-    private final RepositoryService repositoryService;
+    @Autowired
+    private RuntimeService runtimeService;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private RepositoryService repositoryService;
 
 
     public boolean startActivity() {
@@ -63,8 +66,18 @@ public class ActivitiServiceImpl implements ActivitiService {
 
 
 	@Override
-    public List<DeploymentVO> getDeployList() {
-		return null;
+    public List<ProcessDefinitionVO> getDeployList() {
+        List<ProcessDefinition> list = this.repositoryService.createProcessDefinitionQuery().list();
+        if(ObjectUtil.isNotEmpty(list)) {
+            List<ProcessDefinitionVO> collect = list.stream().map(processDefinition -> {
+                ProcessDefinitionVO processDefinitionVO = new ProcessDefinitionVO();
+                BeanUtils.copyProperties(processDefinition, processDefinitionVO);
+                return processDefinitionVO;
+            }).collect(Collectors.toList());
+
+            return collect;
+        }
+        return new ArrayList<>();
 	}
 
     @Override
@@ -77,6 +90,7 @@ public class ActivitiServiceImpl implements ActivitiService {
                 .deploy();
 
         // 4.输出部署信息
+        log.info("部署工作流");
         log.info("流程部署id："+deployment.getId());
         log.info("流程部署名称：" + deployment.getName());
     }
@@ -97,6 +111,6 @@ public class ActivitiServiceImpl implements ActivitiService {
             }).collect(Collectors.toList());
             return collect;
         }
-        return null;
+        return new ArrayList<>();
     }
 }

@@ -53,12 +53,12 @@ public class LeaveBillServiceImpl extends ServiceImpl<LeaveBillMapper, LeaveBill
 
         SysUser user = sysUserService.getById(leaveBill.getUserId());
 
-        runtimeService.startProcessInstanceByKey(CommonConstant.LEAVE_BILL_ID, leaveBill.getId().toString());
-//        processRuntime.start(ProcessPayloadBuilder.start().withProcessDefinitionKey(CommonConstant.LEAVE_BILL_ID).build());
+        runtimeService.startProcessInstanceByKey(CommonConstant.LEAVE_BILL_KEY, leaveBill.getId().toString());
+//        processRuntime.start(ProcessPayloadBuilder.start().withProcessDefinitionKey(CommonConstant.LEAVE_BILL_KEY).build());
 
         // 查询处理人
         Task task = taskService.createTaskQuery().taskAssignee(user.getUsername().toString())
-                .processDefinitionKey(CommonConstant.LEAVE_BILL_ID)
+                .processDefinitionKey(CommonConstant.LEAVE_BILL_KEY)
                 .processInstanceBusinessKey(leaveBill.getId().toString())
                 .singleResult();
         taskService.complete(task.getId());

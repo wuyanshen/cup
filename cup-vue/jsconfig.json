@@ -1,0 +1,15 @@
+// vetur配置文件
+// https://vuejs.github.io/vetur/guide/
+// 当你用Vue CLI创建项目时。
+// 如果你不使用typescript，请在打开的项目根部添加jsconfig.json。
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "esnext",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["components/*"]
+        }
+    },
+    "include": ["src/**/*.vue", "src/**/*.js"]
+}
