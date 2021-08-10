@@ -1,90 +1,68 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1627785563719" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
-  <process id="myProcess_1" isClosed="false" isExecutable="true" name="我的请假流程" processType="None">
-    <startEvent id="_2" name="开始"/>
-    <endEvent id="_6" name="结束"/>
-    <userTask activiti:assignee="${assignee}" activiti:exclusive="true" id="_10" name="提交请假">
-      <extensionElements>
-        <activiti:taskListener class="com.lvcoding.activiti.LeaveProcessListener" event="create"/>
-      </extensionElements>
-    </userTask>
-    <userTask activiti:exclusive="true" id="_11" name="组长审批">
-      <extensionElements>
-        <activiti:taskListener class="com.lvcoding.activiti.LeaveProcessListener" event="create"/>
-        <activiti:taskListener class="com.lvcoding.activiti.LeaveProcessListener" event="create"/>
-      </extensionElements>
-    </userTask>
-    <userTask activiti:exclusive="true" id="_12" name="副总审批">
-      <extensionElements>
-        <activiti:taskListener class="com.lvcoding.activiti.LeaveProcessListener" event="create"/>
-        <activiti:taskListener class="com.lvcoding.activiti.LeaveProcessListener" event="create"/>
-      </extensionElements>
-    </userTask>
-    <sequenceFlow id="_13" sourceRef="_2" targetRef="_10"/>
-    <sequenceFlow id="_14" sourceRef="_10" targetRef="_11"/>
-    <sequenceFlow id="_15" sourceRef="_11" targetRef="_12"/>
-    <sequenceFlow id="_16" sourceRef="_12" targetRef="_6"/>
-  </process>
-  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
-    <bpmndi:BPMNPlane bpmnElement="myProcess_1">
-      <bpmndi:BPMNShape bpmnElement="_2" id="Shape-_2">
-        <omgdc:Bounds height="32.0" width="32.0" x="360.0" y="35.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_6" id="Shape-_6">
-        <omgdc:Bounds height="32.0" width="32.0" x="370.0" y="450.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_10" id="Shape-_10">
-        <omgdc:Bounds height="55.0" width="85.0" x="340.0" y="115.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_11" id="Shape-_11">
-        <omgdc:Bounds height="55.0" width="85.0" x="340.0" y="220.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_12" id="Shape-_12">
-        <omgdc:Bounds height="55.0" width="85.0" x="340.0" y="315.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="_13" id="BPMNEdge__13" sourceElement="_2" targetElement="_10">
-        <omgdi:waypoint x="376.0" y="67.0"/>
-        <omgdi:waypoint x="376.0" y="115.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:activiti="http://activiti.org/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="leave" name="请假流程" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="开始">
+      <bpmn:outgoing>Flow_0trm6z8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_14lhm2n" name="提交请假" activiti:assignee="zhangsan">
+      <bpmn:incoming>Flow_0trm6z8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wt8ovq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0trm6z8" sourceRef="StartEvent_1" targetRef="Activity_14lhm2n" />
+    <bpmn:userTask id="Activity_1v5eltg" name="组长审批" activiti:assignee="lisi">
+      <bpmn:incoming>Flow_1wt8ovq</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j4kb2e</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1wt8ovq" sourceRef="Activity_14lhm2n" targetRef="Activity_1v5eltg" />
+    <bpmn:userTask id="Activity_0kk3kez" name="经理审批" activiti:assignee="wangwu">
+      <bpmn:incoming>Flow_1j4kb2e</bpmn:incoming>
+      <bpmn:outgoing>Flow_01u99xs</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1j4kb2e" sourceRef="Activity_1v5eltg" targetRef="Activity_0kk3kez" />
+    <bpmn:endEvent id="Event_1nct61k" name="结束">
+      <bpmn:incoming>Flow_01u99xs</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01u99xs" sourceRef="Activity_0kk3kez" targetRef="Event_1nct61k" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="leave">
+      <bpmndi:BPMNEdge id="Flow_0trm6z8_di" bpmnElement="Flow_0trm6z8">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="260" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_15" id="BPMNEdge__15" sourceElement="_11" targetElement="_12">
-        <omgdi:waypoint x="382.5" y="275.0"/>
-        <omgdi:waypoint x="382.5" y="315.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="Flow_1wt8ovq_di" bpmnElement="Flow_1wt8ovq">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="420" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_14" id="BPMNEdge__14" sourceElement="_10" targetElement="_11">
-        <omgdi:waypoint x="382.5" y="170.0"/>
-        <omgdi:waypoint x="382.5" y="220.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="Flow_1j4kb2e_di" bpmnElement="Flow_1j4kb2e">
+        <di:waypoint x="520" y="120" />
+        <di:waypoint x="580" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_16" id="BPMNEdge__16" sourceElement="_12" targetElement="_6">
-        <omgdi:waypoint x="386.0" y="370.0"/>
-        <omgdi:waypoint x="386.0" y="450.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="Flow_01u99xs_di" bpmnElement="Flow_01u99xs">
+        <di:waypoint x="680" y="120" />
+        <di:waypoint x="742" y="120" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="180" y="145" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14lhm2n_di" bpmnElement="Activity_14lhm2n">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1v5eltg_di" bpmnElement="Activity_1v5eltg">
+        <dc:Bounds x="420" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kk3kez_di" bpmnElement="Activity_0kk3kez">
+        <dc:Bounds x="580" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nct61k_di" bpmnElement="Event_1nct61k">
+        <dc:Bounds x="742" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="749" y="145" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-</definitions>
+</bpmn:definitions>
