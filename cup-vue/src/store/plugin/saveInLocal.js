@@ -3,6 +3,5 @@ export const saveInLocal = store => {
     if (sessionStorage.state) store.replaceState(JSON.parse(sessionStorage.state))
     store.subscribe((mutation, state) => {
         sessionStorage.state = JSON.stringify(state)
-        console.log('提交了mutations')
     })
 }

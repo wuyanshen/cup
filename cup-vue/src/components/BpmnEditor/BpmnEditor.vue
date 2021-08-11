@@ -4,7 +4,7 @@
     <div class="btn-group">
       <el-button-group>
         <el-button icon="el-icon-upload" @click="handleOpenFile">导入</el-button>
-        <el-button icon="el-icon-upload" @click="handlePublish">部署</el-button>
+        <el-button :disabled="canDownload" icon="el-icon-upload" @click="handlePublish">部署</el-button>
         <el-button :disabled="canDownload" icon="el-icon-download" @click="handleDownloadSvg">导出为svg</el-button>
         <el-button :disabled="canDownload" icon="el-icon-download" @click="handleDownloadXml">导出为bpmn</el-button>
         <el-button icon="el-icon-sort" @click="hideRightPanel">{{ showRight ? '隐藏' : '显示' }}属性栏</el-button>
