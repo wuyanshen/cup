@@ -79,5 +79,5 @@ public interface CommonConstant {
     /**
      * 流程定义key
      */
-    String LEAVE_BILL_KEY = "leave";
+    String LEAVE_BILL_KEY = "newleave";
 }

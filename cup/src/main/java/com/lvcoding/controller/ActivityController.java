@@ -13,6 +13,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -44,13 +45,31 @@ public class ActivityController {
     }
 
     /**
+     * 根据xml发布流程
+     */
+    @PostMapping("publishByXml")
+    public Res publishByXml(@RequestBody DeploymentVO deploymentVO) {
+        this.activityService.publishByXml(deploymentVO);
+        return Res.success("发布成功");
+    }
+
+    /**
+     * 根据zip发布流程
+     */
+    @PostMapping("publishByZip")
+    public Res publishByZip(@RequestParam("file") MultipartFile multipartFile) {
+        this.activityService.publishByZip(multipartFile);
+        return Res.success("发布成功");
+    }
+
+    /**
      * 删除流程
-     * @param name
+     * @param id
      * @return
      */
-    @DeleteMapping("{name}")
-    public Res delete(@PathVariable("name") String name) {
-        Deployment deployment = repositoryService.createDeploymentQuery().deploymentName(name).singleResult();
+    @DeleteMapping("{id}")
+    public Res delete(@PathVariable("id") String id) {
+        Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(id).singleResult();
         if(ObjectUtil.isNotEmpty(deployment)) {
             repositoryService.deleteDeployment(deployment.getId(), true);
             return Res.success("删除流程成功");
@@ -74,14 +93,6 @@ public class ActivityController {
         }
     }
 
-    /**
-     * 审批任务
-     */
-    @PutMapping("complete")
-    public Res complete(@RequestParam("taskId") String taskId) {
-        this.taskService.complete(taskId);
-        return Res.success("审批成功");
-    }
 
     /**
      * 查询部署中的工作流
@@ -89,5 +100,23 @@ public class ActivityController {
     @GetMapping("deps")
     public Res deps() {
         return Res.success(this.activityService.getDeployList());
+    }
+
+    /**
+     * 挂起/激活流程
+     */
+    @PutMapping("suspend")
+    public Res suspend(@RequestBody ProcessDefinitionVO processDefinitionVO) {
+        this.activityService.suspendProcess(processDefinitionVO.getKey());
+        return Res.success();
+    }
+
+    /**
+     * 处理任务
+     */
+    @PutMapping("complete")
+    public Res complete(@RequestBody TaskVO taskVO) {
+        this.activityService.completeTask(taskVO);
+        return Res.success();
     }
 }

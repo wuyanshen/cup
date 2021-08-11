@@ -10,14 +10,10 @@
         <a @click="open" href="#"><i class="el-icon-star-off"></i></a>
       </el-tooltip>
       <el-tooltip content="博客" placement="top">
-        <a href="https://www.lvcoding.com" target="_blank"
-          ><i class="el-icon-reading"></i
-        ></a>
+        <a href="https://www.lvcoding.com" target="_blank"><i class="el-icon-reading"></i></a>
       </el-tooltip>
       <el-tooltip content="Gitee码云" placement="bottom">
-        <a href="https://gitee.com/wuyanshen/cup" target="_blank"
-          ><i class="el-icon-medal-1"></i
-        ></a>
+        <a href="https://gitee.com/wuyanshen/cup" target="_blank"><i class="el-icon-medal-1"></i></a>
       </el-tooltip>
     </div>
     <!-- 头像 -->
@@ -25,11 +21,7 @@
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
           <el-avatar v-if="avatarUrl" :size="50" :src="avatarUrl"></el-avatar>
-          <el-avatar
-            v-if="!avatarUrl"
-            :size="50"
-            icon="el-icon-user-solid"
-          ></el-avatar>
+          <el-avatar v-if="!avatarUrl" :size="50" icon="el-icon-user-solid"></el-avatar>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="info">个人信息</el-dropdown-item>
@@ -39,20 +31,8 @@
       </el-dropdown>
     </div>
     <!-- 修改密码对话框 -->
-    <el-dialog
-      title="修改密码"
-      :visible.sync="pwdDialog"
-      width="30%"
-      :show-close="false"
-      @close="pwdClose"
-    >
-      <el-form
-        label-width="100px"
-        ref="pwdForm"
-        :rules="pwdRules"
-        size="mini"
-        :model="pwdForm"
-      >
+    <el-dialog title="修改密码" :visible.sync="pwdDialog" width="30%" :show-close="false" @close="pwdClose">
+      <el-form label-width="100px" ref="pwdForm" :rules="pwdRules" size="mini" :model="pwdForm">
         <el-form-item label="原密码" prop="old_password">
           <el-input type="password" v-model="pwdForm.old_password"></el-input>
         </el-form-item>
@@ -65,21 +45,11 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="pwdDialog = false">取 消</el-button>
-        <el-button
-          size="mini"
-          type="primary"
-          @click="handleUpdatePwd('pwdForm')"
-          >确 定</el-button
-        >
+        <el-button size="mini" type="primary" @click="handleUpdatePwd('pwdForm')">确 定</el-button>
       </span>
     </el-dialog>
     <!-- 二维码显示 -->
-    <el-dialog
-      class="qrcode_dialog"
-      title=""
-      :visible.sync="qrCodeDialog"
-      width="15%"
-    >
+    <el-dialog class="qrcode_dialog" title="" :visible.sync="qrCodeDialog" width="15%">
       <img src="../assets/images/dashang.jpg" width="200px" height="200px" />
     </el-dialog>
   </div>
@@ -228,18 +198,19 @@ export default {
         .then(async () => {
           const res = await this.logout();
           if (res.code === 0) {
-            window.sessionStorage.clear();
             this.$router.push("/login").catch((err) => {
               err;
             });
             this.initMainTabs();
+            window.sessionStorage.clear();
+            window.localStorage.clear();
             this.$message({
               type: "success",
               message: "退出成功!",
             });
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     handleCollapse() {
       this.UPDATE_COLLAPSE(!this.siderCollapse);

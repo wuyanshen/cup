@@ -4,6 +4,7 @@
     <div class="btn-group">
       <el-button-group>
         <el-button icon="el-icon-upload" @click="handleOpenFile">导入</el-button>
+        <el-button icon="el-icon-upload" @click="handlePublish">部署</el-button>
         <el-button :disabled="canDownload" icon="el-icon-download" @click="handleDownloadSvg">导出为svg</el-button>
         <el-button :disabled="canDownload" icon="el-icon-download" @click="handleDownloadXml">导出为bpmn</el-button>
         <el-button icon="el-icon-sort" @click="hideRightPanel">{{ showRight ? '隐藏' : '显示' }}属性栏</el-button>
@@ -219,6 +220,19 @@ export default {
     // 隐藏右侧属性栏
     hideRightPanel() {
       this.showRight = !this.showRight;
+    },
+    // 部署工作流
+    handlePublish() {
+      this.bpmnModeler.saveXML({ format: true }, (err, xml) => {
+        if (err) {
+          this.$message.error('导出错误，请重试')
+        } else {
+          console.log(xml)
+          this.$api.activiti.publishByXml({ name: 'userDefineXml.bpmn', xml }).then(res => {
+            this.$message.success('部署工作流成功')
+          })
+        }
+      })
     }
   }
 

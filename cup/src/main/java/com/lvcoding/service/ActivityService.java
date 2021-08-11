@@ -3,6 +3,7 @@ package com.lvcoding.service;
 import com.lvcoding.entity.vo.DeploymentVO;
 import com.lvcoding.entity.vo.ProcessDefinitionVO;
 import com.lvcoding.entity.vo.TaskVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,4 +29,27 @@ public interface ActivityService {
      * @param
      */
     void publish();
+
+    /**
+     * 挂起/激活流程
+     *
+     * @param processKey
+     */
+    void suspendProcess(String processKey);
+
+    /**
+     * 根据xml发布流程
+     *
+     * @param deploymentVO
+     */
+    void publishByXml(DeploymentVO deploymentVO);
+
+    /**
+     * 处理任务
+     *
+     * @param taskVO
+     */
+    void completeTask(TaskVO taskVO);
+
+    void publishByZip(MultipartFile multipartFile);
 }

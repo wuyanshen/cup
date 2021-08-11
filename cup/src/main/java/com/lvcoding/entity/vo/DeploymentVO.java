@@ -11,11 +11,13 @@ public class DeploymentVO {
 
     private String name;
 
-    private Date DeploymentTime;
+    private Date deploymentTime;
 
     private String category;
-  
+
     private String key;
+
+    private String xml;
 
     private String tenantId;
 }

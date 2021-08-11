@@ -6,14 +6,16 @@ import org from './org'
 import tenant from './tenant'
 import job from './job'
 import leave from './leave'
+import activiti from './activiti'
 
 export default {
     user,
     menu,
-	log,
+    log,
     role,
     org,
     tenant,
     leave,
-    job
+    job,
+    activiti
 }

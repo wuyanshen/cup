@@ -120,7 +120,8 @@ public class JavaTest {
         RuntimeService runtimeService = processEngine.getRuntimeService();
 
         // 3.根据流程定义的id启动流程
-        ProcessInstance instance = runtimeService.startProcessInstanceByKey("leave");
+        // ProcessInstance instance = runtimeService.startProcessInstanceByKey("Process_1");
+        ProcessInstance instance = runtimeService.startProcessInstanceById("Process_1:1:7f13263e-fa93-11eb-a64b-acde48001122");
 
         // 4.输出内容
         System.out.println("流程定义ID：" + instance.getProcessDefinitionId());
@@ -287,7 +288,7 @@ public class JavaTest {
         RepositoryService repositoryService = processEngine.getRepositoryService();
 
         // 3.查询流程定义
-        String key = "Process_1";
+        String key = "leave";
         ProcessDefinition processDefinition = repositoryService
                 .createProcessDefinitionQuery()
                 // .processDefinitionName("请假流程")
@@ -371,6 +372,85 @@ public class JavaTest {
         ZipInputStream zipInputStream = new ZipInputStream(inputStream);
         Deployment deployment = repositoryService.createDeployment()
                 .addZipInputStream(zipInputStream)
+                .deploy();
+
+        // 4.输出部署信息
+        System.out.println("流程部署id "+deployment.getId());
+        System.out.println("流程部署名称 " + deployment.getName());
+    }
+
+    /**
+     * 使用xml部署流程
+     */
+    @Test
+    public void deployByXml() {
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<bpmn:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:activiti=\"http://activiti.org/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n" +
+                "  <bpmn:process id=\"newLeave\" name=\"新的请假流程\" isExecutable=\"true\">\n" +
+                "    <bpmn:startEvent id=\"StartEvent_1\" name=\"开始\">\n" +
+                "      <bpmn:outgoing>Flow_0aymhqd</bpmn:outgoing>\n" +
+                "    </bpmn:startEvent>\n" +
+                "    <bpmn:userTask id=\"Activity_1ejk5ls\" name=\"提交请假\" activiti:assignee=\"zhangsan\">\n" +
+                "      <bpmn:incoming>Flow_0aymhqd</bpmn:incoming>\n" +
+                "      <bpmn:outgoing>Flow_0s6slid</bpmn:outgoing>\n" +
+                "    </bpmn:userTask>\n" +
+                "    <bpmn:sequenceFlow id=\"Flow_0aymhqd\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1ejk5ls\" />\n" +
+                "    <bpmn:userTask id=\"Activity_0m3jsvi\" name=\"组长审批\" activiti:assignee=\"admin\">\n" +
+                "      <bpmn:incoming>Flow_0s6slid</bpmn:incoming>\n" +
+                "      <bpmn:outgoing>Flow_00nix90</bpmn:outgoing>\n" +
+                "    </bpmn:userTask>\n" +
+                "    <bpmn:sequenceFlow id=\"Flow_0s6slid\" sourceRef=\"Activity_1ejk5ls\" targetRef=\"Activity_0m3jsvi\" />\n" +
+                "    <bpmn:endEvent id=\"Event_1ehobbm\" name=\"结束\">\n" +
+                "      <bpmn:incoming>Flow_00nix90</bpmn:incoming>\n" +
+                "    </bpmn:endEvent>\n" +
+                "    <bpmn:sequenceFlow id=\"Flow_00nix90\" sourceRef=\"Activity_0m3jsvi\" targetRef=\"Event_1ehobbm\" />\n" +
+                "  </bpmn:process>\n" +
+                "  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n" +
+                "    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"newLeave\">\n" +
+                "      <bpmndi:BPMNEdge id=\"Flow_0aymhqd_di\" bpmnElement=\"Flow_0aymhqd\">\n" +
+                "        <di:waypoint x=\"209\" y=\"120\" />\n" +
+                "        <di:waypoint x=\"260\" y=\"120\" />\n" +
+                "      </bpmndi:BPMNEdge>\n" +
+                "      <bpmndi:BPMNEdge id=\"Flow_0s6slid_di\" bpmnElement=\"Flow_0s6slid\">\n" +
+                "        <di:waypoint x=\"360\" y=\"120\" />\n" +
+                "        <di:waypoint x=\"420\" y=\"120\" />\n" +
+                "      </bpmndi:BPMNEdge>\n" +
+                "      <bpmndi:BPMNEdge id=\"Flow_00nix90_di\" bpmnElement=\"Flow_00nix90\">\n" +
+                "        <di:waypoint x=\"520\" y=\"120\" />\n" +
+                "        <di:waypoint x=\"582\" y=\"120\" />\n" +
+                "      </bpmndi:BPMNEdge>\n" +
+                "      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n" +
+                "        <dc:Bounds x=\"173\" y=\"102\" width=\"36\" height=\"36\" />\n" +
+                "        <bpmndi:BPMNLabel>\n" +
+                "          <dc:Bounds x=\"180\" y=\"145\" width=\"22\" height=\"14\" />\n" +
+                "        </bpmndi:BPMNLabel>\n" +
+                "      </bpmndi:BPMNShape>\n" +
+                "      <bpmndi:BPMNShape id=\"Activity_1ejk5ls_di\" bpmnElement=\"Activity_1ejk5ls\">\n" +
+                "        <dc:Bounds x=\"260\" y=\"80\" width=\"100\" height=\"80\" />\n" +
+                "      </bpmndi:BPMNShape>\n" +
+                "      <bpmndi:BPMNShape id=\"Activity_0m3jsvi_di\" bpmnElement=\"Activity_0m3jsvi\">\n" +
+                "        <dc:Bounds x=\"420\" y=\"80\" width=\"100\" height=\"80\" />\n" +
+                "      </bpmndi:BPMNShape>\n" +
+                "      <bpmndi:BPMNShape id=\"Event_1ehobbm_di\" bpmnElement=\"Event_1ehobbm\">\n" +
+                "        <dc:Bounds x=\"582\" y=\"102\" width=\"36\" height=\"36\" />\n" +
+                "        <bpmndi:BPMNLabel>\n" +
+                "          <dc:Bounds x=\"589\" y=\"145\" width=\"22\" height=\"14\" />\n" +
+                "        </bpmndi:BPMNLabel>\n" +
+                "      </bpmndi:BPMNShape>\n" +
+                "    </bpmndi:BPMNPlane>\n" +
+                "  </bpmndi:BPMNDiagram>\n" +
+                "</bpmn:definitions>";
+
+        // 1.获取流程引擎
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+
+        // 2.获取RepositoryService
+        RepositoryService repositoryService = processEngine.getRepositoryService();
+
+        // 3.使用RepositoryService部署流程
+        Deployment deployment = repositoryService.createDeployment()
+                .addString("leaveXml.bpmn", xml)
+                .name("根据xml部署流程")
                 .deploy();
 
         // 4.输出部署信息
