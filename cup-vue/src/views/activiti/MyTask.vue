@@ -2,7 +2,7 @@
   <div>
     <el-card>
       <!-- 表格区 -->
-      <el-table border stripe size="mini" :data="taskList">
+      <el-table stripe size="mini" :data="taskList">
         <el-table-column align="center" label="流程实例ID" prop="processInstanceId"></el-table-column>
         <el-table-column align="center" label="任务名称" prop="name"></el-table-column>
         <el-table-column align="center" label="任务ID" prop="id"></el-table-column>

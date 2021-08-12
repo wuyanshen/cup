@@ -14,10 +14,8 @@
       <el-table
         size="mini"
         :data="tableData"
-        border
         stripe
         row-key="id"
-        :header-cell-style="{ background: '#F2F6FC' }"
       >
         <el-table-column
           align="center"

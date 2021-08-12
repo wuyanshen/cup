@@ -8,93 +8,52 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="6">
-        <el-input size="mini" clearable v-model="queryInfo.jobName" placeholder="请输入要查询的任务名称" @change="handleSearch">
-        </el-input>
+        <el-input size="mini" clearable v-model="queryInfo.jobName" placeholder="请输入要查询的任务名称" @change="handleSearch"> </el-input>
       </el-col>
       <el-col :span="2">
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleSearch">查询</el-button>
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-table :data="this.page.tableData" stripe border size="mini" class="job_table"
-              :header-cell-style="{background:'#F2F6FC'}">
+    <el-table :data="this.page.tableData" stripe size="mini" class="job_table">
       <el-table-column type="index" label="序号" width="50" align="center"></el-table-column>
       <el-table-column align="center" label="名称" min-width="120" prop="jobName"></el-table-column>
       <el-table-column label="状态" prop="type" width="110px" align="center">
         <template v-slot="scope">
-          <el-tag size="mini" v-if="scope.row.status==='1'" type="success">运行中</el-tag>
-          <el-tag size="mini" v-if="scope.row.status==='2'" type="info">暂停中</el-tag>
-          <el-tag size="mini" v-if="scope.row.status==='3'" type="primary">未开始</el-tag>
+          <el-tag size="mini" v-if="scope.row.status === '1'" type="success">运行中</el-tag>
+          <el-tag size="mini" v-if="scope.row.status === '2'" type="info">暂停中</el-tag>
+          <el-tag size="mini" v-if="scope.row.status === '3'" type="primary">未开始</el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" label="cron表达式" min-width="120" prop="cron"></el-table-column>
       <el-table-column align="center" label="类名" min-width="100" prop="beanName"></el-table-column>
       <el-table-column align="center" label="方法名" prop="methodName"></el-table-column>
       <el-table-column align="center" label="描述" min-width="100" prop="description"></el-table-column>
-      <el-table-column label="创建时间" prop="createTime" :formatter="formatDate" width="150"
-                       align="center"></el-table-column>
-      <el-table-column label="更新时间" prop="updateTime" :formatter="formatDate" width="150"
-                       align="center"></el-table-column>
+      <el-table-column label="创建时间" prop="createTime" :formatter="formatDate" width="150" align="center"></el-table-column>
+      <el-table-column label="更新时间" prop="updateTime" :formatter="formatDate" width="150" align="center"></el-table-column>
       <el-table-column min-width="300" align="center" label="操作">
         <template v-slot="scope">
-          <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-edit"
-              @click="handleEdit(scope.row)"
-          >修改
-          </el-button>
-          <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-delete"
-              @click="handleDelete(scope.row)"
-          >删除
-          </el-button>
-          <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-video-pause"
-              @click="handlePause(scope.row)"
-          >暂停
-          </el-button>
-          <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-video-play"
-              @click="handleResume(scope.row)"
-          >恢复
-          </el-button>
-          <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-refresh"
-              @click="handleTrigger(scope.row)"
-          >手动执行一次
-          </el-button>
+          <el-button type="text" size="mini" icon="el-icon-edit" @click="handleEdit(scope.row)">修改 </el-button>
+          <el-button type="text" size="mini" icon="el-icon-delete" @click="handleDelete(scope.row)">删除 </el-button>
+          <el-button type="text" size="mini" icon="el-icon-video-pause" @click="handlePause(scope.row)">暂停 </el-button>
+          <el-button type="text" size="mini" icon="el-icon-video-play" @click="handleResume(scope.row)">恢复 </el-button>
+          <el-button type="text" size="mini" icon="el-icon-refresh" @click="handleTrigger(scope.row)">手动执行一次 </el-button>
         </template>
       </el-table-column>
     </el-table>
     <!-- 分页区 -->
     <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="this.page.currentPage"
-        :page-sizes="[5, 10, 15, 20]"
-        :page-size="this.page.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="this.page.total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="this.page.currentPage"
+      :page-sizes="[5, 10, 15, 20]"
+      :page-size="this.page.pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="this.page.total"
     ></el-pagination>
 
     <!-- 新增/修改任务对话框 -->
-    <el-dialog
-        :title="title"
-        :visible.sync="jobDialog"
-        width="30%"
-        :show-close="false"
-        @close="jobDialogClose"
-        :close-on-click-modal="false"
-    >
+    <el-dialog :title="title" :visible.sync="jobDialog" width="30%" :show-close="false" @close="jobDialogClose" :close-on-click-modal="false">
       <el-form size="mini" label-width="130px" :rules="rules" :model="form" ref="form">
         <el-form-item label="任务名称" prop="jobName">
           <el-input v-model="form.jobName" :disabled="form.id !== undefined"></el-input>
@@ -121,15 +80,15 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
-import {formatDate} from '@/lib/util'
+import { mapActions } from 'vuex'
+import { formatDate } from '@/lib/util'
 import moment from "moment";
 
 export default {
   data() {
     const cronCheck = async (rule, value, callback) => {
       console.log(value)
-      const res = await this.check({cron: value});
+      const res = await this.check({ cron: value });
       if (res.data) {
         callback();
       } else {
@@ -154,17 +113,17 @@ export default {
       },
       rules: {
         jobName: [
-          {required: true, message: '任务名称不能为空', trigger: 'blur'}
+          { required: true, message: '任务名称不能为空', trigger: 'blur' }
         ],
         beanName: [
-          {required: true, message: '类名不能为空', trigger: 'blur'}
+          { required: true, message: '类名不能为空', trigger: 'blur' }
         ],
         cron: [
-          {required: true, message: 'cron表达式不能为空', trigger: 'blur'},
-          {validator: cronCheck, trigger: 'blur'}
+          { required: true, message: 'cron表达式不能为空', trigger: 'blur' },
+          { validator: cronCheck, trigger: 'blur' }
         ],
         methodName: [
-          {required: true, message: '方法名不能为空', trigger: 'blur'}
+          { required: true, message: '方法名不能为空', trigger: 'blur' }
         ]
       }
     };

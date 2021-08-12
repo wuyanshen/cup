@@ -5,7 +5,7 @@
       <el-button type="danger" size="mini" @click="showActEditor">工作流编辑器</el-button>
       <el-button type="danger" size="mini" @click="showUploadDialog">通过zip部署</el-button>
       <!-- 表格 -->
-      <el-table size="mini" border stripe :data="processList">
+      <el-table size="mini" stripe :data="processList">
         <el-table-column align="center" label="流程ID" prop="id"></el-table-column>
         <el-table-column align="center" label="流程KEY" prop="key"></el-table-column>
         <el-table-column align="center" label="部署ID" prop="deploymentId"></el-table-column>
