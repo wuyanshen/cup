@@ -29,6 +29,12 @@ public class LeaveBill implements Serializable {
     private Integer userId;
 
     /**
+     * 请假类型(1.年假2.事假3.病假 4.调休假)
+     */
+    @TableField(value = "type")
+    private String type;
+
+    /**
      * 请假原因
      */
     @TableField(value = "reason")

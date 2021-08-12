@@ -14,37 +14,27 @@
       <!--              ></el-option>-->
       <!--          </el-select>-->
       <!--      </div>-->
-      <el-form
-        :model="loginForm"
-        status-icon
-        :rules="rules"
-        ref="loginForm"
-        class="loginForm"
-      >
+      <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" class="loginForm">
         <el-form-item label prop="username">
-          <el-input
-            prefix-icon="el-icon-user"
-            placeholder="请输入用户名"
-            v-model="loginForm.username"
-            autocomplete="off"
-          ></el-input>
+          <el-input prefix-icon="el-icon-user" placeholder="请输入用户名" v-model="loginForm.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label prop="password">
+          <el-input show-password prefix-icon="el-icon-key" placeholder="请输入密码" type="password" v-model="loginForm.password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label prop="captcha">
           <el-input
-            prefix-icon="el-icon-key"
-            placeholder="请输入密码"
-            type="password"
-            v-model="loginForm.password"
+            class="imgCodeInput"
+            prefix-icon="el-icon-lock"
+            placeholder="请输入验证码"
+            type="text"
+            v-model="loginForm.captcha"
+            @keyup.enter.native="submitForm('loginForm')"
             autocomplete="off"
           ></el-input>
+          <el-image class="imgCode" :src="imgUrl" @click="getCaptchaImage"></el-image>
         </el-form-item>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="submitForm('loginForm')"
-            style="width: 100%"
-            >登录</el-button
-          >
+          <el-button type="primary" @click="submitForm('loginForm')" style="width: 100%">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -84,6 +74,7 @@ export default {
     return {
       tenantId: "",
       tenants: [],
+      imgUrl: '',
       loginForm: {
         username: "",
         password: "",
@@ -91,6 +82,7 @@ export default {
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
         password: [{ validator: validatePassword, trigger: "blur" }],
+        captcha: [{ required: true, message: '请填写验证码' }],
       },
     };
   },
@@ -102,6 +94,8 @@ export default {
 
     // 获取租户列表
     this.getTenantList();
+    // 获取验证码
+    this.getCaptchaImage();
   },
   computed: {
     ...mapState(["appName"]),
@@ -114,6 +108,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
+          this.getCaptchaImage();
           if (this.tenantId) {
             let tenantInfo = {
               dataType: "number",
@@ -168,6 +163,14 @@ export default {
       }
       this.tenants = arr;
     },
+    // 验证码
+    getCaptchaImage() {
+      this.$api.captcha.captchaImage().then(res => {
+        console.log('调用了验证码')
+        this.imgUrl = "data:image/jpg;base64," + res.data.img;
+        this.loginForm.uuid = res.data.uuid;
+      })
+    }
   },
 };
 </script>
@@ -183,7 +186,7 @@ el-button {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: url("../../assets/images/bg.jpg") no-repeat;
+  background: url('../../assets/images/bg.jpg') no-repeat;
   background-size: 100% 100%;
 
   .login-footer {
@@ -224,5 +227,17 @@ el-button {
   .tenant-list {
     width: 150px;
   }
+}
+
+.imgCodeInput {
+  width: 246px;
+}
+
+.imgCode {
+  cursor: pointer;
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  right: 0;
 }
 </style>

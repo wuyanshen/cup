@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.10.RELEASE</version>
+        <version>2.3.9.RELEASE</version>
     </parent>
 
     <groupId>com.cup</groupId>
@@ -111,7 +111,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.3.1</version>
+            <version>5.5.8</version>
         </dependency>
 
 
@@ -175,7 +175,7 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
-            <version>7.0.0.SR1</version>
+            <version>7.1.0.M6</version>
             <exclusions>
                 <exclusion>
                     <artifactId>mybatis</artifactId>
@@ -190,6 +190,12 @@
             <version>2.5</version>
         </dependency>
 
+        <!--验证码-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
 
         <!--jasypt安全框架,加密数据源-->
         <dependency>

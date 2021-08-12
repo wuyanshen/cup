@@ -18,7 +18,7 @@ import java.io.IOException;
  * @Date 2020-08-28 3:00 下午
  * @Author wuyanshen
  */
-@Component
+// @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class TenantFilter extends OncePerRequestFilter {
     @Override

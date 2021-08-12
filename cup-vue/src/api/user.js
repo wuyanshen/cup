@@ -7,11 +7,12 @@ const userInfo = () => {
 
 //登录方法
 const login = params => {
-    return axios.request({
-        url: '/certification',
-        method: 'post',
-        data: params
-    })
+    // return axios.request({
+    //     url: '/certification',
+    //     method: 'post',
+    //     data: params
+    // })
+    return axios.post('/certification', params)
 }
 
 //登出
@@ -76,5 +77,5 @@ export default {
     updatePwd,
     pwdCheck,
     usernameCheck,
-    userRoleIds,
+    userRoleIds
 }

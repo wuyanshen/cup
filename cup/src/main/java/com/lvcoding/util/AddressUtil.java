@@ -25,7 +25,7 @@ public class AddressUtil {
      * @param ip
      */
     public String getAddressByIp(String ip) {
-        if (NetUtil.isInnerIP(ip)) {
+        if ("0:0:0:0:0:0:0:1".equals(ip) ||  NetUtil.isInnerIP(ip)) {
             return "内网IP";
         }
 

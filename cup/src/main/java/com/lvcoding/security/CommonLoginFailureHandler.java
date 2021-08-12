@@ -2,6 +2,7 @@ package com.lvcoding.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
+import com.lvcoding.exception.ImgCodeException;
 import com.lvcoding.util.Res;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,9 @@ public class CommonLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
                 res.setMsg("用户名或密码错误");
             } else if (exception instanceof UsernameNotFoundException) {
                 res.setMsg("用户名不存在");
+            } else if (exception instanceof ImgCodeException) {
+                res.setCode(-1);
+                res.setMsg("验证码错误");
             } else {
                 res.setCode(500);
                 res.setMsg("系统错误，请联系管理员");

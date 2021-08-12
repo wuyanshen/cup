@@ -23,6 +23,16 @@ public class CupProperties {
     private boolean enableDemo = false;
 
     /**
+     * 验证码类型
+     */
+    private String captchaType = "math";
+
+    /**
+     * redis cache注解失效时间(单位：分)，默认60分钟
+     */
+    private int cacheExpire = 60;
+
+    /**
      * 不需要校验token的url
      */
     private List<String> tokenIgnoreUrl = new ArrayList<>();

@@ -7,6 +7,7 @@ import tenant from './tenant'
 import job from './job'
 import leave from './leave'
 import activiti from './activiti'
+import captcha from './captcha'
 
 export default {
     user,
@@ -17,5 +18,6 @@ export default {
     tenant,
     leave,
     job,
+    captcha,
     activiti
 }

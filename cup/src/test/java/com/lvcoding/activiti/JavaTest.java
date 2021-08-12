@@ -15,7 +15,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -121,7 +123,9 @@ public class JavaTest {
 
         // 3.根据流程定义的id启动流程
         // ProcessInstance instance = runtimeService.startProcessInstanceByKey("Process_1");
-        ProcessInstance instance = runtimeService.startProcessInstanceById("Process_1:1:7f13263e-fa93-11eb-a64b-acde48001122");
+        Map<String, Object> map = new HashMap<>();
+        map.put("day", 2);
+        ProcessInstance instance = runtimeService.startProcessInstanceById("Process_1:1:56931ea6-fb36-11eb-8e45-acde48001122", map);
 
         // 4.输出内容
         System.out.println("流程定义ID：" + instance.getProcessDefinitionId());

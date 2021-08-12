@@ -1,9 +1,9 @@
-package com.lvcoding.redis;
+package com.lvcoding.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.hutool.extra.spring.SpringUtil;
+import lombok.experimental.UtilityClass;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -13,11 +13,10 @@ import java.util.concurrent.TimeUnit;
  *
  * @author wuyanshen
  */
-@Component
-public class RedisService {
+@UtilityClass
+public class RedisUtil {
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+    public RedisTemplate redisTemplate = SpringUtil.getBean("redisTemplate");
 
     /**
      * 模糊查询redis中的key

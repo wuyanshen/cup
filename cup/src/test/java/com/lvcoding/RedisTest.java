@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.service.SysUserService;
-import com.lvcoding.redis.RedisService;
+import com.lvcoding.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,9 +25,6 @@ public class RedisTest {
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private RedisService redisUtil;
-
-    @Autowired
     private SysUserService sysUserService;
 
     @Autowired
@@ -41,7 +38,7 @@ public class RedisTest {
         SysUser sysUser = sysUserService.getById(1);
 //        String user = objectMapper.writeValueAsString(sysUser);
 //        redisTemplate.opsForValue().set("cup:user", user);
-        redisUtil.set("cup:user", sysUser, 30, TimeUnit.SECONDS);
+        RedisUtil.set("cup:user", sysUser, 30, TimeUnit.SECONDS);
     }
 
     /**
@@ -50,7 +47,7 @@ public class RedisTest {
     @Test
     public void getUser() throws IOException {
 //        String result = redisTemplate.opsForValue().get("cup:user").toString();
-        SysUser sysUser = redisUtil.get("cup:user");
+        SysUser sysUser = RedisUtil.get("cup:user");
 //        SysUser sysUser = null;
 //        if (obj instanceof JSONObject){
 //            sysUser = (SysUser)obj;
@@ -61,7 +58,7 @@ public class RedisTest {
 
     @Test
     public void deleUser() {
-        boolean flag = redisUtil.del("cup:user");
+        boolean flag = RedisUtil.del("cup:user");
         if (flag) {
             System.out.println("删除用户成功");
         }
@@ -75,13 +72,13 @@ public class RedisTest {
     public void StringTest() {
         String uuid = UUID.randomUUID().toString();
 //        redisTemplate.opsForValue().set("cup:String:test", uuid);
-        redisUtil.set("cup:String:test", uuid);
+        RedisUtil.set("cup:String:test", uuid);
     }
 
     @Test
     public void RedisKeys() {
 //        Set<String> stringSet = redisTemplate.keys("cup*");
-        Set<String> list = redisUtil.list("cup*");
+        Set<String> list = RedisUtil.list("cup*");
         list.stream().forEach(System.out::println);
     }
 

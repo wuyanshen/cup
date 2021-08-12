@@ -2,8 +2,8 @@ package com.lvcoding.security;
 
 import cn.hutool.core.util.StrUtil;
 import com.lvcoding.constant.CommonConstant;
-import com.lvcoding.redis.RedisService;
 import com.lvcoding.util.JwtUtil;
+import com.lvcoding.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -29,9 +29,6 @@ public class TokenService {
 
     private static final long REFRESH_MILLISECOND = 20 * 60 * 1000;
 
-
-    @Autowired
-    private RedisService redisService;
 
     /**
      * token请求头
@@ -63,7 +60,7 @@ public class TokenService {
             Map<String,Object> map = JwtUtil.parseToken(token, secret);
             String uuid = map.get(CommonConstant.TOKEN_KEY).toString();
             String loginTokenKey = getKey(uuid);
-            CommonUser commonUser = redisService.get(loginTokenKey);
+            CommonUser commonUser = RedisUtil.get(loginTokenKey);
             return commonUser;
         }
         return null;
@@ -121,7 +118,7 @@ public class TokenService {
      */
     public Boolean deleteToken(String token){
         if(StrUtil.isNotEmpty(token)){
-            return redisService.del(CommonConstant.TOKEN_REDIS_KEY+token);
+            return RedisUtil.del(CommonConstant.TOKEN_REDIS_KEY+token);
         }
         return false;
     }
@@ -137,7 +134,7 @@ public class TokenService {
 
         String key = getKey(commonUser.getToken());
         //用redis缓存token
-        redisService.set(key, commonUser, expireTime, TimeUnit.MINUTES);
+        RedisUtil.set(key, commonUser, expireTime, TimeUnit.MINUTES);
     }
 
 

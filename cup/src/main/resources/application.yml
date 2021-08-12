@@ -46,12 +46,17 @@ mybatis-plus:
 cup:
   # 是否开启演示模式
   enableDemo: false
+  # 验证码生成格式： math计算格式 char随机字符串
+  captchaType: math
+  # redis cache注解失效时间(单位：分)，默认60分钟
+  cacheExpire: 60
   # 不校验token的请求
   token-ignore-url:
     - /tenant/list
     - /token/check
     - /token/refresh
     - /certification
+    - /captcha/captchaImage
 
   # 多租户配置
   tenant:

@@ -203,7 +203,6 @@ export default {
             });
             this.initMainTabs();
             window.sessionStorage.clear();
-            window.localStorage.clear();
             this.$message({
               type: "success",
               message: "退出成功!",

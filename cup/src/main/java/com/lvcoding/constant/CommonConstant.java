@@ -7,6 +7,8 @@ package com.lvcoding.constant;
  */
 public interface CommonConstant {
 
+    String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
+
     String CHECK_TOKEN_URI = "/token/check";
 
     String WEB_SOCKET = "/websocket";
@@ -30,6 +32,8 @@ public interface CommonConstant {
     String TOKEN_PREFIX = "Bearer ";
 
     String TOKEN_REDIS_KEY = "login_token_key:";
+
+    String CAPTCHA_CODE_KEY = "captcha_code_key:";
 
     String TOKEN_KEY = "token_key";
 

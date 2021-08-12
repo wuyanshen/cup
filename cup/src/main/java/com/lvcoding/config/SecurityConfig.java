@@ -4,6 +4,7 @@ import com.lvcoding.security.*;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,10 +25,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CommonLoginSuccessHandler commonLoginSuccessHandler;
-
-    private final CommonLoginFailureHandler commonLoginFailureHandler;
-
     private final CommonUserDetailServiceImpl commonUserDetailServiceImpl;
 
     private final CommonAccessDeniedHandler commonAccessDeniedHandler;
@@ -37,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CommonAuthenticationEntryPoint commonAuthenticationEntryPoint;
 
     private final TokenFilter tokenFilter;
+
+    private final JsonLoginFilter jsonLoginFilter;
 
 
     @Override
@@ -49,20 +48,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        // 登录前，先拦截token
+        http.addFilterBefore(tokenFilter, JsonLoginFilter.class);
+        http.addFilterAt(jsonLoginFilter, UsernamePasswordAuthenticationFilter.class);
+
         http
                 .csrf().disable()
-                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
                 .logoutUrl("/signout")
                 .logoutSuccessHandler(commonLogoutSuccessHandler)
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/certification")
-                .successHandler(commonLoginSuccessHandler)
-                .failureHandler(commonLoginFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/service/**", "/token/check", "/certification", "/websocket/**", "/tenant/list").permitAll()
+                // 登录、验证码允许匿名访问
+                .antMatchers("/certification", "/captcha/captchaImage").anonymous()
+                .antMatchers( "/service/**", "/token/check", "/websocket/**", "/tenant/list").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
@@ -90,4 +93,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
 }
