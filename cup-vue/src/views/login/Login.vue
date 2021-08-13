@@ -41,7 +41,7 @@
     <!--  底部  -->
     <div class="login-footer">
       <div class="txt">
-        <span>Copyright © 2018-2020 cup.lvcoding.com All Rights Reserved.</span>
+        <span>Copyright © 2018-2021 cup.lvcoding.com All Rights Reserved.</span>
       </div>
     </div>
   </div>
