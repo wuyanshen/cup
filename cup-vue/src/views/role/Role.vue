@@ -118,7 +118,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import moment from 'moment'
 import { formatDate } from '@/lib/util'
 
 export default {

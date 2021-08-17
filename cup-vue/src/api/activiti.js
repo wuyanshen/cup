@@ -5,6 +5,11 @@ const getTask = params => {
     return axios.get(`/act/`, params)
 }
 
+// 查询历史已处理的任务
+const getHistoryTaskList = params => {
+    return axios.get(`/act/findHistoryTasks`, params)
+}
+
 // 查询部署的工作流
 const getProcessList = params => {
     return axios.get(`/act/deps`, params)
@@ -41,5 +46,6 @@ export default {
     deleteProcess,
     publishByXml,
     publishByZip,
+    getHistoryTaskList,
     completeTask
 }

@@ -1,6 +1,7 @@
 package com.lvcoding.service;
 
 import com.lvcoding.entity.vo.DeploymentVO;
+import com.lvcoding.entity.vo.PageVO;
 import com.lvcoding.entity.vo.ProcessDefinitionVO;
 import com.lvcoding.entity.vo.TaskVO;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ public interface ActivityService {
      *
      * @param
      */
-    List<ProcessDefinitionVO> getDeployList();
+    PageVO<ProcessDefinitionVO> getDeployList(PageVO<ProcessDefinitionVO> pageVO);
 
     /**
      * 发布流程
@@ -51,5 +52,14 @@ public interface ActivityService {
      */
     void completeTask(TaskVO taskVO);
 
+
     void publishByZip(MultipartFile multipartFile);
+
+    /**
+     * 查询历史已办理任务
+     *  @param username
+     * @param pageVO
+     * @return
+     */
+    PageVO<TaskVO> findHistoryTasks(String username, PageVO<TaskVO> pageVO);
 }

@@ -2,13 +2,13 @@ package com.lvcoding.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.lvcoding.entity.vo.DeploymentVO;
+import com.lvcoding.entity.vo.PageVO;
 import com.lvcoding.entity.vo.ProcessDefinitionVO;
 import com.lvcoding.entity.vo.TaskVO;
 import com.lvcoding.service.ActivityService;
 import com.lvcoding.util.Res;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,13 +93,24 @@ public class ActivityController {
         }
     }
 
+    /**
+     * 查询历史已办任务
+     * @param username
+     * @return
+     */
+    @GetMapping("findHistoryTasks")
+    public Res findHistoryTask(@RequestParam("username") String username, PageVO<TaskVO> pageVO) {
+        PageVO<TaskVO> page = activityService.findHistoryTasks(username, pageVO);
+        return Res.success(page);
+    }
+
 
     /**
      * 查询部署中的工作流
      */
     @GetMapping("deps")
-    public Res deps() {
-        return Res.success(this.activityService.getDeployList());
+    public Res deps(PageVO<ProcessDefinitionVO> pageVO) {
+        return Res.success(this.activityService.getDeployList(pageVO));
     }
 
     /**

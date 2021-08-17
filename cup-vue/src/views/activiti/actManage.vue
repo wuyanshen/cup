@@ -5,7 +5,7 @@
       <el-button type="danger" size="mini" @click="showActEditor">工作流编辑器</el-button>
       <el-button type="danger" size="mini" @click="showUploadDialog">通过zip部署</el-button>
       <!-- 表格 -->
-      <el-table size="mini" stripe :data="processList">
+      <el-table size="mini" stripe :data="page.records">
         <el-table-column align="center" label="流程ID" prop="id"></el-table-column>
         <el-table-column align="center" label="流程KEY" prop="key"></el-table-column>
         <el-table-column align="center" label="部署ID" prop="deploymentId"></el-table-column>
@@ -25,6 +25,17 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页区 -->
+      <el-pagination
+        style="margin-top: 10px"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="page.current"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="page.size"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="page.total"
+      ></el-pagination>
     </el-card>
 
     <!-- 上传dialog -->
@@ -56,7 +67,12 @@ export default {
     return {
       showAct: false,
       showUpload: false,
-      processList: [],
+      page: {
+        records: [],
+        size: 5,
+        current: 1,
+        total: 0
+      },
       uploadBtn: true,
       headerObj: {
         Authorization: window.sessionStorage.getItem("token"),
@@ -79,6 +95,8 @@ export default {
     // 上传文件成功时
     uploadOnSuccess(response, file, fileList) {
       if (response.code === 0) {
+        // 清除已上传的文件
+        this.$refs.upload.clearFiles();
         this.$message.success('部署成功')
         this.getProcessList();
       }
@@ -120,10 +138,24 @@ export default {
     },
     // 查询流程部署
     getProcessList() {
-      this.$api.activiti.getProcessList().then(res => {
-        this.processList = res.data;
+      let params = { size: this.page.size, current: this.page.current }
+      this.$api.activiti.getProcessList(params).then(res => {
+        this.page.records = res.data.records;
+        this.page.total = res.data.total;
+        this.page.size = res.data.size;
+        this.page.current = res.data.current;
       })
-    }
+    },
+    //修改每页显示条数
+    handleSizeChange(size) {
+      this.page.size = size;
+      this.getProcessList();
+    },
+    //修改当前第几页
+    handleCurrentChange(current) {
+      this.page.current = current;
+      this.getProcessList();
+    },
   }
 };
 </script>

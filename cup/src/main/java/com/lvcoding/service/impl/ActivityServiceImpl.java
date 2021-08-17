@@ -1,17 +1,20 @@
 package com.lvcoding.service.impl;
 
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.entity.vo.DeploymentVO;
+import com.lvcoding.entity.vo.PageVO;
 import com.lvcoding.entity.vo.ProcessDefinitionVO;
 import com.lvcoding.entity.vo.TaskVO;
 import com.lvcoding.service.ActivityService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -21,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -43,6 +45,8 @@ public class ActivityServiceImpl implements ActivityService {
     private TaskService taskService;
     @Autowired
     private RepositoryService repositoryService;
+    @Autowired
+    private HistoryService historyService;
 
 
     public boolean startActivity() {
@@ -74,18 +78,24 @@ public class ActivityServiceImpl implements ActivityService {
 
 
 	@Override
-    public List<ProcessDefinitionVO> getDeployList() {
-        List<ProcessDefinition> list = this.repositoryService.createProcessDefinitionQuery().list();
-        if(ObjectUtil.isNotEmpty(list)) {
-            List<ProcessDefinitionVO> collect = list.stream().map(processDefinition -> {
-                ProcessDefinitionVO processDefinitionVO = new ProcessDefinitionVO();
-                BeanUtils.copyProperties(processDefinition, processDefinitionVO);
-                return processDefinitionVO;
-            }).collect(Collectors.toList());
+    public PageVO<ProcessDefinitionVO> getDeployList(PageVO<ProcessDefinitionVO> pageVO) {
+        // 每页显示条数
+        int size = NumberUtil.parseInt(pageVO.getSize() + "");
+        // 偏移量
+        int offset = NumberUtil.parseInt((pageVO.getCurrent() - 1) * pageVO.getSize() + "");
 
-            return collect;
-        }
-        return new ArrayList<>();
+        List<ProcessDefinition> list = this.repositoryService.createProcessDefinitionQuery().listPage(offset, size);
+        List<ProcessDefinitionVO> collect = list.stream().map(processDefinition -> {
+            ProcessDefinitionVO processDefinitionVO = new ProcessDefinitionVO();
+            BeanUtils.copyProperties(processDefinition, processDefinitionVO);
+            return processDefinitionVO;
+        }).collect(Collectors.toList());
+
+        // 组装分页参数
+        long total = repositoryService.createProcessDefinitionQuery().count();
+        PageVO<ProcessDefinitionVO> page = new PageVO<>(pageVO.getCurrent(), pageVO.getSize(), total, collect);
+
+        return page;
 	}
 
     @Override
@@ -181,6 +191,29 @@ public class ActivityServiceImpl implements ActivityService {
         log.info("通过zip部署工作流");
         log.info("流程部署id："+deployment.getId());
         log.info("流程部署名称：" + deployment.getName());
+    }
+
+    @Override
+    public PageVO<TaskVO> findHistoryTasks(String username, PageVO<TaskVO> pageVO) {
+        // 每页显示条数
+        int size = NumberUtil.parseInt(pageVO.getSize() + "");
+
+        // 偏移量
+        int offset = NumberUtil.parseInt((pageVO.getCurrent() - 1) * pageVO.getSize() + "");
+
+        List<HistoricTaskInstance> historicTaskInstances = historyService.createHistoricTaskInstanceQuery().processFinished().taskAssignee(username).listPage(offset, size);
+
+        List<TaskVO> collect = historicTaskInstances.stream().map(task -> {
+            TaskVO taskVO = new TaskVO();
+            BeanUtils.copyProperties(task, taskVO);
+            return taskVO;
+        }).collect(Collectors.toList());
+
+        // 组装分页参数
+        long total = historyService.createHistoricTaskInstanceQuery().count();
+        PageVO<TaskVO> page = new PageVO<>(pageVO.getCurrent(), pageVO.getSize(), total, collect);
+
+        return page;
     }
 
 

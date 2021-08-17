@@ -29,6 +29,11 @@ public class TaskVO implements Serializable {
     private Date createTime;
 
     /**
+     * 任务完成时间
+     */
+    private Date endTime;
+
+    /**
      * 流程实例ID
      */
     private String processInstanceId;

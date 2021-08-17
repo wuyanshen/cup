@@ -51,6 +51,11 @@ const menuRouter = [{
                 component: () => import('../views/activiti/MyTask.vue')
             },
             {
+                path: 'historyTask',
+                name: 'HistoryTask',
+                component: () => import('../views/activiti/HistoryTask.vue')
+            },
+            {
                 path: 'actManage',
                 name: 'actManage',
                 component: () => import('../views/activiti/actManage.vue')
