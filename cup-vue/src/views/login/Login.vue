@@ -34,6 +34,9 @@
           <el-image class="imgCode" :src="imgUrl" @click="getCaptchaImage"></el-image>
         </el-form-item>
         <el-form-item>
+          <el-checkbox v-model="rememberMe" label="记住我"></el-checkbox>
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" @click="submitForm('loginForm')" style="width: 100%">登录</el-button>
         </el-form-item>
       </el-form>
@@ -49,11 +52,12 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 import { removeTenantId } from "@/lib/util.js";
+import Cookies from 'js-cookie';
 
 export default {
   data() {
     var validateUsername = (rule, value, callback) => {
-      if (value === "") {
+      if (value === "" || value === undefined || value === null) {
         callback(new Error("请输用户名"));
       } else {
         if (this.loginForm.checkPass !== "") {
@@ -63,7 +67,7 @@ export default {
       }
     };
     var validatePassword = (rule, value, callback) => {
-      if (value === "") {
+      if (value === "" || value === undefined || value === null) {
         callback(new Error("请输入密码"));
       } else if (value.length < 6) {
         callback(new Error("密码至少为6位"));
@@ -78,7 +82,9 @@ export default {
       loginForm: {
         username: "",
         password: "",
+        captcha: "",
       },
+      rememberMe: false,
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
         password: [{ validator: validatePassword, trigger: "blur" }],
@@ -87,10 +93,8 @@ export default {
     };
   },
   mounted() {
-    this.loginForm = {
-      username: this.username,
-      password: this.password,
-    };
+    // 初始化登录
+    this.initLoginForm();
 
     // 获取租户列表
     this.getTenantList();
@@ -105,10 +109,34 @@ export default {
     ...mapActions("user", ["login", "userInfoAction"]),
     ...mapActions("tenant", ["tenantList"]),
     ...mapMutations("user", ["ADD_USERINFO"]),
+    // 初始化登录
+    initLoginForm() {
+      this.loginForm.username = Cookies.get('username');
+      this.loginForm.password = Cookies.get('password');
+      this.rememberMe = Cookies.get('rememberMe') === 'true' ? true : false;
+    },
+    // 记住我
+    handleRememberMe() {
+      if (this.rememberMe) {
+        console.log('记住我', this.rememberMe)
+        Cookies.set('username', this.loginForm.username, { expires: 7 });
+        Cookies.set('password', this.loginForm.password, { expires: 7 });
+        Cookies.set('rememberMe', this.rememberMe, { expires: 7 });
+      } else {
+        Cookies.remove('username');
+        Cookies.remove('password');
+        Cookies.remove('rememberMe');
+      }
+    },
+    // 登录
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
+          // 刷新验证码
           this.getCaptchaImage();
+          // 记住我
+          this.handleRememberMe();
+
           if (this.tenantId) {
             let tenantInfo = {
               dataType: "number",
@@ -166,7 +194,6 @@ export default {
     // 验证码
     getCaptchaImage() {
       this.$api.captcha.captchaImage().then(res => {
-        console.log('调用了验证码')
         this.imgUrl = "data:image/jpg;base64," + res.data.img;
         this.loginForm.uuid = res.data.uuid;
       })
@@ -210,11 +237,11 @@ el-button {
   align-self: center;
   justify-content: center;
   flex-direction: column;
-  width: 400px;
-  height: 350px;
+  width: 22rem;
+  height: 25rem;
   background-color: white;
   box-shadow: 0 0 20px rgb(34, 16, 16);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .loginForm {
   width: 90%;

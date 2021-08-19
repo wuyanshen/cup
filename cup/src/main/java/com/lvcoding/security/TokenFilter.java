@@ -49,18 +49,7 @@ public class TokenFilter extends OncePerRequestFilter {
         }
 
         // 演示模式
-        if (cupProperties.isEnableDemo()) {
-            List<String> methods = new ArrayList<>();
-            methods.add("DELETE");
-            methods.add("POST");
-            methods.add("PUT");
-            if (methods.contains(request.getMethod())) {
-                response.setContentType("application/json;charset=utf-8");
-                response.getWriter().write(objectMapper.writeValueAsString(Res.fail("演示模式，不允许操作")));
-                return;
-            }
-        }
-
+        this.demoMode(request, response);
 
         CommonUser commonUser = tokenService.getCommonUser(request);
         if (ObjectUtil.isNotEmpty(commonUser)) {
@@ -74,5 +63,26 @@ public class TokenFilter extends OncePerRequestFilter {
 
         //继续走其它过滤器
         filterChain.doFilter(request, response);
+    }
+
+    /**
+     * 演示模式
+     *
+     * @param request
+     * @param response
+     * @author wuyanshen
+     */
+    private void demoMode(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (cupProperties.isEnableDemo()) {
+            List<String> methods = new ArrayList<>();
+            methods.add("DELETE");
+            methods.add("POST");
+            methods.add("PUT");
+            if (methods.contains(request.getMethod())) {
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(objectMapper.writeValueAsString(Res.fail("演示模式，不允许操作")));
+                return;
+            }
+        }
     }
 }
