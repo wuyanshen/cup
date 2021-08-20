@@ -51,7 +51,7 @@
 </template>
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import { removeTenantId } from "@/lib/util.js";
+import { removeTenantId, decode, encode } from "@/lib/util.js";
 import Cookies from 'js-cookie';
 
 export default {
@@ -111,16 +111,19 @@ export default {
     ...mapMutations("user", ["ADD_USERINFO"]),
     // 初始化登录
     initLoginForm() {
-      this.loginForm.username = Cookies.get('username');
-      this.loginForm.password = Cookies.get('password');
-      this.rememberMe = Cookies.get('rememberMe') === 'true' ? true : false;
+      const username = Cookies.get('username');
+      const password = Cookies.get('password');
+      const rememberMe = Cookies.get('rememberMe');
+      this.loginForm.username = username == undefined ? this.loginForm.username : username;
+      this.loginForm.password = password == undefined ? this.loginForm.password : decode(password);
+      this.rememberMe = undefined ? false : Boolean(rememberMe);
     },
     // 记住我
     handleRememberMe() {
+
       if (this.rememberMe) {
-        console.log('记住我', this.rememberMe)
         Cookies.set('username', this.loginForm.username, { expires: 7 });
-        Cookies.set('password', this.loginForm.password, { expires: 7 });
+        Cookies.set('password', encode(this.loginForm.password), { expires: 7 });
         Cookies.set('rememberMe', this.rememberMe, { expires: 7 });
       } else {
         Cookies.remove('username');
