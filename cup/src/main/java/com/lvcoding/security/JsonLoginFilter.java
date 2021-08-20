@@ -6,6 +6,8 @@ import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.exception.ImgCodeException;
 import com.lvcoding.util.RedisUtil;
+import com.lvcoding.util.RsaUtil;
+
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -60,7 +62,10 @@ public class JsonLoginFilter extends UsernamePasswordAuthenticationFilter {
                     }
                 }
 
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+                // rsa解密
+                String password = RsaUtil.decode(user.getPassword());
+
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), password);
                 this.setDetails(request, authenticationToken);
                 return this.getAuthenticationManager().authenticate(authenticationToken);
             }

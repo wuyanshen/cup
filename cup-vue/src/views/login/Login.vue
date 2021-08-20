@@ -50,159 +50,166 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
-import { removeTenantId, decode, encode } from "@/lib/util.js";
-import Cookies from 'js-cookie';
+import { mapState, mapActions, mapMutations } from 'vuex'
+import { removeTenantId, decode, encode } from '@/lib/util.js'
+import Cookies from 'js-cookie'
 
 export default {
   data() {
     var validateUsername = (rule, value, callback) => {
-      if (value === "" || value === undefined || value === null) {
-        callback(new Error("请输用户名"));
+      if (value === '' || value === undefined || value === null) {
+        callback(new Error('请输用户名'))
       } else {
-        if (this.loginForm.checkPass !== "") {
-          this.$refs.loginForm.validateField("password");
+        if (this.loginForm.checkPass !== '') {
+          this.$refs.loginForm.validateField('password')
         }
-        callback();
+        callback()
       }
-    };
+    }
     var validatePassword = (rule, value, callback) => {
-      if (value === "" || value === undefined || value === null) {
-        callback(new Error("请输入密码"));
+      if (value === '' || value === undefined || value === null) {
+        callback(new Error('请输入密码'))
       } else if (value.length < 6) {
-        callback(new Error("密码至少为6位"));
+        callback(new Error('密码至少为6位'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
-      tenantId: "",
+      tenantId: '',
       tenants: [],
       imgUrl: '',
       loginForm: {
-        username: "",
-        password: "",
-        captcha: "",
+        username: '',
+        password: '',
+        captcha: '',
+        uuid: ''
       },
       rememberMe: false,
       rules: {
-        username: [{ validator: validateUsername, trigger: "blur" }],
-        password: [{ validator: validatePassword, trigger: "blur" }],
-        captcha: [{ required: true, message: '请填写验证码' }],
-      },
-    };
+        username: [{ validator: validateUsername, trigger: 'blur' }],
+        password: [{ validator: validatePassword, trigger: 'blur' }],
+        captcha: [{ required: true, message: '请填写验证码' }]
+      }
+    }
   },
   mounted() {
     // 初始化登录
-    this.initLoginForm();
+    this.initLoginForm()
 
     // 获取租户列表
-    this.getTenantList();
+    this.getTenantList()
     // 获取验证码
-    this.getCaptchaImage();
+    this.getCaptchaImage()
   },
   computed: {
-    ...mapState(["appName"]),
-    ...mapState("user", ["username", "password"]),
+    ...mapState(['appName']),
+    ...mapState('user', ['username', 'password'])
   },
   methods: {
-    ...mapActions("user", ["login", "userInfoAction"]),
-    ...mapActions("tenant", ["tenantList"]),
-    ...mapMutations("user", ["ADD_USERINFO"]),
+    ...mapActions('user', ['login', 'userInfoAction']),
+    ...mapActions('tenant', ['tenantList']),
+    ...mapMutations('user', ['ADD_USERINFO']),
     // 初始化登录
     initLoginForm() {
-      const username = Cookies.get('username');
-      const password = Cookies.get('password');
-      const rememberMe = Cookies.get('rememberMe');
-      this.loginForm.username = username == undefined ? this.loginForm.username : username;
-      this.loginForm.password = password == undefined ? this.loginForm.password : decode(password);
-      this.rememberMe = undefined ? false : Boolean(rememberMe);
+      const username = Cookies.get('username')
+      const password = Cookies.get('password')
+      const rememberMe = Cookies.get('rememberMe')
+      this.loginForm.username = username == undefined ? this.loginForm.username : username
+      this.loginForm.password = password == undefined ? this.loginForm.password : decode(password)
+      this.rememberMe = undefined ? false : Boolean(rememberMe)
     },
     // 记住我
     handleRememberMe() {
-
       if (this.rememberMe) {
-        Cookies.set('username', this.loginForm.username, { expires: 7 });
-        Cookies.set('password', encode(this.loginForm.password), { expires: 7 });
-        Cookies.set('rememberMe', this.rememberMe, { expires: 7 });
+        Cookies.set('username', this.loginForm.username, { expires: 7 })
+        Cookies.set('password', encode(this.loginForm.password), { expires: 7 })
+        Cookies.set('rememberMe', this.rememberMe, { expires: 7 })
       } else {
-        Cookies.remove('username');
-        Cookies.remove('password');
-        Cookies.remove('rememberMe');
+        Cookies.remove('username')
+        Cookies.remove('password')
+        Cookies.remove('rememberMe')
       }
     },
     // 登录
     submitForm(formName) {
-      this.$refs[formName].validate(async (valid) => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
           // 刷新验证码
-          this.getCaptchaImage();
+          this.getCaptchaImage()
           // 记住我
-          this.handleRememberMe();
+          this.handleRememberMe()
 
           if (this.tenantId) {
             let tenantInfo = {
-              dataType: "number",
+              dataType: 'number',
               content: parseInt(this.tenantId),
-              datetime: new Date().getTime(),
-            };
-            localStorage.setItem("tenantId", JSON.stringify(tenantInfo));
+              datetime: new Date().getTime()
+            }
+            localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
           } else {
           }
 
-          let res = await this.login(this.loginForm);
+          let params = {
+            username: this.loginForm.username,
+            password: encode(this.loginForm.password),
+            captcha: this.loginForm.captcha,
+            uuid: this.loginForm.uuid
+          }
+
+          let res = await this.login(params)
           if (res.code === 0) {
             // 查询用户信息
-            let res = await this.userInfoAction();
+            let res = await this.userInfoAction()
             // 将用户信息放到vuex中
-            this.ADD_USERINFO(res.data);
-            this.$message.success("登录成功~");
-            this.$router.push("/").catch((err) => {
-              err;
-            });
+            this.ADD_USERINFO(res.data)
+            this.$message.success('登录成功~')
+            this.$router.push('/').catch(err => {
+              err
+            })
           }
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     // 获取租户id，并存储到localStorage
     getTenantId() {
       if (this.tenantId) {
         let tenantInfo = {
-          dataType: "number",
+          dataType: 'number',
           content: parseInt(this.tenantId),
-          datetime: new Date().getTime(),
-        };
-        localStorage.setItem("tenantId", JSON.stringify(tenantInfo));
+          datetime: new Date().getTime()
+        }
+        localStorage.setItem('tenantId', JSON.stringify(tenantInfo))
       } else {
-        removeTenantId();
+        removeTenantId()
       }
     },
     // 获取租户列表
     async getTenantList() {
-      let res = await this.tenantList();
-      let arr = [];
+      let res = await this.tenantList()
+      let arr = []
       if (res.code === 0) {
         for (let tenant of res.data) {
           let item = {
             label: tenant.tenantName,
-            value: tenant.tenantId,
-          };
-          arr.push(item);
+            value: tenant.tenantId
+          }
+          arr.push(item)
         }
       }
-      this.tenants = arr;
+      this.tenants = arr
     },
     // 验证码
     getCaptchaImage() {
       this.$api.captcha.captchaImage().then(res => {
-        this.imgUrl = "data:image/jpg;base64," + res.data.img;
-        this.loginForm.uuid = res.data.uuid;
+        this.imgUrl = 'data:image/jpg;base64,' + res.data.img
+        this.loginForm.uuid = res.data.uuid
       })
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="less" scoped>

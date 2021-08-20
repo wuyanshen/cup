@@ -37,7 +37,7 @@ export const encode = content => {
     const encryptor = new JsEcrypt()
     // 之前ssl生成的公钥
     const pubKey =
-        '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCiOn6nGu8Y2+hjro9eK/7JKoUh8JUTPwgT9nALay1wBM7fvOKCZy6wrcgFsOvmyC176e+jLJYTDODErgO3V9V2M+n0QAeo5kDb4oWJhhcWLiAVWdfdisnXJ51bKoKWp/bb4yDX6IHXVZe6rCDxopflwS8G1FKsukEfBBbP8PjfDQIDAQAB-----END PUBLIC KEY-----'
+        '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1+2hj9AMl8YhGX60ti4BT8B2EitkgibJ8kTQyAiwxHT9beqLDKeRPw4iTbO1erPG6TqBlulOgdQgntMoKITFk1A+cEn/v6JpzGNOerG8Feh/qdo++A4MSGM8JTaD9e+BZzi9P3QI5uJoGr8U86amyT4xHq2PyU5HkbQGUElG/1wIDAQAB-----END PUBLIC KEY-----'
     encryptor.setPublicKey(pubKey) //设置公钥
     let encodeResult = encryptor.encrypt(content) // 对内容进行加密
     return encodeResult
@@ -49,7 +49,7 @@ export const decode = content => {
     const encryptor = new JsEcrypt()
     // 之前ssl生成的私钥
     const priKey =
-        '-----BEGIN RSA PRIVATE KEY-----MIICXAIBAAKBgQCiOn6nGu8Y2+hjro9eK/7JKoUh8JUTPwgT9nALay1wBM7fvOKCZy6wrcgFsOvmyC176e+jLJYTDODErgO3V9V2M+n0QAeo5kDb4oWJhhcWLiAVWdfdisnXJ51bKoKWp/bb4yDX6IHXVZe6rCDxopflwS8G1FKsukEfBBbP8PjfDQIDAQABAoGAM+YOuprtPsCrWahwiSn9+pE1wiPbLSsPBIPkWGLTSHDhVcZxmFI2J6OQx/FPpqcHlgrC9SrAYBvQlFsvKSpaSVHPzeIhZzJ1Ka7alFCj9MceJGFxt4RGfzcE5HsOMe0Tf4/IlxaPU/akurkxFgtcWvMOKz1wM53bdOtKaApK6IECQQDVPnkLhziPQ1UXwWkStUdz6fZ0dIbLvxHhzeey0z6ZrrVKllwetSZoZQvVGD1ZynEI0+dCnY4bFzPIPpDma8r9AkEAwsF2o6Xod0UTrHUDt6JPJEIkRgsMC0hdhBTPtFARUYr7Wx8e1HEbnrn672hxH2FqeIHTgQ8+Jdqj9zT6oYHJUQJAdZvEBMCqSBE5sCVivweuBdcGr0nJQjv6L9BxNmZdg0MhB6cP3XvJWBBKy1dYFtqZJuZACLR+uKA+VfVz0zGmPQJAaNCEEEjvFpmXn/4N9RumakYqjYPOhJf6tGYa7tkUqQUaiAz0o7MIAWHoekaEczYTfi2o7dGNSgQksJvTs25NMQJBALmmG5shFjTnyrkBcW27jPZIBkzZgQDlqQ3sce/iSm+rYE8R4Dd5WKdh8hXJRpnJEEn2yq/Nl5Qma+vLU8hsxio=-----END RSA PRIVATE KEY-----'
+        '-----BEGIN PRIVATE KEY-----MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALX7aGP0AyXxiEZfrS2LgFPwHYSK2SCJsnyRNDICLDEdP1t6osMp5E/DiJNs7V6s8bpOoGW6U6B1CCe0ygohMWTUD5wSf+/omnMY056sbwV6H+p2j74DgxIYzwlNoP174FnOL0/dAjm4mgavxTzpqbJPjEerY/JTkeRtAZQSUb/XAgMBAAECgYBTB1KYkANDs5B2cz6jEgvJwDrndyYbd1etB97lliItgmeeyDQskRdu4QqWINOoJ4Xed/MslreC9QJ0g0LPHlfXIPf2zSTl2QSthwLHF/xQ+f0y6F4ASRs3zQq3TeJQYf65P8qBtcJdzVAuIJYsr9LxLEaiWS4gL9eJd4+YxBhECQJBAN2DSaAEwzaSzOSFavBJCA7BU+JcMEdHH6KKInMjoaahW2XoJqZGfBdImo8fr0q8LTOYjw458o6xzoLwpUkSyWsCQQDSUJBscHJuJizYs9PFKQVjPAalLgadi420/tbfVrww5Z4GcDFAOAzYPaQupp7+Bke0IJh731+H2cgY44/mk+JFAkBEyEWOWKw9P+w7cWo5XpQP8NwZR8L9/wnFsNrtobzKPwRgamvF6dESccr8cjw+Gpx2jwKsyjWVNYUIh6zrOdgtAkBcuujy5yGNL4fWhHN7GvslJfJIImMIU9/HThWvo66WYKesbwtIJW6EaalaaFzx5BL5eOXCuFqGq59uWee44ruBAkEAthh9IvHPRZiv0R3MVqoaBMu3MaNmVN/ec3J8CF6zPCRO3snx40Y6wDE8Iri2wBR6yiEcp4kpsjQMk1OwItYXAQ==-----END PRIVATE KEY-----'
     encryptor.setPublicKey(priKey) //设置私钥
     let decodeResult = encryptor.decrypt(content) // 对内容进行加密
     return decodeResult
