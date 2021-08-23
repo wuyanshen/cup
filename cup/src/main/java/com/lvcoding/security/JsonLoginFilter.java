@@ -72,6 +72,8 @@ public class JsonLoginFilter extends UsernamePasswordAuthenticationFilter {
             try (ServletInputStream inputStream = request.getInputStream()) {
                 SysUser user = objectMapper.readValue(inputStream, SysUser.class);
 
+                String password = null;
+
                 // 校验图片验证码
                 String browserDetails = request.getHeader("User-Agent");
                 if (!browserDetails.contains("Postman")) {
@@ -81,10 +83,14 @@ public class JsonLoginFilter extends UsernamePasswordAuthenticationFilter {
                         RedisUtil.del(CommonConstant.CAPTCHA_CODE_KEY + user.getUuid());
                         throw new ImgCodeException("验证码错误");
                     }
-                }
 
-                // rsa解密
-                String password = RsaUtil.decode(user.getPassword());
+                    // rsa解密
+                    password = RsaUtil.decode(user.getPassword());
+
+                    // 如果是postman
+                } else {
+                    password = user.getPassword();
+                }
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), password);
                 this.setDetails(request, authenticationToken);

@@ -37,7 +37,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Res implements Serializable {
 
-    private static final long serialVersionUID = -3146576490912309065L;
+    private static final long serialVersionUID = 1L;
 
     private Integer code;
     private String msg;
