@@ -137,7 +137,7 @@
         from sys_role r,
         sys_user_role ur,
         sys_user u where r.id = ur.role_id and u.id = ur.user_id
-        and u.username = #{username};
+        and u.username = #{username}
     </select>
 
     <!--通过角色id删除关联表-->

@@ -28,12 +28,12 @@ import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerIntercep
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.lvcoding.common.CommonMetaObjectHandler;
+import com.lvcoding.datascope.DataScopeInterceptor;
 import com.lvcoding.tenant.TenantContextHolder;
 import com.lvcoding.tenant.TenantProperties;
 import lombok.AllArgsConstructor;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
-import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.StringValue;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -65,6 +65,10 @@ public class MybatisPlusConfig {
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         // 多租户拦截器
         // interceptor.addInnerInterceptor(this.tenantLineInnerInterceptor());
+
+        // 添加数据权限插件
+        interceptor.addInnerInterceptor(new DataScopeInterceptor());
+
         // 还可以添加其它的拦截器
         return interceptor;
     }

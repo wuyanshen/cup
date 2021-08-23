@@ -21,14 +21,56 @@
 
 package com.lvcoding.datascope;
 
-import com.baomidou.mybatisplus.extension.plugins.inner.DataPermissionInterceptor;
+import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
+import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlCommandType;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
 
 /**
+ * 数据权限拦截器
+ *
+ * @date 2021/8/23 下午7:17
  * @author wuyanshen
- * @description 描述
- * @date 2021-08-23 下午3:32
  */
-public class DataScopeInterceptor extends DataPermissionInterceptor {
+public class DataScopeInterceptor implements InnerInterceptor {
+
+	@Override
+	public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds,
+							ResultHandler resultHandler, BoundSql boundSql) {
+		PluginUtils.MPBoundSql mpBs = PluginUtils.mpBoundSql(boundSql);
+
+		// 原始sql
+		String originalSql = boundSql.getSql();
+
+		// sql参数
+		Object parameterObject = boundSql.getParameterObject();
+
+		// 先判断是不是SELECT操作 不是直接跳过
+		if (!SqlCommandType.SELECT.equals(ms.getSqlCommandType())) {
+			return;
+		}
+
+		// 优先获取赋值数据
+			originalSql = String.format("SELECT %s FROM (%s) temp_data_scope", "*",
+					originalSql);
+			mpBs.sql(originalSql);
+
+
+		// if (deptIds.isEmpty()) {
+		// 	originalSql = String.format("SELECT %s FROM (%s) temp_data_scope WHERE 1 = 2",
+		// 			dataScope.getFunc().getType(), originalSql);
+		// }
+		// else {
+		// 	String join = CollectionUtil.join(deptIds, ",");
+		// 	originalSql = String.format("SELECT %s FROM (%s) temp_data_scope WHERE temp_data_scope.%s IN (%s)",
+		// 			dataScope.getFunc().getType(), originalSql, scopeName, join);
+		// }
+
+	}
 
 
 }
