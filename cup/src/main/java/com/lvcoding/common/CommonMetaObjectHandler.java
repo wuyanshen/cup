@@ -45,6 +45,7 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
         log.info("插入策略");
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
+        this.setFieldValByName("delFlag", 0, metaObject);
     }
 
     /**

@@ -21,6 +21,7 @@
 
 package com.lvcoding.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,19 +55,19 @@ public class BaseEntity implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT_UPDATE)
     private Date createTime;
 
     /**
      * 更新时间
      */
-    @TableField(value = "update_time")
+    @TableField(value = "update_time", fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /**
      * 是否删除,1已删0未删
      */
-    @TableField(value = "del_flag")
+    @TableField(value = "del_flag", fill = FieldFill.INSERT)
     private Integer delFlag;
 
     /**
