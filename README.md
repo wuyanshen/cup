@@ -4,17 +4,17 @@
 
 基于RBAC权限模型设计，JWT前后端分离
 
-- Spring Boot2.0
+- Spring Boot 2.3.9
 - Spring Security
-- Mybatis-Plus 2.3.0
+- Mybatis-Plus 3.4.3
 - Vue
 - jjwt
 
 |技术|版本|
 |:---:|:---:|
-|Spring Boot|2.1.10.RELEASE|
+|Spring Boot|2.3.9.RELEASE|
 |Spring Security|2.1.10.RELEASE|
-|Mybatis-Plus|2.3.0|
+|Mybatis-Plus|3.4.3|
 |Vue|2.6.11|
 |Vue-cli|4.2.0|
 |jjwt|0.10.5|

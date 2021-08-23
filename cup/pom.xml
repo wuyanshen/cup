@@ -34,7 +34,7 @@
     <groupId>com.cup</groupId>
     <artifactId>cup</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.2</version>
 
     <properties>
         <skipTests>true</skipTests>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.3.2</version>
+            <version>3.4.3</version>
         </dependency>
 
         <!--lombok 简化实体类-->

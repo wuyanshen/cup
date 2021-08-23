@@ -19,60 +19,40 @@
  *
  */
 
-package com.lvcoding.entity;
+package com.lvcoding.common;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Getter;
-import lombok.Setter;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * @description mybatisPlus自动填充
+ * @date 2021/8/23 下午4:36
  * @author wuyanshen
- * @description 实体基类
- * @date 2021-08-23 上午10:32
  */
-@Getter
-@Setter
-public class BaseEntity implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Slf4j
+@Component
+public class CommonMetaObjectHandler implements MetaObjectHandler {
 
     /**
-     * 创建人
+     * 插入时的填充策略
      */
-    @TableField(value = "create_by")
-    private String createBy;
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        log.info("插入策略");
+        this.setFieldValByName("createTime", new Date(), metaObject);
+        this.setFieldValByName("updateTime", new Date(), metaObject);
+    }
 
     /**
-     * 更新人
+     * 更新时的填充策略
      */
-    @TableField(value = "update_by")
-    private String updateBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private Date updateTime;
-
-    /**
-     * 是否删除,1已删0未删
-     */
-    @TableField(value = "del_flag")
-    private Integer delFlag;
-
-    /**
-     * 备注信息
-     */
-    @TableField(value = "remark")
-    private String remark;
-
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        log.info("更新策略");
+        this.setFieldValByName("updateTime", new Date(), metaObject);
+    }
 }
