@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 2:37 下午
  */
 @Data

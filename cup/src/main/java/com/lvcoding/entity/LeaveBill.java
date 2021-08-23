@@ -1,3 +1,24 @@
+/*
+ *
+ *
+ *        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+ *
+ *    Redistribution and use in source and binary forms, with or without
+ *    modification, are permitted provided that the following conditions are met:
+ *
+ *    Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *    Neither the name of the lvcoding.com developer nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *    Author: wuyanshen
+ *
+ *
+ */
+
 package com.lvcoding.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -5,17 +26,21 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 请假单
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "leave_bill")
-public class LeaveBill implements Serializable {
+public class LeaveBill extends BaseEntity {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 主键
      */
@@ -65,28 +90,10 @@ public class LeaveBill implements Serializable {
     private String status;
 
     /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private Date updateTime;
-
-    /**
-     * 是否删除,1已删0未删
-     */
-    @TableField(value = "del_flag")
-    private Integer delFlag;
-
-    /**
      * 租户id
      */
     @TableField(value = "tenant_id")
     private Integer tenantId;
 
-    private static final long serialVersionUID = 1L;
+
 }

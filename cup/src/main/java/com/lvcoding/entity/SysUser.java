@@ -1,3 +1,24 @@
+/*
+ *
+ *
+ *        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+ *
+ *    Redistribution and use in source and binary forms, with or without
+ *    modification, are permitted provided that the following conditions are met:
+ *
+ *    Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *    Neither the name of the lvcoding.com developer nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *    Author: wuyanshen
+ *
+ *
+ */
+
 package com.lvcoding.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -6,9 +27,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-import java.io.Serializable;
 
 /**
  * 用户表(SysUser)实体类
@@ -17,10 +38,11 @@ import java.io.Serializable;
  * @since 2020-03-24 01:44:06
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_user")
-public class SysUser implements Serializable {
+public class SysUser extends BaseEntity {
 
-    private static final long serialVersionUID = 448260653094233335L;
+    private static final long serialVersionUID = 1L;
     /**
      * 主键id
      */
@@ -86,21 +108,4 @@ public class SysUser implements Serializable {
     @TableField(value = "sort")
     private Integer sort;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private Date updateTime;
-
-    /**
-     * 是否删除,1已删0未删
-     */
-    @TableField(value = "del_flag")
-    private Integer delFlag;
 }

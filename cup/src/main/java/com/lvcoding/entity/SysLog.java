@@ -1,3 +1,24 @@
+/*
+ *
+ *
+ *        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+ *
+ *    Redistribution and use in source and binary forms, with or without
+ *    modification, are permitted provided that the following conditions are met:
+ *
+ *    Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *    Neither the name of the lvcoding.com developer nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *    Author: wuyanshen
+ *
+ *
+ */
+
 package com.lvcoding.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -5,15 +26,18 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
+/**
+ * 日志实体类
+ * @author wuyanshen
+ */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_log")
-public class SysLog implements Serializable {
+public class SysLog extends BaseEntity {
 
-    private static final long serialVersionUID = 9121075790485507207L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 主键id
@@ -75,28 +99,5 @@ public class SysLog implements Serializable {
     @TableField(value = "time")
     private Long time;
 
-    /**
-     * 操作人
-     */
-    @TableField(value = "create_by")
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 是否删除,1已删0未删
-     */
-    @TableField(value = "del_flag")
-    private Integer delFlag;
 
 }

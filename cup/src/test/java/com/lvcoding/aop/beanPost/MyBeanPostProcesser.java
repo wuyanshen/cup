@@ -9,7 +9,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 1:22 下午
  */
 public class MyBeanPostProcesser implements BeanPostProcessor {

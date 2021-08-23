@@ -1,50 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~
+  ~
+  ~        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+  ~
+  ~    Redistribution and use in source and binary forms, with or without
+  ~    modification, are permitted provided that the following conditions are met:
+  ~
+  ~    Redistributions of source code must retain the above copyright notice,
+  ~    this list of conditions and the following disclaimer.
+  ~    Redistributions in binary form must reproduce the above copyright
+  ~    notice, this list of conditions and the following disclaimer in the
+  ~    documentation and/or other materials provided with the distribution.
+  ~    Neither the name of the lvcoding.com developer nor the names of its
+  ~    contributors may be used to endorse or promote products derived from
+  ~    this software without specific prior written permission.
+  ~    Author: wuyanshen
+  ~
+  ~
+  -->
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lvcoding.dao.SysUserMapper">
-
     <resultMap type="com.lvcoding.entity.SysUser" id="SysUserMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="orgId" column="org_id" jdbcType="INTEGER"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="BOOLEAN"/>
-        <result property="sort" column="sort" jdbcType="INTEGER"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+        <result property="id" column="id"/>
+        <result property="orgId" column="org_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="avatar" column="avatar"/>
+        <result property="status" column="status"/>
+        <result property="sort" column="sort"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createBy" column="create_by"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="remark" column="remark"/>
     </resultMap>
 
+    <sql id="Base_Column_List">
+        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag,
+        create_by, update_by, remark
+    </sql>
 
     <!--修改密码-->
     <update id="updatePwd">
-        update sys_user set password = #{password} where id = #{id}
+        update sys_user
+        set password = #{password}
+        where id = #{id}
     </update>
 
 
     <!--通过用户名查询用户-->
     <select id="loadUserByUsername" resultMap="SysUserMap">
         select
-        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag
+        <include refid="Base_Column_List"/>
         from sys_user
         where username = #{username}
     </select>
 
     <select id="selectPageVo" resultMap="SysUserMap">
-        select id,
-               org_id,
-               username,
-               password,
-               email,
-               phone,
-               avatar,
-               status,
-               sort,
-               create_time,
-               update_time,
-               del_flag
+        select
+        <include refid="Base_Column_List"/>
         from sys_user
         <where>
             <if test="id != null">
@@ -87,15 +106,19 @@
     </select>
 
     <select id="getRolesByUserId" resultType="java.lang.Integer">
-        select role_id from sys_user_role where user_id = #{id}
+        select role_id
+        from sys_user_role
+        where user_id = #{id}
     </select>
 
     <delete id="deleteUserRole">
-        delete from sys_user_role where user_id = #{id}
+        delete
+        from sys_user_role
+        where user_id = #{id}
     </delete>
 
     <insert id="saveUserRole">
-        insert into sys_user_role (user_id,role_id) values(#{userId},#{roleId})
+        insert into sys_user_role (user_id, role_id)
+        values (#{userId}, #{roleId})
     </insert>
-
 </mapper>

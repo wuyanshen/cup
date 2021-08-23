@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 12:22 下午
  */
 public class TestCGLIB {

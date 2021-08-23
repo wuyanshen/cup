@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 2:24 下午
  */
 @Aspect

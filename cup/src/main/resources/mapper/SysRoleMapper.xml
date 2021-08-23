@@ -1,22 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~
+  ~
+  ~        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+  ~
+  ~    Redistribution and use in source and binary forms, with or without
+  ~    modification, are permitted provided that the following conditions are met:
+  ~
+  ~    Redistributions of source code must retain the above copyright notice,
+  ~    this list of conditions and the following disclaimer.
+  ~    Redistributions in binary form must reproduce the above copyright
+  ~    notice, this list of conditions and the following disclaimer in the
+  ~    documentation and/or other materials provided with the distribution.
+  ~    Neither the name of the lvcoding.com developer nor the names of its
+  ~    contributors may be used to endorse or promote products derived from
+  ~    this software without specific prior written permission.
+  ~    Author: wuyanshen
+  ~
+  ~
+  -->
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lvcoding.dao.SysRoleMapper">
 
     <resultMap type="com.lvcoding.entity.SysRole" id="SysRoleMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
-        <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
-        <result property="sort" column="sort" jdbcType="INTEGER"/>
-        <result property="status" column="status" jdbcType="INTEGER"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+        <result property="id" column="id"/>
+        <result property="roleName" column="role_name" />
+        <result property="roleCode" column="role_code" />
+        <result property="sort" column="sort" />
+        <result property="status" column="status" />
+        <result property="updateTime" column="update_time" />
+        <result property="createTime" column="create_time" />
+        <result property="delFlag" column="del_flag" />
+        <result property="remark" column="remark" />
+        <result property="createBy" column="create_by" />
+        <result property="updateBy" column="update_by" />
     </resultMap>
+
+    <sql id="Base_Column_List">
+        iid, role_name, role_code, sort, status, update_time, create_time, del_flag, remark,
+        create_by, update_by, remark
+    </sql>
 
     <!--查询单个-->
     <select id="queryById" resultMap="SysRoleMap">
         select
-        id, role_name, role_code, sort, status, update_time, create_time, del_flag
+        <include refid="Base_Column_List"/>
         from sys_role
         where id = #{id}
     </select>
@@ -24,7 +53,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SysRoleMap">
         select
-        id, role_name, role_code, sort, status, update_time, create_time, del_flag
+        <include refid="Base_Column_List"/>
         from sys_role
         limit #{offset}, #{limit}
     </select>
@@ -32,7 +61,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="SysRoleMap">
         select
-        id, role_name, role_code, sort, status, update_time, create_time, del_flag
+        <include refid="Base_Column_List"/>
         from sys_role
         <where>
             <if test="id != null">

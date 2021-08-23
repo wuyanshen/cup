@@ -10,7 +10,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2021-08-18 上午9:26
  */
 public class ZipTest {

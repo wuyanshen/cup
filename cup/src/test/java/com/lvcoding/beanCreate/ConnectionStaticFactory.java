@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-06 3:24 下午
  */
 public class ConnectionStaticFactory {

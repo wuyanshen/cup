@@ -2,7 +2,7 @@ package com.lvcoding.aop.jdk;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 2:31 下午
  */
 public interface UserService {

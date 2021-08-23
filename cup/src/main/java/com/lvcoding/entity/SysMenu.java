@@ -1,15 +1,33 @@
+/*
+ *
+ *
+ *        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+ *
+ *    Redistribution and use in source and binary forms, with or without
+ *    modification, are permitted provided that the following conditions are met:
+ *
+ *    Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *    Neither the name of the lvcoding.com developer nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *    Author: wuyanshen
+ *
+ *
+ */
+
 package com.lvcoding.entity;
 
 import lombok.Data;
-
-import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 /**
  * 菜单表(SysMenu)实体类
@@ -18,34 +36,42 @@ import java.io.Serializable;
  * @since 2020-03-24 01:24:05
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_menu")
-public class SysMenu implements Serializable {
-    private static final long serialVersionUID = -55455731078448652L;
+public class SysMenu extends BaseEntity {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 主键id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 父id
      */
     @TableField(value = "menu_pid")
     private Integer menuPid;
+
     /**
      * 所有的父id
      */
     @TableField(value = "menu_pids")
     private String menuPids;
+
     /**
      * 菜单名称
      */
     @TableField(value = "menu_name")
     private String menuName;
+
     /**
      * 菜单路径
      */
     @TableField(value = "url")
     private String url;
+
     /**
      * 权限标识
      */
@@ -75,31 +101,18 @@ public class SysMenu implements Serializable {
      */
     @TableField(value = "icon")
     private String icon;
+
     /**
      * 状态,1可用0不可用
      */
     @TableField(value = "status")
     private Integer status;
+
     /**
      * 排序
      */
     @TableField(value = "sort")
     private Integer sort;
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time")
-    private Date createTime;
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time")
-    private Date updateTime;
-    /**
-     * 是否删除,1已删0未删
-     */
-    @TableField(value = "del_flag")
-    private Integer delFlag;
 
 
 }

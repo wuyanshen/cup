@@ -5,7 +5,7 @@ import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 10:37 上午
  */
 

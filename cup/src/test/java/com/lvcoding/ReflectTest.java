@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 /**
  * @author wuyanshen
  * @date 2020-04-12 10:10 上午
- * @discription 反射
+ * @description 反射
  */
 public class ReflectTest {
     public static void main(String[] args) {

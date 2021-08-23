@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * @author wuyanshen
  * @date 2020-07-05 12:28 下午
- * @discription 描述
+ * @description 描述
  */
 public class FactoryTest {
 

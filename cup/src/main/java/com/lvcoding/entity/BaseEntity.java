@@ -21,55 +21,58 @@
 
 package com.lvcoding.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 角色表(SysRole)实体类
- *
- * @author makejava
- * @since 2020-03-24 01:24:31
+ * @author wuyanshen
+ * @description 实体基类
+ * @date 2021-08-23 上午10:32
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_role")
-public class SysRole extends BaseEntity {
+@Getter
+@Setter
+public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键id
+     * 创建人
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableField(value = "create_by")
+    private String createBy;
 
     /**
-     * 角色名称
+     * 更新人
      */
-    @TableField(value = "role_name")
-    private String roleName;
-    /**
-     * 角色英文名称
-     */
-    @TableField(value = "role_code")
-    private String roleCode;
+    @TableField(value = "updateBy")
+    private String updateBy;
 
     /**
-     * 排序
+     * 创建时间
      */
-    @TableField(value = "sort")
-    private Integer sort;
+    @TableField(value = "create_time")
+    private Date createTime;
 
     /**
-     * 状态,1可用0不可用
+     * 更新时间
      */
-    @TableField(value = "status")
-    private Integer status;
+    @TableField(value = "update_time")
+    private Date updateTime;
+
+    /**
+     * 是否删除,1已删0未删
+     */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
+
+    /**
+     * 备注信息
+     */
+    @TableField(value = "remark")
+    private String remark;
 
 }

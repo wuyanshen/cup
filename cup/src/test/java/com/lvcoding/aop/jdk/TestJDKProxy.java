@@ -6,7 +6,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-07 11:14 上午
  */
 public class TestJDKProxy {

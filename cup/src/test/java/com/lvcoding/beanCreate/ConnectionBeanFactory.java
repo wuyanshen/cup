@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 
 /**
  * @author wuyanshen
- * @discription 描述
+ * @description 描述
  * @date 2020-07-06 2:24 下午
  */
 @Data
