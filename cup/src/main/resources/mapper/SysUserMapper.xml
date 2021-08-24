@@ -41,8 +41,21 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, org_id, username, password, email, phone, avatar, status, sort, create_time, update_time, del_flag,
-        create_by, update_by, remark
+        id,
+        org_id,
+        username,
+        password,
+        email,
+        phone,
+        avatar,
+        status,
+        sort,
+        create_time,
+        update_time,
+        del_flag,
+        create_by,
+        update_by,
+        remark
     </sql>
 
     <!--修改密码-->
@@ -66,41 +79,41 @@
         <include refid="Base_Column_List"/>
         from sys_user
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="sysUser.id != null">
+                and id = #{sysUser.id}
             </if>
-            <if test="orgId != null">
-                and org_id = #{orgId}
+            <if test="sysUser.orgId != null">
+                and org_id = #{sysUser.orgId}
             </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
+            <if test="sysUser.username != null and sysUser.username != ''">
+                and username = #{sysUser.username}
             </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
+            <if test="sysUser.password != null and sysUser.password != ''">
+                and password = #{sysUser.password}
             </if>
-            <if test="email != null and email != ''">
-                and email = #{email}
+            <if test="sysUser.email != null and sysUser.email != ''">
+                and email = #{sysUser.email}
             </if>
-            <if test="phone != null and phone != ''">
-                and phone = #{phone}
+            <if test="sysUser.phone != null and sysUser.phone != ''">
+                and phone = #{sysUser.phone}
             </if>
-            <if test="avatar != null and avatar != ''">
-                and avatar = #{avatar}
+            <if test="sysUser.avatar != null and sysUser.avatar != ''">
+                and avatar = #{sysUser.avatar}
             </if>
-            <if test="status != null">
-                and status = #{status}
+            <if test="sysUser.status != null">
+                and status = #{sysUser.status}
             </if>
-            <if test="sort != null">
-                and sort = #{sort}
+            <if test="sysUser.sort != null">
+                and sort = #{sysUser.sort}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
+            <if test="sysUser.createTime != null">
+                and create_time = #{sysUser.createTime}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
+            <if test="sysUser.updateTime != null">
+                and update_time = #{sysUser.updateTime}
             </if>
-            <if test="delFlag != null">
-                and del_flag = #{delFlag}
+            <if test="sysUser.delFlag != null">
+                and del_flag = #{sysUser.delFlag}
             </if>
         </where>
     </select>
@@ -121,4 +134,34 @@
         insert into sys_user_role (user_id, role_id)
         values (#{userId}, #{roleId})
     </insert>
+
+    <!--用户分页查询-->
+    <select id="getPageScope" resultMap="SysUserMap">
+        select
+        u.id,
+		u.org_id,
+		u.username,
+		u.PASSWORD,
+		u.email,
+		u.phone,
+		u.avatar,
+		u.STATUS,
+		u.sort,
+		u.create_time,
+		u.update_time,
+		u.del_flag,
+		u.create_by,
+		u.update_by,
+		u.remark
+        from sys_user u
+                     left join sys_org d on d.id = u.org_id
+        <where>
+            <if test="sysUser.orgId != null and sysUser.orgId != ''">
+                and u.org_id = #{sysUser.orgId}
+            </if>
+            <if test="sysUser.username != null and sysUser.username != ''">
+                and u.username like CONCAT('%', #{sysUser.username}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

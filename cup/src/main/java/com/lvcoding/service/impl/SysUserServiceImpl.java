@@ -21,8 +21,11 @@
 
 package com.lvcoding.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lvcoding.datascope.DataScope;
 import com.lvcoding.entity.SysOrg;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.dao.SysUserMapper;
@@ -121,5 +124,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return this.list(Wrappers.<SysUser>query().lambda().eq(SysUser::getOrgId, orgPid));
         }
         return null;
+    }
+
+    @Override
+    public IPage getPage(Page page, SysUser sysUser) {
+        return this.baseMapper.getPageScope(page, sysUser, new DataScope());
     }
 }

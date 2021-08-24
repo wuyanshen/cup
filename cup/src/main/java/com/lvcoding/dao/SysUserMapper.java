@@ -24,6 +24,7 @@ package com.lvcoding.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lvcoding.datascope.DataScope;
 import com.lvcoding.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,7 +53,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param sysUser
      * @return IPage<SysUser>
      */
-    IPage<SysUser> selectPageVo(Page<?> page, SysUser sysUser);
+    IPage<SysUser> selectPageVo(Page<?> page, @Param("sysUser") SysUser sysUser);
 
     /**
      *  更新密码
@@ -66,4 +67,14 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     boolean deleteUserRole(Integer id);
 
     boolean saveUserRole(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
+
+    /**
+     * 分页查询用户
+     *
+     * @param page
+     * @param sysUser
+     * @param dataScope
+     * @return IPage
+     */
+    IPage<SysUser> getPageScope(Page page, @Param("sysUser") SysUser sysUser, DataScope dataScope);
 }

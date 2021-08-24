@@ -21,7 +21,6 @@
 
 package com.lvcoding.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
@@ -38,7 +37,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -81,15 +79,7 @@ public class SysUserController {
     @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("page")
     public Res page(Page page, SysUser sysUser) {
-        QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(sysUser.getUsername())) {
-            wrapper.lambda().like(SysUser::getUsername, sysUser.getUsername());
-        }
-        if (!StringUtils.isEmpty(sysUser.getOrgId())) {
-            wrapper.lambda().eq(SysUser::getOrgId, sysUser.getOrgId());
-        }
-
-        return Res.success(this.sysUserService.page(page, wrapper));
+        return Res.success(this.sysUserService.getPage(page, sysUser));
     }
 
     /**

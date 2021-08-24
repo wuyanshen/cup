@@ -21,6 +21,8 @@
 
 package com.lvcoding.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.entity.dto.UserDTO;
@@ -76,4 +78,13 @@ public interface SysUserService extends IService<SysUser> {
      * @return List<SysUser>
      */
     List<SysUser> findSuperior(String username);
+
+    /**
+     * 获取用户分页
+     *
+     * @param page
+     * @param sysUser
+     * @return com.baomidou.mybatisplus.core.metadata.IPage
+     */
+    IPage getPage(Page page, SysUser sysUser);
 }
