@@ -24,8 +24,6 @@ package com.lvcoding.security;
 import com.lvcoding.entity.SysRole;
 import com.lvcoding.entity.SysUser;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -134,6 +132,6 @@ public class CommonUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return sysUser.isStatus();
     }
 }

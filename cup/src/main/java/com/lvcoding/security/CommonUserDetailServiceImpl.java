@@ -35,7 +35,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,22 +64,14 @@ public class CommonUserDetailServiceImpl implements UserDetailsService {
 
         //获取角色
         List<SysRole> roles = sysRoleMapper.loadRolesByUsername(username);
-        List<String> roleCodes = roles.stream().map(sysRole -> sysRole.getRoleCode()).collect(Collectors.toList());
+        List<String> roleCodes = roles.stream().map(SysRole::getRoleCode).collect(Collectors.toList());
 
-        //获取可以访问的菜单
-        List<SysMenu> sysMenus = sysMenuMapper.loadPermissionByRoleCode(roleCodes);
-        List<String> urls = sysMenus.stream().map(sysMenu -> sysMenu.getUrl()).filter(url -> !StringUtils.isEmpty(url)).collect(Collectors.toList());
-        //获取可以访问的按钮
-        List<String> permissions = sysMenus.stream().map(sysMenu -> sysMenu.getPermission()).filter(permission-> !StringUtils.isEmpty(permission)).collect(Collectors.toList());
+        // 获取按钮权限
+        Set<String> permissions = sysMenuMapper.loadPermissionByRoleCode(roleCodes).stream().map(SysMenu::getPermission).filter(permission -> !StringUtils.isEmpty(permission)).collect(Collectors.toSet());
 
-        //将按钮权限合并
-        urls.addAll(permissions);
+        // 将按钮权限和角色合并
+        permissions.addAll(roleCodes.stream().map(code -> "ROLE_" + code).collect(Collectors.toSet()));
 
-        //将可以访问的菜单和角色合并
-        urls.addAll(roleCodes.stream().map(roleCode -> "ROLE_" + roleCode).collect(Collectors.toList()));
-        String auths = urls.stream().collect(Collectors.joining(","));
-        Set<String> authorities = Arrays.stream(auths.split(",")).collect(Collectors.toSet());
-
-        return new CommonUser(sysUser, authorities, roles);
+        return new CommonUser(sysUser, permissions, roles);
     }
 }

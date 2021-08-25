@@ -105,4 +105,9 @@ public interface CommonConstant {
      * 流程定义key
      */
     String LEAVE_BILL_KEY = "newleave";
+
+    /**
+     * http的get请求
+     */
+    String HTTP_METHOD_GET = "get";
 }

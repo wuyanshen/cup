@@ -85,6 +85,12 @@
             <el-option v-for="item in roles" :key="item.id" :label="item.roleName" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="启用" prop="status">
+          <el-radio-group v-model="userForm.status">
+            <el-radio :label="true">是</el-radio>
+            <el-radio :label="false">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="userDialog = false">取 消</el-button>
@@ -154,6 +160,7 @@ export default {
         phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
         email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
         roleIds: [{ required: true, message: "角色不能为空", trigger: "blur" }],
+        status: [{ required: true, message: "启用不能为空", trigger: "blur" }],
       }
     };
   },

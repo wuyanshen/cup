@@ -22,6 +22,7 @@
 package com.lvcoding.log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.util.SpringContextHolder;
 import com.lvcoding.util.SysLogUtils;
 import lombok.SneakyThrows;
@@ -53,12 +54,18 @@ public class SysLogAspect {
         logVo.setType(sysLog.type());
         // 发送异步日志事件
         Long startTime = System.currentTimeMillis();
-        //接口响应数据
+
+        // 接口响应数据
         Object obj = point.proceed();
         Long endTime = System.currentTimeMillis();
         logVo.setTime(endTime - startTime);
         logVo.setResponse(objectMapper.writeValueAsString(obj));
-        SpringContextHolder.publishEvent(new SysLogEvent(logVo));
+
+        // 如果是get请求就不记录日志
+        if (!logVo.getMethod().equalsIgnoreCase(CommonConstant.HTTP_METHOD_GET)) {
+            SpringContextHolder.publishEvent(new SysLogEvent(logVo));
+        }
+
         return obj;
     }
 

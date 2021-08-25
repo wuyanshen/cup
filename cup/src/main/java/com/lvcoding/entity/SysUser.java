@@ -100,7 +100,7 @@ public class SysUser extends BaseEntity {
      * 状态,1可用0不可用
      */
     @TableField(value = "status")
-    private boolean status = true;
+    private boolean status;
 
     /**
      * 排序

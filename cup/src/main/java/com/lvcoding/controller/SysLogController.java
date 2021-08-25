@@ -22,6 +22,7 @@
 package com.lvcoding.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysLog;
 import com.lvcoding.service.SysLogService;
@@ -49,30 +50,29 @@ public class SysLogController {
      * 分页查询日志
      *
      * @param page
-     * @param sysLog
-     * @return com.lvcoding.util.Res
+     * @param sysLog
+     * @return Res
      */
     @PreAuthorize("@pm.hasPermission('sys:log:view')")
     @RequestMapping("page")
-    public Res page(Page page, SysLog sysLog){
+    public Res page(Page page, SysLog sysLog) {
         QueryWrapper<SysLog> queryWrapper = new QueryWrapper<>();
-        if(!StringUtils.isEmpty(sysLog.getTitle())){
-            queryWrapper.lambda().like(SysLog::getTitle,sysLog.getTitle());
+        if (!StringUtils.isEmpty(sysLog.getTitle())) {
+            queryWrapper.lambda().like(SysLog::getTitle, sysLog.getTitle());
         }
-        if(!StringUtils.isEmpty(sysLog.getType())){
-            queryWrapper.lambda().eq(SysLog::getType,sysLog.getType());
+        if (!StringUtils.isEmpty(sysLog.getType())) {
+            queryWrapper.lambda().eq(SysLog::getType, sysLog.getType());
         }
         queryWrapper.lambda().orderByDesc(SysLog::getCreateTime);
-        return Res.success(sysLogService.page(page,queryWrapper));
+        return Res.success(sysLogService.page(page, queryWrapper));
     }
 
     /**
      * 清空日志
-     * @return
      */
     @PreAuthorize("@pm.hasPermission('sys:log:delete')")
     @DeleteMapping("delete")
     public Res delete() {
-        return Res.success(sysLogService.remove(null));
+        return Res.success(sysLogService.remove(Wrappers.emptyWrapper()));
     }
 }
