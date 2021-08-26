@@ -14,8 +14,8 @@
         </el-table-column>
         <el-table-column label="操作" width="250" align="center">
           <template v-slot="scope">
-            <el-button size="mini" icon="el-icon-edit" type="primary" @click="handleEditOrg(scope.row)">修改</el-button>
-            <el-button size="mini" icon="el-icon-delete" type="danger" @click="handleDeleteOrg(scope.row.id)">删除</el-button>
+            <el-button size="mini" icon="el-icon-edit" type="text" @click="handleEditOrg(scope.row)">修改</el-button>
+            <el-button size="mini" icon="el-icon-delete" type="text" @click="handleDeleteOrg(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

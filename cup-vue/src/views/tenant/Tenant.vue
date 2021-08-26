@@ -25,8 +25,8 @@
         <el-table-column align="center" label="更新时间" prop="updateTime" :formatter="formatUpdateDate"></el-table-column>
         <el-table-column align="center" label="操作" width="300px">
           <template v-slot="scope">
-            <el-button size="mini" icon="el-icon-edit" type="primary" @click="handleTenantEidt(scope.row)">修改</el-button>
-            <el-button size="mini" icon="el-icon-delete" type="danger" @click="handleTenantDelete(scope.row.id)">删除</el-button>
+            <el-button size="mini" icon="el-icon-edit" type="text" @click="handleTenantEidt(scope.row)">修改</el-button>
+            <el-button size="mini" icon="el-icon-delete" type="text" @click="handleTenantDelete(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

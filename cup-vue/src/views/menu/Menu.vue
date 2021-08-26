@@ -23,8 +23,8 @@
         <el-table-column align="center" prop="permission" label="权限标识"></el-table-column>
         <el-table-column align="center" label="操作">
           <template v-slot="scope">
-            <el-button type="primary" size="mini" icon="el-icon-edit" @click="handleEditMenu(scope.row)">修改</el-button>
-            <el-button type="danger" size="mini" icon="el-icon-delete" @click="handleDeleteMenu(scope.row.id)">删除</el-button>
+            <el-button type="text" size="mini" icon="el-icon-edit" @click="handleEditMenu(scope.row)">修改</el-button>
+            <el-button type="text" size="mini" icon="el-icon-delete" @click="handleDeleteMenu(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -167,7 +167,7 @@ export default {
             })
           }
         })
-        .catch(() => {})
+        .catch(() => { })
     },
 
     handleTreeSelected(value) {

@@ -33,9 +33,9 @@
         <el-table-column align="center" label="更新时间" prop="updateTime" :formatter="formatUpdateDate"></el-table-column>
         <el-table-column align="center" label="操作" width="300px">
           <template v-slot="scope">
-            <el-button size="mini" icon="el-icon-edit" type="primary" @click="handleEidt(scope.row)">修改</el-button>
-            <el-button size="mini" icon="el-icon-delete" type="danger" @click="handleRoleDelete(scope.row.id)">删除</el-button>
-            <el-button size="mini" icon="el-icon-plus" type="warning" @click="handlePermission(scope.row.id)">权限</el-button>
+            <el-button size="mini" icon="el-icon-edit" type="text" @click="handleEidt(scope.row)">修改</el-button>
+            <el-button size="mini" icon="el-icon-delete" type="text" @click="handleRoleDelete(scope.row.id)">删除</el-button>
+            <el-button size="mini" icon="el-icon-plus" type="text" @click="handlePermission(scope.row.id)">权限</el-button>
           </template>
         </el-table-column>
       </el-table>
