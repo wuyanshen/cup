@@ -24,6 +24,7 @@ package com.lvcoding.entity.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 机构树实体类
@@ -56,5 +57,9 @@ public class OrgTree extends TreeNode implements Serializable {
      * 菜单的层级
      */
     private Integer level;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
 }
