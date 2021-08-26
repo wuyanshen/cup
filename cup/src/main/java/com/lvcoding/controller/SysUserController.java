@@ -177,4 +177,17 @@ public class SysUserController {
         return Res.success(this.sysUserService.getRoleIdsByUserId(id));
     }
 
+
+    /**
+     * 重置密码
+     *
+     * @param userVO
+     * @return
+     */
+    @SysLog(value = "重置密码", type = "1")
+    @PutMapping("resetPwd")
+    public Res resetPwd(@RequestBody UserVO userVO) {
+        return Res.success(this.sysUserService.resetPwd(userVO));
+    }
+
 }

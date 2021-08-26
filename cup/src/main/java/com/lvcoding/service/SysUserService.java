@@ -87,4 +87,6 @@ public interface SysUserService extends IService<SysUser> {
      * @return com.baomidou.mybatisplus.core.metadata.IPage
      */
     IPage getPage(Page page, SysUser sysUser);
+
+    boolean resetPwd(UserVO userVO);
 }

@@ -65,6 +65,11 @@ const userRoleIds = id => {
     return axios.get(`/users/roleIds/${id}`)
 }
 
+// 重置密码
+const resetPwd = params => {
+    return axios.put('/users/resetPwd', params)
+}
+
 export default {
     userInfo,
     login,
@@ -77,5 +82,6 @@ export default {
     updatePwd,
     pwdCheck,
     usernameCheck,
+    resetPwd,
     userRoleIds
 }

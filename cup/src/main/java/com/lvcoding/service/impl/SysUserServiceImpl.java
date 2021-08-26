@@ -56,7 +56,7 @@ import java.util.stream.Collectors;
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     private final SysOrgService sysOrgService;
 
@@ -65,7 +65,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public boolean updatePwd(UserVO userVO) {
         SysUser sysUser = new SysUser();
-        BeanUtils.copyProperties(userVO,sysUser);
+        BeanUtils.copyProperties(userVO, sysUser);
         sysUser.setPassword(this.passwordEncoder.encode(userVO.getPassword()));
         return this.baseMapper.updatePwd(sysUser);
     }
@@ -80,11 +80,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public boolean updateUser(UserDTO userDTO) {
         //更新用户
         SysUser sysUser = new SysUser();
-        BeanUtils.copyProperties(userDTO,sysUser);
-        if(!StringUtils.isEmpty(sysUser.getPassword())){
+        BeanUtils.copyProperties(userDTO, sysUser);
+        if (!StringUtils.isEmpty(sysUser.getPassword())) {
             sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
         }
-        boolean flag1 = this.baseMapper.updateById(sysUser)>0?true:false;
+        boolean flag1 = this.baseMapper.updateById(sysUser) > 0;
 
         //删除用户角色关联表
         boolean flag2 = this.baseMapper.deleteUserRole(sysUser.getId());
@@ -94,21 +94,21 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return this.baseMapper.saveUserRole(sysUser.getId(), roleId);
         }).collect(Collectors.toList());
 
-        return flag1&&flag2;
+        return flag1 && flag2;
     }
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     @Override
     public boolean saveUser(UserDTO userDTO) {
-        //新增用户
+        // 新增用户
         SysUser sysUser = new SysUser();
-        BeanUtils.copyProperties(userDTO,sysUser);
+        BeanUtils.copyProperties(userDTO, sysUser);
         sysUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
-        boolean flag1 = this.baseMapper.insert(sysUser)>0?true:false;
+        boolean flag1 = this.baseMapper.insert(sysUser) > 0;
 
         //新增角色关联
-        userDTO.getRoleIds().stream().map(roleId -> {
-            return this.baseMapper.saveUserRole(sysUser.getId(), roleId);
+        userDTO.getRoleIds().stream().peek(roleId -> {
+            this.baseMapper.saveUserRole(sysUser.getId(), roleId);
         }).collect(Collectors.toList());
 
         return flag1;
@@ -129,5 +129,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public IPage getPage(Page page, SysUser sysUser) {
         return this.baseMapper.getPageScope(page, sysUser, new DataScope());
+    }
+
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    @Override
+    public boolean resetPwd(UserVO userVO) {
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(userVO, sysUser);
+        if (!StringUtils.isEmpty(sysUser.getPassword())) {
+            sysUser.setPassword(this.passwordEncoder.encode(sysUser.getPassword()));
+        }
+        return this.baseMapper.updateById(sysUser) > 0;
     }
 }

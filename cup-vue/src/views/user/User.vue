@@ -37,10 +37,11 @@
                 <el-tag size="mini" v-else type="danger">禁用</el-tag>
               </template>
             </el-table-column>
-            <el-table-column align="center" label="操作">
+            <el-table-column align="center" label="操作" width="300">
               <template v-slot="scope">
-                <el-button type="primary" size="mini" icon="el-icon-edit" @click="handleEdit(scope.row)">修改</el-button>
-                <el-button type="danger" size="mini" icon="el-icon-delete" @click="handleDeleteUser(scope.row.id)">删除</el-button>
+                <el-button type="text" size="mini" icon="el-icon-key" @click="showReset(scope.row)">重置密码</el-button>
+                <el-button type="text" size="mini" icon="el-icon-edit" @click="handleEdit(scope.row)">修改</el-button>
+                <el-button type="text" size="mini" icon="el-icon-delete" @click="handleDeleteUser(scope.row.id)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -58,6 +59,15 @@
         </el-col>
       </el-row>
     </el-card>
+
+    <!-- 重置密码对话框 -->
+    <el-dialog title="重置密码" :visible.sync="resetDialog" width="30%" :show-close="false" :close-on-click-modal="false" @close="resetDialogClose">
+      <el-input v-model="resetForm.password" type="password" show-password placeholder="请输入要重置的密码"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button size="mini" @click="resetDialog = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="handleSubmitResetPwd">确 定</el-button>
+      </span>
+    </el-dialog>
 
     <!-- 新增/修改用户对话框 -->
     <el-dialog :title="title" :visible.sync="userDialog" width="30%" :show-close="false" @close="userDialogClose">
@@ -117,6 +127,11 @@ export default {
       }
     };
     return {
+      resetForm: {
+        newPassword: '',
+        id: '',
+      },
+      resetDialog: false,
       title: '',
       orgs: [],
       roles: [],
@@ -190,6 +205,25 @@ export default {
       "roleList"
     ]),
     ...mapActions('org', ['orgTree']),
+    // 关闭重置密码对话框
+    resetDialogClose() {
+      this.resetForm = {
+        password: '',
+        id: ''
+      }
+    },
+    // 提交重置密码
+    handleSubmitResetPwd() {
+      this.$api.user.resetPwd(this.resetForm).then(res => {
+        this.$message.success('重置密码成功');
+        this.resetDialog = false;
+      })
+    },
+    // 显示重置密码对话框
+    showReset(row) {
+      this.resetDialog = true;
+      this.resetForm.id = row.id;
+    },
     // 组织机构树过滤
     filterNode(value, data) {
       if (!value) return true;
