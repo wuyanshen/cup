@@ -74,8 +74,8 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="userForm.email"></el-input>
         </el-form-item>
-        <el-form-item label="所属组织机构">
-          <el-input placeholder="请选择组织机构" v-model="userForm.orgName" @focus="orgTreeKey = true"></el-input>
+        <el-form-item label="所属机构">
+          <el-input placeholder="请选择机构" v-model="userForm.orgName" @focus="orgTreeKey = true"></el-input>
           <div v-if="orgTreeKey">
             <el-tree :data="orgTreeData" :props="defaultProps" default-expand-all @node-click="handleAddTreeSelected"></el-tree>
           </div>
