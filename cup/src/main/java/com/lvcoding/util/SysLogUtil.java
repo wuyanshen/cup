@@ -42,13 +42,13 @@ import java.util.Objects;
  * @description 系统日志工具类
  */
 @UtilityClass
-public class SysLogUtils {
+public class SysLogUtil {
 
     /**
      * 组装系统日志类
      *
      * @param
-     * @return com.lvcoding.entity.SysLog
+     * @return SysLog
      */
     public SysLog getSysLog() {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();

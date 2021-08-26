@@ -21,9 +21,8 @@
 
 package com.lvcoding.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.util.Res;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lvcoding.util.ResUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -42,13 +41,8 @@ import java.io.IOException;
 @Component
 public class CommonAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.setContentType("application/json;charset=utf-8");
-        int code = HttpStatus.UNAUTHORIZED.value();
-        response.getWriter().write(objectMapper.writeValueAsString(Res.fail(code, "未登录，请重新登录 "+ request.getRequestURI())));
+        ResUtil.jsonResult(response, Res.fail(HttpStatus.UNAUTHORIZED.value(), "未登录，请重新登录 "+ request.getRequestURI()));
     }
 }

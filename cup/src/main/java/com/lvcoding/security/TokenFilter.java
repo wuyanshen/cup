@@ -22,9 +22,9 @@
 package com.lvcoding.security;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.common.CupProperties;
 import com.lvcoding.util.Res;
+import com.lvcoding.util.ResUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,9 +49,6 @@ import java.util.List;
 @Component
 @Slf4j
 public class TokenFilter extends OncePerRequestFilter {
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Autowired
     private TokenService tokenService;
@@ -100,8 +97,7 @@ public class TokenFilter extends OncePerRequestFilter {
             methods.add("POST");
             methods.add("PUT");
             if (methods.contains(request.getMethod())) {
-                response.setContentType("application/json;charset=utf-8");
-                response.getWriter().write(objectMapper.writeValueAsString(Res.fail("演示模式，不允许操作")));
+                ResUtil.jsonResult(response, Res.fail("演示模式，不允许操作"));
                 return;
             }
         }

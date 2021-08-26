@@ -21,14 +21,13 @@
 
 package com.lvcoding.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.entity.SysLog;
 import com.lvcoding.service.SysLogService;
 import com.lvcoding.util.DateUtil;
 import com.lvcoding.util.Res;
-import com.lvcoding.util.SysLogUtils;
-import lombok.AllArgsConstructor;
+import com.lvcoding.util.ResUtil;
+import com.lvcoding.util.SysLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,8 +54,6 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Value("${spring.security.loginType}")
     private String loginType;
     @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
     private TokenService tokenService;
     @Autowired
     private SysLogService sysLogService;
@@ -73,8 +70,7 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             // 生成token
             CommonUser commonUser = (CommonUser) authentication.getPrincipal();
             String token = tokenService.createToken(commonUser);
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(Res.success(0, "登录成功", token)));
+            ResUtil.jsonResult(response, Res.success(0, "登录成功", token));
         } else {
             super.onAuthenticationSuccess(request, response, authentication);
         }
@@ -84,8 +80,8 @@ public class CommonLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
      * 记录日志
      */
     private void addLog() {
-        SysLog sysLog = SysLogUtils.getSysLog();
-        sysLog.setTitle(SysLogUtils.getUserName() + "用户登录");
+        SysLog sysLog = SysLogUtil.getSysLog();
+        sysLog.setTitle("【" + SysLogUtil.getUserName() + "】登录");
         sysLog.setType("1");
         sysLogService.save(sysLog);
     }

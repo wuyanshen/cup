@@ -24,7 +24,7 @@ package com.lvcoding.log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.util.SpringContextHolder;
-import com.lvcoding.util.SysLogUtils;
+import com.lvcoding.util.SysLogUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -49,7 +49,7 @@ public class SysLogAspect {
         String strMethodName = point.getSignature().getName();
         log.debug("[类名]:{},[方法]:{}", strClassName, strMethodName);
 
-        com.lvcoding.entity.SysLog logVo = SysLogUtils.getSysLog();
+        com.lvcoding.entity.SysLog logVo = SysLogUtil.getSysLog();
         logVo.setTitle(sysLog.value());
         logVo.setType(sysLog.type());
         // 发送异步日志事件

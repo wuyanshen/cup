@@ -21,13 +21,12 @@
 
 package com.lvcoding.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.exception.ImgCodeException;
 import com.lvcoding.util.Res;
+import com.lvcoding.util.ResUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -48,9 +47,6 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class CommonLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Value("${spring.security.loginType}")
     private String loginType;
 
@@ -58,7 +54,6 @@ public class CommonLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
         if (loginType.equalsIgnoreCase(CommonConstant.LOGIN_TYPE_JSON)) {
-            response.setContentType("application/json;charset=UTF-8");
 
             Res res = new Res();
             res.setCode(1);
@@ -79,7 +74,7 @@ public class CommonLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
                 res.setMsg("系统错误，请联系管理员");
             }
 
-            response.getWriter().write(objectMapper.writeValueAsString(res));
+            ResUtil.jsonResult(response, res);
         } else {
             super.onAuthenticationFailure(request, response, exception);
         }

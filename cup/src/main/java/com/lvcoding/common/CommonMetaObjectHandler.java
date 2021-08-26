@@ -21,7 +21,10 @@
 
 package com.lvcoding.common;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.lvcoding.security.CommonUser;
+import com.lvcoding.util.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -43,6 +46,10 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("插入策略");
+        CommonUser commonUser = SecurityUtil.getUser();
+        if(ObjectUtil.isNotEmpty(commonUser)) {
+            this.setFieldValByName("createBy", commonUser.getSysUser().getUsername(), metaObject);
+        }
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
         this.setFieldValByName("delFlag", 0, metaObject);
@@ -54,6 +61,10 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("更新策略");
+        CommonUser commonUser = SecurityUtil.getUser();
+        if(ObjectUtil.isNotEmpty(commonUser)) {
+            this.setFieldValByName("updateBy", commonUser.getSysUser().getUsername(), metaObject);
+        }
         this.setFieldValByName("updateTime", new Date(), metaObject);
     }
 }

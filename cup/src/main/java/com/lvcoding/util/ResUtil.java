@@ -21,29 +21,24 @@
 
 package com.lvcoding.util;
 
-import com.lvcoding.security.CommonUser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * SpringSecurity工具类
- * @author wuyanshen
+ * @description 返回json结果工具类
+ * @date   2021-08-26 下午4:11
+ * @author  wuyanshen
  */
-@Slf4j
 @UtilityClass
-public class SecurityUtil {
+public class ResUtil {
 
-    /**
-     * 获取当前登录用户
-     */
-    public CommonUser getUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) {
-            return null;
-        }
-        Object principal = authentication.getPrincipal();
-        return principal instanceof CommonUser ? ((CommonUser) principal) : null;
+    @SneakyThrows
+    public void jsonResult(HttpServletResponse response, Res res) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(res));
     }
 }
