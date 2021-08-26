@@ -26,9 +26,9 @@
       <el-table-column label="标题" prop="title"></el-table-column>
       <el-table-column label="日志类型" prop="type" width="110px" align="center">
         <template v-slot="scope">
-          <el-tag v-if="scope.row.type === '1'" type="success">用户日志</el-tag>
-          <el-tag v-if="scope.row.type === '2'" type="success">菜单日志</el-tag>
-          <el-tag v-if="scope.row.type === '3'" type="success">角色日志</el-tag>
+          <el-tag v-if="scope.row.type === '1'" size="mini" type="success">用户日志</el-tag>
+          <el-tag v-if="scope.row.type === '2'" size="mini" type="success">菜单日志</el-tag>
+          <el-tag v-if="scope.row.type === '3'" size="mini" type="success">角色日志</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="主机" prop="ip"></el-table-column>
