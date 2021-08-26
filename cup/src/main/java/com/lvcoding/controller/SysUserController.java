@@ -26,7 +26,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.entity.dto.UserDTO;
 import com.lvcoding.entity.vo.UserVO;
-import com.lvcoding.log.SysLog;
+import com.lvcoding.log.CupLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.service.SysUserService;
 import com.lvcoding.util.Res;
@@ -75,7 +75,7 @@ public class SysUserController {
      * @param page
      * @return com.longyi.util.Res
      */
-    @SysLog(value = "查询用户列表", type = "1")
+    @CupLog(value = "查询用户列表", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("page")
     public Res page(Page page, SysUser sysUser) {
@@ -88,7 +88,7 @@ public class SysUserController {
      * @param userDTO
      * @return com.longyi.util.Res
      */
-    @SysLog(value = "新增用户", type = "1")
+    @CupLog(value = "新增用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:add')")
     @PostMapping
     public Res create(@RequestBody UserDTO userDTO) {
@@ -101,7 +101,7 @@ public class SysUserController {
      * @param id
      * @return com.longyi.util.Res
      */
-    @SysLog(value = "删除用户", type = "1")
+    @CupLog(value = "删除用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:delete')")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id") Integer id) {
@@ -114,7 +114,7 @@ public class SysUserController {
      * @param userDTO
      * @return com.longyi.util.Res
      */
-    @SysLog(value = "更新用户", type = "1")
+    @CupLog(value = "更新用户", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:update')")
     @PutMapping
     public Res update(@RequestBody UserDTO userDTO) {
@@ -128,7 +128,7 @@ public class SysUserController {
      * @param userVO
      * @return
      */
-    @SysLog(value = "更新密码", type = "1")
+    @CupLog(value = "更新密码", type = "1")
     @PutMapping("pwd")
     public Res updatePwd(@RequestBody UserVO userVO) {
         return Res.success(this.sysUserService.updatePwd(userVO));
@@ -184,7 +184,7 @@ public class SysUserController {
      * @param userVO
      * @return
      */
-    @SysLog(value = "重置密码", type = "1")
+    @CupLog(value = "重置密码", type = "1")
     @PutMapping("resetPwd")
     public Res resetPwd(@RequestBody UserVO userVO) {
         return Res.success(this.sysUserService.resetPwd(userVO));

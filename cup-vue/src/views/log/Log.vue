@@ -6,12 +6,13 @@
         <el-input size="mini" clearable v-model="queryInfo.title" placeholder="请输入要查询的日志标题" @change="handleSearch"> </el-input>
       </el-col>
       <el-col :span="3">
-        <el-select size="mini" v-model="queryInfo.type" placeholder="请求选择">
+        <el-select size="mini" v-model="queryInfo.type" @change="handleSearch" placeholder="请求选择">
           <el-option v-for="item in logTypes" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </el-col>
-      <el-col :span="2">
+      <el-col :span="6">
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleSearch">查询</el-button>
+        <el-button type="info" icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-col>
     </el-row>
 
@@ -136,7 +137,15 @@ export default {
       console.log(res);
       this.copyPageValue(res);
     },
-    //条件查询
+    // 重置查询
+    async resetQuery() {
+      this.queryInfo = {
+        title: "",
+        type: "",
+      },
+        await this.handleSearch()
+    },
+    // 条件查询
     async handleSearch() {
       let res = await this.logPage(
         this.copyQueryValue(

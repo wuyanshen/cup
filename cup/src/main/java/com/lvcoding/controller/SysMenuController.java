@@ -23,7 +23,7 @@ package com.lvcoding.controller;
 
 import com.lvcoding.entity.SysMenu;
 import com.lvcoding.entity.dto.MenuTree;
-import com.lvcoding.log.SysLog;
+import com.lvcoding.log.CupLog;
 import com.lvcoding.security.CommonUser;
 import com.lvcoding.security.TokenService;
 import com.lvcoding.service.SysMenuService;
@@ -72,7 +72,7 @@ public class SysMenuController {
      * @return Res
      */
     @PreAuthorize("@pm.hasPermission('sys:menu:view')")
-    @SysLog(type = "2",value = "查询菜单")
+    @CupLog(type = "2",value = "查询菜单")
     @GetMapping("treePage")
     public Res menuTreePage() {
         List<MenuTree> list = sysMenuService.findAllMenuTree();
@@ -86,7 +86,7 @@ public class SysMenuController {
      * @return MenuTree
      */
     @PreAuthorize("@pm.hasPermission('sys:menu:add')")
-    @SysLog(type = "2",value = "新增菜单")
+    @CupLog(type = "2",value = "新增菜单")
     @PostMapping
     public Res add(@RequestBody SysMenu sysMenu){
         return Res.success(sysMenuService.addMenu(sysMenu));
@@ -99,7 +99,7 @@ public class SysMenuController {
      * @return Res
      */
     @PreAuthorize("@pm.hasPermission('sys:menu:update')")
-    @SysLog(type = "2",value = "修改菜单")
+    @CupLog(type = "2",value = "修改菜单")
     @PutMapping
     public Res update(@RequestBody SysMenu sysMenu){
         return Res.success(sysMenuService.updateById(sysMenu));
@@ -112,7 +112,7 @@ public class SysMenuController {
      * @return com.lvcoding.util.Res
      */
     @PreAuthorize("@pm.hasPermission('sys:menu:delete')")
-    @SysLog(type = "2",value = "删除菜单")
+    @CupLog(type = "2",value = "删除菜单")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id")Integer id){
         return Res.success(sysMenuService.deleteById(id));

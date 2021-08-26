@@ -21,8 +21,10 @@
 
 package com.lvcoding.log;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lvcoding.constant.CommonConstant;
+import com.lvcoding.entity.SysLog;
 import com.lvcoding.util.SpringContextHolder;
 import com.lvcoding.util.SysLogUtil;
 import lombok.SneakyThrows;
@@ -30,6 +32,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author wuyanshen
@@ -42,31 +48,66 @@ public class SysLogAspect {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @Around("@annotation(sysLog)")
+    @Around("@annotation(cupLog)")
     @SneakyThrows
-    public Object around(ProceedingJoinPoint point, SysLog sysLog) {
+    public Object around(ProceedingJoinPoint point, CupLog cupLog) {
         String strClassName = point.getTarget().getClass().getName();
         String strMethodName = point.getSignature().getName();
         log.debug("[类名]:{},[方法]:{}", strClassName, strMethodName);
 
-        com.lvcoding.entity.SysLog logVo = SysLogUtil.getSysLog();
-        logVo.setTitle(sysLog.value());
-        logVo.setType(sysLog.type());
+        SysLog sysLog = SysLogUtil.getSysLog();
+        sysLog.setTitle(cupLog.value());
+        sysLog.setType(cupLog.type());
+        // 设置请求参数
+        this.handleRequestParams(point, sysLog);
+
         // 发送异步日志事件
         Long startTime = System.currentTimeMillis();
 
         // 接口响应数据
         Object obj = point.proceed();
         Long endTime = System.currentTimeMillis();
-        logVo.setTime(endTime - startTime);
-        logVo.setResponse(objectMapper.writeValueAsString(obj));
+        sysLog.setTime(endTime - startTime);
+        sysLog.setResponse(objectMapper.writeValueAsString(obj));
 
         // 如果是get请求就不记录日志
-        if (!logVo.getMethod().equalsIgnoreCase(CommonConstant.HTTP_METHOD_GET)) {
-            SpringContextHolder.publishEvent(new SysLogEvent(logVo));
+        if (!sysLog.getMethod().equalsIgnoreCase(CommonConstant.HTTP_METHOD_GET)) {
+            SpringContextHolder.publishEvent(new SysLogEvent(sysLog));
         }
 
         return obj;
+    }
+
+    private void handleRequestParams(ProceedingJoinPoint point, SysLog sysLog) {
+        Object[] args = point.getArgs();
+        String params = this.argsArrayToString(args);
+        sysLog.setParams(params);
+    }
+
+    /**
+     * 参数拼装
+     */
+    private String argsArrayToString(Object[] paramsArray) {
+        StringBuilder params = new StringBuilder();
+        if (paramsArray != null && paramsArray.length > 0) {
+            for (Object o : paramsArray) {
+                if (!isFilterObject(o)) {
+                    Object jsonObj = JSON.toJSON(o);
+                    params.append(jsonObj.toString()).append(" ");
+                }
+            }
+        }
+        return params.toString().trim();
+    }
+
+    /**
+     * 判断是否需要过滤的对象。
+     *
+     * @param o 对象信息。
+     * @return 如果是需要过滤的对象，则返回true；否则返回false。
+     */
+    public boolean isFilterObject(final Object o) {
+        return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse;
     }
 
 }

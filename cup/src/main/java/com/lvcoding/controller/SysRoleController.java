@@ -25,7 +25,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lvcoding.entity.SysRole;
 import com.lvcoding.entity.dto.RoleDTO;
-import com.lvcoding.log.SysLog;
+import com.lvcoding.log.CupLog;
 import com.lvcoding.service.SysRoleService;
 import com.lvcoding.util.Res;
 import lombok.AllArgsConstructor;
@@ -66,7 +66,7 @@ public class SysRoleController {
      * @param sysRole
      * @return com.lvcoding.util.Res
      */
-    @SysLog(type = "3",value = "查询角色")
+    @CupLog(type = "3",value = "查询角色")
     @PreAuthorize("@pm.hasPermission('sys:role:view')")
     @GetMapping("page")
     public Res page(Page page,SysRole sysRole){
@@ -87,7 +87,7 @@ public class SysRoleController {
      * @return com.lvcoding.util.Res
      */
     @PreAuthorize("@pm.hasPermission('sys:role:delete')")
-    @SysLog(type = "3",value = "删除角色")
+    @CupLog(type = "3",value = "删除角色")
     @DeleteMapping("{id}")
     public Res delete(@PathVariable("id") Integer id){
         return Res.success(sysRoleService.delete(id));
@@ -100,7 +100,7 @@ public class SysRoleController {
      * @return com.lvcoding.util.Res
      */
     @PreAuthorize("@pm.hasPermission('sys:role:update')")
-    @SysLog(type = "3",value = "更新角色")
+    @CupLog(type = "3",value = "更新角色")
     @PutMapping
     public Res update(@RequestBody SysRole sysRole){
         return Res.success(this.sysRoleService.updateById(sysRole));
@@ -113,7 +113,7 @@ public class SysRoleController {
      * @return com.lvcoding.util.Res
      */
     @PreAuthorize("@pm.hasPermission('sys:role:add')")
-    @SysLog(type = "3",value = "新增角色")
+    @CupLog(type = "3",value = "新增角色")
     @PostMapping
     public Res add(@RequestBody SysRole sysRole){
         return Res.success(this.sysRoleService.save(sysRole));

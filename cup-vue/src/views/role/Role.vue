@@ -9,13 +9,14 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input size="mini" clearable v-model="queryInfo.roleName" placeholder="请输入要查询的角色名称" @change="queryRole"></el-input>
+          <el-input size="mini" clearable v-model="queryInfo.roleName" placeholder="请输入要查询的角色名称" @change="handleSearch"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-input size="mini" clearable v-model="queryInfo.roleCode" placeholder="请输入要查询的角色英文名称" @change="queryRole"></el-input>
+          <el-input size="mini" clearable v-model="queryInfo.roleCode" placeholder="请输入要查询的角色英文名称" @change="handleSearch"></el-input>
         </el-col>
-        <el-col :span="2">
-          <el-button icon="el-icon-search" size="mini" type="primary" @click="queryRole">查询</el-button>
+        <el-col :span="6">
+          <el-button icon="el-icon-search" size="mini" type="primary" @click="handleSearch">查询</el-button>
+          <el-button icon="el-icon-refresh" size="mini" type="info" @click="resetQuery">重置</el-button>
         </el-col>
       </el-row>
       <!-- 表格区 -->
@@ -200,6 +201,15 @@ export default {
         }
       }
     },
+    // 重置查询
+    resetQuery() {
+      this.queryInfo = {
+        roleName: '',
+        roleCode: '',
+        current: 1
+      }
+      this.handleSearch()
+    },
     //关闭角色新增dialog清空数据
     roleAddClose() {
       this.roleAddForm = {}
@@ -220,7 +230,7 @@ export default {
         })
         .catch(() => { });
     },
-    //新增角色
+    // 新增角色
     async handleRoleAdd() {
       let res = await this.roleAdd(this.roleAddForm)
       this.roleAddDialog = false
@@ -248,7 +258,7 @@ export default {
       }
     },
     //条件查询角色
-    queryRole() {
+    handleSearch() {
       this.queryPage(this.queryInfo.roleName, this.queryInfo.roleCode, this.page.pageSize, '')
     },
     //格式化创建时间

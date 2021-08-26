@@ -9,10 +9,11 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input size="mini" clearable v-model="queryInfo.tenantName" placeholder="请输入要查询的租户名称" @change="queryTenant"></el-input>
+          <el-input size="mini" clearable v-model="queryInfo.tenantName" placeholder="请输入要查询的租户名称" @change="handleSearch"></el-input>
         </el-col>
-        <el-col :span="2">
-          <el-button icon="el-icon-search" size="mini" type="primary" @click="queryTenant">查询</el-button>
+        <el-col :span="6">
+          <el-button icon="el-icon-search" size="mini" type="primary" @click="handleSearch">查询</el-button>
+          <el-button icon="el-icon-refresh" size="mini" type="info" @click="resetQuery">重置</el-button>
         </el-col>
       </el-row>
 
@@ -151,9 +152,16 @@ export default {
         })
         .catch(() => { });
     },
+    // 重置查询
+    resetQuery() {
+      this.queryInfo = {
+        tenantName: ''
+      }
+      this.handleSearch()
+    },
     // 条件查询租户
-    queryTenant() {
-      this.queryPage(this.queryInfo.tenantName,)
+    handleSearch() {
+      this.queryPage(this.queryInfo.tenantName)
     },
     // 新增租户
     handleTenantAdd() {
@@ -204,7 +212,6 @@ export default {
     //封装通用分页方法
     async queryPage(tenantName, size, current) {
       let res = await this.tenantPage(this.copyQueryValue(tenantName, size, current));
-      console.log(res)
       this.copyPageValue(res)
     },
     //刷新界面

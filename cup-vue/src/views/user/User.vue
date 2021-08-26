@@ -20,8 +20,9 @@
             <el-col :span="6">
               <el-input size="mini" clearable v-model="queryInfo.username" placeholder="请输入要查询的用户名" @change="handleSearch"> </el-input>
             </el-col>
-            <el-col :span="2">
+            <el-col :span="6">
               <el-button type="primary" icon="el-icon-search" size="mini" @click="handleSearch">查询</el-button>
+              <el-button type="info" icon="el-icon-refresh" size="mini" @click="queryReset">重置</el-button>
             </el-col>
           </el-row>
 
@@ -211,6 +212,15 @@ export default {
         password: '',
         id: ''
       }
+    },
+    // 查询重置
+    queryReset() {
+      this.queryInfo = {
+        current: 1,
+        username: '',
+        orgId: '',
+      }
+      this.handleSearch();
     },
     // 提交重置密码
     handleSubmitResetPwd() {
