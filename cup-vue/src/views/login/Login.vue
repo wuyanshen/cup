@@ -19,7 +19,7 @@
           <el-input prefix-icon="el-icon-user" placeholder="请输入用户名" v-model="loginForm.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label prop="password">
-          <el-input show-password prefix-icon="el-icon-key" placeholder="请输入密码" type="password" v-model="loginForm.password" autocomplete="off"></el-input>
+          <el-input prefix-icon="el-icon-key" placeholder="请输入密码" type="password" v-model="loginForm.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label prop="captcha">
           <el-input
