@@ -25,10 +25,15 @@ export const removeTenantId = (key = 'tenantId') => {
     window.localStorage.removeItem(key)
 }
 
-// 格式化时间
+// 表格格式化时间
 export const formatDate = (row, column) => {
     let date = row[column.property]
     return moment(date).format('YYYY-MM-DD HH:mm:ss')
+}
+
+// 格式化时间
+export const castDate = data => {
+    return moment(data).format('YYYY-MM-DD HH:mm:ss')
 }
 
 // 加密
