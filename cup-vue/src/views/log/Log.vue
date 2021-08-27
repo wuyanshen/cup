@@ -180,7 +180,6 @@ export default {
         showLogDetail(row) {
             this.showLogDialog = true
             this.logDetail = JSON.parse(JSON.stringify(row))
-            console.log(this.logDetail.params)
         },
         // 清空日志
         async clearLogs() {
@@ -202,7 +201,6 @@ export default {
         //修改当前第几页
         async handleCurrentChange(current) {
             let res = await this.logPage(this.copyQueryValue(this.queryInfo.title, this.queryInfo.type, this.page.pageSize, current))
-            console.log(res)
             this.copyPageValue(res)
         },
         // 重置查询
