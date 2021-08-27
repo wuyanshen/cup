@@ -120,7 +120,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         Integer orgId = sysUser.getOrgId();
         if (orgId != null) {
             SysOrg sysOrg = sysOrgService.getById(orgId);
-            Integer orgPid = sysOrg.getOrgPid();
+            Integer orgPid = sysOrg.getPid();
             return this.list(Wrappers.<SysUser>query().lambda().eq(SysUser::getOrgId, orgPid));
         }
         return null;

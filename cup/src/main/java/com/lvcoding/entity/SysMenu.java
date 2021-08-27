@@ -51,14 +51,14 @@ public class SysMenu extends BaseEntity {
     /**
      * 父id
      */
-    @TableField(value = "menu_pid")
-    private Integer menuPid;
+    @TableField(value = "pid")
+    private Integer pid;
 
     /**
      * 所有的父id
      */
-    @TableField(value = "menu_pids")
-    private String menuPids;
+    @TableField(value = "pids")
+    private String pids;
 
     /**
      * 菜单名称

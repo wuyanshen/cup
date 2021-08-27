@@ -49,14 +49,14 @@ public class SysOrgController {
      * 分页查询接口
      *
      * @param page
-     * @param sysOrg
-     * @return com.lvcoding.util.Res
+     * @param sysOrg
+     * @return Res
      */
     @GetMapping("page")
-    public Res page(Page page, SysOrg sysOrg){
+    public Res page(Page page, SysOrg sysOrg) {
         QueryWrapper<SysOrg> queryWrapper = new QueryWrapper<>();
-        if(!ObjectUtils.isEmpty(sysOrg.getId())){
-            queryWrapper.lambda().eq(SysOrg::getId,sysOrg.getId());
+        if (!ObjectUtils.isEmpty(sysOrg.getId())) {
+            queryWrapper.lambda().eq(SysOrg::getId, sysOrg.getId());
         }
         return Res.success(sysOrgService.page(page, queryWrapper));
     }
@@ -66,10 +66,10 @@ public class SysOrgController {
      * 新增机构
      *
      * @param orgTree
-     * @return com.lvcoding.util.Res
+     * @return Res
      */
     @PostMapping
-    public Res add(@RequestBody OrgTree orgTree){
+    public Res add(@RequestBody OrgTree orgTree) {
         return Res.success(sysOrgService.saveOrg(orgTree));
     }
 
@@ -78,10 +78,10 @@ public class SysOrgController {
      * 更新机构
      *
      * @param orgTree
-     * @return com.lvcoding.util.Res
+     * @return Res
      */
     @PutMapping
-    public Res update(@RequestBody OrgTree orgTree){
+    public Res update(@RequestBody OrgTree orgTree) {
         return Res.success(sysOrgService.updateOrgById(orgTree));
     }
 
@@ -89,10 +89,10 @@ public class SysOrgController {
      * 删除机构
      *
      * @param id
-     * @return com.lvcoding.util.Res
+     * @return Res
      */
     @DeleteMapping("{id}")
-    public Res delete(@PathVariable("id")Integer id){
+    public Res delete(@PathVariable("id") Integer id) {
         return Res.success(sysOrgService.removeById(id));
     }
 
@@ -101,11 +101,22 @@ public class SysOrgController {
      * 获取部门树
      *
      * @param
-     * @return com.lvcoding.util.Res
+     * @return Res
      */
     @GetMapping("tree")
-    public Res tree(){
-        return Res.success(sysOrgService.orgTree());
+    public Res tree(SysOrg sysOrg) {
+        return Res.success(sysOrgService.orgTree(sysOrg));
+    }
+
+    /**
+     * 获取列表
+     *
+     * @param sysOrg
+     * @return Res
+     */
+    @GetMapping("list")
+    public Res list(SysOrg sysOrg) {
+        return Res.success(sysOrgService.getOrgList(sysOrg));
     }
 
 }

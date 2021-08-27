@@ -2,7 +2,20 @@
   <div>
     <!-- 卡片区 -->
     <el-card>
-      <el-button size="mini" type="primary" icon="el-icon-plus" @click="handleOrgAdd">新增</el-button>
+      <el-row :gutter="20">
+        <el-col :span="2">
+          <el-button size="mini" type="primary" icon="el-icon-plus" @click="handleOrgAdd">新增</el-button>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-input size="mini" clearable v-model="queryInfo.orgName" placeholder="请输入机构名称"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-button icon="el-icon-search" size="mini" type="primary" @click="handleSearch">查询</el-button>
+          <el-button icon="el-icon-refresh" size="mini" type="info" @click="resetQuery">重置</el-button>
+        </el-col>
+      </el-row>
       <el-table :data="tableData" default-expand-all row-key="id" class="org_table" size="mini" stripe>
         <el-table-column type="index" label="序号" width="50" align="center"></el-table-column>
         <el-table-column prop="orgName" label="组织机构名称" align="left"></el-table-column>
@@ -97,7 +110,8 @@
 <script>
 import ElTreeSelect from '@/components/TreeSelect'
 import { mapActions } from 'vuex'
-import moment from "moment";
+import { formatDate } from '@/lib/util'
+import { castToTree4 } from '@/lib/treeUtil'
 
 export default {
   components: {
@@ -120,21 +134,20 @@ export default {
         value: 'id',
         label: 'orgName',
         children: 'children',
-      }
+      },
+      queryInfo: {
+        orgName: ''
+      },
     }
   },
-  async mounted() {
-    this.flush()
+  mounted() {
+    this.handleSearch()
   },
   methods: {
     ...mapActions('org', ['orgTree', 'addOrg', 'updateOrg', 'deleteOrg']),
     // 格式化时间
-    dateFormat(row, column, cellValue, index) {
-      const date = row[column.property];
-      if (date === undefined) {
-        return "";
-      }
-      return moment(date).format("YYYY-MM-DD HH:MM:SS");
+    dateFormat(row, column) {
+      return formatDate(row, column);
     },
     //关闭修改dialog
     orgEditClose() {
@@ -150,7 +163,7 @@ export default {
     async handleOrgUpdate() {
       const res = await this.updateOrg(this.orgForm)
       if (res.code === 0) {
-        this.flush()
+        this.handleSearch()
         this.orgEditDialog = false
         this.$message.success('修改成功')
       }
@@ -164,7 +177,7 @@ export default {
       }).then(async () => {
         const res = await this.deleteOrg(id)
         if (res.code === 0) {
-          this.flush()
+          this.handleSearch()
           this.orgEditDialog = false
           this.$message.success('删除成功')
         }
@@ -184,7 +197,7 @@ export default {
       console.log(this.orgForm)
       const res = await this.addOrg(this.orgForm)
       if (res.code === 0) {
-        this.flush()
+        this.handleSearch()
         this.orgAddDialog = false
         this.$message.success('新增成功')
       }
@@ -196,10 +209,18 @@ export default {
     validateSelectTree() {
       this.$refs.orgForm.validateField("parentId");
     },
-    //刷新界面
-    async flush() {
-      const res = await this.orgTree()
-      this.tableData = res.data
+    // 查询
+    handleSearch() {
+      this.$api.org.orgList(this.queryInfo).then(res => {
+        this.tableData = castToTree4(res.data, 'id', 'pid', 'children', 0)
+      })
+    },
+    // 重置查询
+    resetQuery() {
+      this.queryInfo = {
+        orgName: '',
+      }
+      this.handleSearch()
     }
   }
 }

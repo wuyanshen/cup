@@ -53,6 +53,19 @@ public class SysMenuController {
 
 
     /**
+     * 查询所有菜单列表
+     *
+     * @param sysMenu
+     * @return Res
+     * @author wuyanshen
+     */
+    @GetMapping("list")
+    public Res list(SysMenu sysMenu) {
+        List<SysMenu> list = sysMenuService.findMenuList(sysMenu);
+        return Res.success(list);
+    }
+
+    /**
      * 获取当前用户的菜单树
      *
      * @param request

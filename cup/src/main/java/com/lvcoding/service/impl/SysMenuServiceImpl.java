@@ -21,6 +21,7 @@
 
 package com.lvcoding.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysMenu;
@@ -52,9 +53,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      */
     @Override
     public boolean deleteById(Integer id) {
-        boolean flag1 = this.baseMapper.deleteMenuRoleById(id) > 0?true:false;
-        boolean flag2 = this.baseMapper.deleteById(id) > 0?true:false;
-        return flag1&&flag2;
+        boolean flag1 = this.baseMapper.deleteMenuRoleById(id) > 0 ? true : false;
+        boolean flag2 = this.baseMapper.deleteById(id) > 0 ? true : false;
+        return flag1 && flag2;
     }
 
     /**
@@ -70,7 +71,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             MenuTree menuTree = new MenuTree();
             BeanUtils.copyProperties(menu, menuTree);
             menuTree.setId(menu.getId());
-            menuTree.setParentId(menu.getMenuPid());
+            menuTree.setParentId(menu.getPid());
             return menuTree;
         }).collect(Collectors.toList());
         List<MenuTree> trees = TreeUtil.buildByRecursive(menuTrees, 0);
@@ -84,17 +85,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         sysMenu.setStatus(1);
         //设置父id集合
         this.setMenuPids(sysMenu);
-        return this.baseMapper.insert(sysMenu)>0;
+        return this.baseMapper.insert(sysMenu) > 0;
     }
 
-    private void setMenuPids(SysMenu child){
+    private void setMenuPids(SysMenu child) {
         List<SysMenu> sysMenus = this.baseMapper.selectList(new QueryWrapper<>());
-        for (SysMenu sysMenu:sysMenus){
-            if (sysMenu.getId().equals(child.getMenuPid())){
-                if(ObjectUtils.isEmpty(sysMenu.getMenuPids()) || sysMenu.getMenuPids().equals("0")){
-                    child.setMenuPids(sysMenu.getId()+"");
-                }else{
-                    child.setMenuPids(sysMenu.getMenuPids()+","+child.getMenuPid());
+        for (SysMenu sysMenu : sysMenus) {
+            if (sysMenu.getId().equals(child.getPid())) {
+                if (ObjectUtils.isEmpty(sysMenu.getPids()) || sysMenu.getPids().equals("0")) {
+                    child.setPids(sysMenu.getId() + "");
+                } else {
+                    child.setPids(sysMenu.getPids() + "," + child.getPids());
                 }
             }
         }
@@ -104,7 +105,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * 查询所有的菜单树
      *
      * @param
-     * @return java.util.List<com.lvcoding.entity.dto.MenuTree>
+     * @return List<MenuTree>
      */
     @Override
     public List<MenuTree> findAllMenuTree() {
@@ -112,11 +113,23 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         List<MenuTree> collect = sysMenus.stream().map(sysMenu -> {
             MenuTree menuTree = new MenuTree();
             BeanUtils.copyProperties(sysMenu, menuTree);
-            menuTree.setParentId(sysMenu.getMenuPid());
+            menuTree.setParentId(sysMenu.getPid());
             menuTree.setId(sysMenu.getId());
             return menuTree;
         }).collect(Collectors.toList());
         List<MenuTree> menuTrees = TreeUtil.buildByRecursive(collect, 0);
         return menuTrees;
+    }
+
+    @Override
+    public List<SysMenu> findMenuList(SysMenu sysMenu) {
+        QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>();
+
+        if (StrUtil.isNotBlank(sysMenu.getMenuName())) {
+            queryWrapper.lambda().like(SysMenu::getMenuName, sysMenu.getMenuName());
+        }
+
+        List<SysMenu> sysMenuList = this.baseMapper.selectList(queryWrapper);
+        return sysMenuList;
     }
 }

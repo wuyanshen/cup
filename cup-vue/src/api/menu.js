@@ -10,14 +10,19 @@ const menuTreePage = () => {
     return axios.get('/menus/treePage')
 }
 
+// 查询菜单列表
+const menuList = params => {
+    return axios.get('/menus/list', params)
+}
+
 //新增菜单
 const addMenu = params => {
     console.log(params)
-    return axios.post('/menus',params)
+    return axios.post('/menus', params)
 }
 //修改菜单
 const updateMenu = params => {
-    return axios.put('/menus',params)
+    return axios.put('/menus', params)
 }
 //删除菜单
 const deleteMenu = id => {
@@ -26,8 +31,9 @@ const deleteMenu = id => {
 
 export default {
     menuTree,
-	menuTreePage,
+    menuTreePage,
     addMenu,
     updateMenu,
-    deleteMenu
+    deleteMenu,
+    menuList
 }

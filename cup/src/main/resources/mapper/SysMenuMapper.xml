@@ -25,8 +25,8 @@
 
     <resultMap type="com.lvcoding.entity.SysMenu" id="SysMenuMap">
         <result property="id" column="id" />
-        <result property="menuPid" column="menu_pid" />
-        <result property="menuPids" column="menu_pids" />
+        <result property="pid" column="pid" />
+        <result property="pids" column="pids" />
         <result property="menuName" column="menu_name" />
         <result property="url" column="url" />
         <result property="permission" column="permission" />
@@ -44,7 +44,7 @@
 
 
     <sql id="queryJoin">
-        m.id, m.menu_pid, m.menu_pids, m.menu_name, m.url, m.permission,m.type, m.icon, m.status, m.sort, m.create_time, m.update_time, m.del_flag
+        m.id, m.pid, m.pids, m.menu_name, m.url, m.permission,m.type, m.icon, m.status, m.sort, m.remark, m.create_by, m.update_by, m.create_time, m.update_time, m.del_flag
     </sql>
 
 

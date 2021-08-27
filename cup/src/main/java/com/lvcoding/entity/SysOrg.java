@@ -52,14 +52,14 @@ public class SysOrg extends BaseEntity {
     /**
      * 父节点id
      */
-    @TableField(value = "org_pid")
-    private Integer orgPid;
+    @TableField(value = "pid")
+    private Integer pid;
 
     /**
      * 所有的父节点
      */
-    @TableField(value = "org_pids")
-    private String orgPids;
+    @TableField(value = "pids")
+    private String pids;
 
     /**
      * 是否叶子节点

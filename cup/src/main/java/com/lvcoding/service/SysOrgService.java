@@ -36,9 +36,11 @@ import java.util.List;
  */
 public interface SysOrgService extends IService<SysOrg> {
 
-    List<OrgTree> orgTree();
+    List<OrgTree> orgTree(SysOrg sysOrg);
 
     Boolean saveOrg(OrgTree orgTree);
 
     Boolean updateOrgById(OrgTree orgTree);
+
+    List<SysOrg> getOrgList(SysOrg sysOrg);
 }

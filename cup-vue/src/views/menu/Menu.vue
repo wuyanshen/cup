@@ -3,7 +3,20 @@
     <!-- 卡片区 -->
     <el-card>
       <!--新增-->
-      <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleMenuAdd">新增</el-button>
+      <el-row :gutter="20">
+        <el-col :span="2">
+          <el-button size="mini" type="primary" icon="el-icon-plus" @click="handleMenuAdd">新增</el-button>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-input size="mini" clearable v-model="queryInfo.menuName" placeholder="请输入菜单名称"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-button icon="el-icon-search" size="mini" type="primary" @click="handleSearch">查询</el-button>
+          <el-button icon="el-icon-refresh" size="mini" type="info" @click="resetQuery">重置</el-button>
+        </el-col>
+      </el-row>
       <!-- 表格区 -->
       <el-table size="mini" :data="tableData" stripe row-key="id">
         <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
@@ -75,6 +88,7 @@
 import { mapActions } from 'vuex'
 import IconSelect from '../../components/IconSelect.vue'
 import ElTreeSelect from '@/components/TreeSelect'
+import { castToTree4 } from '@/lib/treeUtil'
 
 export default {
   components: { IconSelect, ElTreeSelect },
@@ -95,11 +109,14 @@ export default {
         value: 'id',
         label: 'menuName',
         children: 'children'
-      }
+      },
+      queryInfo: {
+        menuName: ''
+      },
     }
   },
   mounted() {
-    this.flush()
+    this.handleSearch()
   },
   methods: {
     ...mapActions('menu', ['menuTreePage', 'addMenu', 'updateMenu', 'deleteMenu']),
@@ -147,7 +164,7 @@ export default {
           this.$message.success('更新成功')
         }
       }
-      await this.flush()
+      this.handleSearch();
     },
 
     // 删除按钮
@@ -160,7 +177,7 @@ export default {
         .then(async () => {
           let res = await this.deleteMenu(menuId)
           if (res.code === 0) {
-            this.flush()
+            this.handleSearch();
             this.$message({
               type: 'success',
               message: '删除成功!'
@@ -178,11 +195,20 @@ export default {
       this.$refs.menuForm.validateField('menuPid')
     },
 
-    // 刷新table
-    async flush() {
-      const res = await this.menuTreePage()
-      this.tableData = res.data
-    }
+    // 查询
+    handleSearch() {
+      this.$api.menu.menuList(this.queryInfo).then(res => {
+        console.log(res.data)
+        this.tableData = castToTree4(res.data, "id", "pid", "children", 0)
+      })
+    },
+    // 重置查询
+    resetQuery() {
+      this.queryInfo = {
+        menuName: ''
+      }
+      this.handleSearch()
+    },
   }
 }
 </script>
