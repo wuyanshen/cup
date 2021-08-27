@@ -25,8 +25,8 @@
 
     <resultMap type="com.lvcoding.entity.SysOrg" id="SysOrgMap">
         <result property="id" column="id" />
-        <result property="orgPid" column="org_pid" />
-        <result property="orgPids" column="org_pids" />
+        <result property="pid" column="pid" />
+        <result property="pids" column="pids" />
         <result property="isLeaf" column="is_leaf" />
         <result property="orgName" column="org_name" />
         <result property="address" column="address" />

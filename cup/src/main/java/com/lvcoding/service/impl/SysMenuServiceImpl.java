@@ -105,19 +105,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * 查询所有的菜单树
      *
      * @param
+     * @param sysMenu
      * @return List<MenuTree>
      */
     @Override
-    public List<MenuTree> findAllMenuTree() {
-        List<SysMenu> sysMenus = this.baseMapper.selectList(new QueryWrapper<>());
-        List<MenuTree> collect = sysMenus.stream().map(sysMenu -> {
-            MenuTree menuTree = new MenuTree();
-            BeanUtils.copyProperties(sysMenu, menuTree);
-            menuTree.setParentId(sysMenu.getPid());
-            menuTree.setId(sysMenu.getId());
-            return menuTree;
-        }).collect(Collectors.toList());
-        List<MenuTree> menuTrees = TreeUtil.buildByRecursive(collect, 0);
+    public List<SysMenu> findAllMenuTree(SysMenu sysMenu) {
+        QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>();
+        if(StrUtil.isNotBlank(sysMenu.getMenuName())) {
+            queryWrapper.lambda().like(SysMenu::getMenuName, sysMenu.getMenuName());
+        }
+        List<SysMenu> sysMenus = this.baseMapper.selectList(queryWrapper);
+        List<SysMenu> menuTrees = TreeUtil.buildTreeDynamicRoot(sysMenus, 0);
         return menuTrees;
     }
 

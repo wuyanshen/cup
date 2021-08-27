@@ -87,8 +87,8 @@ public class SysMenuController {
     @PreAuthorize("@pm.hasPermission('sys:menu:view')")
     @CupLog(type = "2",value = "查询菜单")
     @GetMapping("treePage")
-    public Res menuTreePage() {
-        List<MenuTree> list = sysMenuService.findAllMenuTree();
+    public Res menuTreePage(SysMenu sysMenu) {
+        List<SysMenu> list = sysMenuService.findAllMenuTree(sysMenu);
         return Res.success(list);
     }
 

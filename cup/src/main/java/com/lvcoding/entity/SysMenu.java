@@ -29,6 +29,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 菜单表(SysMenu)实体类
  *
@@ -115,4 +118,6 @@ public class SysMenu extends BaseEntity {
     private Integer sort;
 
 
+    @TableField(exist = false)
+    private List<SysMenu> children = new ArrayList<>();
 }

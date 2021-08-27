@@ -21,11 +21,15 @@
 
 package com.lvcoding.util;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.lvcoding.entity.SysMenu;
 import com.lvcoding.entity.dto.TreeNode;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author wuyanshen
@@ -39,10 +43,10 @@ public class TreeUtil {
      * 使用两次循环建树
      *
      * @param treeNodes
-     * @param root
+     * @param root
      * @return java.util.List<T>
      */
-    public <T extends TreeNode> List<T> bulidTree(List<T> treeNodes,Object root) {
+    public <T extends TreeNode> List<T> bulidTree(List<T> treeNodes, Object root) {
 
         List<T> trees = new ArrayList<T>();
 
@@ -98,5 +102,42 @@ public class TreeUtil {
             }
         }
         return treeNode;
+    }
+
+    /**
+     * 构建树(支持动态根节点)
+     *
+     * @param treeNodes
+     * @param root
+     * @return List<SysMenu>
+     */
+    public List<SysMenu> buildTreeDynamicRoot(List<SysMenu> treeNodes, Integer root) {
+
+        // 动态获取列表中最小的根节点
+        SysMenu menu = treeNodes.stream().min(Comparator.comparing(SysMenu::getPid)).get();
+
+        if (ObjectUtil.isNotEmpty(menu)) {
+            root = menu.getPid();
+        }
+
+        Integer rootVal = root;
+
+        List<SysMenu> menus = new ArrayList<>();
+
+        treeNodes.forEach(parent -> {
+
+            List<SysMenu> children = treeNodes.stream().filter(child -> child.getPid().equals(parent.getId())).collect(Collectors.toList());
+
+            if (ObjectUtil.isNotEmpty(children)) {
+                parent.setChildren(children);
+            }
+
+            if (parent.getPid().equals(rootVal)) {
+                menus.add(parent);
+            }
+
+        });
+
+        return menus;
     }
 }

@@ -53,7 +53,7 @@ public interface SysMenuService extends IService<SysMenu> {
 
     boolean addMenu(SysMenu sysMenu);
 
-    List<MenuTree> findAllMenuTree();
+    List<SysMenu> findAllMenuTree(SysMenu sysMenu);
 
     List<SysMenu> findMenuList(SysMenu sysMenu);
 }
