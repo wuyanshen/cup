@@ -112,6 +112,12 @@ public class SysMenu extends BaseEntity {
     private Integer status;
 
     /**
+     * 是否展示,1展示 0隐藏
+     */
+    @TableField(value = "is_show")
+    private Integer isShow;
+
+    /**
      * 排序
      */
     @TableField(value = "sort")

@@ -33,6 +33,7 @@
         <result property="icon" column="icon" />
         <result property="type" column="type" />
         <result property="status" column="status" />
+        <result property="isShow" column="is_show" />
         <result property="sort" column="sort" />
         <result property="createTime" column="create_time" />
         <result property="updateTime" column="update_time" />

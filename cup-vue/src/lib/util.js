@@ -59,3 +59,10 @@ export const decode = content => {
     let decodeResult = encryptor.decrypt(content) // 对内容进行加密
     return decodeResult
 }
+
+// 表单重置
+export function resetForm(refName) {
+    if (this.$refs[refName]) {
+        this.$refs[refName].resetFields();
+    }
+}

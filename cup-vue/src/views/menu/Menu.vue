@@ -33,6 +33,12 @@
                         <i :class="scope.row.icon"></i>
                     </template>
                 </el-table-column>
+                <el-table-column align="center" prop="icon" label="展示">
+                    <template v-slot="scope">
+                        <el-tag size="mini" type="success" v-if="scope.row.isShow === 1">是</el-tag>
+                        <el-tag size="mini" type="danger" v-if="scope.row.isShow === 0">否</el-tag>
+                    </template>
+                </el-table-column>
                 <el-table-column align="center" prop="permission" label="权限标识"></el-table-column>
                 <el-table-column align="center" label="操作">
                     <template v-slot="scope">
@@ -53,6 +59,10 @@
                     <el-radio v-model="menuForm.type" label="0" border>菜单</el-radio>
                     <el-radio v-model="menuForm.type" label="1" border>按钮</el-radio>
                 </el-form-item>
+                <el-form-item label="展示" prop="type">
+                    <el-radio v-model="menuForm.isShow" label="1" border>展示</el-radio>
+                    <el-radio v-model="menuForm.isShow" label="0" border>隐藏</el-radio>
+                </el-form-item>
                 <el-form-item label="路由路径" prop="url" v-if="menuForm.type === '0'">
                     <el-input v-model="menuForm.url"></el-input>
                 </el-form-item>
@@ -65,11 +75,11 @@
                 <el-form-item label="权限标识" prop="permission" v-if="menuForm.type === '1'">
                     <el-input v-model="menuForm.permission"></el-input>
                 </el-form-item>
-                <el-form-item label="上级菜单" prop="menuPid">
+                <el-form-item label="上级菜单" prop="pid">
                     <el-tree-select
                         :elTreeProps="elTreeProps"
                         :elTreeData="tableData"
-                        :defaultSelectedId="menuForm.menuPid"
+                        :defaultSelectedId="menuForm.pid"
                         :disabled="false"
                         @handleTreeSelected="handleTreeSelected($event)"
                         @validateSelectTree="validateSelectTree"
@@ -100,7 +110,7 @@ export default {
             menuForm: {
                 type: '0',
                 menuName: '',
-                menuPid: 0,
+                pid: 0,
                 permission: ''
             },
             elTreeDisabled: false,
@@ -127,7 +137,7 @@ export default {
 
         // dialog关闭
         menuDialogClose() {
-            this.$set(this.menuForm, 'menuPid', undefined)
+            this.$set(this.menuForm, 'pid', undefined)
             this.$refs.menuForm.resetFields()
         },
 
@@ -143,7 +153,6 @@ export default {
             this.menuDialog = true
             const rowInfo = JSON.parse(JSON.stringify(row))
             this.menuForm = rowInfo
-            this.menuForm.menuPid = rowInfo.parentId
         },
 
         // 提交表单
@@ -187,11 +196,11 @@ export default {
         },
 
         handleTreeSelected(value) {
-            this.menuForm.menuPid = value
-            this.$refs.menuForm.validateField('menuPid')
+            this.menuForm.pid = value
+            this.$refs.menuForm.validateField('pid')
         },
         validateSelectTree() {
-            this.$refs.menuForm.validateField('menuPid')
+            this.$refs.menuForm.validateField('pid')
         },
 
         // 查询

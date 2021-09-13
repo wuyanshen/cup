@@ -120,6 +120,8 @@
 <script>
 import { mapActions } from 'vuex'
 import { formatDate } from '@/lib/util'
+import { castToTree4 } from '@/lib/treeUtil'
+
 
 export default {
   data() {
@@ -186,7 +188,7 @@ export default {
       this.permissionDialog = true
       let res = await this.menuTreePage()
       if (res.code === 0) {
-        this.treeData = res.data
+        this.treeData = castToTree4(res.data, 'id', 'pid', 'children', 0)
         //设置默认选中
         let res1 = await this.roleMenuIds(id)
         if (res1.code === 0) {

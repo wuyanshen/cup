@@ -21,6 +21,22 @@ const menuRouter = [{
                 component: () => import('../views/role/Role.vue')
             },
             {
+                path: 'dict',
+                name: 'dict',
+                component: () => import('../views/dict/Dict.vue'),
+                // children: [
+                //     {
+                //         path: 'data/:typeCode',
+                //         component: () => import('../views/dict/DictData.vue'),
+                //         name: 'dictData',
+                //     }]
+            },
+            {
+                path: 'dict/data/:id(\\d+)',
+                name: 'dictData',
+                component: () => import('../views/dict/DictData.vue')
+            },
+            {
                 path: 'log',
                 name: 'log',
                 component: () => import('../views/log/Log.vue')

@@ -115,8 +115,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             queryWrapper.lambda().like(SysMenu::getMenuName, sysMenu.getMenuName());
         }
         List<SysMenu> sysMenus = this.baseMapper.selectList(queryWrapper);
-        List<SysMenu> menuTrees = TreeUtil.buildTreeDynamicRoot(sysMenus, 0);
-        return menuTrees;
+        // List<SysMenu> menuTrees = TreeUtil.buildTreeDynamicRoot(sysMenus, 0);
+        return sysMenus;
     }
 
     @Override

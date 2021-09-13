@@ -11,13 +11,15 @@ if (process.env.NODE_ENV === 'development') require('./mock')
 // require('./mock')
 // import Mock from './mock'
 import api from '@/api/api'
+import { resetForm } from "./lib/util";
 
 
-Vue.config.productionTip = false
-Vue.use(ElementUI)
-Vue.use(vueAxios, axios)
+Vue.config.productionTip = false;
+Vue.use(ElementUI);
+Vue.use(vueAxios, axios);
 //api接口
-Vue.prototype.$api = api
+Vue.prototype.$api = api;
+Vue.prototype.resetForm = resetForm;
 
 
 

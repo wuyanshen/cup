@@ -8,6 +8,7 @@ import job from './job'
 import leave from './leave'
 import activiti from './activiti'
 import captcha from './captcha'
+import dict from './dict'
 
 export default {
     user,
@@ -19,5 +20,6 @@ export default {
     leave,
     job,
     captcha,
+    dict,
     activiti
 }
