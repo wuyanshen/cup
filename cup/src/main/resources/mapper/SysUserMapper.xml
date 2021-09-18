@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~
+  ~        Copyright (c) 2021-2015, wuyanshen All rights reserved.
   ~
-  ~        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
   ~
-  ~    Redistribution and use in source and binary forms, with or without
-  ~    modification, are permitted provided that the following conditions are met:
-  ~
-  ~    Redistributions of source code must retain the above copyright notice,
-  ~    this list of conditions and the following disclaimer.
-  ~    Redistributions in binary form must reproduce the above copyright
-  ~    notice, this list of conditions and the following disclaimer in the
-  ~    documentation and/or other materials provided with the distribution.
-  ~    Neither the name of the lvcoding.com developer nor the names of its
-  ~    contributors may be used to endorse or promote products derived from
-  ~    this software without specific prior written permission.
-  ~    Author: wuyanshen
-  ~
+  ~  Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the lvcoding.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: wuyanshen
   ~
   -->
 
@@ -138,29 +136,14 @@
     <!--用户分页查询-->
     <select id="getPageScope" resultMap="SysUserMap">
         select
-        u.id,
-		u.org_id,
-		u.username,
-		u.PASSWORD,
-		u.email,
-		u.phone,
-		u.avatar,
-		u.STATUS,
-		u.sort,
-		u.create_time,
-		u.update_time,
-		u.del_flag,
-		u.create_by,
-		u.update_by,
-		u.remark
-        from sys_user u
-                     left join sys_org o on o.id = u.org_id
+        <include refid="Base_Column_List"/>
+        from sys_user
         <where>
             <if test="sysUser.orgId != null and sysUser.orgId != ''">
-                and u.org_id = #{sysUser.orgId}
+                and org_id = #{sysUser.orgId}
             </if>
             <if test="sysUser.username != null and sysUser.username != ''">
-                and u.username like CONCAT('%', #{sysUser.username}, '%')
+                and username like CONCAT('%', #{sysUser.username}, '%')
             </if>
         </where>
     </select>

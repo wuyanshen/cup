@@ -1,21 +1,19 @@
 /*
  *
+ *        Copyright (c) 2021-2015, wuyanshen All rights reserved.
  *
- *        Copyright (c) 2018-2021, wuyanshen All rights reserved.
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are met:
  *
- *    Redistribution and use in source and binary forms, with or without
- *    modification, are permitted provided that the following conditions are met:
- *
- *    Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- *    Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *    Neither the name of the lvcoding.com developer nor the names of its
- *    contributors may be used to endorse or promote products derived from
- *    this software without specific prior written permission.
- *    Author: wuyanshen
- *
+ *  Redistributions of source code must retain the above copyright notice,
+ *  this list of conditions and the following disclaimer.
+ *  Redistributions in binary form must reproduce the above copyright
+ *  notice, this list of conditions and the following disclaimer in the
+ *  documentation and/or other materials provided with the distribution.
+ *  Neither the name of the lvcoding.com developer nor the names of its
+ *  contributors may be used to endorse or promote products derived from
+ *  this software without specific prior written permission.
+ *  Author: wuyanshen
  *
  */
 
@@ -47,7 +45,7 @@ import java.util.stream.Collectors;
 public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper, SysOrg> implements SysOrgService {
 
     @Override
-    public List<OrgTree> orgTree(SysOrg sysOrg) {
+    public List<SysOrg> orgTree(SysOrg sysOrg) {
         QueryWrapper<SysOrg> queryWrapper = new QueryWrapper<>();
 
         if (StrUtil.isNotBlank(sysOrg.getOrgName())) {
@@ -55,15 +53,15 @@ public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper, SysOrg> impleme
         }
 
         List<SysOrg> sysOrgs = baseMapper.selectList(queryWrapper);
-        List<OrgTree> collect = sysOrgs.stream().map(org -> {
-            OrgTree orgTree = new OrgTree();
-            BeanUtils.copyProperties(org, orgTree);
-            orgTree.setId(org.getId());
-            orgTree.setParentId(org.getPid());
-            return orgTree;
-        }).collect(Collectors.toList());
-        List<OrgTree> orgTrees = TreeUtil.buildByRecursive(collect, 0);
-        return orgTrees;
+        // List<OrgTree> collect = sysOrgs.stream().map(org -> {
+        //     OrgTree orgTree = new OrgTree();
+        //     BeanUtils.copyProperties(org, orgTree);
+        //     orgTree.setId(org.getId());
+        //     orgTree.setParentId(org.getPid());
+        //     return orgTree;
+        // }).collect(Collectors.toList());
+        // List<OrgTree> orgTrees = TreeUtil.buildByRecursive(collect, 0);
+        return sysOrgs;
     }
 
     @Transactional

@@ -1,5 +1,25 @@
+/*
+ *
+ *        Copyright (c) 2021-2015, wuyanshen All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are met:
+ *
+ *  Redistributions of source code must retain the above copyright notice,
+ *  this list of conditions and the following disclaimer.
+ *  Redistributions in binary form must reproduce the above copyright
+ *  notice, this list of conditions and the following disclaimer in the
+ *  documentation and/or other materials provided with the distribution.
+ *  Neither the name of the lvcoding.com developer nor the names of its
+ *  contributors may be used to endorse or promote products derived from
+ *  this software without specific prior written permission.
+ *  Author: wuyanshen
+ *
+ */
+
 package com.lvcoding.datascope;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
 import com.lvcoding.constant.CommonConstant;
 import com.lvcoding.security.CommonUser;
@@ -61,6 +81,8 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
             String userAlias = dataScopeMetaData.getUserAlias();
             // 部门表别名
             String orgAlias = dataScopeMetaData.getOrgAlias();
+            String orgColumn = dataScopeMetaData.getOrgColumn();
+            String userColumn = dataScopeMetaData.getUserColumn();
             List<String> orgIds = dataScopeMetaData.getOrgIds();
 
             switch (type) {
@@ -75,7 +97,7 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
                     // 创建IN范围的元素集合
                     // 把集合转变为JSQLParser需要的元素列表
                     ItemsList itemsList = new ExpressionList(Arrays.stream(scope.split(",")).map(LongValue::new).collect(Collectors.toList()));
-                    InExpression inExpression = new InExpression(new Column(String.format("%s.org_id", userAlias)), itemsList);
+                    InExpression inExpression = new InExpression(new Column(this.formatSql(orgAlias, orgColumn)), itemsList);
                     return new AndExpression(where, inExpression);
 
                 // 本部门及子部门
@@ -86,7 +108,7 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
                     // 把集合转变为JSQLParser需要的元素列表
                     orgIds.add(String.valueOf(user.getSysUser().getOrgId()));
                     ItemsList departmentList = new ExpressionList(orgIds.stream().map(LongValue::new).collect(Collectors.toList()));
-                    InExpression depExpression = new InExpression(new Column(String.format("%s.org_id", userAlias)), departmentList);
+                    InExpression depExpression = new InExpression(new Column(this.formatSql(orgAlias, orgColumn)), departmentList);
                     return new AndExpression(where, depExpression);
 
                 // 本部门
@@ -94,35 +116,42 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
                 case CommonConstant.DATA_SCOPE_SELF_DEPARTMENT:
                     Integer orgId = user.getSysUser().getOrgId();
                     EqualsTo selfDepartmentEqualsTo = new EqualsTo();
-                    selfDepartmentEqualsTo.setLeftExpression(new Column(String.format("%s.org_id", userAlias)));
+                    selfDepartmentEqualsTo.setLeftExpression(new Column(this.formatSql(orgAlias, orgColumn)));
                     selfDepartmentEqualsTo.setRightExpression(new LongValue(orgId));
-
                     return new AndExpression(where, selfDepartmentEqualsTo);
 
                 // 仅自己
                 // where create_by = userId and org_id = userDeptId
                 default:
-                    Integer id = user.getSysUser().getId();
                     String username = user.getUsername();
-
                     EqualsTo selfEqualsTo = new EqualsTo();
-                    selfEqualsTo.setLeftExpression(new Column(String.format("%s.id", userAlias)));
-                    selfEqualsTo.setRightExpression(new LongValue(id));
-                    AndExpression andExpression = new AndExpression(where, selfEqualsTo);
-
-                    EqualsTo selfEqualsTo2 = new EqualsTo();
-                    selfEqualsTo2.setLeftExpression(new Column(String.format("%s.create_by", userAlias)));
-                    selfEqualsTo2.setRightExpression(new StringValue(username));
-                    OrExpression orExpression = new OrExpression(andExpression, selfEqualsTo2);
-                    AndExpression andExpression2 = new AndExpression(where, selfEqualsTo2);
-
-                    return andExpression2;
+                    String sqlFormat;
+                    if (StrUtil.isNotBlank(userAlias)) {
+                        sqlFormat = String.format("%s.create_by", userAlias);
+                    } else {
+                        sqlFormat = String.format("%s", "create_by");
+                    }
+                    selfEqualsTo.setLeftExpression(new Column(sqlFormat));
+                    selfEqualsTo.setRightExpression(new StringValue(username));
+                    return new AndExpression(where, selfEqualsTo);
             }
+
         } catch (Exception e) {
             log.error("CupDataPermissionHandler.err", e);
         } finally {
             DataScopeThreadLocal.clear();
         }
         return where;
+    }
+
+    public String formatSql(String orgAlias, String orgColumn) {
+        String sqlFormat;
+        if (StrUtil.isNotBlank(orgAlias)) {
+            sqlFormat = String.format("%s.%s", orgAlias, orgColumn);
+        } else {
+            sqlFormat = String.format("%s", orgColumn);
+        }
+
+        return sqlFormat;
     }
 }

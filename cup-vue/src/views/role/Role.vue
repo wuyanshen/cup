@@ -244,8 +244,8 @@
             // 查询机构树
             async handelQueryOrgTree() {
                 // 查询机构树
-                const orgs = await this.orgTree()
-                this.orgTreeData = orgs.data
+                const res = await this.orgTree()
+                this.orgTreeData = castToTree4(res.data, 'id', 'pid', 'children', 0)
             },
             // 重置dialog
             reset() {

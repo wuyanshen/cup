@@ -112,6 +112,8 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import {castToTree4} from '@/lib/treeUtil'
+
 export default {
   data() {
     const usernameCheck = async (rule, value, callback) => {
@@ -182,8 +184,7 @@ export default {
   },
   async mounted() {
     // 查询机构树
-    const orgs = await this.orgTree()
-    this.orgTreeData = orgs.data
+      this.getOrgTree()
 
     // 查询用户列表
     this.flush()
@@ -213,6 +214,11 @@ export default {
         id: ''
       }
     },
+      async getOrgTree() {
+          const res = await this.orgTree()
+          this.orgTreeData = castToTree4(res.data, 'id', 'pid', 'children', 0)
+          console.log(this.orgTreeData)
+      },
     // 查询重置
     queryReset() {
       this.queryInfo = {
