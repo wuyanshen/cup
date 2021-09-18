@@ -154,7 +154,7 @@
 		u.update_by,
 		u.remark
         from sys_user u
-                     left join sys_org d on d.id = u.org_id
+                     left join sys_org o on o.id = u.org_id
         <where>
             <if test="sysUser.orgId != null and sysUser.orgId != ''">
                 and u.org_id = #{sysUser.orgId}

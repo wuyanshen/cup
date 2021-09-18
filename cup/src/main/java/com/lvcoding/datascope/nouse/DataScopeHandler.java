@@ -19,30 +19,22 @@
  *
  */
 
-package com.lvcoding.service;
-
-
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.lvcoding.entity.SysOrg;
-import com.lvcoding.entity.dto.OrgTree;
+package com.lvcoding.datascope.nouse;
 
 import java.util.List;
 
 /**
- * 组织机构表(SysOrg)表服务接口
- *
- * @author makejava
- * @since 2020-03-24 01:24:17
+ * @description 数据权限处理器
+ * @date   2021-08-24 下午6:35
+ * @author  wuyanshen
  */
-public interface SysOrgService extends IService<SysOrg> {
+public interface DataScopeHandler {
 
-    List<OrgTree> orgTree(SysOrg sysOrg);
-
-    Boolean saveOrg(OrgTree orgTree);
-
-    Boolean updateOrgById(OrgTree orgTree);
-
-    List<SysOrg> getOrgList(SysOrg sysOrg);
-
-    List<SysOrg> findChildOrgs(Integer orgId);
+    /**
+     * 是否需要进行数据权限过滤
+     *
+     * @param depIds
+     * @return boolean
+     */
+    boolean getDataScope(List<String> depIds);
 }

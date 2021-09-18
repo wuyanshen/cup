@@ -114,6 +114,12 @@ public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper, SysOrg> impleme
         return sysOrgList;
     }
 
+    @Override
+    public List<SysOrg> findChildOrgs(Integer orgId) {
+        List<SysOrg> collect = this.list().stream().filter(sysOrg -> StrUtil.isNotBlank(sysOrg.getPids())).filter(sysOrg -> sysOrg.getPids().contains(String.valueOf(orgId))).collect(Collectors.toList());
+        return collect;
+    }
+
     private void setOrgPidsAndLevel(SysOrg sysOrg) {
         QueryWrapper<SysOrg> queryWrapper = new QueryWrapper<>();
         List<SysOrg> orgList = baseMapper.selectList(queryWrapper);

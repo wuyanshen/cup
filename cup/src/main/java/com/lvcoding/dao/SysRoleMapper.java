@@ -41,9 +41,9 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      * @param username
      * @return List<SysRole>
      */
-    List<SysRole> loadRolesByUsername(String username);
+    List<SysRole> loadRolesByUsername(@Param("username") String username);
 
-    int deleteSysRoleMenuById(Integer id);
+    int deleteSysRoleMenuById(@Param("id") Integer id);
 
     List<Integer> findMenuIds(@Param("roleId") Integer id);
 

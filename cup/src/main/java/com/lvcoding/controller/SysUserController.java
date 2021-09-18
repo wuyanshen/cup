@@ -23,6 +23,7 @@ package com.lvcoding.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lvcoding.datascope.DataScope;
 import com.lvcoding.entity.SysUser;
 import com.lvcoding.entity.dto.UserDTO;
 import com.lvcoding.entity.vo.UserVO;
@@ -75,6 +76,7 @@ public class SysUserController {
      * @param page
      * @return com.longyi.util.Res
      */
+    @DataScope
     @CupLog(value = "查询用户列表", type = "1")
     @PreAuthorize("@pm.hasPermission('sys:user:view')")
     @GetMapping("page")

@@ -23,18 +23,13 @@ package com.lvcoding.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
-import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.DataPermissionInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.lvcoding.common.CommonMetaObjectHandler;
-import com.lvcoding.datascope.DataScopeInterceptor;
-import com.lvcoding.tenant.TenantContextHolder;
-import com.lvcoding.tenant.TenantProperties;
-import lombok.AllArgsConstructor;
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.LongValue;
-import net.sf.jsqlparser.expression.StringValue;
+import com.lvcoding.datascope.CupDataPermissionHandler;
+import com.lvcoding.tenant.CupTenantHandler;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -48,80 +43,63 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @description Mybatis配置
  */
 
-@AllArgsConstructor
 @Configuration
-@MapperScan(basePackages = "com.lvcoding.dao")
+@MapperScan("com.lvcoding.dao")
 @EnableTransactionManagement
-public class MybatisPlusConfig {
+public class MybatisPlusConfig  {
 
-    private final TenantProperties tenantProperties;
-
+    /**
+     * mybatis拦截器
+     */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+
+        // 多租户拦截器
+        // TenantLineInnerInterceptor tenantLineInnerInterceptor = new TenantLineInnerInterceptor();
+        // tenantLineInnerInterceptor.setTenantLineHandler(this.tenantLineHandler());
+        // interceptor.addInnerInterceptor(tenantLineInnerInterceptor);
+
+        // 数据权限拦截器
+        DataPermissionInterceptor dataPermissionInterceptor = new DataPermissionInterceptor();
+        dataPermissionInterceptor.setDataPermissionHandler(this.dataPermissionHandler());
+        interceptor.addInnerInterceptor(dataPermissionInterceptor);
+
         // 向Mybatis过滤器链中添加分页拦截器
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         // 防止全表更新与删除插件: BlockAttackInnerInterceptor
-        interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
-        // 多租户拦截器
-        // interceptor.addInnerInterceptor(this.tenantLineInnerInterceptor());
-
-        // 添加数据权限插件
-        interceptor.addInnerInterceptor(new DataScopeInterceptor());
+        // interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
 
         // 还可以添加其它的拦截器
         return interceptor;
     }
 
     /**
-     * 自动填充数据
+     * 注入多租户处理器
      */
     @Bean
-    @ConditionalOnMissingBean(CommonMetaObjectHandler.class)
-    public CommonMetaObjectHandler mateMetaObjectHandler() {
-        return new CommonMetaObjectHandler();
+    @ConditionalOnMissingBean
+    public TenantLineHandler tenantLineHandler() {
+        return new CupTenantHandler();
     }
 
     /**
-     * 新多租户插件配置
+     * 注入权限范围处理器
      */
     @Bean
-    public TenantLineInnerInterceptor tenantLineInnerInterceptor() {
-        return new TenantLineInnerInterceptor(new TenantLineHandler() {
-            /**
-             * 获取租户ID
-             * @return
-             */
-            @Override
-            public Expression getTenantId() {
-                Integer tenant = TenantContextHolder.getTenantId();
-                if (tenant != null) {
-                    return new StringValue(TenantContextHolder.getTenantId() + "");
-                }
-                return new LongValue(1);
-            }
+    @ConditionalOnMissingBean
+    public DataPermissionHandler dataPermissionHandler() {
+        return new CupDataPermissionHandler();
+    }
 
-            /**
-             * 获取多租户的字段名
-             * @return String
-             */
-            @Override
-            public String getTenantIdColumn() {
-                return tenantProperties.getColumn();
-            }
 
-            /**
-             * 过滤不需要根据租户隔离的表
-             * 这是 default 方法,默认返回 false 表示所有表都需要拼多租户条件
-             * @param tableName 表名
-             */
-            @Override
-            public boolean ignoreTable(String tableName) {
-                return tenantProperties.getIgnoreTables().stream().anyMatch(
-                        (t) -> t.equalsIgnoreCase(tableName)
-                );
-            }
-        });
+    /**
+     * 自动填充数据
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public CommonMetaObjectHandler mateMetaObjectHandler() {
+        return new CommonMetaObjectHandler();
     }
 
 }

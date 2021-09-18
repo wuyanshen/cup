@@ -38,7 +38,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        iid, role_name, role_code, sort, status, update_time, create_time, del_flag, remark,
+        id, role_name, role_code, sort, status, update_time, create_time, del_flag, remark,
         create_by, update_by, remark
     </sql>
 
@@ -133,7 +133,7 @@
 
     <!--通过用户名查询权限-->
     <select id="loadRolesByUsername" resultMap="SysRoleMap">
-        select r.id, r.role_code ,r.role_name, r.status
+        select r.id, r.role_code ,r.role_name, r.status, r.data_scope, r.scope_type
         from sys_role r,
         sys_user_role ur,
         sys_user u where r.id = ur.role_id and u.id = ur.user_id
@@ -142,7 +142,7 @@
 
     <!--通过角色id删除关联表-->
     <delete id="deleteSysRoleMenuById">
-        delete from sys_role_menu where role_id = #{roleId}
+        delete from sys_role_menu where role_id = #{id}
     </delete>
 
     <!-- 通过角色id查询菜单id集合-->

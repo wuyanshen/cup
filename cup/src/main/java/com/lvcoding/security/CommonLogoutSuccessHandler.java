@@ -71,8 +71,8 @@ public class CommonLogoutSuccessHandler implements LogoutSuccessHandler {
      * 记录日志
      */
     private void addLog(String username) {
-        SysLog sysLog = SysLogUtils.getSysLog();
-        sysLog.setTitle(username + "用户退出系统");
+        SysLog sysLog = SysLogUtil.getSysLog();
+        sysLog.setTitle("【"+username + "】登出");
         sysLog.setType("1");
         sysLog.setCreateBy(username);
         sysLogService.save(sysLog);
