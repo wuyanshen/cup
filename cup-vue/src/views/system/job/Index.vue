@@ -81,8 +81,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { formatDate } from '@/lib/util'
-import moment from "moment";
 
 export default {
   data() {
@@ -247,10 +245,6 @@ export default {
     // 条件查询
     async handleSearch() {
       this.flush()
-    },
-    // 格式化table日期格式
-    formatDate(row, column) {
-      return formatDate(row, column)
     },
     // 封装分页属性值
     copyPageValue(res) {

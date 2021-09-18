@@ -22,8 +22,8 @@
         <el-table-column align="center" label="序号" type="index" width="50px"></el-table-column>
         <el-table-column align="center" label="租户名称" prop="tenantName"></el-table-column>
         <el-table-column align="center" label="租户编号" prop="tenantId"></el-table-column>
-        <el-table-column align="center" label="创建时间" prop="createTime" :formatter="formatCreateDate"></el-table-column>
-        <el-table-column align="center" label="更新时间" prop="updateTime" :formatter="formatUpdateDate"></el-table-column>
+        <el-table-column align="center" label="创建时间" prop="createTime" :formatter="formatDate"></el-table-column>
+        <el-table-column align="center" label="更新时间" prop="updateTime" :formatter="formatDate"></el-table-column>
         <el-table-column align="center" label="操作" width="300px">
           <template v-slot="scope">
             <el-button size="mini" icon="el-icon-edit" type="text" @click="handleTenantEidt(scope.row)">修改</el-button>
@@ -85,7 +85,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { formatDate } from '@/lib/util'
 
 export default {
   data() {
@@ -185,14 +184,6 @@ export default {
     //修改当前第几页
     handleCurrentChange(current) {
       this.queryPage(this.queryInfo.tenantName, this.page.pageSize, current)
-    },
-    //格式化创建时间
-    formatCreateDate(row, column) {
-      return formatDate(row, column)
-    },
-    //格式化更新时间
-    formatUpdateDate(row, column) {
-      return formatDate(row, column)
     },
     //封装查询条件
     copyQueryValue(tenantName, size, current) {

@@ -38,6 +38,7 @@
                 <el-tag size="mini" v-else type="danger">禁用</el-tag>
               </template>
             </el-table-column>
+            <el-table-column prop="createTime" label="创建时间" :formatter="formatDate" align="center"></el-table-column>
             <el-table-column align="center" label="操作" width="300">
               <template v-slot="scope">
                 <el-button type="text" size="mini" icon="el-icon-key" @click="showReset(scope.row)">重置密码</el-button>

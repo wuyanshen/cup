@@ -96,7 +96,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import IconSelect from '../../components/IconSelect.vue'
+import IconSelect from '../../../components/IconSelect.vue'
 import ElTreeSelect from '@/components/TreeSelect'
 import { castToTree4 } from '@/lib/treeUtil'
 

@@ -10,8 +10,8 @@
         <el-table-column label="流程定义id" align="center" prop="processDefinitionId"></el-table-column>
         <el-table-column label="任务执行id" align="center" prop="executionId"></el-table-column>
         <el-table-column label="处理人" align="center" prop="assignee"></el-table-column>
-        <el-table-column label="任务创建时间" align="center" :formatter="dateFormat" prop="createTime"></el-table-column>
-        <el-table-column label="任务完成时间" align="center" :formatter="dateFormat" prop="endTime"></el-table-column>
+        <el-table-column label="任务创建时间" align="center" :formatter="formatDate" prop="createTime"></el-table-column>
+        <el-table-column label="任务完成时间" align="center" :formatter="formatDate" prop="endTime"></el-table-column>
       </el-table>
       <!-- 分页区 -->
       <el-pagination
@@ -69,14 +69,6 @@ export default {
     handleCurrentChange(current) {
       this.page.current = current;
       this.handleQueryHistoryTaskList();
-    },
-    // 格式化时间
-    dateFormat(row, column, cellValue, index) {
-      const date = row[column.property];
-      if (date === undefined) {
-        return "";
-      }
-      return moment(date).format("YYYY-MM-DD HH:MM:SS");
     },
   }
 };

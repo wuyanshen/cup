@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development') require('./mock')
 // require('./mock')
 // import Mock from './mock'
 import api from '@/api/api'
-import { resetForm,getTreeCheckedKeys,setTreeNodeCheck } from "./lib/util";
+import { formatDate,resetForm,getTreeCheckedKeys,setTreeNodeCheck } from "./lib/util";
 
 
 Vue.config.productionTip = false;
@@ -20,6 +20,7 @@ Vue.use(vueAxios, axios);
 //api接口
 Vue.prototype.$api = api;
 Vue.prototype.resetForm = resetForm;
+Vue.prototype.formatDate = formatDate;
 Vue.prototype.getTreeCheckedKeys = getTreeCheckedKeys;
 Vue.prototype.setTreeNodeCheck = setTreeNodeCheck;
 

@@ -35,6 +35,7 @@
                         <el-tag size="mini" type="danger" v-if="scope.row.status === 0">停用</el-tag>
                     </template>
                 </el-table-column>
+                <el-table-column prop="createTime" label="创建时间" :formatter="formatDate" align="center"></el-table-column>
                 <el-table-column align="center" label="操作">
                     <template v-slot="scope">
                         <el-button type="text" size="mini" icon="el-icon-edit" @click="handleEdit(scope.row)">修改</el-button>

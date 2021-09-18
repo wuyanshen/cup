@@ -25,7 +25,7 @@
             <el-tag v-if="scope.row.status === 0" size="mini" type="danger">无效</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" :formatter="dateFormat" align="center"></el-table-column>
+        <el-table-column prop="createTime" label="创建时间" :formatter="formatDate" align="center"></el-table-column>
         <el-table-column label="操作" width="250" align="center">
           <template v-slot="scope">
             <el-button size="mini" icon="el-icon-edit" type="text" @click="handleEditOrg(scope.row)">修改</el-button>
@@ -110,7 +110,6 @@
 <script>
 import ElTreeSelect from '@/components/TreeSelect'
 import { mapActions } from 'vuex'
-import { formatDate } from '@/lib/util'
 import { castToTree4 } from '@/lib/treeUtil'
 
 export default {
@@ -145,10 +144,6 @@ export default {
   },
   methods: {
     ...mapActions('org', ['orgTree', 'addOrg', 'updateOrg', 'deleteOrg']),
-    // 格式化时间
-    dateFormat(row, column) {
-      return formatDate(row, column);
-    },
     //关闭修改dialog
     orgEditClose() {
       //清空form的值

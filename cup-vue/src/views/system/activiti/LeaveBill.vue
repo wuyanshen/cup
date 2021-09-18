@@ -28,8 +28,8 @@
             <el-tag v-if="scope.row.status === '1'" type="success" size="mini">通过</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="开始时间" prop="startDate" :formatter="dateFormat"></el-table-column>
-        <el-table-column label="结束时间" prop="endDate" :formatter="dateFormat"></el-table-column>
+        <el-table-column label="开始时间" prop="startDate" :formatter="formatDate"></el-table-column>
+        <el-table-column label="结束时间" prop="endDate" :formatter="formatDate"></el-table-column>
         <el-table-column label="操作">
           <template v-slot="scope">
             <el-button size="mini" icon="el-icon-edit" type="primary" @click="handleUpdate(scope.row)">修改</el-button>
@@ -172,14 +172,6 @@ export default {
       this.title = "修改请假";
       this.leaveBillForm = JSON.parse(JSON.stringify(row));
       this.leaveShow = true;
-    },
-    // 格式化时间
-    dateFormat(row, column, cellValue, index) {
-      const date = row[column.property];
-      if (date === undefined) {
-        return "";
-      }
-      return moment(date).format("YYYY-MM-DD");
     },
     handleSizeChange(val) {
       this.page.size = val;

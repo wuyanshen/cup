@@ -15,12 +15,12 @@ const routes = [{
         path: '/',
         name: 'Home',
         redirect: '/welcome',
-        component: () => import('../views/Home.vue'),
+        component: () => import('../views/system/Home.vue'),
         children: [
             {
                 path: 'info',
                 name: 'Info',
-                component: () => import('../views/Info.vue')
+                component: () => import('../views/system/Info.vue')
             },
             ...menuRouter
         ]
@@ -28,11 +28,11 @@ const routes = [{
     {
         path: '/login',
         name: 'login',
-        component: () => import('../views/login/Login.vue'),
+        component: () => import('../views/system/login/Login.vue'),
     },
     {
         path: '*',
-        component: () => import('../views/error/NotFound.vue')
+        component: () => import('../views/system/error/NotFound.vue')
     }
 ]
 

@@ -234,7 +234,7 @@ el-button {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: url('../../assets/images/bg.jpg') no-repeat;
+  background: url('../../../assets/images/bg.jpg') no-repeat;
   background-size: 100% 100%;
 
   .login-footer {

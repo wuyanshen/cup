@@ -34,9 +34,9 @@
                     </template>
                 </el-table-column>
                 <el-table-column align="center" label="创建时间" prop="createTime"
-                                 :formatter="formatCreateDate"></el-table-column>
+                                 :formatter="formatDate"></el-table-column>
                 <el-table-column align="center" label="更新时间" prop="updateTime"
-                                 :formatter="formatUpdateDate"></el-table-column>
+                                 :formatter="formatDate"></el-table-column>
                 <el-table-column align="center" label="操作" width="300px">
                     <template v-slot="scope">
                         <el-button size="mini" icon="el-icon-edit" type="text" @click="handleEdit(scope.row)">修改
@@ -131,7 +131,6 @@
 
 <script>
     import {mapActions} from 'vuex'
-    import {formatDate} from '@/lib/util'
     import {castToTree4} from '@/lib/treeUtil'
 
 
@@ -340,14 +339,6 @@
                 this.page.total = res.data.total;
                 this.page.size = res.data.size;
                 this.page.current = res.data.current;
-            },
-            //格式化创建时间
-            formatCreateDate(row, column) {
-                return formatDate(row, column)
-            },
-            //格式化更新时间
-            formatUpdateDate(row, column) {
-                return formatDate(row, column)
             },
             //修改每页显示条数
             handleSizeChange(size) {

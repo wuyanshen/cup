@@ -126,7 +126,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { formatDate, castDate } from '@/lib/util'
+import { castDate } from '@/lib/util'
 
 export default {
     data() {
@@ -215,10 +215,6 @@ export default {
         async handleSearch() {
             let res = await this.logPage(this.copyQueryValue(this.queryInfo.title, this.queryInfo.type, this.page.pageSize, ''))
             this.copyPageValue(res)
-        },
-        //格式化table日期格式
-        formatDate(row, column) {
-            return formatDate(row, column)
         },
         //封装查询条件
         copyQueryValue(title, type, size, current) {
