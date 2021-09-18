@@ -1,3 +1,10 @@
+###########################################
+#                                         #
+#               主配置文件                 #
+#                                         #
+###########################################
+
+
 server:
   port: 3001
 
@@ -6,7 +13,7 @@ spring:
   application:
     name: cup
   profiles:
-    active: druid,quartz,activiti
+    active: dev
   security:
     loginType: JSON
   rabbitmq:

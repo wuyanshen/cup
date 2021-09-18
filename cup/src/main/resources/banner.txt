@@ -8,8 +8,8 @@ ${AnsiColor.BRIGHT_RED}
              / ___/ / / / __ \
             / /__/ /_/ / /_/ /
             \___/\__,_/ .___/
-                     /_/       V1.0
+                     /_/       V1.3
 
               来一杯咖啡可好~
 
-              https://www.lvcoding.com
+              更多信息访问 https://www.lvcoding.com

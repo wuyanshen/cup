@@ -1,0 +1,126 @@
+###########################################
+#                                         #
+#               开发环境dev                #
+#                                         #
+###########################################
+
+spring:
+
+######################################### 数据源配置 #########################################
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    username: ENC(qPk24c9OuwPT2qYHnLIymA==)
+    password: ENC(xz3XtbFndmSVOsS+CBxqrQ==)
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 连接池配置
+    druid:
+      # 去掉警告: discard long time none received connection.
+      mysql:
+        use-ping-method: false,
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 10
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存时间
+      min-evictable-idle-time-millis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      max-evictable-idle-time-millis: 900000
+      # 配置检测连接是否有效
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开 PSCache，并且指定每个连接上 PSCache 的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的 Filter，去掉后监控界面 SQL 无法统计，wall 用于防火墙
+      # 打开 mergeSql 功能；慢 SQL 记录
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+      # 配置 DruidStatFilter
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: .js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
+      # 配置 DruidStatViewServlet
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        # IP 白名单，没有配置或者为空，则允许所有访问
+        allow:
+        # IP 黑名单，若白名单也存在，则优先使用
+        deny:
+        # 禁用 HTML 中 Reset All 按钮
+        reset-enable: false
+        # 登录用户名/密码
+        login-username:
+        login-password:
+
+######################################### activiti配置 #########################################
+  activiti:
+    # 默认为true。为true表示activiti会对数据库中的表进行更新操作，如果不存在，则进行创建
+    database-schema-update: true
+    # 自动部署验证设置:true-开启（默认）、false-关闭
+    check-process-definitions: false # activti是否自动部署
+    # 是否使用activiti中的act_id_*这4张表，默认true
+    db-identity-used: true
+    # 历史任务存储等级
+    history-level: full
+    # 开启历史记录表
+    db-history-used: true
+
+
+######################################### quartz配置 ############################################
+  # quartz定时任务框架配置
+  quartz:
+    job-store-type: jdbc
+    # 设置覆盖已存在的任务
+    overwrite-existing-jobs: true
+    # 项目启动完成后，等待10秒后开始执行调度器初始化
+    startup-delay: 10s
+    # 设置调度器的名称
+    scheduler-name: adminQuartzScheduler
+    # 设置调度器自动运行
+    auto-startup: true
+    # 项目关闭的时候关闭定时任务线程
+    wait-for-jobs-to-complete-on-shutdown: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            # 超过60s的就不立即执行
+            # 解释：
+            # 如果设置 misfireThreshold: 60000
+            # 我设置15s的情况下，如果我在10:00:00执行了一个任务，下次就是15s，但是如果服务器挂掉，我在10:00:50重新启动服务器，由于任务间隔是15s，所以从00-50s中间会有三个任务超时没有执行（本来应该分别是在15s，30s，45s执行），而超时的时间均小于1min，所以服务器启动以后会立即开启三个quartz线程来执行超时的任务。
+            # 如果设置定时任务1min执行一次，无论如何超时，都是超过1min的，所以不会执行超时任务。
+            misfireThreshold: 1000
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            dataSource: quartzDataSource
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+

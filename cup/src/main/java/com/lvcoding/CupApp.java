@@ -21,6 +21,8 @@ package com.lvcoding;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * @author wuyanshen
@@ -30,6 +32,27 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CupApp {
     public static void main(String[] args) {
-        SpringApplication.run(CupApp.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(CupApp.class, args);
+        ConfigurableEnvironment environment = context.getEnvironment();
+        String port = environment.getProperty("server.port");
+        String env = environment.getProperty("spring.profiles.active");
+
+        System.out.println(
+                "\n" +
+                "\n" +
+                "              _______  ______\n" +
+                "             / ___/ / / / __ \\\n" +
+                "            / /__/ /_/ / /_/ /\n" +
+                "            \\___/\\__,_/ .___/\n" +
+                "                     /_/       V1.3\n" +
+                "\n" +
+                "             cup启动成功！" +
+                "\n" +
+                "             端口：" + port +
+                "\n" +
+                "             环境：" + env +
+                "\n" +
+                "\n"
+        );
     }
 }
