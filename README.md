@@ -143,15 +143,24 @@ nginx配置反向代理，结果请求接口没有反应
 
 ## 版本更新记录
 
-- v1.0  项目最初版本
+- v1.0  
+    - 项目最初版本
 
-- v1.1  springboot版本升级 2.1.10.RELEASE -> 2.3.9.RELEASE
+- v1.1  
+    - springboot版本升级 2.1.10.RELEASE -> 2.3.9.RELEASE
+    - 整合activiti7工作流
+    - bug修复
+    
 
-  ​		 加入activiti7工作流
-
-- v1.2  mybatis-plus版本升级 3.3.2 -> 3.4.3
-
-  ​		 新增实体基类
+- v1.2  
+    - mybatis-plus版本升级 3.3.2 -> 3.4.3
+    - 实体基类
+    - bug修复
+ 
+- v1.3  
+    - 实现数据权限功能
+    - 重构部分vue页面代码
+    - bug修复
 
 ## 请我喝咖啡
 

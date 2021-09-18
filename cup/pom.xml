@@ -32,7 +32,7 @@
     <groupId>com.cup</groupId>
     <artifactId>cup</artifactId>
     <packaging>jar</packaging>
-    <version>1.2</version>
+    <version>1.3</version>
 
     <properties>
         <skipTests>true</skipTests>
