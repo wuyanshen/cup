@@ -109,28 +109,5 @@ public interface CommonConstant {
      */
     String HTTP_METHOD_GET = "get";
 
-    /**
-     * 数据权限：全部数据
-     */
-    String DATA_SCOPE_ALL = "1";
 
-    /**
-     * 数据权限：自定义
-     */
-    String DATA_SCOPE_CUSTOMIZE = "2";
-
-    /**
-     * 数据权限：本部门及子部门
-     */
-    String DATA_SCOPE_DEPARTMENT = "3";
-
-    /**
-     * 数据权限：本部门
-     */
-    String DATA_SCOPE_SELF_DEPARTMENT = "4";
-
-    /**
-     * 数据权限：仅自己
-     */
-    String DATA_SCOPE_SELF = "5";
 }

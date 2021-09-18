@@ -73,8 +73,6 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
                 where = expression;
             }
 
-            // 数据权限类型
-            String type = dataScopeMetaData.getScopeType();
             // 数据权限范围(仅自定义时有值，逗号隔开的部门id)
             String scope = dataScopeMetaData.getDataScope();
             // 用户表别名
@@ -85,14 +83,15 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
             String userColumn = dataScopeMetaData.getUserColumn();
             List<String> orgIds = dataScopeMetaData.getOrgIds();
 
-            switch (type) {
+            switch (dataScopeMetaData.getScopeType()) {
+
                 // 查看全部 where 1=1
-                case CommonConstant.DATA_SCOPE_ALL:
+                case ALL:
                     return where;
 
                 // 自定义
                 // where org_id in (orgIds)
-                case CommonConstant.DATA_SCOPE_CUSTOMIZE:
+                case CUSTOM:
                     // 创建IN 表达式
                     // 创建IN范围的元素集合
                     // 把集合转变为JSQLParser需要的元素列表
@@ -102,7 +101,7 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
 
                 // 本部门及子部门
                 // where org_id in (userOrgId, childOrgIds)
-                case CommonConstant.DATA_SCOPE_DEPARTMENT:
+                case ORGS:
                     // 创建IN 表达式
                     // 创建IN范围的元素集合
                     // 把集合转变为JSQLParser需要的元素列表
@@ -113,7 +112,7 @@ public class CupDataPermissionHandler implements DataPermissionHandler {
 
                 // 本部门
                 // where org_id = userOrgId
-                case CommonConstant.DATA_SCOPE_SELF_DEPARTMENT:
+                case SELF_ORG:
                     Integer orgId = user.getSysUser().getOrgId();
                     EqualsTo selfDepartmentEqualsTo = new EqualsTo();
                     selfDepartmentEqualsTo.setLeftExpression(new Column(this.formatSql(orgAlias, orgColumn)));

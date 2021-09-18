@@ -149,11 +149,12 @@ nginx配置反向代理，结果请求接口没有反应
 - v1.1  
     - springboot版本升级 2.1.10.RELEASE -> 2.3.9.RELEASE
     - 整合activiti7工作流
+    - 整合bpmn.js流程图编辑器
     - bug修复
-    
 
 - v1.2  
     - mybatis-plus版本升级 3.3.2 -> 3.4.3
+    - 登录验证码功能
     - 实体基类
     - bug修复
  

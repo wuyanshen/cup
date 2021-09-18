@@ -1,5 +1,6 @@
 package com.lvcoding;
 
+import com.lvcoding.datascope.DataScopeEnum;
 import com.lvcoding.util.RsaUtil;
 
 import org.junit.Test;
@@ -14,7 +15,8 @@ public class RsaTest {
 
     @Test
     public void rsaTests() {
-        Console.log("aaa");
+        DataScopeEnum dataScopeEnum = DataScopeEnum.getEumByType("6");
+        System.out.println("dataScopeEnum = " + dataScopeEnum);
     }
 
     public static void main(String[] args) throws Exception {
@@ -38,7 +40,7 @@ public class RsaTest {
 
     /**
      * RSA公钥加密
-     * 
+     *
      * @param str       加密字符串
      * @param publicKey 公钥
      * @return 密文
@@ -59,7 +61,7 @@ public class RsaTest {
 
     /**
      * RSA私钥解密
-     * 
+     *
      * @param str        加密字符串
      * @param privateKey 私钥
      * @return 铭文

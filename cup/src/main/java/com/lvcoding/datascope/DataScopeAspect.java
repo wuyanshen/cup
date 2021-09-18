@@ -71,7 +71,7 @@ public class DataScopeAspect {
             List<String> childOrgIds = childOrgs.stream().map(SysOrg::getId).map(String::valueOf).collect(Collectors.toList());
 
             // 将数据权限数据放到ThreadLocal中
-            dataScopeMetaData.setScopeType(type);
+            dataScopeMetaData.setScopeType(DataScopeEnum.getEumByType(type));
             dataScopeMetaData.setDataScope(scope);
             dataScopeMetaData.setUserAlias(dataScope.userAlias());
             dataScopeMetaData.setOrgAlias(dataScope.orgAlias());

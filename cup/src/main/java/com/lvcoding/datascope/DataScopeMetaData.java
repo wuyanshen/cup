@@ -31,7 +31,7 @@ import java.util.List;
 @Data
 public class DataScopeMetaData {
 
-    private String scopeType;
+    private DataScopeEnum scopeType;
     private String dataScope;
     private String userAlias;
     private String orgAlias;
