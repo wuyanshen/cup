@@ -52,7 +52,7 @@ class HttpRequest {
             config => {
                 //添加全局loading...
                 //Spin->iView组件
-                if(!Object.keys(this.queue).length)showLoading()
+                // if(!Object.keys(this.queue).length)showLoading()
 
                 //在所有请求头设置token
                 let token = getToken()
@@ -68,7 +68,7 @@ class HttpRequest {
                 return config
             },
             error => {
-                hideLoading()
+                // hideLoading()
                 return Promise.reject(error)
             }
         )

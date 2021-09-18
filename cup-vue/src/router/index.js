@@ -32,7 +32,7 @@ const routes = [{
     },
     {
         path: '*',
-        component: () => import('../views/NotFound.vue')
+        component: () => import('../views/error/NotFound.vue')
     }
 ]
 

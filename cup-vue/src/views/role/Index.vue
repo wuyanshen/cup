@@ -120,7 +120,7 @@
 
         <!-- 权限dialog -->
         <el-dialog :show-close="false" title="分配权限" :visible.sync="permissionDialog" width="30%">
-            <el-tree ref="tree" :data="treeData" show-checkbox node-key="id" :props="defaultProps"></el-tree>
+            <el-tree ref="tree" :data="treeData" show-checkbox node-key="id" :props="menuTreeProps"></el-tree>
             <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="permissionDialog = false">取 消</el-button>
         <el-button size="mini" type="primary" @click="handlePermissionUpdate">确 定</el-button>
@@ -146,6 +146,10 @@
                 defaultProps: {
                     children: 'children',
                     label: 'orgName'
+                },
+                menuTreeProps: {
+                    children: 'children',
+                    label: 'menuName'
                 },
                 treeData: [],
                 permissionDialog: false,
@@ -201,7 +205,6 @@
             //更新权限
             async handlePermissionUpdate() {
                 this.permissionForm.menuIds = this.$refs.tree.getCheckedKeys().concat(this.$refs.tree.getHalfCheckedKeys())
-                console.log(this.permissionForm)
                 let res = await this.permission(this.permissionForm)
                 if (res.code === 0) {
                     this.permissionDialog = false

@@ -86,7 +86,7 @@ public class SysMenuController {
     @CupLog(type = "2",value = "查询菜单")
     @GetMapping("treePage")
     public Res menuTreePage(SysMenu sysMenu) {
-        List<SysMenu> list = sysMenuService.findAllMenuTree(sysMenu);
+        List<SysMenu> list = sysMenuService.findMenuList(sysMenu);
         return Res.success(list);
     }
 

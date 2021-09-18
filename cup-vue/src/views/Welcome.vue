@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { mapMutations, mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   data() {

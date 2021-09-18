@@ -37,7 +37,8 @@
           <el-checkbox v-model="rememberMe" label="记住我"></el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('loginForm')" style="width: 100%">登录</el-button>
+          <el-button type="primary" v-if="!loading" @click="submitForm('loginForm')" style="width: 100%">登录</el-button>
+          <el-button type="primary" v-if="loading" style="width: 100%" :loading="true">登录中...</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -76,6 +77,7 @@ export default {
       }
     }
     return {
+        loading: false,
       tenantId: '',
       tenants: [],
       imgUrl: '',
@@ -135,6 +137,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
+            this.loading = true;
           // 刷新验证码
           this.getCaptchaImage()
           // 记住我
@@ -157,17 +160,25 @@ export default {
             uuid: this.loginForm.uuid
           }
 
-          let res = await this.login(params)
-          if (res.code === 0) {
-            // 查询用户信息
-            let res = await this.userInfoAction()
-            // 将用户信息放到vuex中
-            this.ADD_USERINFO(res.data)
-            this.$message.success('登录成功~')
-            this.$router.push('/').catch(err => {
-              err
-            })
+          try {
+              let res = await this.login(params)
+              if (res.code === 0) {
+
+                  // 查询用户信息
+                  let res = await this.userInfoAction()
+                  // 将用户信息放到vuex中
+                  this.ADD_USERINFO(res.data)
+                  this.$message.success('登录成功~')
+                  this.$router.push('/').catch(err => {
+                      err
+                  })
+
+              }
+          } catch (e) {
+              this.loading = false;
           }
+
+
         } else {
           return false
         }

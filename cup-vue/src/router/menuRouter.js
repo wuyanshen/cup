@@ -1,29 +1,25 @@
-const menuRouter = [{
-                path: 'about',
-                name: 'about',
-                component: () => import('../views/About.vue')
-            }, {
+const menuRouter = [ {
                 path: 'welcome',
                 name: 'welcome',
                 component: () => import('../views/Welcome.vue')
             }, {
                 path: 'user',
                 name: 'user',
-                component: () => import('../views/user/User.vue')
+                component: () => import('../views/user/Index.vue')
             }, {
                 path: 'menu',
                 name: 'menu',
-                component: () => import('../views/menu/Menu.vue')
+                component: () => import('../views/menu/Index.vue')
             },
             {
                 path: 'role',
                 name: 'role',
-                component: () => import('../views/role/Role.vue')
+                component: () => import('../views/role/Index.vue')
             },
             {
                 path: 'dict',
                 name: 'dict',
-                component: () => import('../views/dict/Dict.vue'),
+                component: () => import('../views/dict/Index.vue'),
                 // children: [
                 //     {
                 //         path: 'data/:typeCode',
@@ -39,22 +35,22 @@ const menuRouter = [{
             {
                 path: 'log',
                 name: 'log',
-                component: () => import('../views/log/Log.vue')
+                component: () => import('../views/log/Index.vue')
             },
             {
                 path: 'org',
                 name: 'org',
-                component: () => import('../views/org/Org.vue')
+                component: () => import('../views/org/Index.vue')
             },
             {
                 path: 'job',
                 name: 'job',
-                component: () => import('../views/job/Job.vue')
+                component: () => import('../views/job/Index.vue')
             },
             {
                 path: 'tenant',
                 name: 'tenant',
-                component: () => import('../views/tenant/Tenant.vue')
+                component: () => import('../views/tenant/Index.vue')
             },
             {
                 path: 'leaveBill',
@@ -79,7 +75,7 @@ const menuRouter = [{
             {
                 path: 'websocket',
                 name: 'websocket',
-                component: () => import('../views/websocket/websocket.vue')
+                component: () => import('../views/websocket/Index.vue')
             }]
 
 export default menuRouter

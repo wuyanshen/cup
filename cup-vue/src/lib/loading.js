@@ -5,11 +5,11 @@ let loading
 
 const startLoading = () => {
     loading = Loading.service({
-      lock: true,
-      text: '正在拼命加载中',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)',
-      fullscreen: true ,
+      lock: false,
+      // text: '正在拼命加载中',
+      // spinner: 'el-icon-loading',
+      // background: 'rgba(0, 0, 0, 0.7)',
+      fullscreen: false ,
      });
 }
 
