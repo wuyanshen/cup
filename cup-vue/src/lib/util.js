@@ -66,3 +66,18 @@ export function resetForm(refName) {
         this.$refs[refName].resetFields();
     }
 }
+
+/** 获取树所有选中的节点id数组 **/
+export function getTreeCheckedKeys(refName) {
+    const halfCheckedKeys = this.$refs[refName].getHalfCheckedKeys()
+    const fullCheckedKeys = this.$refs[refName].getCheckedKeys()
+    return halfCheckedKeys.concat(fullCheckedKeys)
+}
+
+/** 选中tree的节点 **/
+export function setTreeNodeCheck(refName, nodeId) {
+    const node = this.$refs[refName].getNode(nodeId)
+    if (node && node.isLeaf) { // 只让叶子节点选中
+        this.$refs[refName].setChecked(node, true)
+    }
+}
