@@ -15,6 +15,7 @@ const routes = [{
         path: '/',
         name: 'Home',
         redirect: '/welcome',
+        meta: { title: '首页' },
         component: () => import('../views/system/Home.vue'),
         children: [
             {
