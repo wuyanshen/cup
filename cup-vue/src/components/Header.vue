@@ -25,15 +25,18 @@
         </div>
         <!-- 头像 -->
         <div class="avatar">
-            <el-dropdown trigger="click" @command="handleCommand">
+            <div class="img">
+                <el-avatar v-if="avatarUrl" :size="50" :src="avatarUrl"></el-avatar>
+                <el-avatar v-if="!avatarUrl" :size="50" icon="el-icon-user-solid"></el-avatar>
+            </div>
+            <el-dropdown trigger="click" size="medium" @command="handleCommand">
                 <span class="el-dropdown-link">
-                    <el-avatar v-if="avatarUrl" :size="50" :src="avatarUrl"></el-avatar>
-                    <el-avatar v-if="!avatarUrl" :size="50" icon="el-icon-user-solid"></el-avatar>
+                    <span class="username">{{ showName }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="info">个人信息</el-dropdown-item>
                     <el-dropdown-item command="preUpdatePwd">修改密码</el-dropdown-item>
-                    <el-dropdown-item command="signout">退出</el-dropdown-item>
+                    <el-dropdown-item divided command="signout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -135,13 +138,25 @@ export default {
     computed: {
         ...mapState(['siderCollapse']),
         ...mapState({
-            username: state => state.user.username
-        })
+            username: state => state.user.userInfo.username
+        }),
+        ...mapState({
+            nickname: state => state.user.userInfo.nickname
+        }),
+        // 右上角显示的用户名称
+        showName() {
+            if (this.nickname) {
+                return this.nickname
+            } else {
+                return this.username
+            }
+        }
     },
     methods: {
         ...mapActions('user', ['updatePwd', 'userInfoAction', 'pwdCheck', 'logout']),
         ...mapActions('tabs', ['addTab']),
         ...mapMutations(['UPDATE_COLLAPSE']),
+        ...mapMutations('user', ['CLEAR_USERINFO']),
         handleCommand(command) {
             this[command]()
         },
@@ -201,6 +216,9 @@ export default {
                             err
                         })
                         window.sessionStorage.clear()
+                        // 清空vuex中的用户信息
+                        this.CLEAR_USERINFO()
+
                         this.$message({
                             type: 'success',
                             message: '退出成功!'
@@ -299,15 +317,34 @@ export default {
     // 右边的头像
     .avatar {
         height: 60px;
+        width: 190px;
         display: flex;
         align-items: center;
 
         .el-dropdown {
-            height: 50px;
+            height: 60px;
         }
 
-        img {
-            margin-top: 10px;
+        .username {
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .username::before {
+            content: '';
+            background: rgb(13, 255, 0);
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+
+        .img {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding-right: 10px;
         }
     }
 }

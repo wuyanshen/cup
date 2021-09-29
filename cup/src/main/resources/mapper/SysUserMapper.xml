@@ -36,12 +36,14 @@
         <result property="createBy" column="create_by"/>
         <result property="delFlag" column="del_flag"/>
         <result property="remark" column="remark"/>
+        <result property="nickname" column="nickname"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,
         org_id,
         username,
+        nickname,
         password,
         email,
         phone,

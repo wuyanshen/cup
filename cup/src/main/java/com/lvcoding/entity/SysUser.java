@@ -70,6 +70,13 @@ public class SysUser extends BaseEntity {
      */
     @TableField(value = "username")
     private String username;
+
+    /**
+     * 昵称
+     */
+    @TableField(value = "nickname")
+    private String nickname;
+
     /**
      * 密码
      */
