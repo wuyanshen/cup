@@ -148,6 +148,12 @@ export default {
             .tags-li-title {
                 color: #666;
             }
+            .tags-li-icon:hover {
+                background: #999;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+            }
         }
     }
 }
