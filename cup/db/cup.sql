@@ -1,24 +1,4 @@
 /*
- *
- *        Copyright (c) 2021-2015, wuyanshen All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted provided that the following conditions are met:
- *
- *  Redistributions of source code must retain the above copyright notice,
- *  this list of conditions and the following disclaimer.
- *  Redistributions in binary form must reproduce the above copyright
- *  notice, this list of conditions and the following disclaimer in the
- *  documentation and/or other materials provided with the distribution.
- *  Neither the name of the lvcoding.com developer nor the names of its
- *  contributors may be used to endorse or promote products derived from
- *  this software without specific prior written permission.
- *  Author: wuyanshen
- *
- */
-
-
-/*
  Navicat Premium Data Transfer
 
  Source Server         : 本地mysql
@@ -31,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 18/09/2021 15:27:10
+ Date: 29/09/2021 19:19:47
 */
 
 SET NAMES utf8mb4;
@@ -434,6 +414,7 @@ INSERT INTO `act_re_deployment` VALUES ('148607f0-17aa-11ec-be49-a202c84fa83c', 
 INSERT INTO `act_re_deployment` VALUES ('1567612b-fb64-11eb-8ce0-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:54:43.913', NULL, 31, NULL);
 INSERT INTO `act_re_deployment` VALUES ('16528f13-04ba-11ec-9e07-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 17:03:02.629', NULL, 68, NULL);
 INSERT INTO `act_re_deployment` VALUES ('16ba8ecb-0545-11ec-bd58-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 09:38:03.299', NULL, 95, NULL);
+INSERT INTO `act_re_deployment` VALUES ('17b2bac7-1867-11ec-baf2-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:59:19.942', NULL, 205, NULL);
 INSERT INTO `act_re_deployment` VALUES ('17d558ef-04cc-11ec-bc10-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 19:11:56.087', NULL, 87, NULL);
 INSERT INTO `act_re_deployment` VALUES ('1881d0e0-184a-11ec-a773-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:31:45.834', NULL, 191, NULL);
 INSERT INTO `act_re_deployment` VALUES ('1a90668d-03f3-11ec-abb1-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 17:18:39.860', NULL, 54, NULL);
@@ -442,14 +423,18 @@ INSERT INTO `act_re_deployment` VALUES ('1eed26d4-03f2-11ec-91ec-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('1ef60312-0559-11ec-bf7e-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 12:01:27.061', NULL, 107, NULL);
 INSERT INTO `act_re_deployment` VALUES ('2056a4b7-057e-11ec-9070-ca9125d65789', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 16:26:20.774', NULL, 111, NULL);
 INSERT INTO `act_re_deployment` VALUES ('20e5efb2-1846-11ec-a1b3-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:03:21.988', NULL, 185, NULL);
+INSERT INTO `act_re_deployment` VALUES ('21067f43-1865-11ec-8836-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:45:16.596', NULL, 202, NULL);
 INSERT INTO `act_re_deployment` VALUES ('2237b33a-0618-11ec-bc1d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 10:48:46.433', NULL, 116, NULL);
+INSERT INTO `act_re_deployment` VALUES ('22a5ef21-186b-11ec-a2ea-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:28:16.305', NULL, 208, NULL);
 INSERT INTO `act_re_deployment` VALUES ('22f8c613-184d-11ec-983f-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:53:31.910', NULL, 193, NULL);
 INSERT INTO `act_re_deployment` VALUES ('24518c12-04d2-11ec-8831-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 19:55:14.030', NULL, 92, NULL);
 INSERT INTO `act_re_deployment` VALUES ('263295bc-fb65-11eb-92fe-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 20:02:21.510', NULL, 34, NULL);
 INSERT INTO `act_re_deployment` VALUES ('273f0b34-fb5f-11eb-81d0-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:19:26.370', NULL, 20, NULL);
 INSERT INTO `act_re_deployment` VALUES ('2801f804-03ee-11ec-ab3d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 16:43:14.666', NULL, 49, NULL);
+INSERT INTO `act_re_deployment` VALUES ('2893f77a-1862-11ec-ba97-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:24:00.778', NULL, 198, NULL);
 INSERT INTO `act_re_deployment` VALUES ('29e810ad-0403-11ec-8190-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 19:13:37.538', NULL, 65, NULL);
 INSERT INTO `act_re_deployment` VALUES ('2b88a1e0-04bc-11ec-910f-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 17:17:57.159', NULL, 70, NULL);
+INSERT INTO `act_re_deployment` VALUES ('2e7c9070-186d-11ec-9234-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:42:55.161', NULL, 212, NULL);
 INSERT INTO `act_re_deployment` VALUES ('30186f62-0546-11ec-80a9-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 09:45:55.361', NULL, 96, NULL);
 INSERT INTO `act_re_deployment` VALUES ('32c90056-17ac-11ec-9e66-a202c84fa83c', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-17 19:41:29.508', NULL, 174, NULL);
 INSERT INTO `act_re_deployment` VALUES ('32f5803a-04be-11ec-82fb-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 17:32:28.655', NULL, 76, NULL);
@@ -460,6 +445,7 @@ INSERT INTO `act_re_deployment` VALUES ('361e996b-0717-11ec-8970-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('3738ceeb-1851-11ec-9e97-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 15:22:43.901', NULL, 197, NULL);
 INSERT INTO `act_re_deployment` VALUES ('390a9d67-fe69-11eb-8ab6-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-16 16:09:04.675', NULL, 43, NULL);
 INSERT INTO `act_re_deployment` VALUES ('392188ba-184d-11ec-b174-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:54:09.099', NULL, 194, NULL);
+INSERT INTO `act_re_deployment` VALUES ('3a6ab21b-186f-11ec-8bc5-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:57:34.166', NULL, 216, NULL);
 INSERT INTO `act_re_deployment` VALUES ('3a752b27-fe78-11eb-9a55-acde48001122', 'zip流程-20210816175629', NULL, NULL, '', '2021-08-16 17:56:29.522', NULL, 1, NULL);
 INSERT INTO `act_re_deployment` VALUES ('3d086168-fb65-11eb-925c-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 20:02:59.899', NULL, 35, NULL);
 INSERT INTO `act_re_deployment` VALUES ('3df855ab-182e-11ec-8f8a-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 11:12:22.848', NULL, 176, NULL);
@@ -472,7 +458,9 @@ INSERT INTO `act_re_deployment` VALUES ('431887bb-03f3-11ec-bf88-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('4523d665-fb64-11eb-bbd0-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:56:03.962', NULL, 32, NULL);
 INSERT INTO `act_re_deployment` VALUES ('4652d049-04ca-11ec-b250-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 18:58:55.104', NULL, 84, NULL);
 INSERT INTO `act_re_deployment` VALUES ('46faafa8-054c-11ec-a74a-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 10:29:30.736', NULL, 98, NULL);
+INSERT INTO `act_re_deployment` VALUES ('48defa4d-1cdf-11ec-9b86-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-24 10:29:46.659', NULL, 220, NULL);
 INSERT INTO `act_re_deployment` VALUES ('49679245-0713-11ec-aafa-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 16:46:35.815', NULL, 153, NULL);
+INSERT INTO `act_re_deployment` VALUES ('4b9a66a3-186b-11ec-a8d2-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:29:25.008', NULL, 209, NULL);
 INSERT INTO `act_re_deployment` VALUES ('4bcdcf7f-0642-11ec-aa01-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 15:50:34.924', NULL, 121, NULL);
 INSERT INTO `act_re_deployment` VALUES ('4ce9edda-0559-11ec-844c-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 12:02:44.192', NULL, 108, NULL);
 INSERT INTO `act_re_deployment` VALUES ('4ed64974-0641-11ec-85e8-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 15:43:30.603', NULL, 120, NULL);
@@ -485,26 +473,33 @@ INSERT INTO `act_re_deployment` VALUES ('51e50f37-04c4-11ec-a817-0ad7d3971b07', 
 INSERT INTO `act_re_deployment` VALUES ('5288877d-054e-11ec-b4b4-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 10:44:09.152', NULL, 101, NULL);
 INSERT INTO `act_re_deployment` VALUES ('54bf6650-0715-11ec-bc82-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 17:01:13.818', NULL, 157, NULL);
 INSERT INTO `act_re_deployment` VALUES ('566e5894-fb36-11eb-8e45-acde48001122', 'xml流程20210812142716', NULL, NULL, '', '2021-08-12 14:27:16.180', NULL, 1, NULL);
+INSERT INTO `act_re_deployment` VALUES ('56a0bd52-2114-11ec-b5f2-f2a384d66207', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-29 18:59:37.705', NULL, 226, NULL);
 INSERT INTO `act_re_deployment` VALUES ('570dbcc0-fb52-11eb-bebc-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 17:47:43.091', NULL, 9, NULL);
+INSERT INTO `act_re_deployment` VALUES ('58b65910-186d-11ec-ae5d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:44:06.000', NULL, 213, NULL);
 INSERT INTO `act_re_deployment` VALUES ('5ced84b5-04c9-11ec-b630-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 18:52:23.538', NULL, 82, NULL);
 INSERT INTO `act_re_deployment` VALUES ('5d66b3ee-0643-11ec-a01d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 15:58:14.010', NULL, 127, NULL);
 INSERT INTO `act_re_deployment` VALUES ('5d91b4b8-1846-11ec-968d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:05:03.780', NULL, 186, NULL);
 INSERT INTO `act_re_deployment` VALUES ('5ecfaecb-04c5-11ec-8c5b-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 18:23:48.711', NULL, 79, NULL);
+INSERT INTO `act_re_deployment` VALUES ('63603e8e-1868-11ec-8f12-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:08:36.409', NULL, 206, NULL);
+INSERT INTO `act_re_deployment` VALUES ('65304b9b-1865-11ec-926c-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:47:10.957', NULL, 203, NULL);
 INSERT INTO `act_re_deployment` VALUES ('69e3d8d7-04c9-11ec-8df0-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 18:52:45.284', NULL, 83, NULL);
 INSERT INTO `act_re_deployment` VALUES ('6cdffe0d-04c5-11ec-a6d4-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 18:24:12.303', NULL, 80, NULL);
 INSERT INTO `act_re_deployment` VALUES ('6cf26327-1431-11ec-bbd5-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-13 09:25:05.387', NULL, 166, NULL);
 INSERT INTO `act_re_deployment` VALUES ('71aaaafc-03ef-11ec-b9f8-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 16:52:28.000', NULL, 50, NULL);
 INSERT INTO `act_re_deployment` VALUES ('71ef0021-fb61-11eb-ade0-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:35:50.639', NULL, 26, NULL);
 INSERT INTO `act_re_deployment` VALUES ('734559d3-fe77-11eb-9a55-acde48001122', 'zip流程-20210816175055', NULL, NULL, '', '2021-08-16 17:50:55.342', NULL, 1, NULL);
+INSERT INTO `act_re_deployment` VALUES ('74691c12-186d-11ec-8419-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:44:52.463', NULL, 214, NULL);
 INSERT INTO `act_re_deployment` VALUES ('74cc4a5c-06e7-11ec-8d3d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 11:32:50.688', NULL, 143, NULL);
 INSERT INTO `act_re_deployment` VALUES ('74efd669-fb5c-11eb-bdfc-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:00:08.223', NULL, 15, NULL);
 INSERT INTO `act_re_deployment` VALUES ('76183eb4-fb5e-11eb-9804-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:14:29.160', NULL, 18, NULL);
 INSERT INTO `act_re_deployment` VALUES ('78e767cc-0659-11ec-89ab-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 18:36:29.072', NULL, 139, NULL);
 INSERT INTO `act_re_deployment` VALUES ('7a4a6696-fb4a-11eb-a7c7-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 16:51:26.241', NULL, 3, NULL);
+INSERT INTO `act_re_deployment` VALUES ('7a587547-2115-11ec-88e2-f2a384d66207', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-29 19:07:46.982', NULL, 227, NULL);
 INSERT INTO `act_re_deployment` VALUES ('7d5f8c8b-1840-11ec-a106-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 13:23:00.160', NULL, 183, NULL);
 INSERT INTO `act_re_deployment` VALUES ('7dbd5376-fb5a-11eb-bfd0-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 18:46:03.939', NULL, 11, NULL);
 INSERT INTO `act_re_deployment` VALUES ('7e561588-fc0c-11eb-867d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-13 16:00:15.343', NULL, 37, NULL);
 INSERT INTO `act_re_deployment` VALUES ('7f99d31e-fb68-11eb-bad3-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 20:26:20.042', NULL, 36, NULL);
+INSERT INTO `act_re_deployment` VALUES ('7fdac693-1ff7-11ec-97a4-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-28 09:00:40.300', NULL, 221, NULL);
 INSERT INTO `act_re_deployment` VALUES ('834e15f3-1847-11ec-a05e-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:13:16.579', NULL, 187, NULL);
 INSERT INTO `act_re_deployment` VALUES ('85100849-060b-11ec-827b-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 09:18:28.808', NULL, 114, NULL);
 INSERT INTO `act_re_deployment` VALUES ('852d41f6-03f1-11ec-9a43-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 17:07:19.737', NULL, 51, NULL);
@@ -515,6 +510,7 @@ INSERT INTO `act_re_deployment` VALUES ('881297e4-0646-11ec-8d28-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('88cdd627-0556-11ec-b3e3-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 11:42:56.182', NULL, 104, NULL);
 INSERT INTO `act_re_deployment` VALUES ('899ac4d0-0712-11ec-8856-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 16:41:13.990', NULL, 152, NULL);
 INSERT INTO `act_re_deployment` VALUES ('8ad8d830-03df-11ec-adb6-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 14:58:37.945', NULL, 47, NULL);
+INSERT INTO `act_re_deployment` VALUES ('8d314967-2115-11ec-a7f6-f2a384d66207', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-29 19:08:18.725', NULL, 228, NULL);
 INSERT INTO `act_re_deployment` VALUES ('8d68f03e-0644-11ec-9a0a-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 16:06:44.121', NULL, 130, NULL);
 INSERT INTO `act_re_deployment` VALUES ('8d8e56bc-0701-11ec-b97a-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 14:39:39.248', NULL, 148, NULL);
 INSERT INTO `act_re_deployment` VALUES ('8fd83f32-fb63-11eb-81b4-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:50:59.586', NULL, 30, NULL);
@@ -531,18 +527,23 @@ INSERT INTO `act_re_deployment` VALUES ('9a09da49-0650-11ec-94bc-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('9d705577-fe77-11eb-9a55-acde48001122', 'zip流程-20210816175206', NULL, NULL, '', '2021-08-16 17:52:06.088', NULL, 1, NULL);
 INSERT INTO `act_re_deployment` VALUES ('9fdd70d0-1153-11ec-829d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-09 17:52:20.234', NULL, 163, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a146b456-1474-11ec-ac1c-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-13 17:26:09.472', NULL, 168, NULL);
+INSERT INTO `act_re_deployment` VALUES ('a2bcc1ee-204e-11ec-9eda-027983a1b500', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-28 19:24:24.339', NULL, 222, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a31699ed-03f9-11ec-93ad-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 18:05:25.891', NULL, 60, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a3437d30-04ba-11ec-95c8-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 17:06:59.093', NULL, 69, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a4ca15a0-fb4e-11eb-83f5-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 17:21:15.541', NULL, 4, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a51abd1a-183c-11ec-a3b4-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 12:55:28.827', NULL, 179, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a5a89f94-fb57-11eb-af62-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 18:25:42.446', NULL, 10, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a7008db5-04d1-11ec-b185-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 19:51:43.785', NULL, 91, NULL);
+INSERT INTO `act_re_deployment` VALUES ('a93dcda7-1876-11ec-8fe1-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 19:50:46.568', NULL, 218, NULL);
 INSERT INTO `act_re_deployment` VALUES ('a991313b-fe77-11eb-9a55-acde48001122', 'zip流程-20210816175226', NULL, NULL, '', '2021-08-16 17:52:26.436', NULL, 1, NULL);
+INSERT INTO `act_re_deployment` VALUES ('a9bb6b7c-2113-11ec-b4ab-f2a384d66207', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-29 18:54:47.656', NULL, 225, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ab40b849-1848-11ec-be64-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:21:33.105', NULL, 188, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ab4666c3-04cc-11ec-9acb-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 19:16:03.472', NULL, 88, NULL);
+INSERT INTO `act_re_deployment` VALUES ('ac3db79a-1862-11ec-9e7f-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:27:41.665', NULL, 199, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ad486999-04d2-11ec-8470-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 19:59:03.817', NULL, 93, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ad71be63-0647-11ec-a011-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 16:29:06.352', NULL, 135, NULL);
 INSERT INTO `act_re_deployment` VALUES ('adbc9c63-0642-11ec-81d6-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 15:53:19.325', NULL, 122, NULL);
+INSERT INTO `act_re_deployment` VALUES ('add6ed9c-20c6-11ec-a997-f2a384d66207', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-29 09:43:43.110', NULL, 223, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ae9ae084-17a9-11ec-b73d-a202c84fa83c', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-17 19:23:28.753', NULL, 171, NULL);
 INSERT INTO `act_re_deployment` VALUES ('af688004-fb62-11eb-b82d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:44:43.294', NULL, 29, NULL);
 INSERT INTO `act_re_deployment` VALUES ('b0e73e7f-fe77-11eb-9a55-acde48001122', 'zip流程-20210816175238', NULL, NULL, '', '2021-08-16 17:52:38.744', NULL, 1, NULL);
@@ -556,6 +557,7 @@ INSERT INTO `act_re_deployment` VALUES ('b7b8b173-fe77-11eb-9a55-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('b8d51052-063f-11ec-a527-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 15:32:09.451', NULL, 119, NULL);
 INSERT INTO `act_re_deployment` VALUES ('b92524e2-0642-11ec-95c5-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 15:53:38.497', NULL, 123, NULL);
 INSERT INTO `act_re_deployment` VALUES ('b977cddc-0558-11ec-b143-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 11:58:36.781', NULL, 106, NULL);
+INSERT INTO `act_re_deployment` VALUES ('be51f105-1864-11ec-8d91-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:42:30.959', NULL, 201, NULL);
 INSERT INTO `act_re_deployment` VALUES ('c0abe464-fe63-11eb-b115-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-16 15:29:55.208', NULL, 42, NULL);
 INSERT INTO `act_re_deployment` VALUES ('c0cac0b3-fb5f-11eb-b4a5-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:23:43.872', NULL, 22, NULL);
 INSERT INTO `act_re_deployment` VALUES ('c0d9c915-1849-11ec-8d07-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:29:18.813', NULL, 189, NULL);
@@ -566,6 +568,7 @@ INSERT INTO `act_re_deployment` VALUES ('c551797e-03f3-11ec-9e12-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('c553db3d-03df-11ec-8901-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 15:00:16.423', NULL, 48, NULL);
 INSERT INTO `act_re_deployment` VALUES ('c6e4a632-03ff-11ec-9661-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 18:49:22.935', NULL, 63, NULL);
 INSERT INTO `act_re_deployment` VALUES ('c6e71b4e-0644-11ec-b0b8-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 16:08:20.577', NULL, 131, NULL);
+INSERT INTO `act_re_deployment` VALUES ('c7c5660b-186c-11ec-9bd0-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:40:02.828', NULL, 211, NULL);
 INSERT INTO `act_re_deployment` VALUES ('cb262595-1839-11ec-82c6-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 12:35:04.149', NULL, 178, NULL);
 INSERT INTO `act_re_deployment` VALUES ('cd6443ff-110d-11ec-a173-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-09 09:32:31.919', NULL, 160, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ce391f05-03fa-11ec-aed2-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 18:13:47.757', NULL, 61, NULL);
@@ -575,14 +578,19 @@ INSERT INTO `act_re_deployment` VALUES ('cf051b01-183e-11ec-80c0-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('d1282806-fb4f-11eb-932d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 17:29:39.468', NULL, 6, NULL);
 INSERT INTO `act_re_deployment` VALUES ('d351a90e-1431-11ec-8bad-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-13 09:27:57.229', NULL, 167, NULL);
 INSERT INTO `act_re_deployment` VALUES ('d5cdd2ca-fb60-11eb-86be-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:31:28.721', NULL, 24, NULL);
+INSERT INTO `act_re_deployment` VALUES ('d813c35c-1865-11ec-b482-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:50:23.708', NULL, 204, NULL);
 INSERT INTO `act_re_deployment` VALUES ('da7de7f7-184f-11ec-83b4-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 15:12:58.824', NULL, 195, NULL);
 INSERT INTO `act_re_deployment` VALUES ('dbb0db9f-184a-11ec-a920-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 14:37:13.362', NULL, 192, NULL);
+INSERT INTO `act_re_deployment` VALUES ('dc7ab317-20de-11ec-abbf-f2a384d66207', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-29 12:36:49.455', NULL, 224, NULL);
+INSERT INTO `act_re_deployment` VALUES ('ddf6e781-1862-11ec-8434-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 17:29:05.050', NULL, 200, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e16228f9-054d-11ec-9faf-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 10:40:59.323', NULL, 100, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e255df47-fb61-11eb-ad2e-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 19:38:59.241', NULL, 27, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e2d89b6f-04c4-11ec-9061-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 18:20:20.728', NULL, 78, NULL);
+INSERT INTO `act_re_deployment` VALUES ('e32a35f9-1874-11ec-9135-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 19:38:04.763', NULL, 217, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e3643385-110b-11ec-b59b-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-09 09:18:49.819', NULL, 159, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e414085e-1475-11ec-b78c-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-13 17:35:10.991', NULL, 169, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e436a220-0618-11ec-8779-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 10:54:11.904', NULL, 117, NULL);
+INSERT INTO `act_re_deployment` VALUES ('e446087c-1b49-11ec-bf79-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-22 10:07:51.674', NULL, 219, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e498c59d-04bd-11ec-af0d-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 17:30:17.189', NULL, 74, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e507d525-0662-11ec-8701-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 19:43:55.993', NULL, 141, NULL);
 INSERT INTO `act_re_deployment` VALUES ('e520c8d2-183f-11ec-b0be-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 13:18:44.734', NULL, 182, NULL);
@@ -602,15 +610,18 @@ INSERT INTO `act_re_deployment` VALUES ('ec92999b-fb5e-11eb-9344-acde48001122', 
 INSERT INTO `act_re_deployment` VALUES ('ecf2ada3-0714-11ec-ae20-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 16:58:19.658', NULL, 155, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ed082029-17a8-11ec-93f3-a202c84fa83c', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-17 19:18:03.817', NULL, 170, NULL);
 INSERT INTO `act_re_deployment` VALUES ('ed0d88f0-0645-11ec-8b13-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 16:16:34.077', NULL, 133, NULL);
+INSERT INTO `act_re_deployment` VALUES ('ee6de759-186b-11ec-939b-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:33:58.184', NULL, 210, NULL);
 INSERT INTO `act_re_deployment` VALUES ('eff0a2d6-0609-11ec-9968-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 09:07:09.123', NULL, 113, NULL);
 INSERT INTO `act_re_deployment` VALUES ('eff24cd2-fe73-11eb-9a55-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-16 17:25:46.506', NULL, 44, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f0a3ff13-fb35-11eb-8e45-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-12 14:24:25.401', NULL, 1, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f0bb26ce-1850-11ec-a6cc-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 15:20:45.641', NULL, 196, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f1f48c6d-03f1-11ec-abba-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 17:10:22.270', NULL, 52, NULL);
+INSERT INTO `act_re_deployment` VALUES ('f3957153-186a-11ec-b9df-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:26:57.343', NULL, 207, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f42b43be-0710-11ec-bdac-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-27 16:29:53.793', NULL, 149, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f718731f-0644-11ec-b421-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 16:09:41.383', NULL, 132, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f853ca49-03d9-11ec-827a-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-23 14:18:44.978', NULL, 46, NULL);
 INSERT INTO `act_re_deployment` VALUES ('f95af03e-04b9-11ec-a2e4-0ad7d3971b07', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-24 17:02:14.002', NULL, 67, NULL);
+INSERT INTO `act_re_deployment` VALUES ('fd1f2049-186d-11ec-be9c-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 18:48:41.830', NULL, 215, NULL);
 INSERT INTO `act_re_deployment` VALUES ('fd85d17f-0618-11ec-bd5a-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-26 10:54:54.367', NULL, 118, NULL);
 INSERT INTO `act_re_deployment` VALUES ('fe363dbb-0576-11ec-a999-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-08-25 15:35:17.019', NULL, 109, NULL);
 INSERT INTO `act_re_deployment` VALUES ('fe46dba9-1841-11ec-bd3d-acde48001122', 'SpringAutoDeployment', NULL, NULL, '', '2021-09-18 13:33:45.870', NULL, 184, NULL);
@@ -1221,7 +1232,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- Records of qrtz_scheduler_state
 -- ----------------------------
 BEGIN;
-INSERT INTO `qrtz_scheduler_state` VALUES ('adminQuartzScheduler', 'localhost1631949764475', 1631950030574, 10000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('adminQuartzScheduler', 'localhost1632913699636', 1632914382840, 10000);
 COMMIT;
 
 -- ----------------------------
@@ -1423,7 +1434,7 @@ CREATE TABLE `sys_log` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `tenant_id` int(11) DEFAULT '1' COMMENT '租户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2117 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=2288 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
 
 -- ----------------------------
 -- Records of sys_log
@@ -1445,6 +1456,177 @@ INSERT INTO `sys_log` VALUES (2113, '1', '【jl】登出', '127.0.0.1', '内网I
 INSERT INTO `sys_log` VALUES (2114, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 15:14:32', '2021-09-18 15:14:32', 0, 'jl', NULL, NULL, 1);
 INSERT INTO `sys_log` VALUES (2115, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 15:23:38', '2021-09-18 15:23:38', 0, 'jl', NULL, NULL, 1);
 INSERT INTO `sys_log` VALUES (2116, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 15:23:44', '2021-09-18 15:23:44', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2117, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 15:33:44', '2021-09-18 15:33:44', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2118, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 15:33:52', '2021-09-18 15:33:52', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2119, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 15:33:59', '2021-09-18 15:33:59', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2120, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 15:34:07', '2021-09-18 15:34:07', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2121, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631878063000,\"sort\":1,\"dataScope\":\"3,4\",\"delFlag\":0,\"createTime\":1584981146000,\"scopeType\":\"1\",\"roleCode\":\"admin\",\"roleName\":\"管理员11\",\"id\":1,\"status\":1}', 46, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 15:48:04', '2021-09-18 15:48:04', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2122, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631951284000,\"sort\":1,\"dataScope\":\"3,4\",\"delFlag\":0,\"createTime\":1584981146000,\"scopeType\":\"1\",\"updateBy\":\"admin\",\"roleCode\":\"admin\",\"roleName\":\"管理员\",\"id\":1,\"status\":1}', 3, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 15:48:10', '2021-09-18 15:48:10', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2123, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"tt\",\"roleName\":\"tt\",\"status\":1}', 52, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:17:34', '2021-09-18 16:17:34', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2124, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/3', 'DELETE', '3', 45, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:17:39', '2021-09-18 16:17:39', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2125, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"bb\",\"roleName\":\"bb\",\"status\":0}', 48, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:18:07', '2021-09-18 16:18:07', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2126, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 16:18:17', '2021-09-18 16:18:17', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2127, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/4', 'DELETE', '4', 10, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:18:22', '2021-09-18 16:18:22', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2128, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":111,\"roleCode\":\"bb\",\"roleName\":\"bb\",\"status\":1}', 17, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:18:29', '2021-09-18 16:18:29', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2129, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631953109000,\"sort\":111,\"delFlag\":0,\"createTime\":1631953109000,\"roleCode\":\"bb22\",\"roleName\":\"bb22\",\"id\":5,\"status\":1}', 49, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:18:38', '2021-09-18 16:18:38', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2130, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631953118000,\"sort\":111,\"delFlag\":0,\"createTime\":1631953109000,\"updateBy\":\"admin\",\"roleCode\":\"bb22\",\"roleName\":\"bb22\",\"id\":5,\"status\":0}', 9, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:18:43', '2021-09-18 16:18:43', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2131, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631953123000,\"sort\":111,\"delFlag\":0,\"createTime\":1631953109000,\"updateBy\":\"admin\",\"roleCode\":\"bb22\",\"roleName\":\"bb22\",\"id\":5,\"status\":1}', 7, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:18:49', '2021-09-18 16:18:49', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2132, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"aa\",\"roleName\":\"aa\",\"status\":1}', 5, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:19:10', '2021-09-18 16:19:10', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2133, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"c\",\"roleName\":\"c\",\"status\":1}', 3, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:19:18', '2021-09-18 16:19:18', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2134, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"d\",\"roleName\":\"d\",\"status\":1}', 3, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:19:23', '2021-09-18 16:19:23', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2135, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/8', 'DELETE', '8', 120, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:19:29', '2021-09-18 16:19:29', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2136, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/7', 'DELETE', '7', 43, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:19:46', '2021-09-18 16:19:46', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2137, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/6', 'DELETE', '6', 4, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:20:24', '2021-09-18 16:20:24', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2138, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/5', 'DELETE', '5', 42, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:20:27', '2021-09-18 16:20:27', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2139, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"a\",\"roleName\":\"a\",\"status\":1}', 8, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:20:33', '2021-09-18 16:20:33', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2140, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"b\",\"roleName\":\"b\",\"status\":1}', 7, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:20:37', '2021-09-18 16:20:37', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2141, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"c\",\"roleName\":\"c\",\"status\":1}', 4, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:20:41', '2021-09-18 16:20:41', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2142, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"d\",\"roleName\":\"d\",\"status\":1}', 4, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:20:45', '2021-09-18 16:20:45', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2143, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/12', 'DELETE', '12', 44, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:20:52', '2021-09-18 16:20:52', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2144, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"e\",\"roleName\":\"e\",\"status\":1}', 41, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:21:40', '2021-09-18 16:21:40', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2145, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/13', 'DELETE', '13', 44, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:21:44', '2021-09-18 16:21:44', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2146, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"e\",\"roleName\":\"e\",\"status\":1}', 5, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:21:57', '2021-09-18 16:21:57', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2147, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/14', 'DELETE', '14', 13, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:22:08', '2021-09-18 16:22:08', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2148, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"e\",\"roleName\":\"e\",\"status\":1}', 43, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:24:13', '2021-09-18 16:24:13', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2149, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/15', 'DELETE', '15', 42, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:24:40', '2021-09-18 16:24:40', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2150, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"e\",\"roleName\":\"e\",\"status\":1}', 44, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:25:23', '2021-09-18 16:25:23', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2151, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"roleCode\":\"e\",\"roleName\":\"e\",\"status\":1}', 5, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:26:09', '2021-09-18 16:26:09', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2152, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/17', 'DELETE', '17', 44, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:26:15', '2021-09-18 16:26:15', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2153, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/16', 'DELETE', '16', 56, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:26:25', '2021-09-18 16:26:25', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2154, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631953233000,\"sort\":0,\"delFlag\":0,\"createTime\":1631953233000,\"scopeType\":\"1\",\"roleCode\":\"a\",\"roleName\":\"a\",\"id\":9,\"status\":1}', 43, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:41:06', '2021-09-18 16:41:06', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2155, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631953237000,\"sort\":0,\"delFlag\":0,\"createTime\":1631953237000,\"scopeType\":\"5\",\"roleCode\":\"b\",\"roleName\":\"b\",\"id\":10,\"status\":1}', 4, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:41:14', '2021-09-18 16:41:14', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2156, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/9', 'DELETE', '9', 8, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:41:24', '2021-09-18 16:41:24', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2157, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/10', 'DELETE', '10', 9, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:41:29', '2021-09-18 16:41:29', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2158, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/11', 'DELETE', '11', 4, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 16:41:31', '2021-09-18 16:41:31', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2159, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631949212000,\"sort\":2,\"dataScope\":\"3,4\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"5\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 8, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:41:39', '2021-09-18 16:41:39', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2160, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 16:41:42', '2021-09-18 16:41:42', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2161, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 16:41:49', '2021-09-18 16:41:49', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2162, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 16:42:10', '2021-09-18 16:42:10', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2163, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 16:42:25', '2021-09-18 16:42:25', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2164, '3', '新增角色', '127.0.0.1', '内网IP', '/roles', 'POST', '{\"sort\":0,\"scopeType\":\"2\",\"roleCode\":\"t\",\"roleName\":\"t\",\"status\":1}', 50, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:58:43', '2021-09-18 16:58:43', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2165, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631955523000,\"sort\":0,\"delFlag\":0,\"createTime\":1631955523000,\"scopeType\":\"1\",\"roleCode\":\"t\",\"roleName\":\"t\",\"id\":18,\"status\":1}', 49, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:59:12', '2021-09-18 16:59:12', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2166, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631955551000,\"sort\":0,\"delFlag\":0,\"createTime\":1631955523000,\"scopeType\":\"2\",\"updateBy\":\"admin\",\"roleCode\":\"t\",\"roleName\":\"t\",\"id\":18,\"status\":1}', 9, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 16:59:30', '2021-09-18 16:59:30', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2167, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631955570000,\"sort\":0,\"dataScope\":\"1,2,3,4,6,7\",\"delFlag\":0,\"createTime\":1631955523000,\"scopeType\":\"2\",\"updateBy\":\"admin\",\"roleCode\":\"t\",\"roleName\":\"t\",\"id\":18,\"status\":1}', 27, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:02:49', '2021-09-18 17:02:49', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2168, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631954499000,\"sort\":2,\"dataScope\":\"5,8\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"2\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 47, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:06:08', '2021-09-18 17:06:08', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2169, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 17:06:24', '2021-09-18 17:06:24', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2170, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:06:35', '2021-09-18 17:06:35', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2171, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 17:06:46', '2021-09-18 17:06:46', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2172, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:06:59', '2021-09-18 17:06:59', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2173, '3', '删除角色', '127.0.0.1', '内网IP', '/roles/18', 'DELETE', '18', 8, '{\"code\":0,\"msg\":\"请求成功\",\"data\":false}', '2021-09-18 17:08:51', '2021-09-18 17:08:51', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2174, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631955968000,\"sort\":2,\"dataScope\":\"5,8\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"1\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 24, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:10:05', '2021-09-18 17:10:05', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2175, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631956205000,\"sort\":2,\"dataScope\":\"\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"3\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 8, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:11:05', '2021-09-18 17:11:05', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2176, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631956265000,\"sort\":2,\"dataScope\":\"1,2,3,4,6,7\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"2\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 8, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:11:22', '2021-09-18 17:11:22', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2177, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631956282000,\"sort\":2,\"dataScope\":\"1,2,3,4\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"2\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 4, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:11:38', '2021-09-18 17:11:38', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2178, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631951290000,\"sort\":1,\"dataScope\":\"\",\"delFlag\":0,\"createTime\":1584981146000,\"scopeType\":\"1\",\"updateBy\":\"admin\",\"roleCode\":\"admin\",\"roleName\":\"管理员\",\"id\":1,\"status\":1}', 9, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:11:58', '2021-09-18 17:11:58', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2179, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:25:03', '2021-09-18 17:25:03', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2180, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 17:30:33', '2021-09-18 17:30:33', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2181, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:30:41', '2021-09-18 17:30:41', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2182, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 17:48:04', '2021-09-18 17:48:04', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2183, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:48:13', '2021-09-18 17:48:13', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2184, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631956298000,\"sort\":2,\"dataScope\":\"\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"3\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 13, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 17:50:39', '2021-09-18 17:50:39', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2185, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 17:50:44', '2021-09-18 17:50:44', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2186, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:50:52', '2021-09-18 17:50:52', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2187, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 17:59:40', '2021-09-18 17:59:40', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2188, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 17:59:45', '2021-09-18 17:59:45', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2189, '1', '【jl】登录', '0:0:0:0:0:0:0:1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:05:37', '2021-09-18 18:05:37', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2190, '1', '【jl】登录', '0:0:0:0:0:0:0:1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:06:02', '2021-09-18 18:06:02', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2191, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:12:59', '2021-09-18 18:12:59', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2192, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:13:10', '2021-09-18 18:13:10', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2193, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:18:45', '2021-09-18 18:18:45', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2194, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:18:53', '2021-09-18 18:18:53', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2195, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:21:28', '2021-09-18 18:21:28', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2196, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:21:36', '2021-09-18 18:21:36', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2197, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631958639000,\"sort\":2,\"dataScope\":\"\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"4\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 7, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 18:21:51', '2021-09-18 18:21:51', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2198, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:21:55', '2021-09-18 18:21:55', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2199, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:22:03', '2021-09-18 18:22:03', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2200, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:22:21', '2021-09-18 18:22:21', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2201, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:22:44', '2021-09-18 18:22:44', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2202, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631960511000,\"sort\":2,\"dataScope\":\"\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"5\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 2, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 18:22:52', '2021-09-18 18:22:52', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2203, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:22:56', '2021-09-18 18:22:56', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2204, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:23:03', '2021-09-18 18:23:03', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2205, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:45:29', '2021-09-18 18:45:29', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2206, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:45:35', '2021-09-18 18:45:35', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2207, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:45:39', '2021-09-18 18:45:39', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2208, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:45:45', '2021-09-18 18:45:45', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2209, '3', '更新角色', '127.0.0.1', '内网IP', '/roles', 'PUT', '{\"updateTime\":1631960572000,\"sort\":2,\"dataScope\":\"\",\"delFlag\":0,\"createTime\":1584981195000,\"scopeType\":\"4\",\"updateBy\":\"admin\",\"roleCode\":\"common\",\"roleName\":\"普通用户\",\"id\":2,\"status\":1}', 7, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-18 18:46:10', '2021-09-18 18:46:10', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2210, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:46:13', '2021-09-18 18:46:13', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2211, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:46:22', '2021-09-18 18:46:22', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2212, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:49:21', '2021-09-18 18:49:21', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2213, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:49:28', '2021-09-18 18:49:28', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2214, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:50:14', '2021-09-18 18:50:14', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2215, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:50:17', '2021-09-18 18:50:17', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2216, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:50:42', '2021-09-18 18:50:42', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2217, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:50:46', '2021-09-18 18:50:46', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2218, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:51:12', '2021-09-18 18:51:12', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2219, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:51:15', '2021-09-18 18:51:15', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2220, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:53:49', '2021-09-18 18:53:49', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2221, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:53:56', '2021-09-18 18:53:56', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2222, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 18:57:58', '2021-09-18 18:57:58', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2223, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 18:58:25', '2021-09-18 18:58:25', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2224, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 19:16:28', '2021-09-18 19:16:28', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2225, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 19:16:32', '2021-09-18 19:16:32', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2226, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 19:38:43', '2021-09-18 19:38:43', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2227, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-18 19:38:48', '2021-09-18 19:38:48', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2228, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-18 19:51:30', '2021-09-18 19:51:30', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2229, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-22 10:08:11', '2021-09-22 10:08:11', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2230, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-22 10:08:35', '2021-09-22 10:08:35', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2231, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-22 10:08:49', '2021-09-22 10:08:49', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2232, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-24 10:31:17', '2021-09-24 10:31:17', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2233, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-24 14:39:14', '2021-09-24 14:39:14', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2234, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-28 09:02:03', '2021-09-28 09:02:03', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2235, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-28 10:26:43', '2021-09-28 10:26:43', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2236, '2', '修改菜单', '127.0.0.1', '内网IP', '/menus', 'PUT', '{\"icon\":\"el-icon-s-platform\",\"menuName\":\"数据源监控\",\"permission\":\"\",\"pid\":42,\"updateTime\":1631235692000,\"delFlag\":0,\"type\":\"0\",\"url\":\"/monitor/druid\",\"createBy\":\"admin\",\"children\":[],\"createTime\":1631235621000,\"updateBy\":\"admin\",\"id\":92,\"status\":1}', 290, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-28 10:28:51', '2021-09-28 10:28:51', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2237, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-28 19:24:51', '2021-09-28 19:24:51', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2238, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-28 19:27:16', '2021-09-28 19:27:16', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2239, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-28 19:27:19', '2021-09-28 19:27:19', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2240, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-28 19:32:29', '2021-09-28 19:32:29', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2241, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-28 19:34:13', '2021-09-28 19:34:13', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2242, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 09:44:30', '2021-09-29 09:44:30', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2243, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 11:04:56', '2021-09-29 11:04:56', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2244, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 11:30:06', '2021-09-29 11:30:06', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2245, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 11:30:11', '2021-09-29 11:30:11', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2246, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 11:35:15', '2021-09-29 11:35:15', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2247, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 12:15:22', '2021-09-29 12:15:22', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2248, '2', '修改菜单', '127.0.0.1', '内网IP', '/menus', 'PUT', '{\"icon\":\"el-icon-eleme\",\"menuName\":\"百度\",\"permission\":\"\",\"pid\":0,\"updateTime\":1611555931000,\"type\":\"0\",\"url\":\"https://www.baidu.com\",\"children\":[],\"id\":37}', 51, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 12:32:00', '2021-09-29 12:32:00', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2249, '2', '修改菜单', '127.0.0.1', '内网IP', '/menus', 'PUT', '{\"icon\":\"el-icon-eleme\",\"menuName\":\"百度\",\"permission\":\"\",\"pid\":0,\"updateTime\":1632889920000,\"type\":\"0\",\"url\":\"https://www.baidu.com/\",\"children\":[],\"updateBy\":\"admin\",\"id\":37}', 42, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 12:32:58', '2021-09-29 12:32:58', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2250, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 14:35:50', '2021-09-29 14:35:50', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2251, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:13:46', '2021-09-29 18:13:46', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2252, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:14:00', '2021-09-29 18:14:00', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2253, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:14:07', '2021-09-29 18:14:07', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2254, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:14:45', '2021-09-29 18:14:45', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2255, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:36:40', '2021-09-29 18:36:40', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2256, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:36:59', '2021-09-29 18:36:59', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2257, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:37:21', '2021-09-29 18:37:21', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2258, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:37:45', '2021-09-29 18:37:45', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2259, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:37:58', '2021-09-29 18:37:58', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2260, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:38:11', '2021-09-29 18:38:11', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2261, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:38:34', '2021-09-29 18:38:34', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2262, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:38:41', '2021-09-29 18:38:41', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2263, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:44:03', '2021-09-29 18:44:03', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2264, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:44:08', '2021-09-29 18:44:08', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2265, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:44:15', '2021-09-29 18:44:15', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2266, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 18:45:19', '2021-09-29 18:45:19', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2267, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 18:49:56', '2021-09-29 18:49:56', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2268, '2', '删除菜单', '127.0.0.1', '内网IP', '/menus/37', 'DELETE', '37', 137, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 18:50:14', '2021-09-29 18:50:14', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2269, '1', '更新用户', '127.0.0.1', '内网IP', '/users', 'PUT', '{\"updateTime\":1629971315000,\"orgId\":1,\"roleIds\":[1],\"phone\":\"189222222\",\"id\":2,\"email\":\"22@qq.com\",\"status\":true,\"username\":\"admin\"}', 45, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 18:56:43', '2021-09-29 18:56:43', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2270, '1', '更新用户', '127.0.0.1', '内网IP', '/users', 'PUT', '{\"updateTime\":1632913003000,\"orgId\":1,\"roleIds\":[1],\"phone\":\"189222222\",\"id\":2,\"email\":\"22@qq.com\",\"status\":true,\"username\":\"admin\"}', 55, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 18:58:12', '2021-09-29 18:58:12', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2271, '1', '更新用户', '127.0.0.1', '内网IP', '/users', 'PUT', '{\"updateTime\":1632913092000,\"orgId\":1,\"roleIds\":[1],\"phone\":\"189222222\",\"nickname\":\"管理员xx\",\"id\":2,\"email\":\"22@qq.com\",\"status\":true,\"username\":\"admin\"}', 117, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 19:04:00', '2021-09-29 19:04:00', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2272, '1', '更新用户', '127.0.0.1', '内网IP', '/users', 'PUT', '{\"updateTime\":1632913440000,\"orgId\":1,\"roleIds\":[1],\"phone\":\"189222222\",\"nickname\":\"管理员\",\"id\":2,\"email\":\"22@qq.com\",\"status\":true,\"username\":\"admin\"}', 53, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 19:04:18', '2021-09-29 19:04:18', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2273, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 19:04:40', '2021-09-29 19:04:40', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2274, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:09:24', '2021-09-29 19:09:24', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2275, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 19:09:30', '2021-09-29 19:09:30', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2276, '1', '【jl】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:09:39', '2021-09-29 19:09:39', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2277, '1', '【jl】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 19:09:45', '2021-09-29 19:09:45', 0, 'jl', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2278, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:09:52', '2021-09-29 19:09:52', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2279, '1', '重置密码', '127.0.0.1', '内网IP', '/users/resetPwd', 'PUT', '{\"password\":\"123456\",\"id\":1,\"status\":true}', 177, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 19:10:05', '2021-09-29 19:10:05', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2280, '1', '更新用户', '127.0.0.1', '内网IP', '/users', 'PUT', '{\"updateTime\":1629977396000,\"sort\":1,\"delFlag\":0,\"orgId\":3,\"roleIds\":[1],\"phone\":\"18888888888\",\"nickname\":\"超级管理员\",\"id\":1,\"email\":\"222@qq.com\",\"status\":true,\"username\":\"sadmin\"}', 20, '{\"code\":0,\"msg\":\"请求成功\",\"data\":true}', '2021-09-29 19:10:16', '2021-09-29 19:10:16', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2281, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 19:10:21', '2021-09-29 19:10:21', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2282, '1', '【sadmin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:10:28', '2021-09-29 19:10:28', 0, 'sadmin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2283, '1', '【sadmin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 19:13:41', '2021-09-29 19:13:41', 0, 'sadmin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2284, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:13:47', '2021-09-29 19:13:47', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2285, '1', '【admin】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:17:22', '2021-09-29 19:17:22', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2286, '1', '【admin】登出', '127.0.0.1', '内网IP', '/signout', 'GET', '', NULL, NULL, '2021-09-29 19:18:57', '2021-09-29 19:18:57', 0, 'admin', NULL, NULL, 1);
+INSERT INTO `sys_log` VALUES (2287, '1', '【zhangsan】登录', '127.0.0.1', '内网IP', '/certification', 'POST', '', NULL, NULL, '2021-09-29 19:19:06', '2021-09-29 19:19:06', 0, 'zhangsan', NULL, NULL, 1);
 COMMIT;
 
 -- ----------------------------
@@ -1498,7 +1680,6 @@ INSERT INTO `sys_menu` VALUES (33, 29, NULL, '角色新增', '', 'sys:role:add',
 INSERT INTO `sys_menu` VALUES (34, 2, NULL, '用户删除', '', 'sys:user:delete', '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (35, 29, NULL, '分配权限', '', 'sys:permission:update', '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (36, 3, NULL, '日志查询', '', 'sys:log:view', '', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_menu` VALUES (37, 0, NULL, '百度', 'http://www.baidu.com', '', 'el-icon-eleme', NULL, '0', NULL, NULL, NULL, NULL, NULL, '2021-01-25 14:25:31', NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (38, 0, NULL, '腾讯网', 'http://qq.com', '', 'el-icon-eleme', NULL, '0', NULL, 1, NULL, NULL, '2020-06-12 11:19:50', '2021-01-25 14:25:51', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (39, 1, '1', '租户管理', '/tenant', '', 'el-icon-s-custom', NULL, '0', NULL, 1, NULL, NULL, '2020-09-02 16:26:38', '2020-09-02 16:26:52', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (41, 1, '1', '机构管理', '/org', '', 'el-icon-s-home', NULL, '0', NULL, 1, NULL, NULL, '2020-11-05 14:46:26', '2020-11-05 14:55:54', 0, NULL, NULL, NULL, 1);
@@ -1520,7 +1701,7 @@ INSERT INTO `sys_menu` VALUES (57, 53, NULL, '流程管理', '/actManage', NULL,
 INSERT INTO `sys_menu` VALUES (84, 3, '1,3', '清空日志', NULL, 'sys:log:delete', NULL, NULL, '1', NULL, 1, NULL, NULL, '2021-08-03 16:55:45', '2021-08-03 16:55:45', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (85, 53, '53', '历史处理任务', '/historyTask', '', 'el-icon-time', NULL, '0', NULL, 1, NULL, NULL, '2021-08-16 16:24:29', '2021-08-16 16:24:29', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_menu` VALUES (86, 1, NULL, '字典管理', '/dict', '', 'el-icon-collection', NULL, '0', NULL, 1, NULL, NULL, '2021-09-09 09:35:31', '2021-09-09 17:03:30', 0, NULL, 'admin', 'admin', 1);
-INSERT INTO `sys_menu` VALUES (92, 42, NULL, '数据源监控', 'http://localhost:3001/druid/index.html', '', 'el-icon-s-platform', NULL, '0', NULL, 1, NULL, NULL, '2021-09-10 09:00:21', '2021-09-10 09:01:32', 0, NULL, 'admin', 'admin', 1);
+INSERT INTO `sys_menu` VALUES (92, 42, NULL, '数据源监控', '/monitor/druid', '', 'el-icon-s-platform', NULL, '0', NULL, 1, NULL, NULL, '2021-09-10 09:00:21', '2021-09-28 10:28:51', 0, NULL, 'admin', 'admin', 1);
 COMMIT;
 
 -- ----------------------------
@@ -1555,10 +1736,10 @@ INSERT INTO `sys_org` VALUES (1, 0, '0', 0, 'cup总部', '北京海淀', 1, 1, 1
 INSERT INTO `sys_org` VALUES (2, 1, '1', 0, '研发部', '北京海淀', 1, 1, 2, '2020-03-24 00:36:31', '2020-03-24 00:36:31', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_org` VALUES (3, 2, '1,2', 1, '研发一部', '北京海淀', 1, 1, 3, '2020-03-24 00:37:36', '2020-03-24 00:37:36', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_org` VALUES (4, 2, '1,2', 1, '研发二部', '北京海淀', 1, 2, 3, '2020-03-24 00:38:09', '2020-03-24 00:38:09', 0, NULL, NULL, NULL, 1);
-INSERT INTO `sys_org` VALUES (5, 0, NULL, 1, '测试机构', '', 1, 0, 1, '2020-11-05 14:48:15', '2020-11-05 14:48:15', 0, NULL, NULL, NULL, 1);
+INSERT INTO `sys_org` VALUES (5, 0, '0', 1, '测试机构', '', 1, 0, 1, '2020-11-05 14:48:15', '2021-09-18 18:21:01', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_org` VALUES (6, 1, '1', 1, '业务部', '北京海淀', 1, 1, 2, '2020-11-05 14:52:36', '2020-11-05 14:52:36', 0, NULL, NULL, NULL, 1);
 INSERT INTO `sys_org` VALUES (7, 1, '1', 1, '人事部', '', 1, 0, 2, '2021-07-31 16:30:29', '2021-07-31 16:30:29', 0, NULL, NULL, NULL, 1);
-INSERT INTO `sys_org` VALUES (8, 0, '1,2,4', 1, '测试机构2', '', 1, 0, 4, NULL, '2021-08-25 16:11:29', 0, NULL, NULL, NULL, 1);
+INSERT INTO `sys_org` VALUES (8, 0, '0', 1, '测试机构2', '', 1, 0, 4, NULL, '2021-09-18 18:21:00', 0, NULL, NULL, NULL, 1);
 COMMIT;
 
 -- ----------------------------
@@ -1587,8 +1768,8 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_role` VALUES (1, '管理员', 'admin', '1', '3,4', 1, 1, '2021-09-17 19:27:43', '2020-03-24 00:32:26', 0, NULL, NULL, NULL, 1);
-INSERT INTO `sys_role` VALUES (2, '普通用户', 'common', '3', '3,4', 2, 1, '2021-09-18 15:13:32', '2020-03-24 00:33:15', 0, NULL, NULL, 'admin', 1);
+INSERT INTO `sys_role` VALUES (1, '管理员', 'admin', '1', '', 1, 1, '2021-09-18 17:11:58', '2020-03-24 00:32:26', 0, NULL, NULL, 'admin', 1);
+INSERT INTO `sys_role` VALUES (2, '普通用户', 'common', '3', '', 2, 1, '2021-09-18 19:38:37', '2020-03-24 00:33:15', 0, NULL, NULL, 'admin', 1);
 COMMIT;
 
 -- ----------------------------
@@ -1601,7 +1782,7 @@ CREATE TABLE `sys_role_menu` (
   `menu_id` int(11) DEFAULT NULL COMMENT '菜单id',
   `tenant_id` int(11) DEFAULT '1' COMMENT '租户id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1395 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色和菜单关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=1435 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色和菜单关联表';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -1619,44 +1800,45 @@ INSERT INTO `sys_role_menu` VALUES (1200, 2, 57, 1);
 INSERT INTO `sys_role_menu` VALUES (1201, 2, 85, 1);
 INSERT INTO `sys_role_menu` VALUES (1202, 2, 1, 1);
 INSERT INTO `sys_role_menu` VALUES (1203, 2, 2, 1);
-INSERT INTO `sys_role_menu` VALUES (1356, 1, 1, 1);
-INSERT INTO `sys_role_menu` VALUES (1357, 1, 2, 1);
-INSERT INTO `sys_role_menu` VALUES (1358, 1, 7, 1);
-INSERT INTO `sys_role_menu` VALUES (1359, 1, 8, 1);
-INSERT INTO `sys_role_menu` VALUES (1360, 1, 14, 1);
-INSERT INTO `sys_role_menu` VALUES (1361, 1, 34, 1);
-INSERT INTO `sys_role_menu` VALUES (1362, 1, 9, 1);
-INSERT INTO `sys_role_menu` VALUES (1363, 1, 16, 1);
-INSERT INTO `sys_role_menu` VALUES (1364, 1, 18, 1);
-INSERT INTO `sys_role_menu` VALUES (1365, 1, 21, 1);
-INSERT INTO `sys_role_menu` VALUES (1366, 1, 22, 1);
-INSERT INTO `sys_role_menu` VALUES (1367, 1, 29, 1);
-INSERT INTO `sys_role_menu` VALUES (1368, 1, 30, 1);
-INSERT INTO `sys_role_menu` VALUES (1369, 1, 31, 1);
-INSERT INTO `sys_role_menu` VALUES (1370, 1, 32, 1);
-INSERT INTO `sys_role_menu` VALUES (1371, 1, 33, 1);
-INSERT INTO `sys_role_menu` VALUES (1372, 1, 35, 1);
-INSERT INTO `sys_role_menu` VALUES (1373, 1, 39, 1);
-INSERT INTO `sys_role_menu` VALUES (1374, 1, 41, 1);
-INSERT INTO `sys_role_menu` VALUES (1375, 1, 86, 1);
-INSERT INTO `sys_role_menu` VALUES (1377, 1, 42, 1);
-INSERT INTO `sys_role_menu` VALUES (1378, 1, 3, 1);
-INSERT INTO `sys_role_menu` VALUES (1379, 1, 36, 1);
-INSERT INTO `sys_role_menu` VALUES (1380, 1, 84, 1);
-INSERT INTO `sys_role_menu` VALUES (1381, 1, 92, 1);
-INSERT INTO `sys_role_menu` VALUES (1382, 1, 44, 1);
-INSERT INTO `sys_role_menu` VALUES (1383, 1, 47, 1);
-INSERT INTO `sys_role_menu` VALUES (1384, 1, 48, 1);
-INSERT INTO `sys_role_menu` VALUES (1385, 1, 49, 1);
-INSERT INTO `sys_role_menu` VALUES (1386, 1, 50, 1);
-INSERT INTO `sys_role_menu` VALUES (1387, 1, 51, 1);
-INSERT INTO `sys_role_menu` VALUES (1388, 1, 52, 1);
-INSERT INTO `sys_role_menu` VALUES (1389, 1, 53, 1);
-INSERT INTO `sys_role_menu` VALUES (1390, 1, 55, 1);
-INSERT INTO `sys_role_menu` VALUES (1391, 1, 56, 1);
-INSERT INTO `sys_role_menu` VALUES (1392, 1, 57, 1);
-INSERT INTO `sys_role_menu` VALUES (1393, 1, 85, 1);
-INSERT INTO `sys_role_menu` VALUES (1394, 1, 43, 1);
+INSERT INTO `sys_role_menu` VALUES (1395, 1, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (1396, 1, 2, 1);
+INSERT INTO `sys_role_menu` VALUES (1397, 1, 7, 1);
+INSERT INTO `sys_role_menu` VALUES (1398, 1, 8, 1);
+INSERT INTO `sys_role_menu` VALUES (1399, 1, 14, 1);
+INSERT INTO `sys_role_menu` VALUES (1400, 1, 34, 1);
+INSERT INTO `sys_role_menu` VALUES (1401, 1, 9, 1);
+INSERT INTO `sys_role_menu` VALUES (1402, 1, 16, 1);
+INSERT INTO `sys_role_menu` VALUES (1403, 1, 18, 1);
+INSERT INTO `sys_role_menu` VALUES (1404, 1, 21, 1);
+INSERT INTO `sys_role_menu` VALUES (1405, 1, 22, 1);
+INSERT INTO `sys_role_menu` VALUES (1406, 1, 29, 1);
+INSERT INTO `sys_role_menu` VALUES (1407, 1, 30, 1);
+INSERT INTO `sys_role_menu` VALUES (1408, 1, 31, 1);
+INSERT INTO `sys_role_menu` VALUES (1409, 1, 32, 1);
+INSERT INTO `sys_role_menu` VALUES (1410, 1, 33, 1);
+INSERT INTO `sys_role_menu` VALUES (1411, 1, 35, 1);
+INSERT INTO `sys_role_menu` VALUES (1412, 1, 39, 1);
+INSERT INTO `sys_role_menu` VALUES (1413, 1, 41, 1);
+INSERT INTO `sys_role_menu` VALUES (1414, 1, 86, 1);
+INSERT INTO `sys_role_menu` VALUES (1416, 1, 38, 1);
+INSERT INTO `sys_role_menu` VALUES (1417, 1, 42, 1);
+INSERT INTO `sys_role_menu` VALUES (1418, 1, 3, 1);
+INSERT INTO `sys_role_menu` VALUES (1419, 1, 36, 1);
+INSERT INTO `sys_role_menu` VALUES (1420, 1, 84, 1);
+INSERT INTO `sys_role_menu` VALUES (1421, 1, 92, 1);
+INSERT INTO `sys_role_menu` VALUES (1422, 1, 44, 1);
+INSERT INTO `sys_role_menu` VALUES (1423, 1, 47, 1);
+INSERT INTO `sys_role_menu` VALUES (1424, 1, 48, 1);
+INSERT INTO `sys_role_menu` VALUES (1425, 1, 49, 1);
+INSERT INTO `sys_role_menu` VALUES (1426, 1, 50, 1);
+INSERT INTO `sys_role_menu` VALUES (1427, 1, 51, 1);
+INSERT INTO `sys_role_menu` VALUES (1428, 1, 52, 1);
+INSERT INTO `sys_role_menu` VALUES (1429, 1, 53, 1);
+INSERT INTO `sys_role_menu` VALUES (1430, 1, 55, 1);
+INSERT INTO `sys_role_menu` VALUES (1431, 1, 56, 1);
+INSERT INTO `sys_role_menu` VALUES (1432, 1, 57, 1);
+INSERT INTO `sys_role_menu` VALUES (1433, 1, 85, 1);
+INSERT INTO `sys_role_menu` VALUES (1434, 1, 43, 1);
 COMMIT;
 
 -- ----------------------------
@@ -1691,7 +1873,8 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `org_id` int(11) DEFAULT NULL COMMENT '组织机构id',
-  `username` varchar(10) DEFAULT NULL COMMENT '用户名',
+  `username` varchar(64) DEFAULT NULL COMMENT '用户名',
+  `nickname` varchar(64) DEFAULT NULL COMMENT '昵称',
   `password` varchar(200) DEFAULT NULL COMMENT '密码',
   `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(20) DEFAULT NULL COMMENT '电话',
@@ -1713,12 +1896,12 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 3, 'sadmin', '$2a$10$BqmyJhzbUTwAlW6JPQINZufIgEBVvUs/Go6CjDPXPiI3bvSOJrWaW', '222@qq.com', '18888888888', NULL, 1, 1, 1, NULL, '2021-08-26 19:29:56', 'admin', 'admin', 0, NULL, NULL);
-INSERT INTO `sys_user` VALUES (2, 1, 'admin', '$2a$10$1E0IkYcjX7vfU14sr7GO.OH4bpCJrv4yspweSHCyqRiiKGr4pSMHm', '22@qq.com', '189222222', NULL, 1, NULL, NULL, NULL, '2021-08-26 17:48:35', 'admin', 'admin', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (9, 3, 'zhangsan', '$2a$10$S2RG6iq4/LiwICRPpGqj1u4pVpAH19ePvmvCFzENlB7shi42HD1gy', '333@hotmail.com', '18888888888', NULL, 1, NULL, NULL, '2021-07-31 21:57:04', '2021-08-26 18:39:18', 'admin', 'admin', 0, NULL, 1);
-INSERT INTO `sys_user` VALUES (10, 2, 'jl', '$2a$10$CoZfAEOqRICgZjvidZPtt.a.1LyS4f4FE9EN1n7FKyM6RKDxs7/WW', '3333322@hotmail.com', '18888888888', NULL, 1, NULL, NULL, '2021-07-31 21:58:22', '2021-08-26 19:23:01', 'admin', 'admin', 0, NULL, 1);
-INSERT INTO `sys_user` VALUES (11, 2, 'test1', '$2a$10$pusk4noItkNVUh51UttoJOUO.juguf.9BafWy.rZc6x2QV/IQoXYq', '22222@qq.com', '0019999', NULL, 1, NULL, NULL, '2021-08-24 17:12:25', '2021-08-27 18:03:49', 'admin', 'admin', 0, NULL, 1);
-INSERT INTO `sys_user` VALUES (12, 4, 'jl2', '$2a$10$CoZfAEOqRICgZjvidZPtt.a.1LyS4f4FE9EN1n7FKyM6RKDxs7/WW', '3333322@hotmail.com', '18888888888', NULL, 1, NULL, NULL, '2021-07-31 21:58:22', '2021-08-26 19:23:01', 'jl', 'jl', 0, NULL, 1);
+INSERT INTO `sys_user` VALUES (1, 3, 'sadmin', '超级管理员', '$2a$10$wK32hbnEqebMKJX5eMIR/Ocibf2W1cGwSMQSnIdY1ntzIIpoB9LWy', '222@qq.com', '18888888888', NULL, 1, 1, 1, NULL, '2021-09-29 19:10:16', 'admin', 'admin', 0, NULL, NULL);
+INSERT INTO `sys_user` VALUES (2, 1, 'admin', '管理员', '$2a$10$1E0IkYcjX7vfU14sr7GO.OH4bpCJrv4yspweSHCyqRiiKGr4pSMHm', '22@qq.com', '189222222', NULL, 1, NULL, NULL, NULL, '2021-09-29 19:04:18', 'admin', 'admin', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (9, 3, 'zhangsan', NULL, '$2a$10$S2RG6iq4/LiwICRPpGqj1u4pVpAH19ePvmvCFzENlB7shi42HD1gy', '333@hotmail.com', '18888888888', NULL, 1, NULL, NULL, '2021-07-31 21:57:04', '2021-08-26 18:39:18', 'admin', 'admin', 0, NULL, 1);
+INSERT INTO `sys_user` VALUES (10, 2, 'jl', NULL, '$2a$10$CoZfAEOqRICgZjvidZPtt.a.1LyS4f4FE9EN1n7FKyM6RKDxs7/WW', '3333322@hotmail.com', '18888888888', NULL, 1, NULL, NULL, '2021-07-31 21:58:22', '2021-08-26 19:23:01', 'admin', 'admin', 0, NULL, 1);
+INSERT INTO `sys_user` VALUES (11, 2, 'test1', NULL, '$2a$10$pusk4noItkNVUh51UttoJOUO.juguf.9BafWy.rZc6x2QV/IQoXYq', '22222@qq.com', '0019999', NULL, 1, NULL, NULL, '2021-08-24 17:12:25', '2021-08-27 18:03:49', 'admin', 'admin', 0, NULL, 1);
+INSERT INTO `sys_user` VALUES (12, 4, 'jl2', NULL, '$2a$10$CoZfAEOqRICgZjvidZPtt.a.1LyS4f4FE9EN1n7FKyM6RKDxs7/WW', '3333322@hotmail.com', '18888888888', NULL, 1, NULL, NULL, '2021-07-31 21:58:22', '2021-08-26 19:23:01', 'jl', 'jl', 0, NULL, 1);
 COMMIT;
 
 -- ----------------------------
@@ -1731,22 +1914,22 @@ CREATE TABLE `sys_user_role` (
   `role_id` int(11) DEFAULT NULL COMMENT '角色id',
   `tenant_id` int(11) DEFAULT '1' COMMENT '租户id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户和角色关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户和角色关联表';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user_role` VALUES (37, 8, 10, 1);
-INSERT INTO `sys_user_role` VALUES (38, 2, 1, 1);
 INSERT INTO `sys_user_role` VALUES (53, 12, 2, 1);
 INSERT INTO `sys_user_role` VALUES (54, 12, 2, 1);
 INSERT INTO `sys_user_role` VALUES (55, 13, 2, 1);
 INSERT INTO `sys_user_role` VALUES (58, 9, 2, 1);
 INSERT INTO `sys_user_role` VALUES (61, 10, 2, 1);
-INSERT INTO `sys_user_role` VALUES (62, 1, 1, 1);
 INSERT INTO `sys_user_role` VALUES (63, 11, 2, 1);
 INSERT INTO `sys_user_role` VALUES (64, 11, 2, 1);
+INSERT INTO `sys_user_role` VALUES (68, 2, 1, 1);
+INSERT INTO `sys_user_role` VALUES (69, 1, 1, 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
