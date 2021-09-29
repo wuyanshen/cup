@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {
-    setToken,
-    getToken
-} from '@/lib/util'
+import { setToken, getToken } from '@/lib/util'
 import store from '@/store'
 import menuRouter from './menuRouter.js'
 import NProgress from 'nprogress'
@@ -11,7 +8,8 @@ import 'nprogress/nprogress.css'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'Home',
         redirect: '/welcome',
@@ -21,6 +19,7 @@ const routes = [{
             {
                 path: 'info',
                 name: 'Info',
+                meta: { title: '个人信息' },
                 component: () => import('../views/system/Info.vue')
             },
             ...menuRouter
@@ -29,7 +28,7 @@ const routes = [{
     {
         path: '/login',
         name: 'login',
-        component: () => import('../views/system/login/Login.vue'),
+        component: () => import('../views/system/login/Login.vue')
     },
     {
         path: '*',
@@ -45,23 +44,11 @@ const router = new VueRouter({
 
 //全局路由守卫
 router.beforeEach(async (to, from, next) => {
-    NProgress.start();
+    NProgress.start()
     const token = getToken()
-    if (token) { //如果有token
-        // store.dispatch('checkAndRefreshToken').then(
-        //     //如果没过期
-        //     () => {
-        //         if (to.path === '/login') next('/')
-        //         else next()
-
-        //         //如果token过期
-        //     }).catch(error => {
-        //     //清空token
-        //     setToken('')
-        //     next('/login')
-        // })
+    if (token) {
         try {
-            await store.dispatch('user/checkToken');
+            await store.dispatch('user/checkToken')
             if (to.path === '/login') next('/')
             else next()
         } catch (e) {
@@ -69,17 +56,19 @@ router.beforeEach(async (to, from, next) => {
             setToken('')
             next('/login')
         }
-    } else { //没有登录
+    } else {
+        //没有登录
         if (to.path === '/login') next()
         else next('/login')
     }
 })
 
-router.afterEach((to,from)=>{
-    if(to.path !== '/login'){
-        store.dispatch("tabs/addTab", to.path)
+router.afterEach((to, from) => {
+    if (to.path !== '/login') {
+        // 加载左侧菜单
+        store.dispatch('menu/loadMenuTree')
     }
-    NProgress.done();
+    NProgress.done()
 })
 
 export default router
