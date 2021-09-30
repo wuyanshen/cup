@@ -46,3 +46,7 @@ body,
     height: 40px;
     font-size: 13px;
 }
+
+.mb-10 {
+    margin-bottom: 10px;
+}

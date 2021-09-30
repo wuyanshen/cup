@@ -31,6 +31,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,7 +72,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             menuTree.setId(menu.getId());
             menuTree.setParentId(menu.getPid());
             return menuTree;
-        }).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(MenuTree::getSort)).collect(Collectors.toList());
         List<MenuTree> trees = TreeUtil.buildByRecursive(menuTrees, 0);
         return trees;
     }

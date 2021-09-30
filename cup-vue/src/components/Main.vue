@@ -1,16 +1,8 @@
 <template>
     <div class="main_div">
-        <!--<el-tabs :value="activeRoute" @tab-click="tabClick" @tab-remove="tabRemove">-->
-        <!--  <el-tab-pane-->
-        <!--    v-for="(item, index) in maintabs"-->
-        <!--    :key="item.url"-->
-        <!--    :label="item.title"-->
-        <!--    :name="item.url"-->
-        <!--	:closable="item.closable"-->
-        <!--  >-->
-        <!--  </el-tab-pane>-->
-        <!--</el-tabs>-->
+        <!-- 标签 -->
         <v-tags></v-tags>
+        <!-- 主页面 -->
         <transition name="move" mode="out-in">
             <keep-alive :include="tagsList">
                 <router-view v-if="routerViewShowHide"></router-view>
