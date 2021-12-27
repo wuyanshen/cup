@@ -22,15 +22,24 @@ package com.lvcoding.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lvcoding.entity.SysDictData;
+import com.lvcoding.service.SysDictDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvcoding.entity.SysDictType;
 import com.lvcoding.dao.SysDictTypeMapper;
 import com.lvcoding.service.SysDictTypeService;
 
+import java.util.List;
+
 @Service
 public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDictType> implements SysDictTypeService {
+
+    @Autowired
+    private SysDictDataService sysDictDataService;
 
     @Override
     public Page<SysDictType> getPage(Page<SysDictType> page, SysDictType sysDictType) {
@@ -68,6 +77,13 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     @Override
     public boolean deleteType(String id) {
         int delete = this.baseMapper.deleteById(id);
+        SysDictType sysDictType = this.getById(id);
+        List<SysDictData> sysDictDataList = sysDictDataService.list(Wrappers.<SysDictData>lambdaQuery().eq(SysDictData::getTypeCode, sysDictType.getTypeCode()));
+
+        if(ObjectUtil.isNotEmpty(sysDictDataList)) {
+            throw new RuntimeException("该字典类型下已经有字典数据");
+        }
+
         return delete > 0;
     }
 

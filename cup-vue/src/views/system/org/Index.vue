@@ -2,7 +2,7 @@
   <div>
     <!-- 卡片区 -->
     <el-card>
-      <el-row :gutter="20">
+      <el-row class="mb-10" :gutter="20">
         <el-col :span="2">
           <el-button size="mini" type="primary" icon="el-icon-plus" @click="handleOrgAdd">新增</el-button>
         </el-col>
