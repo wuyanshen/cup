@@ -84,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 登录、验证码允许匿名访问
                 .antMatchers("/certification", "/captcha/captchaImage").anonymous()
-                .antMatchers( "/service/**", "/token/check", "/websocket/**", "/tenant/list").permitAll()
+                .antMatchers( "/service/**", "/token/check", "/websocket/**", "/tenant/list", "/test/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
