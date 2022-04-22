@@ -8,7 +8,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 WORKDIR /cup
 
-ADD ./target/cup-1.3.jar ./cup.jar
+ADD ./target/cup.jar ./cup.jar
 
 EXPOSE 3001
 

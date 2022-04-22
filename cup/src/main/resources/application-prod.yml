@@ -11,8 +11,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/cup?characterEncoding=utf8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-    username: ENC(qPk24c9OuwPT2qYHnLIymA==)
-    password: ENC(xz3XtbFndmSVOsS+CBxqrQ==)
+    username: root
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     # 连接池配置
     druid:
@@ -124,3 +124,8 @@ spring:
             threadPriority: 5
             threadsInheritContextClassLoaderOfInitializingThread: true
 
+  # redis配置
+  redis:
+    host: localhost
+    password:
+    port: 6379

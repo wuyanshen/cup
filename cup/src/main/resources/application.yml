@@ -13,7 +13,7 @@ spring:
   application:
     name: cup
   profiles:
-    active: dev
+    active: prod
   security:
     loginType: JSON
   rabbitmq:
@@ -25,12 +25,6 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
-
-  # redis配置
-  redis:
-    host: localhost
-    password:
-    port: 6379
 
 
 # token配置
@@ -52,7 +46,7 @@ mybatis-plus:
 
 cup:
   # 是否开启演示模式
-  enableDemo: false
+  enableDemo: true
   # 验证码生成格式： math计算格式 char随机字符串
   captchaType: math
   # redis cache注解失效时间(单位：分)，默认60分钟

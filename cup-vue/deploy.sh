@@ -6,7 +6,7 @@ echo '当前工作分支 => '${curr_branch}'\n'
 
 
 echo '获取环境名'
-env=''
+env='prod'
 
 if [ x$1 != x ];then
     env=$1

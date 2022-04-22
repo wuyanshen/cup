@@ -240,6 +240,7 @@
     </repositories>
 
     <build>
+        <finalName>cup</finalName>
         <plugins>
             <!-- 用来编译项目-->
             <plugin>

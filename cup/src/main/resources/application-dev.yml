@@ -124,3 +124,8 @@ spring:
             threadPriority: 5
             threadsInheritContextClassLoaderOfInitializingThread: true
 
+  # redis配置
+  redis:
+    host: localhost
+    password:
+    port: 6379
