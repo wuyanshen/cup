@@ -8,8 +8,8 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 WORKDIR /cup
 
-ADD ./target/cup-1.0.jar ./
+ADD ./target/cup-1.3.jar ./cup.jar
 
 EXPOSE 3001
 
-CMD java -jar -Xms128m -Xmx256m cup-1.0.jar
+CMD java -jar -Xms128m -Xmx256m cup.jar

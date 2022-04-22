@@ -20,9 +20,11 @@
 package com.lvcoding.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Cleanup;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -37,6 +39,7 @@ public class ResUtil {
     public void jsonResult(HttpServletResponse response, Res res) {
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(res));
+        @Cleanup ServletOutputStream outputStream = response.getOutputStream();
+        outputStream.write(objectMapper.writeValueAsBytes(res));
     }
 }
