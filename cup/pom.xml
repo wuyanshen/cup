@@ -264,6 +264,50 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--数据库文档生成插件-->
+            <plugin>
+                <groupId>cn.smallbun.screw</groupId>
+                <artifactId>screw-maven-plugin</artifactId>
+                <version>1.0.5</version>
+                <!--依赖-->
+                <dependencies>
+                    <!--数据库连接池-->
+                    <dependency>
+                        <groupId>com.zaxxer</groupId>
+                        <artifactId>HikariCP</artifactId>
+                        <version>3.4.5</version>
+                    </dependency>
+                    <!--mysql驱动-->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.28</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!--mysql配置-->
+                    <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                    <jdbcUrl>jdbc:mysql://localhost:3306/cup</jdbcUrl>
+                    <username>root</username>
+                    <password>root</password>
+                    <!--<fileType>WORD</fileType>-->
+                    <fileType>HTML</fileType><!--生成的文档类型支持 HTML和WORD两种类型-->
+                    <!--screw配置-->
+                    <fileName>cup数据库</fileName>
+                    <description>cup数据库表结构</description>
+                    <version>${project.version}</version><!--版本-->
+                    <openOutputDir>false</openOutputDir><!--是否打开输出目录-->
+                    <produceType>freemarker</produceType><!--生成用的模板-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
