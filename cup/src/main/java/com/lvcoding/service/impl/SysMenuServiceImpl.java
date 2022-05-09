@@ -31,8 +31,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -66,6 +68,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<MenuTree> findMenuByRoleIds(List<Integer> roleIds) {
         List<SysMenu> menuList = baseMapper.findMenuByRoleIds(roleIds);
+        // 由于一个用户有多个角色的情况，菜单会有重复的情况，这里需要去重一下
+        menuList = menuList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(SysMenu::getId))), ArrayList::new));
         List<MenuTree> menuTrees = menuList.stream().map(menu -> {
             MenuTree menuTree = new MenuTree();
             BeanUtils.copyProperties(menu, menuTree);
